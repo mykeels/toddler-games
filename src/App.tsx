@@ -30,7 +30,7 @@ function App() {
   return (
     <>
       <div className="flex flex-col h-screen">
-        <main className="flex-grow max-h-[90vh]">
+        <main className="flex-grow max-h-[90dvh]">
           {state === "playing" ? (
             <h1 className="text-4xl text-gray-800">What is this?</h1>
           ) : null}
