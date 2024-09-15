@@ -2,7 +2,7 @@
 
 A collection of educational games for toddlers.
 
-## Game 1: What is this?
+## Game 1: Find and Tap
 
 Display a pair of cards. Each card has a letter or number.
 
