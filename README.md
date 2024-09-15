@@ -1,6 +1,18 @@
 # Toddler Games
 
 A collection of educational games for toddlers.
+
+## Game 1: What is this?
+
+Display a pair of cards. Each card has a letter or number.
+
+Verbally ask the toddler to tap on the card with the letter "A" or the card with the number "1".
+
+If they tap on the correct card, cheer.
+
+If they tap on the incorrect card, show them the correct card, and let them tap on it.
+
+
 ## Using the template
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
