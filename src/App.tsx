@@ -6,7 +6,7 @@ import classNames from "clsx";
 import "./App.css";
 
 function App() {
-  const pkgVersion = __APP_VERSION__ as unknown as string;
+  const pkgVersion = __APP_VERSION__;
   const [state, setState] = useState<"playing" | "interlude">("playing");
   const [pair, setPair] = useState<string[]>(getRandomPair());
   const [selected, setSelected] = useState<string | null>(null);
