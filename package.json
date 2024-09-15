@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "deploy": "gh-pages",
+    "deploy": "gh-pages -d dist",
     "dev": "vite",
     "start": "vite",
     "build": "tsc -b && vite build",
