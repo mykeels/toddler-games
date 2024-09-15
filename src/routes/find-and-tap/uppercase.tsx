@@ -1,6 +1,6 @@
-import { createFileRoute } from '@tanstack/react-router'
-import FindAndTapGame from '../../FindAndTap'
+import { createFileRoute } from "@tanstack/react-router";
+import FindAndTap from "../../FindAndTap";
 
-export const Route = createFileRoute('/find-and-tap/uppercase')({
-  component: () => <FindAndTapGame gameType="uppercase" />,
-})
+export const Route = createFileRoute("/find-and-tap/uppercase")({
+  component: () => <FindAndTap getCharacterSet={(set) => set.uppercaseLetters} />,
+});
