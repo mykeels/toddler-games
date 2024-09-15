@@ -22,6 +22,9 @@ devDependencies:
   '@eslint/js':
     specifier: ^9.9.0
     version: 9.10.0
+  '@types/node':
+    specifier: ^22.5.5
+    version: 22.5.5
   '@types/react':
     specifier: ^18.3.3
     version: 18.3.5
@@ -63,7 +66,7 @@ devDependencies:
     version: 8.5.0(eslint@9.10.0)(typescript@5.6.2)
   vite:
     specifier: ^5.4.1
-    version: 5.4.5
+    version: 5.4.5(@types/node@22.5.5)
 
 packages:
 
@@ -779,6 +782,12 @@ packages:
     resolution: {integrity: sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==}
     dev: true
 
+  /@types/node@22.5.5:
+    resolution: {integrity: sha512-Xjs4y5UPO/CLdzpgR6GirZJx36yScjh73+2NlLlkFRSoQN8B0DpfXPdZGnvVmLRLOsqDpOfTNv7D9trgGhmOIA==}
+    dependencies:
+      undici-types: 6.19.8
+    dev: true
+
   /@types/prop-types@15.7.12:
     resolution: {integrity: sha512-5zvhXYtRNRluoE/jAp4GVsSduVUzNWKkOZrCDBWYtE7biZywwdC2AcEzg+cSMLFRfVgeAFqpfNabiPjxFddV1Q==}
     dev: true
@@ -933,7 +942,7 @@ packages:
       '@babel/plugin-transform-react-jsx-source': 7.24.7(@babel/core@7.25.2)
       '@types/babel__core': 7.20.5
       react-refresh: 0.14.2
-      vite: 5.4.5
+      vite: 5.4.5(@types/node@22.5.5)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -2794,6 +2803,10 @@ packages:
     hasBin: true
     dev: true
 
+  /undici-types@6.19.8:
+    resolution: {integrity: sha512-ve2KP6f/JnbPBFyobGHuerC9g1FYGn/F8n1LWTwNxCEzd6IfqTwUQcNXgEtmmQ6DlRrC1hrSrBnCZPokRrDHjw==}
+    dev: true
+
   /universalify@2.0.1:
     resolution: {integrity: sha512-gptHNQghINnc/vTGIk0SOFGFNXw7JVrlRUtConJRlvaw6DuX0wO5Jeko9sWrMBhh+PsYAZ7oXAiOnf/UKogyiw==}
     engines: {node: '>= 10.0.0'}
@@ -2836,7 +2849,7 @@ packages:
       rimraf: 2.7.1
     dev: true
 
-  /vite@5.4.5:
+  /vite@5.4.5(@types/node@22.5.5):
     resolution: {integrity: sha512-pXqR0qtb2bTwLkev4SE3r4abCNioP3GkjvIDLlzziPpXtHgiJIjuKl+1GN6ESOT3wMjG3JTeARopj2SwYaHTOA==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
@@ -2867,6 +2880,7 @@ packages:
       terser:
         optional: true
     dependencies:
+      '@types/node': 22.5.5
       esbuild: 0.21.5
       postcss: 8.4.47
       rollup: 4.21.3

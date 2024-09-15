@@ -22,7 +22,7 @@ function App() {
 
   return (
     <>
-      <h1 className="text-4xl text-gray-800">Identify A - Z or 0 - 9</h1>
+      <h1 className="text-4xl text-gray-800">What is this letter or number?</h1>
       <div data-name="pair" className="flex justify-center space-x-8 mt-8">
         <button
           onClick={() => onLetterOrNumberClick(pair[0])}
