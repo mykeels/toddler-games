@@ -1,4 +1,4 @@
-import FindAndTap from "./FindAndTap";
+import FindAndTap from "./FindAndTap/FindAndTap";
 
 function App() {
   const pkgVersion = __APP_VERSION__;
