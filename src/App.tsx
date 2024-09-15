@@ -14,11 +14,17 @@ function App() {
   const onLetterOrNumberClick = (letterOrNumber: string) => {
     setSelected(letterOrNumber);
     setState("interlude");
+    if ('vibrate' in navigator) {
+      navigator.vibrate(200);
+    }
   };
   const onNextClick = () => {
     setSelected(null);
     setPair(getRandomPair());
     setState("playing");
+    if ('vibrate' in navigator) {
+      navigator.vibrate(200);
+    }
   };
 
   return (
