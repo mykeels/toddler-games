@@ -25,7 +25,7 @@ function App() {
       <h1 className="text-4xl text-gray-800">What is this letter or number?</h1>
       <div data-name="pair" className="flex justify-center space-x-8 mt-8">
         <button
-          onClick={() => onLetterOrNumberClick(pair[0])}
+          onMouseDown={() => onLetterOrNumberClick(pair[0])}
           className={classNames(
             "w-72 h-72 border-8 border-gray-800 flex items-center justify-center text-9xl font-bold",
             {
@@ -36,7 +36,7 @@ function App() {
           {pair[0]}
         </button>
         <button
-          onClick={() => onLetterOrNumberClick(pair[1])}
+          onMouseDown={() => onLetterOrNumberClick(pair[1])}
           className={classNames(
             "w-72 h-72 border-8 border-gray-800 flex items-center justify-center text-9xl font-bold",
             {
@@ -53,7 +53,7 @@ function App() {
           className="flex flex-col items-center justify-center py-24 space-y-8"
         >
           <button
-            onClick={onNextClick}
+            onMouseDown={onNextClick}
             className="px-16 py-8 text-8xl text-gray-800 border-8 border-gray-800 p-4 rounded-md"
           >
             Next
