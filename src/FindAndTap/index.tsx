@@ -2,21 +2,21 @@ import FindAndTap from "./FindAndTap";
 import { CHARACTERS } from "./FindAndTap.const";
 
 type GameType =
-  | "uppercase-letters"
-  | "lowercase-letters"
+  | "uppercase"
+  | "lowercase"
   | "numbers"
   | "animals"
   | "fruits";
 
 function FindAndTapGame({
-  gameType = "uppercase-letters",
+  gameType = "uppercase",
 }: {
   gameType?: GameType;
 }) {
   const getCharacterSet = () =>
     ({
-      "uppercase-letters": CHARACTERS.uppercaseLetters,
-      "lowercase-letters": CHARACTERS.lowercaseLetters,
+      "uppercase": CHARACTERS.uppercaseLetters,
+      "lowercase": CHARACTERS.lowercaseLetters,
       numbers: CHARACTERS.numbers,
       animals: CHARACTERS.animals,
       fruits: CHARACTERS.fruits,

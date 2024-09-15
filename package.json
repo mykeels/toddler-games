@@ -13,6 +13,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tanstack/react-router": "^1.57.15",
     "clsx": "^2.1.1",
     "gh-pages": "^6.1.1",
     "react": "^18.3.1",
@@ -20,6 +21,8 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
+    "@tanstack/router-devtools": "^1.57.15",
+    "@tanstack/router-plugin": "^1.57.15",
     "@types/node": "^22.5.5",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
