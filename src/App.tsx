@@ -22,14 +22,19 @@ function App() {
 
   return (
     <>
-      <h1 className="text-4xl text-gray-800">What is this letter or number?</h1>
+      {state === "playing" ? (
+        <h1 className="text-4xl text-gray-800">
+          What is this?
+        </h1>
+      ) : null}
       <div data-name="pair" className="flex justify-center space-x-8 mt-8">
         <button
           onMouseDown={() => onLetterOrNumberClick(pair[0])}
           className={classNames(
-            "w-72 h-72 border-8 border-gray-800 flex items-center justify-center text-9xl font-bold",
+            "w-72 border-8 border-gray-800 flex items-center justify-center text-9xl font-bold",
             {
               "bg-blue-200 animate-breathe": selected === pair[0],
+              "h-72": state !== "interlude",
             }
           )}
         >
@@ -38,9 +43,10 @@ function App() {
         <button
           onMouseDown={() => onLetterOrNumberClick(pair[1])}
           className={classNames(
-            "w-72 h-72 border-8 border-gray-800 flex items-center justify-center text-9xl font-bold",
+            "w-72 border-8 border-gray-800 flex items-center justify-center text-9xl font-bold",
             {
               "bg-blue-200 animate-breathe": selected === pair[1],
+              "h-72": state !== "interlude",
             }
           )}
         >
