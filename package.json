@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "deploy": "gh-pages -d dist",
+    "deploy": "npm run build && gh-pages -d dist",
     "dev": "vite",
     "start": "vite",
     "build": "tsc -b && npx cross-env ASSET_URL=/toddler-games/ vite build --base=/toddler-games/",
