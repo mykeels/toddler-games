@@ -16,6 +16,7 @@ import { Route as FindAndTapUppercaseImport } from './routes/find-and-tap/upperc
 import { Route as FindAndTapNumbersImport } from './routes/find-and-tap/numbers'
 import { Route as FindAndTapLowercaseImport } from './routes/find-and-tap/lowercase'
 import { Route as FindAndTapFruitsImport } from './routes/find-and-tap/fruits'
+import { Route as FindAndTapAnimalsImport } from './routes/find-and-tap/animals'
 
 // Create/Update Routes
 
@@ -44,6 +45,11 @@ const FindAndTapFruitsRoute = FindAndTapFruitsImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const FindAndTapAnimalsRoute = FindAndTapAnimalsImport.update({
+  path: '/find-and-tap/animals',
+  getParentRoute: () => rootRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -53,6 +59,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/find-and-tap/animals': {
+      id: '/find-and-tap/animals'
+      path: '/find-and-tap/animals'
+      fullPath: '/find-and-tap/animals'
+      preLoaderRoute: typeof FindAndTapAnimalsImport
       parentRoute: typeof rootRoute
     }
     '/find-and-tap/fruits': {
@@ -90,6 +103,7 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/find-and-tap/animals': typeof FindAndTapAnimalsRoute
   '/find-and-tap/fruits': typeof FindAndTapFruitsRoute
   '/find-and-tap/lowercase': typeof FindAndTapLowercaseRoute
   '/find-and-tap/numbers': typeof FindAndTapNumbersRoute
@@ -98,6 +112,7 @@ export interface FileRoutesByFullPath {
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/find-and-tap/animals': typeof FindAndTapAnimalsRoute
   '/find-and-tap/fruits': typeof FindAndTapFruitsRoute
   '/find-and-tap/lowercase': typeof FindAndTapLowercaseRoute
   '/find-and-tap/numbers': typeof FindAndTapNumbersRoute
@@ -107,6 +122,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/find-and-tap/animals': typeof FindAndTapAnimalsRoute
   '/find-and-tap/fruits': typeof FindAndTapFruitsRoute
   '/find-and-tap/lowercase': typeof FindAndTapLowercaseRoute
   '/find-and-tap/numbers': typeof FindAndTapNumbersRoute
@@ -117,6 +133,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/find-and-tap/animals'
     | '/find-and-tap/fruits'
     | '/find-and-tap/lowercase'
     | '/find-and-tap/numbers'
@@ -124,6 +141,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/find-and-tap/animals'
     | '/find-and-tap/fruits'
     | '/find-and-tap/lowercase'
     | '/find-and-tap/numbers'
@@ -131,6 +149,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/find-and-tap/animals'
     | '/find-and-tap/fruits'
     | '/find-and-tap/lowercase'
     | '/find-and-tap/numbers'
@@ -140,6 +159,7 @@ export interface FileRouteTypes {
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  FindAndTapAnimalsRoute: typeof FindAndTapAnimalsRoute
   FindAndTapFruitsRoute: typeof FindAndTapFruitsRoute
   FindAndTapLowercaseRoute: typeof FindAndTapLowercaseRoute
   FindAndTapNumbersRoute: typeof FindAndTapNumbersRoute
@@ -148,6 +168,7 @@ export interface RootRouteChildren {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  FindAndTapAnimalsRoute: FindAndTapAnimalsRoute,
   FindAndTapFruitsRoute: FindAndTapFruitsRoute,
   FindAndTapLowercaseRoute: FindAndTapLowercaseRoute,
   FindAndTapNumbersRoute: FindAndTapNumbersRoute,
@@ -167,6 +188,7 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/find-and-tap/animals",
         "/find-and-tap/fruits",
         "/find-and-tap/lowercase",
         "/find-and-tap/numbers",
@@ -175,6 +197,9 @@ export const routeTree = rootRoute
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/find-and-tap/animals": {
+      "filePath": "find-and-tap/animals.tsx"
     },
     "/find-and-tap/fruits": {
       "filePath": "find-and-tap/fruits.tsx"

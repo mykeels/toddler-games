@@ -17,6 +17,9 @@ export const Route = createFileRoute('/')({
         <li>
             <Link to="/find-and-tap/fruits">Find and Tap (Fruits only)</Link>
         </li>
+        <li>
+            <Link to="/find-and-tap/animals">Find and Tap (Animals only)</Link>
+        </li>
     </ol>
   </div>,
 })
