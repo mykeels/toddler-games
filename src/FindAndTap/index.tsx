@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import classNames from "clsx";
 
 import { CHARACTERS } from "./FindAndTap.const";
@@ -18,6 +18,7 @@ function FindAndTap({
     [pair]
   );
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const onLetterOrNumberClick = (letterOrNumber: string) => {
     setSelected(letterOrNumber);
     setState("interlude");
@@ -25,6 +26,7 @@ function FindAndTap({
       navigator.vibrate(200);
     }
   };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const onNextClick = () => {
     setSelected(null);
     setPair(getNextPair());
@@ -37,8 +39,26 @@ function FindAndTap({
     selected === item && item === goal
       ? true
       : selected === item && item !== goal
-      ? false
-      : null;
+        ? false
+        : null;
+
+  useEffect(() => {
+    const controller = new AbortController();
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (event.key === "Enter" || event.key === " ") {
+        onNextClick();
+      } else if (event.key === "ArrowLeft") {
+        onLetterOrNumberClick(pair[0]);
+      } else if (event.key === "ArrowRight") {
+        onLetterOrNumberClick(pair[1]);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyPress, {
+      signal: controller.signal,
+    });
+    return () => controller.abort();
+  }, [onNextClick, onLetterOrNumberClick, pair]);
 
   return (
     <>
