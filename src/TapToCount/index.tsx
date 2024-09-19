@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import classNames from "clsx";
-import { FRUITS } from "../FindAndTap/FindAndTap.const";
+import { FRUITS, ANIMALS } from "../FindAndTap/FindAndTap.const";
+
+const COUNTABLES = [...FRUITS, ...ANIMALS];
 
 const TapToCount = () => {
   const [gameId, setGameId] = useState(0);
@@ -23,8 +25,8 @@ const TapToCount = () => {
     const items = [];
     for (let i = 0; i < noOfItems; i++) {
       items.push({
-        target: Math.floor(Math.random() * 3) + 1,
-        text: FRUITS[Math.floor(Math.random() * FRUITS.length)],
+        target: Math.floor(Math.random() * 2) + 2,
+        text: COUNTABLES[Math.floor(Math.random() * COUNTABLES.length)],
       });
     }
     return items;
@@ -103,7 +105,7 @@ function Box({
       onMouseDown={() => onTap()}
       onTouchStart={() => onTap()}
       className={classNames(
-        "w-24 h-24 lg:w-48 lg:h-48 border-8 border-gray-800", 
+        "w-24 h-24 lg:w-40 lg:h-40 border-8 border-gray-800", 
         "flex items-center justify-center text-5xl lg:text-9xl font-bold",
         {
           "bg-yellow-300 animate-breathe": checked,
