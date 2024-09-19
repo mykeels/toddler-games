@@ -90,6 +90,7 @@ function Card({
   return (
     <button
       onMouseDown={() => onClick(value)}
+      onTouchStart={() => onClick(value)}
       className={classNames(
         "w-72 border-8 border-gray-800 flex items-center justify-center text-9xl font-bold",
         {
