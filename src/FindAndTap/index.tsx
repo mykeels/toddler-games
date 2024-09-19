@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import classNames from "clsx";
 
 import { CHARACTERS } from "./FindAndTap.const";
+import { onTouch } from "../utils/touch";
 
 function FindAndTap({
   getCharacterSet = (set: typeof CHARACTERS) => set.uppercaseLetters,
@@ -109,8 +110,7 @@ function Card({
 }) {
   return (
     <button
-      onMouseDown={() => onClick(value)}
-      onTouchStart={() => onClick(value)}
+      {...onTouch(() => onClick(value))}
       className={classNames(
         "w-72 border-8 border-gray-800 flex items-center justify-center text-9xl font-bold",
         {
