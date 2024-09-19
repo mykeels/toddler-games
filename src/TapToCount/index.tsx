@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import classNames from "clsx";
 import { FRUITS } from "../FindAndTap/FindAndTap.const";
 
@@ -29,11 +29,26 @@ const TapToCount = () => {
     }
     return items;
   }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   function reset() {
     setItems(getNextItems());
     setCount(0);
     setGameId(gameId + 1);
   }
+
+  useEffect(() => {
+    const controller = new AbortController();
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (event.key === "Enter" || event.key === " ") {
+        reset();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyPress, {
+      signal: controller.signal,
+    });
+    return () => controller.abort();
+  }, [reset]);
 
   return (
     <div
@@ -62,7 +77,7 @@ const TapToCount = () => {
           className="border-4 border-gray-800 px-8 py-2 text-4xl rounded-md"
           onClick={reset}
         >
-          Reset
+          Next
         </button>
       )}
     </div>
