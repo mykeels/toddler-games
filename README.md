@@ -2,7 +2,21 @@
 
 A collection of educational games for toddlers.
 
-- [Find and Tap](./src/FindAndTap/README.md)
+- [Find and Tap](./src/FindAndTap/README.md): A game where toddlers identify and tap on specific letters, numbers, or objects on the screen.
+
+- [Tap to Count](./src/CountingGame/README.md): An interactive game that presents various objects for toddlers to count by tapping, helping them learn numbers and basic addition.
+
+- [Letter Tracing](./src/LetterTracing/README.md): An interactive game that helps toddlers practice writing letters by tracing them on the screen with their finger or a stylus.
+
+- [Number Matching](./src/NumberMatching/README.md): A game where toddlers match numbers with the corresponding quantity of objects, reinforcing number recognition and counting skills.
+
+- [Phonics Flashcards](./src/PhonicsFlashcards/README.md): Digital flashcards that display letters or simple words, encouraging toddlers to practice phonics by sounding out the letters and words.
+
+- [Rhyming Words](./src/RhymingWords/README.md): A game that introduces toddlers to rhyming by presenting a word and asking them to choose the picture that rhymes with it from a set of options.
+
+- [Alphabet Puzzle](./src/AlphabetPuzzle/README.md): A digital puzzle game where toddlers drag and drop letter pieces to complete the alphabet, enhancing letter recognition and order.
+
+- [Story Time](./src/StoryTime/README.md): A simple, interactive storybook app that highlights words as they are read aloud, encouraging toddlers to follow along and associate written words with their spoken counterparts.
 
 
 ## Using the template

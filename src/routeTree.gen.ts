@@ -12,6 +12,7 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
+import { Route as TapToCountIndexImport } from './routes/tap-to-count/index'
 import { Route as FindAndTapUppercaseImport } from './routes/find-and-tap/uppercase'
 import { Route as FindAndTapNumbersImport } from './routes/find-and-tap/numbers'
 import { Route as FindAndTapLowercaseImport } from './routes/find-and-tap/lowercase'
@@ -22,6 +23,11 @@ import { Route as FindAndTapAnimalsImport } from './routes/find-and-tap/animals'
 
 const IndexRoute = IndexImport.update({
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const TapToCountIndexRoute = TapToCountIndexImport.update({
+  path: '/tap-to-count/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -96,6 +102,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FindAndTapUppercaseImport
       parentRoute: typeof rootRoute
     }
+    '/tap-to-count/': {
+      id: '/tap-to-count/'
+      path: '/tap-to-count'
+      fullPath: '/tap-to-count'
+      preLoaderRoute: typeof TapToCountIndexImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -108,6 +121,7 @@ export interface FileRoutesByFullPath {
   '/find-and-tap/lowercase': typeof FindAndTapLowercaseRoute
   '/find-and-tap/numbers': typeof FindAndTapNumbersRoute
   '/find-and-tap/uppercase': typeof FindAndTapUppercaseRoute
+  '/tap-to-count': typeof TapToCountIndexRoute
 }
 
 export interface FileRoutesByTo {
@@ -117,6 +131,7 @@ export interface FileRoutesByTo {
   '/find-and-tap/lowercase': typeof FindAndTapLowercaseRoute
   '/find-and-tap/numbers': typeof FindAndTapNumbersRoute
   '/find-and-tap/uppercase': typeof FindAndTapUppercaseRoute
+  '/tap-to-count': typeof TapToCountIndexRoute
 }
 
 export interface FileRoutesById {
@@ -127,6 +142,7 @@ export interface FileRoutesById {
   '/find-and-tap/lowercase': typeof FindAndTapLowercaseRoute
   '/find-and-tap/numbers': typeof FindAndTapNumbersRoute
   '/find-and-tap/uppercase': typeof FindAndTapUppercaseRoute
+  '/tap-to-count/': typeof TapToCountIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -138,6 +154,7 @@ export interface FileRouteTypes {
     | '/find-and-tap/lowercase'
     | '/find-and-tap/numbers'
     | '/find-and-tap/uppercase'
+    | '/tap-to-count'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -146,6 +163,7 @@ export interface FileRouteTypes {
     | '/find-and-tap/lowercase'
     | '/find-and-tap/numbers'
     | '/find-and-tap/uppercase'
+    | '/tap-to-count'
   id:
     | '__root__'
     | '/'
@@ -154,6 +172,7 @@ export interface FileRouteTypes {
     | '/find-and-tap/lowercase'
     | '/find-and-tap/numbers'
     | '/find-and-tap/uppercase'
+    | '/tap-to-count/'
   fileRoutesById: FileRoutesById
 }
 
@@ -164,6 +183,7 @@ export interface RootRouteChildren {
   FindAndTapLowercaseRoute: typeof FindAndTapLowercaseRoute
   FindAndTapNumbersRoute: typeof FindAndTapNumbersRoute
   FindAndTapUppercaseRoute: typeof FindAndTapUppercaseRoute
+  TapToCountIndexRoute: typeof TapToCountIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -173,6 +193,7 @@ const rootRouteChildren: RootRouteChildren = {
   FindAndTapLowercaseRoute: FindAndTapLowercaseRoute,
   FindAndTapNumbersRoute: FindAndTapNumbersRoute,
   FindAndTapUppercaseRoute: FindAndTapUppercaseRoute,
+  TapToCountIndexRoute: TapToCountIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -192,7 +213,8 @@ export const routeTree = rootRoute
         "/find-and-tap/fruits",
         "/find-and-tap/lowercase",
         "/find-and-tap/numbers",
-        "/find-and-tap/uppercase"
+        "/find-and-tap/uppercase",
+        "/tap-to-count/"
       ]
     },
     "/": {
@@ -212,6 +234,9 @@ export const routeTree = rootRoute
     },
     "/find-and-tap/uppercase": {
       "filePath": "find-and-tap/uppercase.tsx"
+    },
+    "/tap-to-count/": {
+      "filePath": "tap-to-count/index.tsx"
     }
   }
 }
