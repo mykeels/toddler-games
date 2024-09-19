@@ -12,8 +12,12 @@ const TapToCount = () => {
   >(getNextItems());
   const targetCount = items.reduce((acc, item) => acc + item.target, 0);
   const [count, setCount] = useState(0);
-  const getNextCount = (checked: boolean) =>
+  const getNextCount = (checked: boolean) => {
     setCount(count + (checked ? 1 : -1));
+    if ("vibrate" in navigator) {
+      navigator.vibrate(200);
+    }
+  };
   function getNextItems() {
     const noOfItems = Math.floor(Math.random() * 2) + 1;
     const items = [];
