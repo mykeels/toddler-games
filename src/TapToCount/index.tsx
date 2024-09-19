@@ -103,9 +103,11 @@ function Box({
       onMouseDown={() => onTap()}
       onTouchStart={() => onTap()}
       className={classNames(
-        "w-24 h-24 lg:w-48 lg:h-48 border-8 border-gray-800 flex items-center justify-center text-5xl lg:text-9xl font-bold",
+        "w-24 h-24 lg:w-48 lg:h-48 border-8 border-gray-800", 
+        "flex items-center justify-center text-5xl lg:text-9xl font-bold",
         {
           "bg-yellow-300 animate-breathe": checked,
+          "hover:bg-blue-200": !checked,
         }
       )}
     >
