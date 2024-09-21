@@ -98,8 +98,10 @@ function Box({
 }) {
   const [checked, setChecked] = useState(false);
   const onTap = () => {
-    setChecked(!checked);
-    onClick(!checked);
+    if (!checked) { 
+      onClick(true);
+    }
+    setChecked(true);
   };
   return (
     <button
