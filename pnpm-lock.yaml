@@ -20,6 +20,9 @@ dependencies:
   react-dom:
     specifier: ^18.3.1
     version: 18.3.1(react@18.3.1)
+  swipe-listener:
+    specifier: ^1.3.0
+    version: 1.3.0
 
 devDependencies:
   '@eslint/js':
@@ -5081,6 +5084,10 @@ packages:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
     dev: true
+
+  /swipe-listener@1.3.0:
+    resolution: {integrity: sha512-8cOZEHn8I2aVjKiAiu4tprZAS6e0nTy4RjuN/cAALKU/8212u+dqT1cytWGIoWjVzVxVggIduUtuckrHGu6/8Q==}
+    dev: false
 
   /tabalot@0.6.0:
     resolution: {integrity: sha512-mol1JXLJ2RMJO9Pb89b7CYqeKp8BwrXw0fPyNKbCXd0/X2Mn/LXmIgdyAnCwc7ZsseSEiAjJ6Rc6ECvMvsFGOg==}

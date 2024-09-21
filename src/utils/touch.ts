@@ -1,9 +1,12 @@
+export const hasTouch = () => "ontouchstart" in window;
+
 export const onTouch = (
   handler: (e: React.TouchEvent | React.MouseEvent) => void
 ) => {
   return {
-    onTouchStart: "ontouchstart" in window ? handler : undefined,
-    onMouseDown: "ontouchstart" in window ? undefined : handler,
-    onMouseOver: "ontouchstart" in window ? handler : undefined,
+    onTouchStart: hasTouch() ? handler : undefined,
+    onMouseDown: hasTouch() ? undefined : handler,
+    onMouseOver: hasTouch() ? handler : undefined,
   };
 };
+

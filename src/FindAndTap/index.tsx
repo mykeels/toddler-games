@@ -3,6 +3,7 @@ import classNames from "clsx";
 
 import { CHARACTERS } from "./FindAndTap.const";
 import { onTouch } from "../utils/touch";
+import { useSwipe } from "../utils/swipe";
 
 function FindAndTap({
   getCharacterSet = (set: typeof CHARACTERS) => set.uppercaseLetters,
@@ -61,8 +62,12 @@ function FindAndTap({
     return () => controller.abort();
   }, [onNextClick, onLetterOrNumberClick, pair]);
 
+  const { ref } = useSwipe({
+    onSwipe: () => onNextClick()
+  });
+
   return (
-    <>
+    <div ref={ref as React.LegacyRef<HTMLDivElement>}>
       <h1 className="text-4xl text-gray-800">Tap on {goal}</h1>
       <div data-name="pair" className="flex justify-center space-x-8 mt-8">
         <Card
@@ -91,7 +96,7 @@ function FindAndTap({
           </button>
         </div>
       ) : null}
-    </>
+    </div>
   );
 }
 

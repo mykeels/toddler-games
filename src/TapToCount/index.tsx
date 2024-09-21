@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import classNames from "clsx";
 import { FRUITS, ANIMALS } from "../FindAndTap/FindAndTap.const";
 import { onTouch } from "../utils/touch";
+import { useSwipe } from "../utils/swipe";
 
 const COUNTABLES = [...FRUITS, ...ANIMALS];
 
@@ -13,6 +14,9 @@ const TapToCount = () => {
       text: string;
     }[]
   >(getNextItems());
+  const { ref } = useSwipe({
+    onSwipe: () => reset()
+  });
   const targetCount = items.reduce((acc, item) => acc + item.target, 0);
   const [count, setCount] = useState(0);
   const getNextCount = (checked: boolean) => {
@@ -57,6 +61,7 @@ const TapToCount = () => {
     <div
       className="flex flex-col space-y-4 items-center justify-center h-full"
       key={gameId}
+      ref={ref as React.LegacyRef<HTMLDivElement>}
     >
       <h1
         className={classNames("font-bold py-8", {
