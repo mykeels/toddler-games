@@ -4,5 +4,6 @@ export const onTouch = (
   return {
     onTouchStart: "ontouchstart" in window ? handler : undefined,
     onMouseDown: "ontouchstart" in window ? undefined : handler,
+    onMouseOver: "ontouchstart" in window ? handler : undefined,
   };
 };
