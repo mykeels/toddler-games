@@ -13,6 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
 import { Route as TapToCountIndexImport } from './routes/tap-to-count/index'
+import { Route as FreeDrawIndexImport } from './routes/free-draw/index'
 import { Route as FindAndTapUppercaseImport } from './routes/find-and-tap/uppercase'
 import { Route as FindAndTapNumbersImport } from './routes/find-and-tap/numbers'
 import { Route as FindAndTapLowercaseImport } from './routes/find-and-tap/lowercase'
@@ -28,6 +29,11 @@ const IndexRoute = IndexImport.update({
 
 const TapToCountIndexRoute = TapToCountIndexImport.update({
   path: '/tap-to-count/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const FreeDrawIndexRoute = FreeDrawIndexImport.update({
+  path: '/free-draw/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -102,6 +108,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FindAndTapUppercaseImport
       parentRoute: typeof rootRoute
     }
+    '/free-draw/': {
+      id: '/free-draw/'
+      path: '/free-draw'
+      fullPath: '/free-draw'
+      preLoaderRoute: typeof FreeDrawIndexImport
+      parentRoute: typeof rootRoute
+    }
     '/tap-to-count/': {
       id: '/tap-to-count/'
       path: '/tap-to-count'
@@ -121,6 +134,7 @@ export interface FileRoutesByFullPath {
   '/find-and-tap/lowercase': typeof FindAndTapLowercaseRoute
   '/find-and-tap/numbers': typeof FindAndTapNumbersRoute
   '/find-and-tap/uppercase': typeof FindAndTapUppercaseRoute
+  '/free-draw': typeof FreeDrawIndexRoute
   '/tap-to-count': typeof TapToCountIndexRoute
 }
 
@@ -131,6 +145,7 @@ export interface FileRoutesByTo {
   '/find-and-tap/lowercase': typeof FindAndTapLowercaseRoute
   '/find-and-tap/numbers': typeof FindAndTapNumbersRoute
   '/find-and-tap/uppercase': typeof FindAndTapUppercaseRoute
+  '/free-draw': typeof FreeDrawIndexRoute
   '/tap-to-count': typeof TapToCountIndexRoute
 }
 
@@ -142,6 +157,7 @@ export interface FileRoutesById {
   '/find-and-tap/lowercase': typeof FindAndTapLowercaseRoute
   '/find-and-tap/numbers': typeof FindAndTapNumbersRoute
   '/find-and-tap/uppercase': typeof FindAndTapUppercaseRoute
+  '/free-draw/': typeof FreeDrawIndexRoute
   '/tap-to-count/': typeof TapToCountIndexRoute
 }
 
@@ -154,6 +170,7 @@ export interface FileRouteTypes {
     | '/find-and-tap/lowercase'
     | '/find-and-tap/numbers'
     | '/find-and-tap/uppercase'
+    | '/free-draw'
     | '/tap-to-count'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -163,6 +180,7 @@ export interface FileRouteTypes {
     | '/find-and-tap/lowercase'
     | '/find-and-tap/numbers'
     | '/find-and-tap/uppercase'
+    | '/free-draw'
     | '/tap-to-count'
   id:
     | '__root__'
@@ -172,6 +190,7 @@ export interface FileRouteTypes {
     | '/find-and-tap/lowercase'
     | '/find-and-tap/numbers'
     | '/find-and-tap/uppercase'
+    | '/free-draw/'
     | '/tap-to-count/'
   fileRoutesById: FileRoutesById
 }
@@ -183,6 +202,7 @@ export interface RootRouteChildren {
   FindAndTapLowercaseRoute: typeof FindAndTapLowercaseRoute
   FindAndTapNumbersRoute: typeof FindAndTapNumbersRoute
   FindAndTapUppercaseRoute: typeof FindAndTapUppercaseRoute
+  FreeDrawIndexRoute: typeof FreeDrawIndexRoute
   TapToCountIndexRoute: typeof TapToCountIndexRoute
 }
 
@@ -193,6 +213,7 @@ const rootRouteChildren: RootRouteChildren = {
   FindAndTapLowercaseRoute: FindAndTapLowercaseRoute,
   FindAndTapNumbersRoute: FindAndTapNumbersRoute,
   FindAndTapUppercaseRoute: FindAndTapUppercaseRoute,
+  FreeDrawIndexRoute: FreeDrawIndexRoute,
   TapToCountIndexRoute: TapToCountIndexRoute,
 }
 
@@ -214,6 +235,7 @@ export const routeTree = rootRoute
         "/find-and-tap/lowercase",
         "/find-and-tap/numbers",
         "/find-and-tap/uppercase",
+        "/free-draw/",
         "/tap-to-count/"
       ]
     },
@@ -234,6 +256,9 @@ export const routeTree = rootRoute
     },
     "/find-and-tap/uppercase": {
       "filePath": "find-and-tap/uppercase.tsx"
+    },
+    "/free-draw/": {
+      "filePath": "free-draw/index.tsx"
     },
     "/tap-to-count/": {
       "filePath": "tap-to-count/index.tsx"

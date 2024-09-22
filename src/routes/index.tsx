@@ -23,6 +23,10 @@ export const Route = createFileRoute('/')({
         <li>
             <Link to="/tap-to-count">Tap to Count</Link>
         </li>
+        <li>
+            <Link to="/free-draw">Free Draw</Link>
+        </li>
+        
     </ol>
   </div>,
 })
