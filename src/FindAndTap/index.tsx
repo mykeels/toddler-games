@@ -68,7 +68,7 @@ function FindAndTap({
 
   return (
     <div
-      className="flex flex-col space-y-4 items-center justify-center h-full"
+      className="h-full"
       ref={ref as React.LegacyRef<HTMLDivElement>}
     >
       <h1 className="text-4xl text-gray-800">Tap on {goal}</h1>
