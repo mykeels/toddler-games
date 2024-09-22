@@ -4,6 +4,24 @@ import CanvasDraw from "react-canvas-draw";
 export const FreeDraw = () => {
   const [size, setSize] = useState({ width: 500, height: 500 });
   const containerRef = useRef<HTMLDivElement>(null);
+  const colors = [
+    "#FF0000", // Red
+    "#FF7F00", // Orange
+    "#FFFF00", // Yellow
+    "#00FF00", // Green
+    "#0000FF", // Blue
+    "#4B0082", // Indigo
+    "#9400D3", // Violet
+    "#000000", // Black
+  ];
+  const [colorIndex, setColorIndex] = useState(0);
+  const color = colors[colorIndex % colors.length];
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setColorIndex((index) => index + 1);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     setSize({
@@ -22,6 +40,7 @@ export const FreeDraw = () => {
         <CanvasDraw
           canvasWidth={size.width}
           canvasHeight={size.height}
+          brushColor={color}
         />
       </div>
     </div>
