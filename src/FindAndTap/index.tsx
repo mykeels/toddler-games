@@ -63,11 +63,14 @@ function FindAndTap({
   }, [onNextClick, onLetterOrNumberClick, pair]);
 
   const { ref } = useSwipe({
-    onSwipe: () => onNextClick()
+    onSwipe: () => onNextClick(),
   });
 
   return (
-    <div ref={ref as React.LegacyRef<HTMLDivElement>}>
+    <div
+      className="flex flex-col space-y-4 items-center justify-center h-full"
+      ref={ref as React.LegacyRef<HTMLDivElement>}
+    >
       <h1 className="text-4xl text-gray-800">Tap on {goal}</h1>
       <div data-name="pair" className="flex justify-center space-x-8 mt-8">
         <Card
