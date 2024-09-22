@@ -4,8 +4,6 @@ import CanvasDraw from "react-canvas-draw";
 export const FreeDraw = () => {
   const [size, setSize] = useState({ width: 500, height: 500 });
   const containerRef = useRef<HTMLDivElement>(null);
-  const [color, setColor] = useState("#000000");
-  const [lineWidth, setLineWidth] = useState(2);
 
   useEffect(() => {
     setSize({
@@ -13,8 +11,6 @@ export const FreeDraw = () => {
       height: containerRef.current?.clientHeight ?? 0,
     });
   }, []);
-
-  const clearCanvas = () => {};
 
   return (
     <div className="flex flex-col h-full">
