@@ -8,8 +8,7 @@ export const FreeDraw = () => {
   const colors = [
     "#FF0000", // Red
     "#FF7F00", // Orange
-    "#FFFF00", // Yellow
-    "#00FF00", // Green
+    "#008000", // Deep Green
     "#0000FF", // Blue
     "#4B0082", // Indigo
     "#9400D3", // Violet
