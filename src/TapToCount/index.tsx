@@ -3,6 +3,7 @@ import classNames from "clsx";
 import { FRUITS, ANIMALS } from "../FindAndTap/FindAndTap.const";
 import { onTouch } from "../utils/touch";
 import { useSwipe } from "../utils/swipe";
+import { fx } from "../utils/sound";
 
 const COUNTABLES = [...FRUITS, ...ANIMALS];
 
@@ -21,6 +22,7 @@ const TapToCount = () => {
   const [count, setCount] = useState(0);
   const getNextCount = (checked: boolean) => {
     setCount(count + (checked ? 1 : -1));
+    fx.click.play();
     if ("vibrate" in navigator) {
       navigator.vibrate(200);
     }
@@ -41,6 +43,7 @@ const TapToCount = () => {
     setItems(getNextItems());
     setCount(0);
     setGameId(gameId + 1);
+    fx.correct.play();
   }
 
   useEffect(() => {
@@ -56,6 +59,10 @@ const TapToCount = () => {
     });
     return () => controller.abort();
   }, [reset]);
+
+  useEffect(() => {
+    fx.game.play();
+  }, []);
 
   return (
     <div

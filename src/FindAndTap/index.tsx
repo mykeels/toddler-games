@@ -4,6 +4,7 @@ import classNames from "clsx";
 import { CHARACTERS } from "./FindAndTap.const";
 import { onTouch } from "../utils/touch";
 import { useSwipe } from "../utils/swipe";
+import { fx } from "../utils/sound";
 
 function FindAndTap({
   getCharacterSet = (set: typeof CHARACTERS) => set.uppercaseLetters,
@@ -19,9 +20,15 @@ function FindAndTap({
     () => pair[Math.floor(Math.random() * pair.length)],
     [pair]
   );
+  const isCorrect = (letterOrNumber: string) => letterOrNumber === goal;
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const onLetterOrNumberClick = (letterOrNumber: string) => {
+    if (isCorrect(letterOrNumber)) {
+      fx.correct.play();
+    } else {
+      fx.incorrect.play();
+    }
     setSelected(letterOrNumber);
     setState("interlude");
     if ("vibrate" in navigator) {
@@ -30,6 +37,7 @@ function FindAndTap({
   };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const onNextClick = () => {
+    fx.click.play();
     setSelected(null);
     setPair(getNextPair());
     setState("playing");
@@ -61,6 +69,10 @@ function FindAndTap({
     });
     return () => controller.abort();
   }, [onNextClick, onLetterOrNumberClick, pair]);
+
+  useEffect(() => {
+    fx.game.play();
+  }, []);
 
   const { ref } = useSwipe({
     onSwipe: () => onNextClick(),
