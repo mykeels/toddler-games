@@ -89,10 +89,10 @@ const TapToCount = () => {
       </div>
       {count === targetCount && (
         <button
-          className="border-4 border-gray-800 px-8 py-2 text-4xl rounded-md"
+          className="border-4 border-gray-800 px-8 py-2 text-8xl rounded-md"
           onClick={reset}
         >
-          Next
+          👍
         </button>
       )}
     </div>

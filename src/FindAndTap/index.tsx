@@ -107,7 +107,7 @@ function FindAndTap({
             onMouseDown={onNextClick}
             className="px-16 py-8 text-8xl text-gray-800 border-8 border-gray-800 p-4 rounded-md"
           >
-            Next
+            👍
           </button>
         </div>
       ) : null}
