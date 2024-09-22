@@ -6,7 +6,6 @@ export const onTouch = (
   return {
     onTouchStart: hasTouch() ? handler : undefined,
     onMouseDown: hasTouch() ? undefined : handler,
-    onMouseOver: hasTouch() ? handler : undefined,
   };
 };
 
