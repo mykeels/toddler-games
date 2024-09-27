@@ -23,11 +23,6 @@ export const ImageToLetterMatching = () => {
     [image.word]
   );
   const goal = image.word[0];
-  console.log({
-    image,
-    letters,
-    goal,
-  });
   const isCorrect = (letterOrNumber: string) => letterOrNumber === goal;
   const isItemCorrect = (item: string) =>
     selected === item && item === goal
