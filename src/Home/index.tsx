@@ -45,6 +45,11 @@ export const Home = () => {
         <li>
           <Link to="/image-to-letter-matching">Match Image to Letter</Link>
         </li>
+        <li>
+          <Link to="/image-to-letter-matching/lowercase">
+            Match Image to Letter (Lowercase)
+          </Link>
+        </li>
       </ol>
     </div>
   );

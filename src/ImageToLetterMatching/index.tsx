@@ -5,7 +5,11 @@ import { useSwipe } from "../utils/swipe";
 import { onTouch } from "../utils/touch";
 import { fx } from "../utils/sound";
 
-export const ImageToLetterMatching = () => {
+export const ImageToLetterMatching = ({
+  transformLetter = (letter) => letter,
+}: {
+  transformLetter?: (letter: string) => string;
+}) => {
   const [gameIndex, setGameIndex] = useState(0);
   const [state, setState] = useState<"playing" | "interlude">("playing");
   const [selected, setSelected] = useState<string | null>(null);
@@ -19,10 +23,10 @@ export const ImageToLetterMatching = () => {
       shuffleArray([
         image.word[0],
         UPPERCASE_LETTERS[Math.floor(Math.random() * UPPERCASE_LETTERS.length)],
-      ]),
-    [image.word]
+      ]).map(transformLetter),
+    [image.word, transformLetter]
   );
-  const goal = image.word[0];
+  const goal = transformLetter(image.word[0]);
   const isCorrect = (letterOrNumber: string) => letterOrNumber === goal;
   const isItemCorrect = (item: string) =>
     selected === item && item === goal
@@ -88,7 +92,9 @@ export const ImageToLetterMatching = () => {
       ref={ref as React.LegacyRef<HTMLDivElement>}
     >
       <h1 className="text-4xl text-gray-800">
-        {state === "interlude" ? `${image.word} starts with ${goal}` : `${image.word} starts with...`}
+        {state === "interlude"
+          ? `${image.word} starts with ${goal}`
+          : `${image.word} starts with...`}
       </h1>
       <div className="text-center py-8 text-9xl font-bold">{image.image}</div>
       <div data-name="pair" className="flex justify-center space-x-8">
@@ -103,7 +109,7 @@ export const ImageToLetterMatching = () => {
           isCorrect={isItemCorrect(letters[1])}
         />
       </div>
-      {state == "interlude" ? (
+      {state == "interlude" && selected && isCorrect(selected) ? (
         <div
           data-name="interlude"
           className="flex flex-col items-center justify-center py-16 space-y-8"
