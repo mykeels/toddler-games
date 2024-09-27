@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import classNames from "clsx";
 import { IMAGES, UPPERCASE_LETTERS } from "./ImageToLetterMatching.const";
 import { useSwipe } from "../utils/swipe";
@@ -36,6 +36,7 @@ export const ImageToLetterMatching = () => {
         ? false
         : null;
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const onLetterClick = (letter: string) => {
     if (isCorrect(letter)) {
       fx.correct.play();
@@ -59,6 +60,28 @@ export const ImageToLetterMatching = () => {
     }
   };
 
+  useEffect(() => {
+    const controller = new AbortController();
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (event.key === "Enter" || event.key === " ") {
+        onNextClick();
+      } else if (event.key === "ArrowLeft") {
+        onLetterClick(letters[0]);
+      } else if (event.key === "ArrowRight") {
+        onLetterClick(letters[1]);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyPress, {
+      signal: controller.signal,
+    });
+    return () => controller.abort();
+  }, [onNextClick, onLetterClick, letters]);
+
+  useEffect(() => {
+    fx.game.play();
+  }, []);
+
   const { ref } = useSwipe({
     onSwipe: () => onNextClick(),
   });
@@ -70,7 +93,7 @@ export const ImageToLetterMatching = () => {
       ref={ref as React.LegacyRef<HTMLDivElement>}
     >
       <h1 className="text-4xl text-gray-800">
-        {state === "interlude" ? `${image.word} starts with ${goal}` : "This starts with..."}
+        {state === "interlude" ? `${image.word} starts with ${goal}` : `${image.word} starts with...`}
       </h1>
       <div className="text-center py-8 text-9xl font-bold">{image.image}</div>
       <div data-name="pair" className="flex justify-center space-x-8">
