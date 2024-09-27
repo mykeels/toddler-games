@@ -24,7 +24,8 @@ export const ImageToLetterMatching = ({
         image.word[0],
         UPPERCASE_LETTERS[Math.floor(Math.random() * UPPERCASE_LETTERS.length)],
       ]).map(transformLetter),
-    [image.word, transformLetter]
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    [image.word]
   );
   const goal = transformLetter(image.word[0]);
   const isCorrect = (letterOrNumber: string) => letterOrNumber === goal;

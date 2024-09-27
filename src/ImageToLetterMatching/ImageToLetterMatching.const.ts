@@ -68,5 +68,9 @@ export const IMAGES = [
     image: "😠",
     word: "Angry",
   },
-  
+  {
+    image: "🐢",
+    word: "Turtle",
+  },
+
 ];
