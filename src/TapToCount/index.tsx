@@ -83,7 +83,7 @@ const TapToCount = () => {
           Array(item.target)
             .fill("")
             .map((_, index) => (
-              <Box key={index} value={item.text} onClick={getNextCount} />
+              <Countable key={index} value={item.text} onClick={getNextCount} />
             ))
         )}
       </div>
@@ -101,7 +101,7 @@ const TapToCount = () => {
 
 export default TapToCount;
 
-function Box({
+function Countable({
   value,
   onClick,
 }: {

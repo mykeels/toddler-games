@@ -8,6 +8,8 @@ A collection of educational games for toddlers.
 
 - [Free Draw](./src/FreeDraw/README.md): A game where toddlers can draw with different colors. The colors change every 5 seconds.
 
+- [Image to Letter Matching](./src/ImageToLetterMatching/README.md): An interactive game that helps toddlers identify letters by matching them with the corresponding image.
+
 - [Letter Tracing](./src/LetterTracing/README.md): An interactive game that helps toddlers practice writing letters by tracing them on the screen with their finger or a stylus.
 
 - [Number Matching](./src/NumberMatching/README.md): A game where toddlers match numbers with the corresponding quantity of objects, reinforcing number recognition and counting skills.

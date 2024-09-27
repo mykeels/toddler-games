@@ -13,6 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
 import { Route as TapToCountIndexImport } from './routes/tap-to-count/index'
+import { Route as ImageToLetterMatchingIndexImport } from './routes/image-to-letter-matching/index'
 import { Route as FreeDrawIndexImport } from './routes/free-draw/index'
 import { Route as FindAndTapUppercaseImport } from './routes/find-and-tap/uppercase'
 import { Route as FindAndTapNumbersImport } from './routes/find-and-tap/numbers'
@@ -31,6 +32,13 @@ const TapToCountIndexRoute = TapToCountIndexImport.update({
   path: '/tap-to-count/',
   getParentRoute: () => rootRoute,
 } as any)
+
+const ImageToLetterMatchingIndexRoute = ImageToLetterMatchingIndexImport.update(
+  {
+    path: '/image-to-letter-matching/',
+    getParentRoute: () => rootRoute,
+  } as any,
+)
 
 const FreeDrawIndexRoute = FreeDrawIndexImport.update({
   path: '/free-draw/',
@@ -115,6 +123,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FreeDrawIndexImport
       parentRoute: typeof rootRoute
     }
+    '/image-to-letter-matching/': {
+      id: '/image-to-letter-matching/'
+      path: '/image-to-letter-matching'
+      fullPath: '/image-to-letter-matching'
+      preLoaderRoute: typeof ImageToLetterMatchingIndexImport
+      parentRoute: typeof rootRoute
+    }
     '/tap-to-count/': {
       id: '/tap-to-count/'
       path: '/tap-to-count'
@@ -135,6 +150,7 @@ export interface FileRoutesByFullPath {
   '/find-and-tap/numbers': typeof FindAndTapNumbersRoute
   '/find-and-tap/uppercase': typeof FindAndTapUppercaseRoute
   '/free-draw': typeof FreeDrawIndexRoute
+  '/image-to-letter-matching': typeof ImageToLetterMatchingIndexRoute
   '/tap-to-count': typeof TapToCountIndexRoute
 }
 
@@ -146,6 +162,7 @@ export interface FileRoutesByTo {
   '/find-and-tap/numbers': typeof FindAndTapNumbersRoute
   '/find-and-tap/uppercase': typeof FindAndTapUppercaseRoute
   '/free-draw': typeof FreeDrawIndexRoute
+  '/image-to-letter-matching': typeof ImageToLetterMatchingIndexRoute
   '/tap-to-count': typeof TapToCountIndexRoute
 }
 
@@ -158,6 +175,7 @@ export interface FileRoutesById {
   '/find-and-tap/numbers': typeof FindAndTapNumbersRoute
   '/find-and-tap/uppercase': typeof FindAndTapUppercaseRoute
   '/free-draw/': typeof FreeDrawIndexRoute
+  '/image-to-letter-matching/': typeof ImageToLetterMatchingIndexRoute
   '/tap-to-count/': typeof TapToCountIndexRoute
 }
 
@@ -171,6 +189,7 @@ export interface FileRouteTypes {
     | '/find-and-tap/numbers'
     | '/find-and-tap/uppercase'
     | '/free-draw'
+    | '/image-to-letter-matching'
     | '/tap-to-count'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -181,6 +200,7 @@ export interface FileRouteTypes {
     | '/find-and-tap/numbers'
     | '/find-and-tap/uppercase'
     | '/free-draw'
+    | '/image-to-letter-matching'
     | '/tap-to-count'
   id:
     | '__root__'
@@ -191,6 +211,7 @@ export interface FileRouteTypes {
     | '/find-and-tap/numbers'
     | '/find-and-tap/uppercase'
     | '/free-draw/'
+    | '/image-to-letter-matching/'
     | '/tap-to-count/'
   fileRoutesById: FileRoutesById
 }
@@ -203,6 +224,7 @@ export interface RootRouteChildren {
   FindAndTapNumbersRoute: typeof FindAndTapNumbersRoute
   FindAndTapUppercaseRoute: typeof FindAndTapUppercaseRoute
   FreeDrawIndexRoute: typeof FreeDrawIndexRoute
+  ImageToLetterMatchingIndexRoute: typeof ImageToLetterMatchingIndexRoute
   TapToCountIndexRoute: typeof TapToCountIndexRoute
 }
 
@@ -214,6 +236,7 @@ const rootRouteChildren: RootRouteChildren = {
   FindAndTapNumbersRoute: FindAndTapNumbersRoute,
   FindAndTapUppercaseRoute: FindAndTapUppercaseRoute,
   FreeDrawIndexRoute: FreeDrawIndexRoute,
+  ImageToLetterMatchingIndexRoute: ImageToLetterMatchingIndexRoute,
   TapToCountIndexRoute: TapToCountIndexRoute,
 }
 
@@ -236,6 +259,7 @@ export const routeTree = rootRoute
         "/find-and-tap/numbers",
         "/find-and-tap/uppercase",
         "/free-draw/",
+        "/image-to-letter-matching/",
         "/tap-to-count/"
       ]
     },
@@ -259,6 +283,9 @@ export const routeTree = rootRoute
     },
     "/free-draw/": {
       "filePath": "free-draw/index.tsx"
+    },
+    "/image-to-letter-matching/": {
+      "filePath": "image-to-letter-matching/index.tsx"
     },
     "/tap-to-count/": {
       "filePath": "tap-to-count/index.tsx"

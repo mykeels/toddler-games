@@ -42,6 +42,9 @@ export const Home = () => {
         <li>
           <Link to="/free-draw">Free Draw</Link>
         </li>
+        <li>
+          <Link to="/image-to-letter-matching">Match Image to Letter</Link>
+        </li>
       </ol>
     </div>
   );
