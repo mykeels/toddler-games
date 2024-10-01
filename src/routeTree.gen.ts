@@ -13,6 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
 import { Route as TapToCountIndexImport } from './routes/tap-to-count/index'
+import { Route as PhoneKeypadIndexImport } from './routes/phone-keypad/index'
 import { Route as ImageToLetterMatchingIndexImport } from './routes/image-to-letter-matching/index'
 import { Route as FreeDrawIndexImport } from './routes/free-draw/index'
 import { Route as ImageToLetterMatchingLowercaseImport } from './routes/image-to-letter-matching/lowercase'
@@ -31,6 +32,11 @@ const IndexRoute = IndexImport.update({
 
 const TapToCountIndexRoute = TapToCountIndexImport.update({
   path: '/tap-to-count/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const PhoneKeypadIndexRoute = PhoneKeypadIndexImport.update({
+  path: '/phone-keypad/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -144,6 +150,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ImageToLetterMatchingIndexImport
       parentRoute: typeof rootRoute
     }
+    '/phone-keypad/': {
+      id: '/phone-keypad/'
+      path: '/phone-keypad'
+      fullPath: '/phone-keypad'
+      preLoaderRoute: typeof PhoneKeypadIndexImport
+      parentRoute: typeof rootRoute
+    }
     '/tap-to-count/': {
       id: '/tap-to-count/'
       path: '/tap-to-count'
@@ -166,6 +179,7 @@ export interface FileRoutesByFullPath {
   '/image-to-letter-matching/lowercase': typeof ImageToLetterMatchingLowercaseRoute
   '/free-draw': typeof FreeDrawIndexRoute
   '/image-to-letter-matching': typeof ImageToLetterMatchingIndexRoute
+  '/phone-keypad': typeof PhoneKeypadIndexRoute
   '/tap-to-count': typeof TapToCountIndexRoute
 }
 
@@ -179,6 +193,7 @@ export interface FileRoutesByTo {
   '/image-to-letter-matching/lowercase': typeof ImageToLetterMatchingLowercaseRoute
   '/free-draw': typeof FreeDrawIndexRoute
   '/image-to-letter-matching': typeof ImageToLetterMatchingIndexRoute
+  '/phone-keypad': typeof PhoneKeypadIndexRoute
   '/tap-to-count': typeof TapToCountIndexRoute
 }
 
@@ -193,6 +208,7 @@ export interface FileRoutesById {
   '/image-to-letter-matching/lowercase': typeof ImageToLetterMatchingLowercaseRoute
   '/free-draw/': typeof FreeDrawIndexRoute
   '/image-to-letter-matching/': typeof ImageToLetterMatchingIndexRoute
+  '/phone-keypad/': typeof PhoneKeypadIndexRoute
   '/tap-to-count/': typeof TapToCountIndexRoute
 }
 
@@ -208,6 +224,7 @@ export interface FileRouteTypes {
     | '/image-to-letter-matching/lowercase'
     | '/free-draw'
     | '/image-to-letter-matching'
+    | '/phone-keypad'
     | '/tap-to-count'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -220,6 +237,7 @@ export interface FileRouteTypes {
     | '/image-to-letter-matching/lowercase'
     | '/free-draw'
     | '/image-to-letter-matching'
+    | '/phone-keypad'
     | '/tap-to-count'
   id:
     | '__root__'
@@ -232,6 +250,7 @@ export interface FileRouteTypes {
     | '/image-to-letter-matching/lowercase'
     | '/free-draw/'
     | '/image-to-letter-matching/'
+    | '/phone-keypad/'
     | '/tap-to-count/'
   fileRoutesById: FileRoutesById
 }
@@ -246,6 +265,7 @@ export interface RootRouteChildren {
   ImageToLetterMatchingLowercaseRoute: typeof ImageToLetterMatchingLowercaseRoute
   FreeDrawIndexRoute: typeof FreeDrawIndexRoute
   ImageToLetterMatchingIndexRoute: typeof ImageToLetterMatchingIndexRoute
+  PhoneKeypadIndexRoute: typeof PhoneKeypadIndexRoute
   TapToCountIndexRoute: typeof TapToCountIndexRoute
 }
 
@@ -259,6 +279,7 @@ const rootRouteChildren: RootRouteChildren = {
   ImageToLetterMatchingLowercaseRoute: ImageToLetterMatchingLowercaseRoute,
   FreeDrawIndexRoute: FreeDrawIndexRoute,
   ImageToLetterMatchingIndexRoute: ImageToLetterMatchingIndexRoute,
+  PhoneKeypadIndexRoute: PhoneKeypadIndexRoute,
   TapToCountIndexRoute: TapToCountIndexRoute,
 }
 
@@ -283,6 +304,7 @@ export const routeTree = rootRoute
         "/image-to-letter-matching/lowercase",
         "/free-draw/",
         "/image-to-letter-matching/",
+        "/phone-keypad/",
         "/tap-to-count/"
       ]
     },
@@ -312,6 +334,9 @@ export const routeTree = rootRoute
     },
     "/image-to-letter-matching/": {
       "filePath": "image-to-letter-matching/index.tsx"
+    },
+    "/phone-keypad/": {
+      "filePath": "phone-keypad/index.tsx"
     },
     "/tap-to-count/": {
       "filePath": "tap-to-count/index.tsx"

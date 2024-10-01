@@ -50,6 +50,9 @@ export const Home = () => {
             Match Image to Letter (Lowercase)
           </Link>
         </li>
+        <li>
+          <Link to="/phone-keypad">Phone Keypad</Link>
+        </li>
       </ol>
     </div>
   );
