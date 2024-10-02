@@ -113,7 +113,7 @@ export const ImageToLetterMatching = ({
       {state == "interlude" && selected && isCorrect(selected) ? (
         <div
           data-name="interlude"
-          className="flex flex-col items-center justify-center py-16 space-y-8"
+          className="flex flex-col items-center justify-center py-8"
         >
           <button
             onMouseDown={onNextClick}
@@ -151,7 +151,7 @@ function Card({
     <button
       {...onTouch(() => onClick(value))}
       className={classNames(
-        "w-32 h-32 border-8 border-gray-800 flex items-center justify-center text-9xl font-bold",
+        "w-48 h-48 border-8 border-gray-800 flex items-center justify-center text-9xl font-bold",
         {
           "bg-green-300 animate-breathe": isCorrect === true,
           "bg-red-300": isCorrect === false,
