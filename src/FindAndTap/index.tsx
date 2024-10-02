@@ -3,7 +3,7 @@ import classNames from "clsx";
 
 import { CHARACTERS } from "./FindAndTap.const";
 import { onTouch } from "../utils/touch";
-import { useSwipe } from "../utils/swipe";
+import { useHorizontalSwipe } from "../utils/swipe";
 import { fx } from "../utils/sound";
 
 function FindAndTap({
@@ -84,7 +84,7 @@ function FindAndTap({
     ]?.play();
   }, [goal]);
 
-  const { ref } = useSwipe({
+  const { ref } = useHorizontalSwipe({
     onSwipe: () => onNextClick(),
   });
 

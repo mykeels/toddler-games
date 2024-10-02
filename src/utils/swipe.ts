@@ -3,19 +3,20 @@ import SwipeListener from "swipe-listener";
 import { hasTouch } from "./touch";
 
 type SwipeEventData = {
-    directions: {
-        left: number;
-        right: number;
-        up: number;
-        down: number;
-    },
-    x: [number, number];
-    y: [number, number];
-}
+  directions: {
+    left: number;
+    right: number;
+    up: number;
+    down: number;
+  };
+  x: [number, number];
+  y: [number, number];
+  distance: [number, number];
+};
 
 type SwipeEvent = {
-    detail: SwipeEventData;
-}
+  detail: SwipeEventData;
+};
 
 export const useSwipe = ({
   onSwipe,
@@ -36,14 +37,22 @@ export const useSwipe = ({
       (e) => {
         const event = e as unknown as SwipeEvent;
         const directions = event.detail.directions;
-        const x = event.detail.x;
-        const y = event.detail.y;
-        console.log(directions, x, y);
-        onSwipe?.({
-          directions,
-          x,
-          y,
-        });
+        const x: [number, number] = event.detail.x;
+        const y: [number, number] = event.detail.y;
+        const distance: [number, number] = [
+          Math.abs(x[0] - x[1]),
+          Math.abs(y[0] - y[1]),
+        ];
+        console.log(directions, x, y, distance);
+        const maxDistance = Math.max(...distance);
+        if (maxDistance > 120) {
+          onSwipe?.({
+            directions,
+            x,
+            y,
+            distance,
+          });
+        }
       },
       {
         signal: controller.signal,
@@ -58,4 +67,32 @@ export const useSwipe = ({
   return {
     ref,
   };
+};
+
+export const useHorizontalSwipe = ({
+  onSwipe,
+}: {
+  onSwipe: (data: SwipeEventData) => void;
+}) => {
+  return useSwipe({
+    onSwipe: (data) => {
+      if (data.directions.left || data.directions.right) {
+        onSwipe(data);
+      }
+    },
+  });
+};
+
+export const useVerticalSwipe = ({
+  onSwipe,
+}: {
+  onSwipe: (data: SwipeEventData) => void;
+}) => {
+  return useSwipe({
+    onSwipe: (data) => {
+      if (data.directions.up || data.directions.down) {
+        onSwipe(data);
+      }
+    },
+  });
 };

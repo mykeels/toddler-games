@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import classNames from "clsx";
 import { IMAGES, UPPERCASE_LETTERS } from "./ImageToLetterMatching.const";
-import { useSwipe } from "../utils/swipe";
+import { useHorizontalSwipe } from "../utils/swipe";
 import { onTouch } from "../utils/touch";
 import { fx } from "../utils/sound";
 
@@ -82,7 +82,7 @@ export const ImageToLetterMatching = ({
     fx.game.play();
   }, []);
 
-  const { ref } = useSwipe({
+  const { ref } = useHorizontalSwipe({
     onSwipe: () => onNextClick(),
   });
 

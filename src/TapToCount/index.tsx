@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import classNames from "clsx";
 import { FRUITS, ANIMALS } from "../FindAndTap/FindAndTap.const";
 import { onTouch } from "../utils/touch";
-import { useSwipe } from "../utils/swipe";
+import { useHorizontalSwipe } from "../utils/swipe";
 import { fx } from "../utils/sound";
 
 const COUNTABLES = [...FRUITS, ...ANIMALS];
@@ -15,7 +15,7 @@ const TapToCount = () => {
       text: string;
     }[]
   >(getNextItems());
-  const { ref } = useSwipe({
+  const { ref } = useHorizontalSwipe({
     onSwipe: () => reset()
   });
   const targetCount = items.reduce((acc, item) => acc + item.target, 0);
