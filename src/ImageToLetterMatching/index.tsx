@@ -89,7 +89,7 @@ export const ImageToLetterMatching = ({
   return (
     <div
       key={gameIndex}
-      className="h-full"
+      className="h-full select-none"
       ref={ref as React.LegacyRef<HTMLDivElement>}
     >
       <h1 className="text-4xl text-gray-800">

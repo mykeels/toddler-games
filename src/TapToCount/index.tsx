@@ -66,7 +66,7 @@ const TapToCount = () => {
 
   return (
     <div
-      className="flex flex-col space-y-4 items-center justify-center h-full"
+      className="flex flex-col space-y-4 items-center justify-center h-full select-none"
       key={gameId}
       ref={ref as React.LegacyRef<HTMLDivElement>}
     >

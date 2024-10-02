@@ -27,7 +27,7 @@ export const PhoneKeypad = () => {
   }, []);
 
   return (
-    <div className="h-full">
+    <div className="h-full select-none">
       <h1 className="text-4xl text-gray-800">{recipient || "#"}</h1>
       <div className="flex flex-col space-y-4 py-8">
         <div className="flex justify-center space-x-4">
