@@ -25,20 +25,73 @@ export const UPPERCASE_LETTERS = [
   "X",
   "Y",
   "Z",
-];
-export const LOWERCASE_LETTERS = UPPERCASE_LETTERS.map((letter) =>
-  letter.toLowerCase()
-);
+] as const;
+export const LOWERCASE_LETTERS = [
+  "a",
+  "b",
+  "c",
+  "d",
+  "e",
+  "f",
+  "g",
+  "h",
+  "i",
+  "j",
+  "k",
+  "l",
+  "m",
+  "n",
+  "o",
+  "p",
+  "q",
+  "r",
+  "s",
+  "t",
+  "u",
+  "v",
+  "w",
+  "x",
+  "y",
+  "z",
+] as const;
 
 export const NUMBERS = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
+export const NUMBERS_TO_WORDS = {
+  1: "one",
+  2: "two",
+  3: "three",
+  4: "four",
+  5: "five",
+  6: "six",
+  7: "seven",
+  8: "eight",
+  9: "nine",
+  0: "zero",
+} as const;
 
-export const ANIMALS = ["🐶", "🐱", "🐭", "🐹", "🐰", "🦊", "🐻", "🐼", "🐨", "🐯", "🦁", "🐮", "🐷", "🐽", "🐸"];
+export const ANIMALS = [
+  "🐶",
+  "🐱",
+  "🐭",
+  "🐹",
+  "🐰",
+  "🦊",
+  "🐻",
+  "🐼",
+  "🐨",
+  "🐯",
+  "🦁",
+  "🐮",
+  "🐷",
+  "🐽",
+  "🐸",
+];
 
 export const FRUITS = ["🍎", "🍌", "🍇", "🍈", "🍉", "🍊", "🍋", "🍍", "🍎"];
 
 export const CHARACTERS = {
-  uppercaseLetters: UPPERCASE_LETTERS,
-  lowercaseLetters: LOWERCASE_LETTERS,
+  uppercaseLetters: UPPERCASE_LETTERS as unknown as string[],
+  lowercaseLetters: LOWERCASE_LETTERS as unknown as string[],
   numbers: NUMBERS,
   animals: ANIMALS,
   fruits: FRUITS,

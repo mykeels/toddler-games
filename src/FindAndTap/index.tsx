@@ -7,7 +7,8 @@ import { useSwipe } from "../utils/swipe";
 import { fx } from "../utils/sound";
 
 function FindAndTap({
-  getCharacterSet = (set: typeof CHARACTERS) => set.uppercaseLetters,
+  getCharacterSet = (set: typeof CHARACTERS) =>
+    set.uppercaseLetters,
 }: {
   getCharacterSet?: (set: typeof CHARACTERS) => string[];
 } = {}) {
@@ -74,15 +75,21 @@ function FindAndTap({
     fx.game.play();
   }, []);
 
+  useEffect(() => {
+    fx.tapOnAlphabet[
+      goal.toLowerCase() as keyof typeof fx.tapOnAlphabet
+    ]?.play();
+    fx.tapOnNumbers[
+      goal as keyof typeof fx.tapOnNumbers
+    ]?.play();
+  }, [goal]);
+
   const { ref } = useSwipe({
     onSwipe: () => onNextClick(),
   });
 
   return (
-    <div
-      className="h-full"
-      ref={ref as React.LegacyRef<HTMLDivElement>}
-    >
+    <div className="h-full" ref={ref as React.LegacyRef<HTMLDivElement>}>
       <h1 className="text-4xl text-gray-800">Tap on {goal}</h1>
       <div data-name="pair" className="flex justify-center space-x-8 mt-8">
         <Card
