@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import classNames from "clsx";
-import { IMAGES, UPPERCASE_LETTERS } from "./ImageToLetterMatching.const";
+import { IMAGES } from "./ImageToLetterMatching.const";
+import { UPPERCASE_LETTERS } from "@/utils/characters";
 import { useHorizontalSwipe } from "@/utils/swipe";
 import { hasTouch, onTouch } from "@/utils/touch";
 import { fx } from "@/utils/sound";

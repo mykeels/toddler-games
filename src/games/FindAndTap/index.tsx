@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import classNames from "clsx";
 
-import { CHARACTERS } from "./FindAndTap.const";
+import { CHARACTERS } from "@/utils/characters";
 import { onTouch } from "@/utils/touch";
 import { useHorizontalSwipe } from "@/utils/swipe";
 import { fx } from "@/utils/sound";
