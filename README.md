@@ -1,6 +1,8 @@
 # Toddler Games
 
-A collection of educational games for toddlers.
+This codebase represents a collection of educational games for toddlers called "Toddler Games". It's a React-based web application that includes several interactive games designed to help toddlers learn various concepts. 
+
+Here's some games included:
 
 - [Find and Tap](./src/FindAndTap/README.md): A game where toddlers identify and tap on specific letters, numbers, or objects on the screen.
 
