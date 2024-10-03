@@ -1,8 +1,80 @@
-import { Link } from "@tanstack/react-router";
+import {
+  Link,
+  useNavigate,
+  type FileRoutesByPath,
+} from "@tanstack/react-router";
 import { fx } from "@/utils/sound";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-export const Home = () => {
+const GAME_LISTING: GameListing = {
+  title: "Toddler Games",
+  children: [
+    {
+      title: "Find and Tap",
+      children: [
+        {
+          title: "Uppercase Letters only",
+          path: "/find-and-tap/uppercase",
+        },
+        {
+          title: "Lowercase Letters only",
+          path: "/find-and-tap/lowercase",
+        },
+        {
+          title: "Numbers only",
+          path: "/find-and-tap/numbers",
+        },
+        {
+          title: "Fruits only",
+          path: "/find-and-tap/fruits",
+        },
+        {
+          title: "Animals only",
+          path: "/find-and-tap/animals",
+        },
+      ],
+    },
+    {
+      title: "Tap to Count",
+      path: "/tap-to-count/",
+    },
+    {
+      title: "Free Draw",
+      path: "/free-draw/",
+    },
+    {
+      title: "Match Image to Letter",
+      children: [
+        {
+          title: "Uppercase Letters only",
+          path: "/image-to-letter-matching/",
+        },
+        {
+          title: "Lowercase Letters only",
+          path: "/image-to-letter-matching/lowercase",
+        },
+      ],
+    },
+    {
+      title: "Number Keypad",
+      path: "/number-keypad/",
+    },
+  ],
+};
+
+type GameListing = {
+  title: string;
+  back?: () => GameListing;
+} & (
+  | {
+      children: GameListing[];
+    }
+  | {
+      path: keyof FileRoutesByPath;
+    }
+);
+
+const useHomeSound = () => {
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const $window = window as any;
@@ -11,48 +83,47 @@ export const Home = () => {
       $window.__hasPlayedHome = true;
     }
   }, []);
+};
+
+export const Home = () => {
+  useHomeSound();
+  const navigate = useNavigate();
+
+  const [listing, setListing] = useState(GAME_LISTING);
+  const enterListing = (item: GameListing) => {
+    if ("children" in item) {
+      setListing({
+        ...item,
+        back: () => listing,
+      });
+    } else {
+      navigate({
+        to: item.path,
+      });
+    }
+  };
 
   return (
     <div className="flex flex-col space-y-4 items-center justify-center h-full px-4">
-      <h1 className="text-4xl font-bold">Toddler Games</h1>
+      <h1 className="text-4xl font-bold">{listing.title}</h1>
 
       <ol className="list-decimal text-lg flex flex-col space-y-4">
-        <li>
-          <Link to="/find-and-tap/uppercase">
-            Find and Tap (Uppercase Letters only)
-          </Link>
-        </li>
-        <li>
-          <Link to="/find-and-tap/lowercase">
-            Find and Tap (Lowercase Letters only)
-          </Link>
-        </li>
-        <li>
-          <Link to="/find-and-tap/numbers">Find and Tap (Numbers only)</Link>
-        </li>
-        <li>
-          <Link to="/find-and-tap/fruits">Find and Tap (Fruits only)</Link>
-        </li>
-        <li>
-          <Link to="/find-and-tap/animals">Find and Tap (Animals only)</Link>
-        </li>
-        <li>
-          <Link to="/tap-to-count">Tap to Count</Link>
-        </li>
-        <li>
-          <Link to="/free-draw">Free Draw</Link>
-        </li>
-        <li>
-          <Link to="/image-to-letter-matching">Match Image to Letter</Link>
-        </li>
-        <li>
-          <Link to="/image-to-letter-matching/lowercase">
-            Match Image to Letter (Lowercase)
-          </Link>
-        </li>
-        <li>
-          <Link to="/number-keypad">Number Keypad</Link>
-        </li>
+        {listing.children.map((child) =>
+          "path" in child ? (
+            <li key={child.title}>
+              <Link to={child.path}>
+                {child.title}
+              </Link>
+            </li>
+          ) : (
+            <li key={child.title} onClick={() => enterListing(child)}>
+              {child.title}
+            </li>
+          )
+        )}
+        {listing.title !== GAME_LISTING.title && (
+          <li onClick={() => enterListing(listing.back!())}>Back</li>
+        )}
       </ol>
     </div>
   );
