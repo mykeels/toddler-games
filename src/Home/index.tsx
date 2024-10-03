@@ -127,12 +127,21 @@ export const Home = () => {
             </li>
           ) : (
             <li key={child.title} onClick={() => enterListing(child)}>
-              {child.title}
+              <Link
+                to="."
+                search={{
+                  title: child.title,
+                }}
+              >
+                {child.title}
+              </Link>
             </li>
           )
         )}
         {!isListingAtRoot && (
-          <li onClick={() => enterListing(listing.back!())}>Back</li>
+          <li onClick={() => enterListing(listing.back!())}>
+            <Link to=".">Back</Link>
+          </li>
         )}
       </ol>
     </div>
