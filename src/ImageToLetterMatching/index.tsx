@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import classNames from "clsx";
 import { IMAGES, UPPERCASE_LETTERS } from "./ImageToLetterMatching.const";
 import { useHorizontalSwipe } from "../utils/swipe";
-import { onTouch } from "../utils/touch";
+import { hasTouch, onTouch } from "../utils/touch";
 import { fx } from "../utils/sound";
 
 export const ImageToLetterMatching = ({
@@ -110,7 +110,7 @@ export const ImageToLetterMatching = ({
           isCorrect={isItemCorrect(letters[1])}
         />
       </div>
-      {state == "interlude" && selected && isCorrect(selected) ? (
+      {!hasTouch() && state == "interlude" && selected && isCorrect(selected) ? (
         <div
           data-name="interlude"
           className="flex flex-col items-center justify-center py-8"

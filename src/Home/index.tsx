@@ -51,7 +51,7 @@ export const Home = () => {
           </Link>
         </li>
         <li>
-          <Link to="/phone-keypad">Phone Keypad</Link>
+          <Link to="/number-keypad">Number Keypad</Link>
         </li>
       </ol>
     </div>

@@ -3,7 +3,7 @@ import classNames from "clsx";
 import { onTouch } from "../utils/touch";
 import { fx } from "../utils/sound";
 
-export const PhoneKeypad = () => {
+export const NumberKeypad = () => {
   const [recipient, setRecipient] = useState<string>("");
   const dial = (digit: string) => {
     const sound = {
@@ -53,7 +53,7 @@ export const PhoneKeypad = () => {
   );
 };
 
-export default PhoneKeypad;
+export default NumberKeypad;
 
 function DigitButton({
   value,
