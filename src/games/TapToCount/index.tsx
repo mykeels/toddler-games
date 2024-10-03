@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import classNames from "clsx";
-import { FRUITS, ANIMALS } from "../FindAndTap/FindAndTap.const";
-import { onTouch } from "../utils/touch";
-import { useHorizontalSwipe } from "../utils/swipe";
-import { fx } from "../utils/sound";
+import { FRUITS, ANIMALS } from "@/games/FindAndTap/FindAndTap.const";
+import { onTouch } from "@/utils/touch";
+import { useHorizontalSwipe } from "@/utils/swipe";
+import { fx } from "@/utils/sound";
 
 const COUNTABLES = [...FRUITS, ...ANIMALS];
 

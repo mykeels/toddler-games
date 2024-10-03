@@ -8,6 +8,7 @@
     "deploy": "gh-pages -d dist",
     "dev": "vite",
     "start": "vite",
+    "ts": "tsc -b",
     "build": "tsc -b && npx cross-env ASSET_URL=/toddler-games/ vite build --base=/toddler-games/",
     "lint": "eslint .",
     "preview": "vite preview"

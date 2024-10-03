@@ -2,9 +2,9 @@ import { useEffect, useMemo, useState } from "react";
 import classNames from "clsx";
 
 import { CHARACTERS } from "./FindAndTap.const";
-import { onTouch } from "../utils/touch";
-import { useHorizontalSwipe } from "../utils/swipe";
-import { fx } from "../utils/sound";
+import { onTouch } from "@/utils/touch";
+import { useHorizontalSwipe } from "@/utils/swipe";
+import { fx } from "@/utils/sound";
 
 function FindAndTap({
   getCharacterSet = (set: typeof CHARACTERS) =>

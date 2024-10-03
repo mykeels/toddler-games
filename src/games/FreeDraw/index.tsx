@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import CanvasDraw from "react-canvas-draw";
-import { fx } from "../utils/sound";
+import { fx } from "@/utils/sound";
 
 export const FreeDraw = () => {
   const [size, setSize] = useState({ width: 500, height: 500 });

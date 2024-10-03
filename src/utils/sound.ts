@@ -1,5 +1,5 @@
 import { Howl } from "howler";
-import { LOWERCASE_LETTERS, NUMBERS, NUMBERS_TO_WORDS } from "../FindAndTap/FindAndTap.const";
+import { LOWERCASE_LETTERS, NUMBERS, NUMBERS_TO_WORDS } from "../games/FindAndTap/FindAndTap.const";
 
 const audio = (src: string, options: { rate?: number } = {}) =>
   new Howl({

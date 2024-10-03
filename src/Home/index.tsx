@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { fx } from "../utils/sound";
+import { fx } from "@/utils/sound";
 import { useEffect } from "react";
 
 export const Home = () => {

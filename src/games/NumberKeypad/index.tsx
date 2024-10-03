@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import classNames from "clsx";
-import { onTouch } from "../utils/touch";
-import { fx } from "../utils/sound";
+import { onTouch } from "@/utils/touch";
+import { fx } from "@/utils/sound";
 
 export const NumberKeypad = () => {
   const [recipient, setRecipient] = useState<string>("");

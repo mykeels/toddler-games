@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
 import classNames from "clsx";
 import { IMAGES, UPPERCASE_LETTERS } from "./ImageToLetterMatching.const";
-import { useHorizontalSwipe } from "../utils/swipe";
-import { hasTouch, onTouch } from "../utils/touch";
-import { fx } from "../utils/sound";
+import { useHorizontalSwipe } from "@/utils/swipe";
+import { hasTouch, onTouch } from "@/utils/touch";
+import { fx } from "@/utils/sound";
 
 export const ImageToLetterMatching = ({
   transformLetter = (letter) => letter,
