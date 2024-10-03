@@ -5,6 +5,7 @@ import {
 } from "@tanstack/react-router";
 import { fx } from "@/utils/sound";
 import { useEffect, useState } from "react";
+import { useHorizontalSwipe } from "@/utils/swipe";
 
 const GAME_LISTING: GameListing = {
   title: "Toddler Games",
@@ -102,18 +103,27 @@ export const Home = () => {
       });
     }
   };
+  const isListingAtRoot = listing.title === GAME_LISTING.title;
+  const { ref } = useHorizontalSwipe({
+    onSwipe: ({ directions }) => {
+      if (directions.right && !isListingAtRoot) {
+        enterListing(listing.back!());
+      }
+    },
+  });
 
   return (
-    <div className="flex flex-col space-y-4 items-center justify-center h-full px-4">
+    <div
+      ref={ref as React.LegacyRef<HTMLDivElement>}
+      className="flex flex-col space-y-4 items-center justify-center h-full px-4"
+    >
       <h1 className="text-4xl font-bold">{listing.title}</h1>
 
       <ol className="list-decimal text-lg flex flex-col space-y-4">
         {listing.children.map((child) =>
           "path" in child ? (
             <li key={child.title}>
-              <Link to={child.path}>
-                {child.title}
-              </Link>
+              <Link to={child.path}>{child.title}</Link>
             </li>
           ) : (
             <li key={child.title} onClick={() => enterListing(child)}>
@@ -121,7 +131,7 @@ export const Home = () => {
             </li>
           )
         )}
-        {listing.title !== GAME_LISTING.title && (
+        {!isListingAtRoot && (
           <li onClick={() => enterListing(listing.back!())}>Back</li>
         )}
       </ol>
