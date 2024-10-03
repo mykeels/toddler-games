@@ -13,10 +13,10 @@ export const Home = () => {
   }, []);
 
   return (
-    <div className="flex flex-col space-y-4 items-center justify-center h-full">
+    <div className="flex flex-col space-y-4 items-center justify-center h-full px-4">
       <h1 className="text-4xl font-bold">Toddler Games</h1>
 
-      <ol className="list-decimal">
+      <ol className="list-decimal text-lg flex flex-col space-y-4">
         <li>
           <Link to="/find-and-tap/uppercase">
             Find and Tap (Uppercase Letters only)
