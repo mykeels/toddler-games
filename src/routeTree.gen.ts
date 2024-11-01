@@ -16,6 +16,10 @@ import { Route as TapToCountIndexImport } from './routes/tap-to-count/index'
 import { Route as NumberKeypadIndexImport } from './routes/number-keypad/index'
 import { Route as ImageToLetterMatchingIndexImport } from './routes/image-to-letter-matching/index'
 import { Route as FreeDrawIndexImport } from './routes/free-draw/index'
+import { Route as LetterTracingDownImport } from './routes/letter-tracing/down'
+import { Route as LetterTracingBUpperImport } from './routes/letter-tracing/b-upper'
+import { Route as LetterTracingAcrossImport } from './routes/letter-tracing/across'
+import { Route as LetterTracingAUpperImport } from './routes/letter-tracing/a-upper'
 import { Route as ImageToLetterMatchingLowercaseImport } from './routes/image-to-letter-matching/lowercase'
 import { Route as FindAndTapUppercaseImport } from './routes/find-and-tap/uppercase'
 import { Route as FindAndTapNumbersImport } from './routes/find-and-tap/numbers'
@@ -49,6 +53,26 @@ const ImageToLetterMatchingIndexRoute = ImageToLetterMatchingIndexImport.update(
 
 const FreeDrawIndexRoute = FreeDrawIndexImport.update({
   path: '/free-draw/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const LetterTracingDownRoute = LetterTracingDownImport.update({
+  path: '/letter-tracing/down',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const LetterTracingBUpperRoute = LetterTracingBUpperImport.update({
+  path: '/letter-tracing/b-upper',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const LetterTracingAcrossRoute = LetterTracingAcrossImport.update({
+  path: '/letter-tracing/across',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const LetterTracingAUpperRoute = LetterTracingAUpperImport.update({
+  path: '/letter-tracing/a-upper',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -136,6 +160,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ImageToLetterMatchingLowercaseImport
       parentRoute: typeof rootRoute
     }
+    '/letter-tracing/a-upper': {
+      id: '/letter-tracing/a-upper'
+      path: '/letter-tracing/a-upper'
+      fullPath: '/letter-tracing/a-upper'
+      preLoaderRoute: typeof LetterTracingAUpperImport
+      parentRoute: typeof rootRoute
+    }
+    '/letter-tracing/across': {
+      id: '/letter-tracing/across'
+      path: '/letter-tracing/across'
+      fullPath: '/letter-tracing/across'
+      preLoaderRoute: typeof LetterTracingAcrossImport
+      parentRoute: typeof rootRoute
+    }
+    '/letter-tracing/b-upper': {
+      id: '/letter-tracing/b-upper'
+      path: '/letter-tracing/b-upper'
+      fullPath: '/letter-tracing/b-upper'
+      preLoaderRoute: typeof LetterTracingBUpperImport
+      parentRoute: typeof rootRoute
+    }
+    '/letter-tracing/down': {
+      id: '/letter-tracing/down'
+      path: '/letter-tracing/down'
+      fullPath: '/letter-tracing/down'
+      preLoaderRoute: typeof LetterTracingDownImport
+      parentRoute: typeof rootRoute
+    }
     '/free-draw/': {
       id: '/free-draw/'
       path: '/free-draw'
@@ -177,6 +229,10 @@ export interface FileRoutesByFullPath {
   '/find-and-tap/numbers': typeof FindAndTapNumbersRoute
   '/find-and-tap/uppercase': typeof FindAndTapUppercaseRoute
   '/image-to-letter-matching/lowercase': typeof ImageToLetterMatchingLowercaseRoute
+  '/letter-tracing/a-upper': typeof LetterTracingAUpperRoute
+  '/letter-tracing/across': typeof LetterTracingAcrossRoute
+  '/letter-tracing/b-upper': typeof LetterTracingBUpperRoute
+  '/letter-tracing/down': typeof LetterTracingDownRoute
   '/free-draw': typeof FreeDrawIndexRoute
   '/image-to-letter-matching': typeof ImageToLetterMatchingIndexRoute
   '/number-keypad': typeof NumberKeypadIndexRoute
@@ -191,6 +247,10 @@ export interface FileRoutesByTo {
   '/find-and-tap/numbers': typeof FindAndTapNumbersRoute
   '/find-and-tap/uppercase': typeof FindAndTapUppercaseRoute
   '/image-to-letter-matching/lowercase': typeof ImageToLetterMatchingLowercaseRoute
+  '/letter-tracing/a-upper': typeof LetterTracingAUpperRoute
+  '/letter-tracing/across': typeof LetterTracingAcrossRoute
+  '/letter-tracing/b-upper': typeof LetterTracingBUpperRoute
+  '/letter-tracing/down': typeof LetterTracingDownRoute
   '/free-draw': typeof FreeDrawIndexRoute
   '/image-to-letter-matching': typeof ImageToLetterMatchingIndexRoute
   '/number-keypad': typeof NumberKeypadIndexRoute
@@ -206,6 +266,10 @@ export interface FileRoutesById {
   '/find-and-tap/numbers': typeof FindAndTapNumbersRoute
   '/find-and-tap/uppercase': typeof FindAndTapUppercaseRoute
   '/image-to-letter-matching/lowercase': typeof ImageToLetterMatchingLowercaseRoute
+  '/letter-tracing/a-upper': typeof LetterTracingAUpperRoute
+  '/letter-tracing/across': typeof LetterTracingAcrossRoute
+  '/letter-tracing/b-upper': typeof LetterTracingBUpperRoute
+  '/letter-tracing/down': typeof LetterTracingDownRoute
   '/free-draw/': typeof FreeDrawIndexRoute
   '/image-to-letter-matching/': typeof ImageToLetterMatchingIndexRoute
   '/number-keypad/': typeof NumberKeypadIndexRoute
@@ -222,6 +286,10 @@ export interface FileRouteTypes {
     | '/find-and-tap/numbers'
     | '/find-and-tap/uppercase'
     | '/image-to-letter-matching/lowercase'
+    | '/letter-tracing/a-upper'
+    | '/letter-tracing/across'
+    | '/letter-tracing/b-upper'
+    | '/letter-tracing/down'
     | '/free-draw'
     | '/image-to-letter-matching'
     | '/number-keypad'
@@ -235,6 +303,10 @@ export interface FileRouteTypes {
     | '/find-and-tap/numbers'
     | '/find-and-tap/uppercase'
     | '/image-to-letter-matching/lowercase'
+    | '/letter-tracing/a-upper'
+    | '/letter-tracing/across'
+    | '/letter-tracing/b-upper'
+    | '/letter-tracing/down'
     | '/free-draw'
     | '/image-to-letter-matching'
     | '/number-keypad'
@@ -248,6 +320,10 @@ export interface FileRouteTypes {
     | '/find-and-tap/numbers'
     | '/find-and-tap/uppercase'
     | '/image-to-letter-matching/lowercase'
+    | '/letter-tracing/a-upper'
+    | '/letter-tracing/across'
+    | '/letter-tracing/b-upper'
+    | '/letter-tracing/down'
     | '/free-draw/'
     | '/image-to-letter-matching/'
     | '/number-keypad/'
@@ -263,6 +339,10 @@ export interface RootRouteChildren {
   FindAndTapNumbersRoute: typeof FindAndTapNumbersRoute
   FindAndTapUppercaseRoute: typeof FindAndTapUppercaseRoute
   ImageToLetterMatchingLowercaseRoute: typeof ImageToLetterMatchingLowercaseRoute
+  LetterTracingAUpperRoute: typeof LetterTracingAUpperRoute
+  LetterTracingAcrossRoute: typeof LetterTracingAcrossRoute
+  LetterTracingBUpperRoute: typeof LetterTracingBUpperRoute
+  LetterTracingDownRoute: typeof LetterTracingDownRoute
   FreeDrawIndexRoute: typeof FreeDrawIndexRoute
   ImageToLetterMatchingIndexRoute: typeof ImageToLetterMatchingIndexRoute
   NumberKeypadIndexRoute: typeof NumberKeypadIndexRoute
@@ -277,6 +357,10 @@ const rootRouteChildren: RootRouteChildren = {
   FindAndTapNumbersRoute: FindAndTapNumbersRoute,
   FindAndTapUppercaseRoute: FindAndTapUppercaseRoute,
   ImageToLetterMatchingLowercaseRoute: ImageToLetterMatchingLowercaseRoute,
+  LetterTracingAUpperRoute: LetterTracingAUpperRoute,
+  LetterTracingAcrossRoute: LetterTracingAcrossRoute,
+  LetterTracingBUpperRoute: LetterTracingBUpperRoute,
+  LetterTracingDownRoute: LetterTracingDownRoute,
   FreeDrawIndexRoute: FreeDrawIndexRoute,
   ImageToLetterMatchingIndexRoute: ImageToLetterMatchingIndexRoute,
   NumberKeypadIndexRoute: NumberKeypadIndexRoute,
@@ -302,6 +386,10 @@ export const routeTree = rootRoute
         "/find-and-tap/numbers",
         "/find-and-tap/uppercase",
         "/image-to-letter-matching/lowercase",
+        "/letter-tracing/a-upper",
+        "/letter-tracing/across",
+        "/letter-tracing/b-upper",
+        "/letter-tracing/down",
         "/free-draw/",
         "/image-to-letter-matching/",
         "/number-keypad/",
@@ -328,6 +416,18 @@ export const routeTree = rootRoute
     },
     "/image-to-letter-matching/lowercase": {
       "filePath": "image-to-letter-matching/lowercase.tsx"
+    },
+    "/letter-tracing/a-upper": {
+      "filePath": "letter-tracing/a-upper.tsx"
+    },
+    "/letter-tracing/across": {
+      "filePath": "letter-tracing/across.tsx"
+    },
+    "/letter-tracing/b-upper": {
+      "filePath": "letter-tracing/b-upper.tsx"
+    },
+    "/letter-tracing/down": {
+      "filePath": "letter-tracing/down.tsx"
     },
     "/free-draw/": {
       "filePath": "free-draw/index.tsx"

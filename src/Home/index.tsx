@@ -60,6 +60,27 @@ const GAME_LISTING: GameListing = {
       title: "Number Keypad",
       path: "/number-keypad/",
     },
+    {
+      title: "Letter Tracing",
+      children: [
+        {
+          title: "Down",
+          path: "/letter-tracing/down",
+        },
+        {
+          title: "Across",
+          path: "/letter-tracing/across",
+        },
+        {
+          title: "Uppercase A",
+          path: "/letter-tracing/a-upper",
+        },
+        {
+          title: "Uppercase B",
+          path: "/letter-tracing/b-upper",
+        },
+      ],
+    },
   ],
 };
 

@@ -5,6 +5,7 @@ import Across from "./Across/Across";
 import { useFullScreenSize } from "@/utils/screen";
 import { LetterSvgProps } from "./LetterTracing.types";
 import { Screens, useMedia } from "@/utils/useMedia";
+import { Link } from "@tanstack/react-router";
 
 type LetterTracingProps = {
   Letter?: (props: LetterSvgProps) => React.ReactNode;
@@ -20,7 +21,9 @@ export const LetterTracing = ({ Letter = Across }: LetterTracingProps) => {
 
   return (
     <div className="flex flex-col h-full">
-      <h1 className="text-4xl text-gray-800">Trace</h1>
+      <h1 className="text-4xl text-gray-800">
+        <Link to="/" search={{ title: "Letter Tracing" }}>Trace</Link>
+      </h1>
       <div
         className="flex flex-col space-y-4 items-center justify-center grow relative"
         ref={containerRef}
