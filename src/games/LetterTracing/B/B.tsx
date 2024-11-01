@@ -11,18 +11,18 @@ export default function B({
   color = DEFAULT_COLOR,
 }: LetterSvgProps) {
   const upperCurvePoints = generateCubicCurvePoints(
-    40, 10, 
-    60, 20, 
-    60, 40, 
-    40, 45, 
-    5
+    [40, 10],
+    [65, 15],
+    [65, 45],
+    [40, 50],
+    6
   );
   const lowerCurvePoints = generateCubicCurvePoints(
-    40, 45, 
-    60, 55, 
-    60, 75, 
-    40, 80, 
-    5
+    [40, 50],
+    [65, 55],
+    [65, 85],
+    [40, 90],
+    6
   );
 
   return (
@@ -30,7 +30,7 @@ export default function B({
       xmlns="http://www.w3.org/2000/svg"
       width={size}
       height={size}
-      viewBox="0 0 80 90"
+      viewBox="0 0 100 100"
     >
       {/*<!-- Vertical line -->*/}
       <circle cx="20" cy="10" r={dotSize} fill={color} />
@@ -41,11 +41,12 @@ export default function B({
       <circle cx="20" cy="60" r={dotSize} fill={color} />
       <circle cx="20" cy="70" r={dotSize} fill={color} />
       <circle cx="20" cy="80" r={dotSize} fill={color} />
+      <circle cx="20" cy="90" r={dotSize} fill={color} />
 
       {/*<!-- Middle vertical line -->*/}
       <circle cx="30" cy="10" r={dotSize} fill={color} />
-      <circle cx="30" cy="45" r={dotSize} fill={color} />
-      <circle cx="30" cy="80" r={dotSize} fill={color} />
+      <circle cx="30" cy="50" r={dotSize} fill={color} />
+      <circle cx="30" cy="90" r={dotSize} fill={color} />
 
       {/*<!-- Upper curve -->*/}
       {upperCurvePoints.map((point) => (
@@ -72,34 +73,38 @@ export default function B({
   );
 }
 
+type Point = [number, number];
+
 function generateCubicCurvePoints(
-  startX: number,
-  startY: number,
-  control1X: number,
-  control1Y: number,
-  control2X: number,
-  control2Y: number,
-  endX: number,
-  endY: number,
-  numPoints: number
+  start: Point,
+  control1: Point,
+  control2: Point,
+  end: Point,
+  count: number
 ) {
   const points = [];
+  const [startX, startY] = start;
+  const [control1X, control1Y] = control1;
+  const [control2X, control2Y] = control2;
+  const [endX, endY] = end;
 
-    for (let t = 0; t <= 1; t += 1/numPoints) {
-        // Cubic Bézier formula:
-        // B(t) = (1-t)³P₀ + 3(1-t)²tP₁ + 3(1-t)t²P₂ + t³P₃
-        const x = Math.pow(1-t, 3) * startX + 
-                  3 * Math.pow(1-t, 2) * t * control1X + 
-                  3 * (1-t) * Math.pow(t, 2) * control2X + 
-                  Math.pow(t, 3) * endX;
-                  
-        const y = Math.pow(1-t, 3) * startY + 
-                  3 * Math.pow(1-t, 2) * t * control1Y + 
-                  3 * (1-t) * Math.pow(t, 2) * control2Y + 
-                  Math.pow(t, 3) * endY;
-                  
-        points.push({x: Math.round(x), y: Math.round(y)});
-    }
-    
-    return points;
+  for (let t = 0; t <= 1; t += 1 / count) {
+    // Cubic Bézier formula:
+    // B(t) = (1-t)³P₀ + 3(1-t)²tP₁ + 3(1-t)t²P₂ + t³P₃
+    const x =
+      Math.pow(1 - t, 3) * startX +
+      3 * Math.pow(1 - t, 2) * t * control1X +
+      3 * (1 - t) * Math.pow(t, 2) * control2X +
+      Math.pow(t, 3) * endX;
+
+    const y =
+      Math.pow(1 - t, 3) * startY +
+      3 * Math.pow(1 - t, 2) * t * control1Y +
+      3 * (1 - t) * Math.pow(t, 2) * control2Y +
+      Math.pow(t, 3) * endY;
+
+    points.push({ x: Math.round(x), y: Math.round(y) });
+  }
+
+  return points;
 }
