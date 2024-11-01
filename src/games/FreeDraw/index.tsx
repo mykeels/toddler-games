@@ -38,7 +38,7 @@ export const FreeDraw = () => {
     <div className="flex flex-col h-full">
       <h1 className="text-4xl text-gray-800">Free Draw</h1>
       <div
-        className="flex flex-col space-y-4 items-center justify-center grow"
+        className="flex flex-col space-y-4 items-center justify-center grow max-h-[80dvh]"
         ref={containerRef}
       >
         <CanvasDraw
