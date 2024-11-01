@@ -61,7 +61,7 @@ const GAME_LISTING: GameListing = {
       path: "/number-keypad/",
     },
     {
-      title: "Letter Tracing",
+      title: "Can you trace this?",
       children: [
         {
           title: "Down",
