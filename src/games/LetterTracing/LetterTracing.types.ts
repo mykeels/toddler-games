@@ -1,5 +1,5 @@
 export type LetterSvgProps = {
-  size?: number;
+  size?: number|string;
   dotSize?: number;
   color?: string;
 };
