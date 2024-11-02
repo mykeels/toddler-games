@@ -24,7 +24,7 @@ export const LetterTracing = ({ Letter = Across }: LetterTracingProps) => {
   return (
     <div className="flex flex-col h-full">
       <h1 className="text-4xl text-gray-800">
-        <Link to="/" search={{ title: "Letter Tracing" }} className="float-left">
+        <Link to="/" search={{ title: "Can you trace this?" }} className="float-left">
           🔙
         </Link>
         <span>Can you trace this?</span>

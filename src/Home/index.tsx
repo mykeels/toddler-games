@@ -1,6 +1,7 @@
 import {
   Link,
   useNavigate,
+  useSearch,
   type FileRoutesByPath,
 } from "@tanstack/react-router";
 import { fx } from "@/utils/sound";
@@ -111,7 +112,32 @@ export const Home = () => {
   useHomeSound();
   const navigate = useNavigate();
 
-  const [listing, setListing] = useState(GAME_LISTING);
+  const searchListing = (title?: string): GameListing => {
+    const findListing = (
+      root: GameListing,
+      searchTitle: string
+    ): GameListing | undefined => {
+      if (root.title === searchTitle) return root;
+      if ("children" in root) {
+        for (const child of root.children) {
+          const found = findListing(child, searchTitle);
+          if (found) return found;
+        }
+      }
+      return undefined;
+    };
+
+    const found = findListing(GAME_LISTING, title ?? "");
+    if (found) {
+      return {
+        ...found,
+        back: () => GAME_LISTING,
+      }
+    }
+    return GAME_LISTING;
+  };
+  const { title } = useSearch({ from: "/" });
+  const [listing, setListing] = useState(searchListing(title));
   const enterListing = (item: GameListing) => {
     if ("children" in item) {
       setListing({
@@ -141,7 +167,7 @@ export const Home = () => {
       <h1 className="text-4xl font-bold">{listing.title}</h1>
 
       <ol className="list-decimal text-lg flex flex-col space-y-4">
-        {listing.children.map((child) =>
+        {"children" in listing ? listing.children.map((child) =>
           "path" in child ? (
             <li key={child.title}>
               <Link to={child.path}>{child.title}</Link>
@@ -158,7 +184,7 @@ export const Home = () => {
               </Link>
             </li>
           )
-        )}
+        ) : null}
         {!isListingAtRoot && (
           <li onClick={() => enterListing(listing.back!())}>
             <Link to=".">Back</Link>

@@ -6,7 +6,7 @@ function Footer() {
   const location = useLocation();
   return (
     <footer
-      onClick={() => {
+      onClick={async () => {
         if ("serviceWorker" in navigator) {
           navigator.serviceWorker.getRegistrations().then((registrations) => {
             for (const registration of registrations) {
@@ -15,6 +15,7 @@ function Footer() {
           });
         }
         if (location.pathname === "/") {
+          await navigate({ to: "/" });
           window.location.reload();
         } else {
           navigate({ to: "/" });
