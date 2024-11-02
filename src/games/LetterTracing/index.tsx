@@ -37,6 +37,7 @@ export const LetterTracing = ({ Letter = Across }: LetterTracingProps) => {
           key={life}
           canvasWidth={size.width}
           canvasHeight={size.height}
+          brushRadius={15}
           brushColor="red"
         />
       </div>

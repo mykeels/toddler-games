@@ -11,18 +11,18 @@ export default function B({
   color = DEFAULT_COLOR,
 }: LetterSvgProps) {
   const upperCurvePoints = generateCubicCurvePoints(
-    [40, 10],
-    [65, 15],
-    [65, 45],
-    [40, 50],
-    6
+    [60, 10],
+    [75, 15],
+    [75, 45],
+    [60, 50],
+    5
   );
   const lowerCurvePoints = generateCubicCurvePoints(
-    [40, 50],
-    [65, 55],
-    [65, 85],
-    [40, 90],
-    6
+    [60, 50],
+    [75, 55],
+    [75, 85],
+    [60, 90],
+    5
   );
 
   return (
@@ -33,20 +33,23 @@ export default function B({
       viewBox="0 0 100 100"
     >
       {/*<!-- Vertical line -->*/}
-      <circle cx="20" cy="10" r={dotSize} fill={color} />
-      <circle cx="20" cy="20" r={dotSize} fill={color} />
-      <circle cx="20" cy="30" r={dotSize} fill={color} />
-      <circle cx="20" cy="40" r={dotSize} fill={color} />
-      <circle cx="20" cy="50" r={dotSize} fill={color} />
-      <circle cx="20" cy="60" r={dotSize} fill={color} />
-      <circle cx="20" cy="70" r={dotSize} fill={color} />
-      <circle cx="20" cy="80" r={dotSize} fill={color} />
-      <circle cx="20" cy="90" r={dotSize} fill={color} />
+      <circle cx="30" cy="10" r={dotSize} fill={color} />
+      <circle cx="30" cy="20" r={dotSize} fill={color} />
+      <circle cx="30" cy="30" r={dotSize} fill={color} />
+      <circle cx="30" cy="40" r={dotSize} fill={color} />
+      <circle cx="30" cy="50" r={dotSize} fill={color} />
+      <circle cx="30" cy="60" r={dotSize} fill={color} />
+      <circle cx="30" cy="70" r={dotSize} fill={color} />
+      <circle cx="30" cy="80" r={dotSize} fill={color} />
+      <circle cx="30" cy="90" r={dotSize} fill={color} />
 
       {/*<!-- Middle vertical line -->*/}
-      <circle cx="30" cy="10" r={dotSize} fill={color} />
-      <circle cx="30" cy="50" r={dotSize} fill={color} />
-      <circle cx="30" cy="90" r={dotSize} fill={color} />
+      <circle cx="40" cy="10" r={dotSize} fill={color} />
+      <circle cx="40" cy="50" r={dotSize} fill={color} />
+      <circle cx="40" cy="90" r={dotSize} fill={color} />
+      <circle cx="50" cy="10" r={dotSize} fill={color} />
+      <circle cx="50" cy="50" r={dotSize} fill={color} />
+      <circle cx="50" cy="90" r={dotSize} fill={color} />
 
       {/*<!-- Upper curve -->*/}
       {upperCurvePoints.map((point) => (
