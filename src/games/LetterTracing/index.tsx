@@ -39,6 +39,7 @@ export const LetterTracing = ({ Letter = Across }: LetterTracingProps) => {
           canvasHeight={size.height}
           brushRadius={10}
           brushColor="red"
+          lazyRadius={0}
         />
       </div>
     </div>
