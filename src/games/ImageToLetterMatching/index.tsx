@@ -5,6 +5,7 @@ import { UPPERCASE_LETTERS } from "@/utils/characters";
 import { useHorizontalSwipe } from "@/utils/swipe";
 import { hasTouch, onTouch } from "@/utils/touch";
 import { fx } from "@/utils/sound";
+import Header from "@/Header/Header";
 
 export const ImageToLetterMatching = ({
   transformLetter = (letter) => letter,
@@ -25,7 +26,7 @@ export const ImageToLetterMatching = ({
         image.word[0],
         UPPERCASE_LETTERS[Math.floor(Math.random() * UPPERCASE_LETTERS.length)],
       ]).map(transformLetter),
-      // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [image.word]
   );
   const goal = transformLetter(image.word[0]);
@@ -93,11 +94,11 @@ export const ImageToLetterMatching = ({
       className="h-full select-none"
       ref={ref as React.LegacyRef<HTMLDivElement>}
     >
-      <h1 className="text-4xl text-gray-800">
+      <Header title="Match Image to Letter" onRestart={onNextClick}>
         {state === "interlude"
           ? `${image.word} starts with ${goal}`
           : `${image.word} starts with...`}
-      </h1>
+      </Header>
       <div className="text-center py-8 text-9xl font-bold">{image.image}</div>
       <div data-name="pair" className="flex justify-center space-x-8">
         <Card
@@ -111,7 +112,10 @@ export const ImageToLetterMatching = ({
           isCorrect={isItemCorrect(letters[1])}
         />
       </div>
-      {!hasTouch() && state == "interlude" && selected && isCorrect(selected) ? (
+      {!hasTouch() &&
+      state == "interlude" &&
+      selected &&
+      isCorrect(selected) ? (
         <div
           data-name="interlude"
           className="flex flex-col items-center justify-center py-8"

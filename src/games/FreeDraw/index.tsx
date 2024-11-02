@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import CanvasDraw from "react-canvas-draw";
 import { fx } from "@/utils/sound";
+import Header from "@/Header/Header";
+import { useRestart } from "@/utils/restart";
 
 export const FreeDraw = () => {
   const [size, setSize] = useState({ width: 500, height: 500 });
@@ -34,14 +36,17 @@ export const FreeDraw = () => {
     fx.game.play();
   }, []);
 
+  const { life, restart } = useRestart();
+
   return (
     <div className="flex flex-col h-full">
-      <h1 className="text-4xl text-gray-800">Free Draw</h1>
+      <Header onRestart={restart}>Free Draw</Header>
       <div
         className="flex flex-col space-y-4 items-center justify-center grow max-h-[80dvh]"
         ref={containerRef}
       >
         <CanvasDraw
+          key={life}
           canvasWidth={size.width}
           canvasHeight={size.height}
           brushColor={color}

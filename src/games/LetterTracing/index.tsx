@@ -5,8 +5,8 @@ import Across from "./Across/Across";
 import { useFullScreenSize } from "@/utils/screen";
 import { LetterSvgProps } from "./LetterTracing.types";
 import { Screens, useMedia } from "@/utils/useMedia";
-import { Link } from "@tanstack/react-router";
 import { useRestart } from "@/utils/restart";
+import Header from "@/Header/Header";
 
 type LetterTracingProps = {
   Letter?: (props: LetterSvgProps) => React.ReactNode;
@@ -23,15 +23,7 @@ export const LetterTracing = ({ Letter = Across }: LetterTracingProps) => {
 
   return (
     <div className="flex flex-col h-full">
-      <h1 className="text-4xl text-gray-800">
-        <Link to="/" search={{ title: "Can you trace this?" }} className="float-left">
-          🔙
-        </Link>
-        <span>Can you trace this?</span>
-        <button className="float-right" onClick={restart}>
-          ↪️
-        </button>
-      </h1>
+      <Header title="Can you trace this?" onRestart={restart} />
       <div
         className="flex flex-col space-y-4 items-center justify-center grow relative max-h-[80dvh]"
         ref={containerRef}

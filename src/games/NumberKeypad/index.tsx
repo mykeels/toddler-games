@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import classNames from "clsx";
 import { onTouch } from "@/utils/touch";
 import { fx } from "@/utils/sound";
+import Header from "@/Header/Header";
 
 export const NumberKeypad = () => {
   const [recipient, setRecipient] = useState<string>("");
@@ -21,6 +22,7 @@ export const NumberKeypad = () => {
     sound?.play();
     setRecipient((recipient + digit).slice(-10));
   };
+  const reset = () => setRecipient("");
 
   useEffect(() => {
     fx.game.play();
@@ -28,7 +30,9 @@ export const NumberKeypad = () => {
 
   return (
     <div className="h-full select-none">
-      <h1 className="text-4xl text-gray-800">{recipient || "#"}</h1>
+      <Header onRestart={reset}>
+        {recipient || "#"}
+      </Header>
       <div className="flex flex-col space-y-4 py-8">
         <div className="flex justify-center space-x-4">
           <DigitButton value="1" onClick={() => dial("1")} />
