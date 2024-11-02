@@ -8,12 +8,12 @@ type HeaderProps = {
 
 export const Header = ({ title, onRestart, children }: HeaderProps) => {
   return (
-    <h1 className="text-4xl text-gray-800">
-      <Link to="/" search={{ title }} className="float-left">
+    <h1 className="text-4xl text-gray-800 flex flex-row items-center justify-between">
+      <Link to="/" search={{ title }}>
         🔙
       </Link>
-      <span>{children ?? title}</span>
-      <button className="float-right" onClick={onRestart}>
+      <span className="text-center text-2xl md:text-4xl">{children ?? title}</span>
+      <button onClick={onRestart}>
         ↪️
       </button>
     </h1>

@@ -18,7 +18,7 @@ export const LetterTracing = ({ Letter = Across }: LetterTracingProps) => {
     fx.game.play();
   }, []);
   const letters = useMedia([Screens.SM], [[0]], [0, 1, 2, 3]);
-  const letterSize = useMedia([Screens.SM], ["80dvh"], "40dvh");
+  const letterSize = useMedia([Screens.SM], ["60dvh"], "40dvh");
   const { life, restart } = useRestart();
 
   return (
@@ -37,7 +37,7 @@ export const LetterTracing = ({ Letter = Across }: LetterTracingProps) => {
           key={life}
           canvasWidth={size.width}
           canvasHeight={size.height}
-          brushRadius={15}
+          brushRadius={10}
           brushColor="red"
         />
       </div>
