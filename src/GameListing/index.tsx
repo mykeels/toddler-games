@@ -9,78 +9,97 @@ import { useEffect, useState } from "react";
 import { useHorizontalSwipe } from "@/utils/swipe";
 import Container from "@/Container";
 import Header from "@/Header/Header";
+import { Tile } from "./Tile";
 
 const GAME_LISTING: GameListing = {
   title: "Toddler Games",
+  icon: "./icons/toddler.svg",
   children: [
     {
       title: "Find and Tap",
+      icon: "./icons/tap.svg",
       children: [
         {
           title: "Uppercase Letters only",
           path: "/find-and-tap/uppercase",
+          icon: "./icons/tap.svg",
         },
         {
           title: "Lowercase Letters only",
           path: "/find-and-tap/lowercase",
+          icon: "./icons/tap.svg",
         },
         {
           title: "Numbers only",
           path: "/find-and-tap/numbers",
+          icon: "./icons/tap.svg",
         },
         {
           title: "Fruits only",
           path: "/find-and-tap/fruits",
+          icon: "./icons/tap.svg",
         },
         {
           title: "Animals only",
           path: "/find-and-tap/animals",
+          icon: "./icons/tap.svg",
         },
       ],
     },
     {
       title: "Tap to Count",
       path: "/tap-to-count/",
+      icon: "./icons/1234.svg",
     },
     {
       title: "Free Draw",
       path: "/free-draw/",
+      icon: "./icons/free-draw.svg",
     },
     {
       title: "Match Image to Letter",
+      icon: "./icons/tap.svg",
       children: [
         {
           title: "Uppercase Letters only",
           path: "/image-to-letter-matching/",
+          icon: "./icons/tap.svg",
         },
         {
           title: "Lowercase Letters only",
           path: "/image-to-letter-matching/lowercase",
+          icon: "./icons/tap.svg",
         },
       ],
     },
     {
       title: "Number Keypad",
       path: "/number-keypad/",
+      icon: "./icons/123.svg",
     },
     {
       title: "Can you trace this?",
+      icon: "./icons/trace.svg",
       children: [
         {
           title: "Down",
           path: "/letter-tracing/down",
+          icon: "./icons/trace.svg",
         },
         {
           title: "Across",
           path: "/letter-tracing/across",
+          icon: "./icons/trace.svg",
         },
         {
           title: "Uppercase A",
           path: "/letter-tracing/a-upper",
+          icon: "./icons/trace.svg",
         },
         {
           title: "Uppercase B",
           path: "/letter-tracing/b-upper",
+          icon: "./icons/trace.svg",
         },
       ],
     },
@@ -89,6 +108,7 @@ const GAME_LISTING: GameListing = {
 
 type GameListing = {
   title: string;
+  icon: string;
   back?: () => GameListing;
 } & (
     | {
@@ -165,19 +185,17 @@ export const Home = () => {
     <Container
       ref={ref as React.LegacyRef<HTMLDivElement>}>
       <Header title={listing.title} onRestart={() => { }} Left={<Header.BackToHome />} Right={null}>
-        <h1 className="text-4xl font-bold font-lily">Let’s Play</h1>
+        {isListingAtRoot ? <h1 className="text-4xl font-bold font-lily">Let’s Play</h1> : null}
       </Header>
       <div
-        className="flex flex-col space-y-4 items-center justify-center h-full px-4"
+        className="flex flex-col items-center justify-center h-full"
       >
-        <h1 className="text-4xl font-bold">{listing.title}</h1>
-
-        <ol className="list-decimal text-lg flex flex-col space-y-4">
+        <ol className="list-none text-lg flex flex-wrap items-center justify-center gap-4">
           {"children" in listing ? listing.children.map((child) =>
             "path" in child ? (
-              <li key={child.title}>
-                <Link to={child.path}>{child.title}</Link>
-              </li>
+              <Link to={child.path}>
+                <Tile title={child.title} imageSourcePath={child.icon} />
+              </Link>
             ) : (
               <li key={child.title} onClick={() => enterListing(child)}>
                 <Link
@@ -186,15 +204,15 @@ export const Home = () => {
                     title: child.title,
                   }}
                 >
-                  {child.title}
+                  <Tile title={child.title} imageSourcePath={child.icon} />
                 </Link>
               </li>
             )
           ) : null}
           {!isListingAtRoot && (
-            <li onClick={() => enterListing(listing.back!())}>
-              <Link to=".">Back</Link>
-            </li>
+            <button onClick={() => enterListing(listing.back!())}>
+              <Tile title="Back" imageSourcePath="./icons/arrow-left-black.svg" />
+            </button>
           )}
         </ol>
       </div>
