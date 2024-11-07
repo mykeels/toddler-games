@@ -7,7 +7,7 @@ export default {
   ],
   theme: {
   	fontFamily: {
-  		sans: ['Segoe UI', 'San Francisco', 'Helvetica Neue', 'Arial', 'sans-serif']
+  		lily: ['Lily Script One', 'Poppins', 'Segoe UI', 'San Francisco', 'Helvetica Neue', 'Arial', 'sans-serif']
   	},
   	extend: {
   		colors: {
