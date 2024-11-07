@@ -136,7 +136,7 @@ export const Home = () => {
     }
     return GAME_LISTING;
   };
-  const { title } = useSearch({ from: "/" });
+  const { title } = useSearch({ from: "/menu/" });
   const [listing, setListing] = useState(searchListing(title));
   const enterListing = (item: GameListing) => {
     if ("children" in item) {

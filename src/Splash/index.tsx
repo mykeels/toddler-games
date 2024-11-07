@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "@tanstack/react-router";
 
 export const Splash = () => {
+    const navigate = useNavigate();
     return (
         <section
             className=" h-screen"
@@ -15,7 +17,7 @@ export const Splash = () => {
                     style={{ textShadow: "2px 2px 4px rgba(0,0,0,0.5)", letterSpacing: "-4%" }}>
                     Let’s Play!
                 </h1>
-                <Button className="text-xl py-6 px-8">
+                <Button className="text-xl py-6 px-8" onClick={() => navigate({ to: "/menu" })}>
                     <span>Play</span>
                     <img src="./icons/play-white.svg" alt="play" />
                 </Button>

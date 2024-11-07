@@ -14,6 +14,7 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
 import { Route as TapToCountIndexImport } from './routes/tap-to-count/index'
 import { Route as NumberKeypadIndexImport } from './routes/number-keypad/index'
+import { Route as MenuIndexImport } from './routes/menu/index'
 import { Route as ImageToLetterMatchingIndexImport } from './routes/image-to-letter-matching/index'
 import { Route as FreeDrawIndexImport } from './routes/free-draw/index'
 import { Route as LetterTracingDownImport } from './routes/letter-tracing/down'
@@ -41,6 +42,11 @@ const TapToCountIndexRoute = TapToCountIndexImport.update({
 
 const NumberKeypadIndexRoute = NumberKeypadIndexImport.update({
   path: '/number-keypad/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const MenuIndexRoute = MenuIndexImport.update({
+  path: '/menu/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -202,6 +208,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ImageToLetterMatchingIndexImport
       parentRoute: typeof rootRoute
     }
+    '/menu/': {
+      id: '/menu/'
+      path: '/menu'
+      fullPath: '/menu'
+      preLoaderRoute: typeof MenuIndexImport
+      parentRoute: typeof rootRoute
+    }
     '/number-keypad/': {
       id: '/number-keypad/'
       path: '/number-keypad'
@@ -235,6 +248,7 @@ export interface FileRoutesByFullPath {
   '/letter-tracing/down': typeof LetterTracingDownRoute
   '/free-draw': typeof FreeDrawIndexRoute
   '/image-to-letter-matching': typeof ImageToLetterMatchingIndexRoute
+  '/menu': typeof MenuIndexRoute
   '/number-keypad': typeof NumberKeypadIndexRoute
   '/tap-to-count': typeof TapToCountIndexRoute
 }
@@ -253,6 +267,7 @@ export interface FileRoutesByTo {
   '/letter-tracing/down': typeof LetterTracingDownRoute
   '/free-draw': typeof FreeDrawIndexRoute
   '/image-to-letter-matching': typeof ImageToLetterMatchingIndexRoute
+  '/menu': typeof MenuIndexRoute
   '/number-keypad': typeof NumberKeypadIndexRoute
   '/tap-to-count': typeof TapToCountIndexRoute
 }
@@ -272,6 +287,7 @@ export interface FileRoutesById {
   '/letter-tracing/down': typeof LetterTracingDownRoute
   '/free-draw/': typeof FreeDrawIndexRoute
   '/image-to-letter-matching/': typeof ImageToLetterMatchingIndexRoute
+  '/menu/': typeof MenuIndexRoute
   '/number-keypad/': typeof NumberKeypadIndexRoute
   '/tap-to-count/': typeof TapToCountIndexRoute
 }
@@ -292,6 +308,7 @@ export interface FileRouteTypes {
     | '/letter-tracing/down'
     | '/free-draw'
     | '/image-to-letter-matching'
+    | '/menu'
     | '/number-keypad'
     | '/tap-to-count'
   fileRoutesByTo: FileRoutesByTo
@@ -309,6 +326,7 @@ export interface FileRouteTypes {
     | '/letter-tracing/down'
     | '/free-draw'
     | '/image-to-letter-matching'
+    | '/menu'
     | '/number-keypad'
     | '/tap-to-count'
   id:
@@ -326,6 +344,7 @@ export interface FileRouteTypes {
     | '/letter-tracing/down'
     | '/free-draw/'
     | '/image-to-letter-matching/'
+    | '/menu/'
     | '/number-keypad/'
     | '/tap-to-count/'
   fileRoutesById: FileRoutesById
@@ -345,6 +364,7 @@ export interface RootRouteChildren {
   LetterTracingDownRoute: typeof LetterTracingDownRoute
   FreeDrawIndexRoute: typeof FreeDrawIndexRoute
   ImageToLetterMatchingIndexRoute: typeof ImageToLetterMatchingIndexRoute
+  MenuIndexRoute: typeof MenuIndexRoute
   NumberKeypadIndexRoute: typeof NumberKeypadIndexRoute
   TapToCountIndexRoute: typeof TapToCountIndexRoute
 }
@@ -363,6 +383,7 @@ const rootRouteChildren: RootRouteChildren = {
   LetterTracingDownRoute: LetterTracingDownRoute,
   FreeDrawIndexRoute: FreeDrawIndexRoute,
   ImageToLetterMatchingIndexRoute: ImageToLetterMatchingIndexRoute,
+  MenuIndexRoute: MenuIndexRoute,
   NumberKeypadIndexRoute: NumberKeypadIndexRoute,
   TapToCountIndexRoute: TapToCountIndexRoute,
 }
@@ -392,6 +413,7 @@ export const routeTree = rootRoute
         "/letter-tracing/down",
         "/free-draw/",
         "/image-to-letter-matching/",
+        "/menu/",
         "/number-keypad/",
         "/tap-to-count/"
       ]
@@ -434,6 +456,9 @@ export const routeTree = rootRoute
     },
     "/image-to-letter-matching/": {
       "filePath": "image-to-letter-matching/index.tsx"
+    },
+    "/menu/": {
+      "filePath": "menu/index.tsx"
     },
     "/number-keypad/": {
       "filePath": "number-keypad/index.tsx"
