@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Loading } from "./index";
 
 export default {
-  title: "Loading",
+  title: "components/Loading",
   component: Loading,
 };
 
