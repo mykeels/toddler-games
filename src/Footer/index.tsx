@@ -1,27 +1,15 @@
-import { useNavigate, useLocation } from "@tanstack/react-router";
+import { useNavigateToRoot } from "@/utils/useNavigateToRoot";
 
 function Footer() {
   const pkgVersion = __APP_VERSION__;
-  const navigate = useNavigate();
-  const location = useLocation();
+  const navigateToRoot = useNavigateToRoot();
   return (
     <footer
       onClick={async () => {
-        if ("serviceWorker" in navigator) {
-          navigator.serviceWorker.getRegistrations().then((registrations) => {
-            for (const registration of registrations) {
-              registration.update();
-            }
-          });
-        }
-        if (location.pathname === "/") {
-          await navigate({ to: "/" });
-          window.location.reload();
-        } else {
-          navigate({ to: "/" });
-        }
+        await navigateToRoot();
       }}
-      className="text-gray-800 text-sm text-center cursor-pointer"
+      className="text-sm text-center text-white cursor-pointer 
+      absolute bottom-0 right-0 w-[30dvh] bg-brand-primary py-4"
     >
       Toddler Games {pkgVersion}
     </footer>

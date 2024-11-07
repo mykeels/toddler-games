@@ -7,7 +7,7 @@ export const Route = createRootRoute({
   component: () => (
     <>
       <div className="flex flex-col h-screen text-center select-none">
-        <main className="flex-grow max-h-[90dvh]">
+        <main className="flex-grow">
           <React.Fragment>
             <Outlet />
           </React.Fragment>

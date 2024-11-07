@@ -42,7 +42,7 @@ export const FreeDraw = () => {
     <div className="flex flex-col h-full">
       <Header onRestart={restart}>Free Draw</Header>
       <div
-        className="flex flex-col space-y-4 items-center justify-center grow max-h-[80dvh]"
+        className="flex flex-col space-y-4 items-center justify-center grow"
         ref={containerRef}
       >
         <CanvasDraw

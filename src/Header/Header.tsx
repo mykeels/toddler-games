@@ -1,3 +1,4 @@
+import { useNavigateToRoot } from "@/utils/useNavigateToRoot";
 import { Link } from "@tanstack/react-router";
 
 type HeaderProps = {
@@ -31,7 +32,8 @@ const BackToMenu = ({ title }: { title?: string }) => {
 }
 
 const BackToHome = () => {
-  return <Link to="/">
+  const navigateToRoot = useNavigateToRoot();
+  return <Link to="/" onClick={async () => await navigateToRoot()}>
     <img src="./icons/home-white.svg" alt="home" />
   </Link>
 }

@@ -25,7 +25,7 @@ export const LetterTracing = ({ Letter = Across }: LetterTracingProps) => {
     <div className="flex flex-col h-full">
       <Header title="Can you trace this?" onRestart={restart} />
       <div
-        className="flex flex-col space-y-4 items-center justify-center grow relative max-h-[80dvh]"
+        className="flex flex-col space-y-4 items-center justify-center grow relative"
         ref={containerRef}
       >
         <div className="w-full h-full absolute top-0 left-0 grid grid-cols-1 grid-rows-1 md:grid-cols-2 md:grid-rows-2 place-items-center gap-8">
