@@ -50,6 +50,7 @@ export const FreeDraw = () => {
           canvasWidth={size.width}
           canvasHeight={size.height}
           brushColor={color}
+          lazyRadius={0}
         />
       </div>
     </div>
