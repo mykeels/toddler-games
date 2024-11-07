@@ -188,7 +188,7 @@ export const Home = () => {
         {isListingAtRoot ? <h1 className="text-4xl font-bold font-lily">Let’s Play</h1> : null}
       </Header>
       <div
-        className="flex flex-col items-center justify-center h-full"
+        className="flex flex-col items-center justify-center h-full p-4"
       >
         <ol className="list-none text-lg flex flex-wrap items-center justify-center gap-4">
           {"children" in listing ? listing.children.map((child) =>
