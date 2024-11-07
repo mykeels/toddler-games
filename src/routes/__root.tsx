@@ -6,7 +6,7 @@ import Footer from '@/Footer'
 export const Route = createRootRoute({
   component: () => (
     <>
-      <div className="flex flex-col h-screen text-center">
+      <div className="flex flex-col h-screen text-center select-none">
         <main className="flex-grow max-h-[90dvh]">
           <React.Fragment>
             <Outlet />

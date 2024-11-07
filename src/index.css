@@ -30,6 +30,10 @@
   font-family: 'Poppins', 'Segoe UI', 'San Francisco', 'Helvetica Neue', 'Arial', sans-serif;
 }
 
+body {
+  padding: 0 !important;
+}
+
 @layer base {
   :root {
     --radius: 0.5rem;

@@ -4,6 +4,8 @@ import { FRUITS, ANIMALS } from "@/utils/characters";
 import { onTouch } from "@/utils/touch";
 import { useHorizontalSwipe } from "@/utils/swipe";
 import { fx } from "@/utils/sound";
+import Container from "@/Container";
+import Header from "@/Header/Header";
 
 const COUNTABLES = [...FRUITS, ...ANIMALS];
 
@@ -65,37 +67,39 @@ const TapToCount = () => {
   }, []);
 
   return (
-    <div
-      className="flex flex-col space-y-4 items-center justify-center h-full select-none"
+    <Container
       key={gameId}
       ref={ref as React.LegacyRef<HTMLDivElement>}
     >
-      <h1
-        className={classNames("font-bold py-8", {
-          "text-4xl": count === 0,
-          "text-8xl": count > 0,
-        })}
-      >
-        {count ? count : "Tap to Count"}
-      </h1>
-      <div className="flex flex-wrap items-center justify-center gap-6">
-        {items.map((item) =>
-          Array(item.target)
-            .fill("")
-            .map((_, index) => (
-              <Countable key={index} value={item.text} onClick={getNextCount} />
-            ))
+      <Header title="Tap to Count" onRestart={reset}></Header>
+      <div className="flex flex-col space-y-4 items-center justify-center h-full">
+        <h1
+          className={classNames("font-bold py-8", {
+            "text-4xl": count === 0,
+            "text-8xl": count > 0,
+          })}
+        >
+          {count ? count : ""}
+        </h1>
+        <div className="flex flex-wrap items-center justify-center gap-6">
+          {items.map((item) =>
+            Array(item.target)
+              .fill("")
+              .map((_, index) => (
+                <Countable key={index} value={item.text} onClick={getNextCount} />
+              ))
+          )}
+        </div>
+        {count === targetCount && (
+          <button
+            className="border-4 border-gray-800 px-8 py-2 text-8xl rounded-md"
+            onClick={reset}
+          >
+            👍
+          </button>
         )}
       </div>
-      {count === targetCount && (
-        <button
-          className="border-4 border-gray-800 px-8 py-2 text-8xl rounded-md"
-          onClick={reset}
-        >
-          👍
-        </button>
-      )}
-    </div>
+    </Container>
   );
 };
 
@@ -110,7 +114,7 @@ function Countable({
 }) {
   const [checked, setChecked] = useState(false);
   const onTap = () => {
-    if (!checked) { 
+    if (!checked) {
       onClick(true);
     }
     setChecked(true);

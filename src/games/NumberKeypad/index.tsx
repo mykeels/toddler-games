@@ -3,6 +3,7 @@ import classNames from "clsx";
 import { onTouch } from "@/utils/touch";
 import { fx } from "@/utils/sound";
 import Header from "@/Header/Header";
+import Container from "@/Container";
 
 export const NumberKeypad = () => {
   const [recipient, setRecipient] = useState<string>("");
@@ -29,7 +30,7 @@ export const NumberKeypad = () => {
   }, []);
 
   return (
-    <div className="h-full select-none">
+    <Container>
       <Header onRestart={reset}>
         {recipient || "#"}
       </Header>
@@ -53,7 +54,7 @@ export const NumberKeypad = () => {
           <DigitButton value="0" onClick={() => dial("0")} />
         </div>
       </div>
-    </div>
+    </Container>
   );
 };
 

@@ -6,6 +6,7 @@ import { onTouch } from "@/utils/touch";
 import { useHorizontalSwipe } from "@/utils/swipe";
 import { fx } from "@/utils/sound";
 import Header from "@/Header/Header";
+import Container from "@/Container";
 
 function FindAndTap({
   getCharacterSet = (set: typeof CHARACTERS) => set.uppercaseLetters,
@@ -87,8 +88,7 @@ function FindAndTap({
   });
 
   return (
-    <div
-      className="h-full select-none"
+    <Container
       ref={ref as React.LegacyRef<HTMLDivElement>}
     >
       <Header title="Find and Tap" onRestart={onNextClick}>
@@ -121,7 +121,7 @@ function FindAndTap({
           </button>
         </div>
       ) : null}
-    </div>
+    </Container>
   );
 }
 

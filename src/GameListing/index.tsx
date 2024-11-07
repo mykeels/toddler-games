@@ -7,6 +7,8 @@ import {
 import { fx } from "@/utils/sound";
 import { useEffect, useState } from "react";
 import { useHorizontalSwipe } from "@/utils/swipe";
+import Container from "@/Container";
+import Header from "@/Header/Header";
 
 const GAME_LISTING: GameListing = {
   title: "Toddler Games",
@@ -89,13 +91,13 @@ type GameListing = {
   title: string;
   back?: () => GameListing;
 } & (
-  | {
+    | {
       children: GameListing[];
     }
-  | {
+    | {
       path: keyof FileRoutesByPath;
     }
-);
+  );
 
 const useHomeSound = () => {
   useEffect(() => {
@@ -160,37 +162,42 @@ export const Home = () => {
   });
 
   return (
-    <div
-      ref={ref as React.LegacyRef<HTMLDivElement>}
-      className="flex flex-col space-y-4 items-center justify-center h-full px-4"
-    >
-      <h1 className="text-4xl font-bold">{listing.title}</h1>
+    <Container
+      ref={ref as React.LegacyRef<HTMLDivElement>}>
+      <Header title={listing.title} onRestart={() => { }} Left={<Header.BackToHome />} Right={null}>
+        <h1 className="text-4xl font-bold font-lily">Let’s Play</h1>
+      </Header>
+      <div
+        className="flex flex-col space-y-4 items-center justify-center h-full px-4"
+      >
+        <h1 className="text-4xl font-bold">{listing.title}</h1>
 
-      <ol className="list-decimal text-lg flex flex-col space-y-4">
-        {"children" in listing ? listing.children.map((child) =>
-          "path" in child ? (
-            <li key={child.title}>
-              <Link to={child.path}>{child.title}</Link>
+        <ol className="list-decimal text-lg flex flex-col space-y-4">
+          {"children" in listing ? listing.children.map((child) =>
+            "path" in child ? (
+              <li key={child.title}>
+                <Link to={child.path}>{child.title}</Link>
+              </li>
+            ) : (
+              <li key={child.title} onClick={() => enterListing(child)}>
+                <Link
+                  to="."
+                  search={{
+                    title: child.title,
+                  }}
+                >
+                  {child.title}
+                </Link>
+              </li>
+            )
+          ) : null}
+          {!isListingAtRoot && (
+            <li onClick={() => enterListing(listing.back!())}>
+              <Link to=".">Back</Link>
             </li>
-          ) : (
-            <li key={child.title} onClick={() => enterListing(child)}>
-              <Link
-                to="."
-                search={{
-                  title: child.title,
-                }}
-              >
-                {child.title}
-              </Link>
-            </li>
-          )
-        ) : null}
-        {!isListingAtRoot && (
-          <li onClick={() => enterListing(listing.back!())}>
-            <Link to=".">Back</Link>
-          </li>
-        )}
-      </ol>
-    </div>
+          )}
+        </ol>
+      </div>
+    </Container>
   );
 };

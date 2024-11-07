@@ -6,6 +6,7 @@ import { useHorizontalSwipe } from "@/utils/swipe";
 import { hasTouch, onTouch } from "@/utils/touch";
 import { fx } from "@/utils/sound";
 import Header from "@/Header/Header";
+import Container from "@/Container";
 
 export const ImageToLetterMatching = ({
   transformLetter = (letter) => letter,
@@ -89,9 +90,8 @@ export const ImageToLetterMatching = ({
   });
 
   return (
-    <div
+    <Container
       key={gameIndex}
-      className="h-full select-none"
       ref={ref as React.LegacyRef<HTMLDivElement>}
     >
       <Header title="Match Image to Letter" onRestart={onNextClick}>
@@ -128,7 +128,7 @@ export const ImageToLetterMatching = ({
           </button>
         </div>
       ) : null}
-    </div>
+    </Container>
   );
 };
 
