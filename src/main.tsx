@@ -21,13 +21,19 @@ declare module "@tanstack/react-router" {
   }
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
+const RenderMode = ({ children }: { children: React.ReactNode }) => {
+  const isProduction = process.env.NODE_ENV === "production";
+  return isProduction ? <StrictMode>{children}</StrictMode> : children;
+}
+
 // Render the app
 const rootElement = document.getElementById("root")!;
 if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
-    <StrictMode>
+    <RenderMode>
       <RouterProvider router={router} />
-    </StrictMode>
+    </RenderMode>
   );
 }
