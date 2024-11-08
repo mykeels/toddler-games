@@ -1,12 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
-import classNames from "clsx";
 import { IMAGES } from "./ImageToLetterMatching.const";
 import { UPPERCASE_LETTERS } from "@/utils/characters";
 import { useHorizontalSwipe } from "@/utils/swipe";
-import { hasTouch, onTouch } from "@/utils/touch";
 import { fx } from "@/utils/sound";
 import Header from "@/Header/Header";
 import Container from "@/Container";
+import Card from "@/Card";
+import Next from "@/Next";
 
 export const ImageToLetterMatching = ({
   transformLetter = (letter) => letter,
@@ -15,7 +15,6 @@ export const ImageToLetterMatching = ({
 }) => {
   const [gameIndex, setGameIndex] = useState(0);
   const [state, setState] = useState<"playing" | "interlude">("playing");
-  const [selected, setSelected] = useState<string | null>(null);
   const image = useMemo(
     () => IMAGES[Math.floor(Math.random() * IMAGES.length)],
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -31,17 +30,13 @@ export const ImageToLetterMatching = ({
     [image.word]
   );
   const goal = transformLetter(image.word[0]);
-  const isCorrect = (letterOrNumber: string) => letterOrNumber === goal;
-  const isItemCorrect = (item: string) =>
-    selected === item && item === goal
-      ? true
-      : selected === item && item !== goal
-        ? false
-        : null;
+  const [selected, setSelected] = useState<string | null>(null);
+  const isCorrect = selected === goal;
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const onLetterClick = (letter: string) => {
-    if (isCorrect(letter)) {
+    setSelected(letter);
+    if (letter === goal) {
       fx.correct.play();
     } else {
       fx.incorrect.play();
@@ -99,35 +94,30 @@ export const ImageToLetterMatching = ({
           ? `${image.word} starts with ${goal}`
           : `${image.word} starts with...`}
       </Header>
-      <div className="text-center py-8 text-9xl font-bold">{image.image}</div>
-      <div data-name="pair" className="flex justify-center space-x-8">
-        <Card
-          value={letters[0]}
-          onClick={onLetterClick}
-          isCorrect={isItemCorrect(letters[0])}
-        />
-        <Card
-          value={letters[1]}
-          onClick={onLetterClick}
-          isCorrect={isItemCorrect(letters[1])}
-        />
-      </div>
-      {!hasTouch() &&
-      state == "interlude" &&
-      selected &&
-      isCorrect(selected) ? (
-        <div
-          data-name="interlude"
-          className="flex flex-col items-center justify-center py-8"
-        >
-          <button
-            onMouseDown={onNextClick}
-            className="px-16 py-4 text-6xl text-gray-800 border-8 border-gray-800 p-4 rounded-md"
+      <div className="flex flex-col items-center justify-center h-[90%] space-y-8">
+        <div className="text-center py-8 text-9xl font-bold">{image.image}</div>
+        <div data-name="pair" className="flex justify-center space-x-8">
+          <Card
+            value={letters[0]}
+            selectedValue={goal}
+            onClick={() => onLetterClick(letters[0])}
+            name="pair"
           >
-            👍
-          </button>
+            {letters[0]}
+          </Card>
+          <Card
+            value={letters[1]}
+            selectedValue={goal}
+            onClick={() => onLetterClick(letters[1])}
+            name="pair"
+          >
+            {letters[1]}
+          </Card>
         </div>
-      ) : null}
+        <Next onNext={onNextClick} className={{
+          'invisible': !(state == "interlude" && selected && isCorrect)
+        }} />
+      </div>
     </Container>
   );
 };
@@ -141,29 +131,4 @@ function shuffleArray<T>(array: T[]): T[] {
     [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
   }
   return shuffled;
-}
-
-function Card({
-  value,
-  onClick,
-  isCorrect,
-}: {
-  value: string;
-  onClick: (value: string) => void;
-  isCorrect: boolean | string | null;
-}) {
-  return (
-    <button
-      {...onTouch(() => onClick(value))}
-      className={classNames(
-        "w-48 h-48 border-8 border-gray-800 flex items-center justify-center text-9xl font-bold",
-        {
-          "bg-green-300 animate-breathe": isCorrect === true,
-          "bg-red-300": isCorrect === false,
-        }
-      )}
-    >
-      {value}
-    </button>
-  );
 }
