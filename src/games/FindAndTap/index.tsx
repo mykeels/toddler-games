@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import classNames from "clsx";
 
 import { CHARACTERS } from "@/utils/characters";
 import { useHorizontalSwipe } from "@/utils/swipe";
@@ -88,38 +89,44 @@ function FindAndTap({
       <Header title="Find and Tap" onRestart={onNextClick}>
         Tap on {goal}
       </Header>
-      <div data-name="pair" className="flex justify-center space-x-8 mt-8"
+      <div className="flex flex-col items-center justify-center h-full space-y-8">
+        <div data-name="pair" className="flex justify-center space-x-8"
+        >
+          <Card
+            value={pair[0]}
+            onClick={() => onLetterOrNumberClick(pair[0])}
+            selectedValue={goal}
+            name="pair"
           >
-        <Card
-          value={pair[0]}
-          onClick={() => onLetterOrNumberClick(pair[0])}
-          selectedValue={goal}
-          name="pair"
-        >
-          {pair[0]}
-        </Card>
-        <Card
-          value={pair[1]}
-          onClick={() => onLetterOrNumberClick(pair[1])}
-          selectedValue={goal}
-          name="pair"
-        >
-          {pair[1]}
-        </Card>
-      </div>
-      {state == "interlude" && isCorrect ? (
-        <div
-          data-name="interlude"
-          className="flex flex-col items-center justify-center py-24 space-y-8"
-        >
-          <button
-            onMouseDown={onNextClick}
-            className="px-16 py-8 text-8xl text-gray-800 border-8 border-gray-800 p-4 rounded-md bg-white"
+            {pair[0]}
+          </Card>
+          <Card
+            value={pair[1]}
+            onClick={() => onLetterOrNumberClick(pair[1])}
+            selectedValue={goal}
+            name="pair"
           >
-            👍
-          </button>
+            {pair[1]}
+          </Card>
         </div>
-      ) : null}
+        <div
+            data-name="interlude"
+            className={classNames("flex flex-col items-center justify-center space-y-8",
+              {
+                "invisible": !(state == "interlude" && isCorrect)
+              }
+            )}
+          >
+            <button
+              onMouseDown={onNextClick}
+              className="px-16 py-8 text-8xl text-gray-800 border-8 border-gray-800 p-4 rounded-md bg-white"
+            >
+              👍
+            </button>
+          </div>
+      </div>
+
+
     </Container>
   );
 }
