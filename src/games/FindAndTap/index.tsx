@@ -14,6 +14,7 @@ function FindAndTap({
   getCharacterSet?: (set: typeof CHARACTERS) => string[];
 } = {}) {
   const characters = getCharacterSet(CHARACTERS);
+  const [gameIndex, setGameIndex] = useState(0);
   const [state, setState] = useState<"playing" | "interlude">("playing");
   const getNextPair = () => getRandomPair(characters);
   const [pair, setPair] = useState<string[]>(getNextPair());
@@ -21,11 +22,13 @@ function FindAndTap({
     () => pair[Math.floor(Math.random() * pair.length)],
     [pair]
   );
-  const isCorrect = (letterOrNumber: string) => letterOrNumber === goal;
+  const [selected, setSelected] = useState<string | null>(null);
+  const isCorrect = selected === goal;
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const onLetterOrNumberClick = (letterOrNumber: string) => {
-    if (isCorrect(letterOrNumber)) {
+    setSelected(letterOrNumber);
+    if (letterOrNumber === goal) {
       fx.correct.play();
     } else {
       fx.incorrect.play();
@@ -38,6 +41,7 @@ function FindAndTap({
     fx.click.play();
     setPair(getNextPair());
     setState("playing");
+    setGameIndex(gameIndex + 1);
     if ("vibrate" in navigator) {
       navigator.vibrate(200);
     }
@@ -79,11 +83,13 @@ function FindAndTap({
   return (
     <Container
       ref={ref as React.LegacyRef<HTMLDivElement>}
+      key={gameIndex}
     >
       <Header title="Find and Tap" onRestart={onNextClick}>
         Tap on {goal}
       </Header>
-      <div data-name="pair" className="flex justify-center space-x-8 mt-8">
+      <div data-name="pair" className="flex justify-center space-x-8 mt-8"
+          >
         <Card
           value={pair[0]}
           onClick={() => onLetterOrNumberClick(pair[0])}
@@ -101,14 +107,14 @@ function FindAndTap({
           {pair[1]}
         </Card>
       </div>
-      {state == "interlude" ? (
+      {state == "interlude" && isCorrect ? (
         <div
           data-name="interlude"
           className="flex flex-col items-center justify-center py-24 space-y-8"
         >
           <button
             onMouseDown={onNextClick}
-            className="px-16 py-8 text-8xl text-gray-800 border-8 border-gray-800 p-4 rounded-md"
+            className="px-16 py-8 text-8xl text-gray-800 border-8 border-gray-800 p-4 rounded-md bg-white"
           >
             👍
           </button>
