@@ -47,6 +47,7 @@ export default {
       },
       animation: {
         breathe: "breathe 1s infinite",
+        vibrate: "vibrate 0.4s linear"
       }
     },
   },

@@ -16,6 +16,21 @@
   }
 }
 
+@keyframes vibrate {
+  0% {
+    transform: translateX(0);
+  }
+  37.5% {
+    transform: translateX(-10px);
+  }
+  62.5% {
+    transform: translateX(10px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
 .prevent-select {
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
