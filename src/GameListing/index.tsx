@@ -84,22 +84,22 @@ const GAME_LISTING: GameListing = {
         {
           title: "Down",
           path: "/letter-tracing/down",
-          icon: "./icons/trace.svg",
+          icon: "./icons/trace/arrows-vertical.svg",
         },
         {
           title: "Across",
           path: "/letter-tracing/across",
-          icon: "./icons/trace.svg",
+          icon: "./icons/trace/arrows-horizontal.svg",
         },
         {
           title: "Uppercase A",
           path: "/letter-tracing/a-upper",
-          icon: "./icons/trace.svg",
+          icon: "./icons/trace/a-uppercase.svg",
         },
         {
           title: "Uppercase B",
           path: "/letter-tracing/b-upper",
-          icon: "./icons/trace.svg",
+          icon: "./icons/trace/b-uppercase.svg",
         },
       ],
     },
