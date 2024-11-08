@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import CanvasDraw from "react-canvas-draw";
+import classNames from "clsx";
 import { fx } from "@/utils/sound";
 import Across from "./Across/Across";
 import { useFullScreenSize } from "@/utils/screen";
@@ -28,7 +29,12 @@ export const LetterTracing = ({ Letter = Across }: LetterTracingProps) => {
         className="flex flex-col space-y-4 items-center justify-center grow relative"
         ref={containerRef}
       >
-        <div className="w-full h-full absolute top-0 left-0 grid grid-cols-1 grid-rows-1 md:grid-cols-2 md:grid-rows-2 place-items-center gap-8">
+        <div className={classNames(
+            "w-full h-full absolute top-0 left-0 content-center place-items-center gap-8",
+            {
+              "grid grid-cols-1 grid-rows-1 md:grid-cols-2 md:grid-rows-2": letters.length > 1
+            }
+          )}>
           {letters.map((item) => (
             <Letter size={letterSize} key={item} />
           ))}
