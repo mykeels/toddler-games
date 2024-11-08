@@ -25,7 +25,7 @@ export const LetterTracing = ({ Letter = Across }: LetterTracingProps) => {
 
   useEffect(() => {
     speak(`Let's trace ${Letter.name}.`);
-  }, []);
+  }, [life]);
 
   return (
     <div className="flex flex-col h-full">
