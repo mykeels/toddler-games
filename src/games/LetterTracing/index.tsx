@@ -21,7 +21,6 @@ export const LetterTracing = ({ name, Letter = Across }: LetterTracingProps) => 
     fx.game.play();
   }, []);
   const letters = useMedia([Screens.SM], [[0]], [0, 1, 2, 3]);
-  const letterSize = useMedia([Screens.SM], ["60dvh"], "40dvh");
   const { life, restart } = useRestart();
 
   useEffect(() => {
@@ -36,13 +35,13 @@ export const LetterTracing = ({ name, Letter = Across }: LetterTracingProps) => 
         ref={containerRef}
       >
         <div className={classNames(
-            "w-full h-full absolute top-0 left-0 content-center place-items-center gap-8",
+            "w-full h-full absolute top-0 left-0 content-center place-items-center gap-8 p-4",
             {
               "grid grid-cols-1 grid-rows-1 md:grid-cols-2 md:grid-rows-2": letters.length > 1
             }
           )}>
           {letters.map((item) => (
-            <Letter size={letterSize} key={item} />
+            <Letter size="100%" key={item} />
           ))}
         </div>
         <CanvasDraw
