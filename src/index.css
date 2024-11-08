@@ -4,10 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.animate-breathe {
-  animation: breathe 1s infinite;
-}
-
 @keyframes breathe {
   0% {
     transform: scale(1);

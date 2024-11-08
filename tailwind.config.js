@@ -45,6 +45,9 @@ export default {
           raw: "@media not all and (-webkit-min-device-pixel-ratio: 2), (min-device-pixel-ratio: 2), (min-resolution: 192dpi)",
         },
       },
+      animation: {
+        breathe: "breathe 1s infinite",
+      }
     },
   },
   plugins: [require("tailwindcss-animate")],

@@ -22,27 +22,27 @@ const GAME_LISTING: GameListing = {
         {
           title: "Uppercase Letters only",
           path: "/find-and-tap/uppercase",
-          icon: "./icons/tap.svg",
+          icon: "./icons/tap-uppercase.svg",
         },
         {
           title: "Lowercase Letters only",
           path: "/find-and-tap/lowercase",
-          icon: "./icons/tap.svg",
+          icon: "./icons/tap-lowercase.svg",
         },
         {
           title: "Numbers only",
           path: "/find-and-tap/numbers",
-          icon: "./icons/tap.svg",
+          icon: "./icons/tap-numbers.svg",
         },
         {
           title: "Fruits only",
           path: "/find-and-tap/fruits",
-          icon: "./icons/tap.svg",
+          icon: "./icons/tap-fruits.svg",
         },
         {
           title: "Animals only",
           path: "/find-and-tap/animals",
-          icon: "./icons/tap.svg",
+          icon: "./icons/tap-animals.svg",
         },
       ],
     },
@@ -58,17 +58,17 @@ const GAME_LISTING: GameListing = {
     },
     {
       title: "Match Image to Letter",
-      icon: "./icons/tap.svg",
+      icon: "./icons/match-image/index.svg",
       children: [
         {
           title: "Uppercase Letters only",
           path: "/image-to-letter-matching/",
-          icon: "./icons/tap.svg",
+          icon: "./icons/match-image/to-uppercase.svg",
         },
         {
           title: "Lowercase Letters only",
           path: "/image-to-letter-matching/lowercase",
-          icon: "./icons/tap.svg",
+          icon: "./icons/match-image/to-lowercase.svg",
         },
       ],
     },
