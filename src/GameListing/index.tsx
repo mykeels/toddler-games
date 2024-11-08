@@ -10,6 +10,7 @@ import { useHorizontalSwipe } from "@/utils/swipe";
 import Container from "@/Container";
 import Header from "@/Header/Header";
 import { Tile } from "./Tile";
+import { onTouch } from "@/utils/touch";
 
 const GAME_LISTING: GameListing = {
   title: "Toddler Games",
@@ -210,7 +211,7 @@ export const Home = () => {
             )
           ) : null}
           {!isListingAtRoot && (
-            <button onClick={() => enterListing(listing.back!())}>
+            <button {...onTouch(() => enterListing(listing.back!()))}>
               <Tile title="Back" imageSourcePath="./icons/arrow-left-black.svg" />
             </button>
           )}

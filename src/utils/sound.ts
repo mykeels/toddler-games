@@ -48,6 +48,7 @@ export const fx = {
     eight: audio("./soundfx/digits/Eight.wav", { rate: digitRate }),
     nine: audio("./soundfx/digits/Nine.wav", { rate: digitRate }),
     zero: audio("./soundfx/digits/Zero.wav", { rate: digitRate }),
+    ten: audio("./soundfx/digits/Ten.wav", { rate: digitRate }),
   },
   alphabet: Object.fromEntries(
     LOWERCASE_LETTERS.map((letter) => [

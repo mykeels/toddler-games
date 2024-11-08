@@ -1,3 +1,4 @@
+import { onTouch } from "@/utils/touch";
 import { useNavigateToRoot } from "@/utils/useNavigateToRoot";
 import { Link } from "@tanstack/react-router";
 
@@ -39,7 +40,7 @@ const BackToHome = () => {
 }
 
 const Restart = ({ onRestart }: { onRestart: () => void }) => {
-  return <button onClick={onRestart}>
+  return <button {...onTouch(onRestart)}>
     <img src="./icons/restart-white.svg" alt="restart" />
   </button>
 }
