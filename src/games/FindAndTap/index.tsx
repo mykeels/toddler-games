@@ -1,12 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
-import classNames from "clsx";
 
 import { CHARACTERS } from "@/utils/characters";
-import { onTouch } from "@/utils/touch";
 import { useHorizontalSwipe } from "@/utils/swipe";
 import { fx } from "@/utils/sound";
 import Header from "@/Header/Header";
 import Container from "@/Container";
+import { vibrate } from "@/utils/vibrate";
+import Card from "@/Card";
 
 function FindAndTap({
   getCharacterSet = (set: typeof CHARACTERS) => set.uppercaseLetters,
@@ -17,7 +17,6 @@ function FindAndTap({
   const [state, setState] = useState<"playing" | "interlude">("playing");
   const getNextPair = () => getRandomPair(characters);
   const [pair, setPair] = useState<string[]>(getNextPair());
-  const [selected, setSelected] = useState<string | null>(null);
   const goal = useMemo(
     () => pair[Math.floor(Math.random() * pair.length)],
     [pair]
@@ -31,28 +30,18 @@ function FindAndTap({
     } else {
       fx.incorrect.play();
     }
-    setSelected(letterOrNumber);
     setState("interlude");
-    if ("vibrate" in navigator) {
-      navigator.vibrate(200);
-    }
+    vibrate();
   };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const onNextClick = () => {
     fx.click.play();
-    setSelected(null);
     setPair(getNextPair());
     setState("playing");
     if ("vibrate" in navigator) {
       navigator.vibrate(200);
     }
   };
-  const isItemCorrect = (item: string) =>
-    selected === item && item === goal
-      ? true
-      : selected === item && item !== goal
-        ? false
-        : null;
 
   useEffect(() => {
     const controller = new AbortController();
@@ -97,16 +86,20 @@ function FindAndTap({
       <div data-name="pair" className="flex justify-center space-x-8 mt-8">
         <Card
           value={pair[0]}
-          onClick={onLetterOrNumberClick}
-          isCorrect={isItemCorrect(pair[0])}
-          fullHeight={state !== "interlude"}
-        />
+          onClick={() => onLetterOrNumberClick(pair[0])}
+          selectedValue={goal}
+          name="pair"
+        >
+          {pair[0]}
+        </Card>
         <Card
           value={pair[1]}
-          onClick={onLetterOrNumberClick}
-          isCorrect={isItemCorrect(pair[1])}
-          fullHeight={state !== "interlude"}
-        />
+          onClick={() => onLetterOrNumberClick(pair[1])}
+          selectedValue={goal}
+          name="pair"
+        >
+          {pair[1]}
+        </Card>
       </div>
       {state == "interlude" ? (
         <div
@@ -126,35 +119,6 @@ function FindAndTap({
 }
 
 export default FindAndTap;
-
-function Card({
-  value,
-  onClick,
-  isCorrect,
-  fullHeight,
-}: {
-  value: string;
-  onClick: (value: string) => void;
-  isCorrect: boolean | string | null;
-  fullHeight: boolean;
-}) {
-  return (
-    <button
-      {...onTouch(() => onClick(value))}
-      className={classNames(
-        "w-72 border-8 border-gray-800 flex items-center justify-center text-9xl font-bold",
-        {
-          "bg-green-300 animate-breathe": isCorrect === true,
-          "bg-red-300": isCorrect === false,
-          "h-72": fullHeight,
-          "h-48": !fullHeight,
-        }
-      )}
-    >
-      {value}
-    </button>
-  );
-}
 
 function getRandomPair(characters: string[]): [string, string] {
   const firstIndex = Math.floor(Math.random() * characters.length);

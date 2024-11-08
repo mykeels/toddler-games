@@ -14,7 +14,7 @@ export function Card({
     children: React.ReactNode;
     name: string;
     value: string;
-    selectedValue: string;
+    selectedValue: string | null;
     onClick: () => void;
 }) {
     const radioRef = useRef<HTMLInputElement>(null);
