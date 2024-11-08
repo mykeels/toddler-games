@@ -9,10 +9,10 @@ export default {
   component: LetterTracing,
 };
 
-export const WithAcross = () => <LetterTracing Letter={Across} />;
+export const WithAcross = () => <LetterTracing Letter={Across} name="Across" />;
 
-export const WithDown = () => <LetterTracing Letter={Down} />;
+export const WithDown = () => <LetterTracing Letter={Down} name="Down" />;
 
-export const WithA = () => <LetterTracing Letter={A} />;
+export const WithA = () => <LetterTracing Letter={A} name="uppercase A" />;
 
-export const WithB = () => <LetterTracing Letter={B} />;
+export const WithB = () => <LetterTracing Letter={B} name="uppercase B" />;

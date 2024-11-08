@@ -11,10 +11,11 @@ import Header from "@/Header/Header";
 import { speak } from "@/utils/speak";
 
 type LetterTracingProps = {
+  name: string;
   Letter?: (props: LetterSvgProps) => React.ReactNode;
 };
 
-export const LetterTracing = ({ Letter = Across }: LetterTracingProps) => {
+export const LetterTracing = ({ name, Letter = Across }: LetterTracingProps) => {
   const { size, containerRef } = useFullScreenSize();
   useEffect(() => {
     fx.game.play();
@@ -24,8 +25,8 @@ export const LetterTracing = ({ Letter = Across }: LetterTracingProps) => {
   const { life, restart } = useRestart();
 
   useEffect(() => {
-    speak(`Let's trace ${Letter.name}.`);
-  }, [life]);
+    speak(`Let's trace ${name}.`);
+  }, [life, name]);
 
   return (
     <div className="flex flex-col h-full">
