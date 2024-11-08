@@ -1,8 +1,13 @@
 import { Button } from "@/components/ui/button";
+import { speak } from "@/utils/speak";
 import { useNavigate } from "@tanstack/react-router";
+import { useEffect } from "react";
 
 export const Splash = () => {
     const navigate = useNavigate();
+    useEffect(() => {
+        speak("Welcome! Let's Play!");
+    }, []);
     return (
         <section
             className=" h-screen"

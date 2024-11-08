@@ -8,6 +8,7 @@ import Container from "@/Container";
 import { vibrate } from "@/utils/vibrate";
 import Card from "@/Card";
 import Next from "@/Next";
+import { speak } from "@/utils/speak";
 
 function FindAndTap({
   getCharacterSet = (set: typeof CHARACTERS) => set.uppercaseLetters,
@@ -70,16 +71,13 @@ function FindAndTap({
     fx.game.play();
   }, []);
 
-  useEffect(() => {
-    fx.tapOnAlphabet[
-      goal.toLowerCase() as keyof typeof fx.tapOnAlphabet
-    ]?.play();
-    fx.tapOnNumbers[goal as keyof typeof fx.tapOnNumbers]?.play();
-  }, [goal]);
-
   const { ref } = useHorizontalSwipe({
     onSwipe: () => onNextClick(),
   });
+
+  useEffect(() => {
+    speak(`Tap on ${goal}`);
+  }, [goal]);
 
   return (
     <Container

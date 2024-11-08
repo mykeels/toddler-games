@@ -7,6 +7,7 @@ import Header from "@/Header/Header";
 import Container from "@/Container";
 import Card from "@/Card";
 import Next from "@/Next";
+import { speak } from "@/utils/speak";
 
 export const ImageToLetterMatching = ({
   transformLetter = (letter) => letter,
@@ -83,6 +84,10 @@ export const ImageToLetterMatching = ({
   const { ref } = useHorizontalSwipe({
     onSwipe: () => onNextClick(),
   });
+
+  useEffect(() => {
+    speak(`Does ${image.word} start with ${letters[0]} or ${letters[1]}?`);
+  }, [gameIndex, image.word, letters]);
 
   return (
     <Container

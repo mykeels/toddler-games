@@ -3,6 +3,7 @@ import CanvasDraw from "react-canvas-draw";
 import { fx } from "@/utils/sound";
 import Header from "@/Header/Header";
 import { useRestart } from "@/utils/restart";
+import { speak } from "@/utils/speak";
 
 export const FreeDraw = () => {
   const [size, setSize] = useState({ width: 500, height: 500 });
@@ -37,6 +38,9 @@ export const FreeDraw = () => {
   }, []);
 
   const { life, restart } = useRestart();
+  useEffect(() => {
+    speak("Draw something beautiful!");
+  }, []);
 
   return (
     <div className="flex flex-col h-full">

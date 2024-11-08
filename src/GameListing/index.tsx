@@ -10,10 +10,10 @@ import { useHorizontalSwipe } from "@/utils/swipe";
 import Container from "@/Container";
 import Header from "@/Header/Header";
 import { Tile } from "./Tile";
-import { onTouch } from "@/utils/touch";
+import { speak } from "@/utils/speak";
 
 const GAME_LISTING: GameListing = {
-  title: "Toddler Games",
+  title: null!,
   icon: "./icons/toddler.svg",
   children: [
     {
@@ -147,7 +147,7 @@ export const Home = () => {
           if (found) return found;
         }
       }
-      return undefined;
+      return GAME_LISTING;
     };
 
     const found = findListing(GAME_LISTING, title ?? "");
@@ -181,6 +181,9 @@ export const Home = () => {
       }
     },
   });
+  useEffect(() => {
+    speak(listing.title ?? `Which game would you like to play?`);
+  }, [listing.title]);
 
   return (
     <Container
@@ -211,7 +214,7 @@ export const Home = () => {
             )
           ) : null}
           {!isListingAtRoot && (
-            <button {...onTouch(() => enterListing(listing.back!()))}>
+            <button onClick={() => enterListing(listing.back!())}>
               <Tile title="Back" imageSourcePath="./icons/arrow-left-black.svg" />
             </button>
           )}

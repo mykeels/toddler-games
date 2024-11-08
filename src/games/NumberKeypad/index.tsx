@@ -5,30 +5,22 @@ import { fx } from "@/utils/sound";
 import Header from "@/Header/Header";
 import Container from "@/Container";
 import { vibrate } from "@/utils/vibrate";
+import { speak } from "@/utils/speak";
 
 export const NumberKeypad = () => {
   const [recipient, setRecipient] = useState<string>("");
   const dial = (digit: string) => {
-    const sound = {
-      0: fx.digits.zero,
-      1: fx.digits.one,
-      2: fx.digits.two,
-      3: fx.digits.three,
-      4: fx.digits.four,
-      5: fx.digits.five,
-      6: fx.digits.six,
-      7: fx.digits.seven,
-      8: fx.digits.eight,
-      9: fx.digits.nine,
-      10: fx.digits.ten,
-    }[digit];
-    sound?.play();
+    speak(digit);
     setRecipient((recipient + digit).slice(-10));
   };
   const reset = () => setRecipient("");
 
   useEffect(() => {
     fx.game.play();
+  }, []);
+
+  useEffect(() => {
+    speak(`Dial a number.`);
   }, []);
 
   return (

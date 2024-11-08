@@ -7,6 +7,7 @@ import { fx } from "@/utils/sound";
 import Container from "@/Container";
 import Header from "@/Header/Header";
 import Next from "@/Next";
+import { speak } from "@/utils/speak";
 
 const COUNTABLES = [...FRUITS, ...ANIMALS];
 
@@ -66,6 +67,16 @@ const TapToCount = () => {
   useEffect(() => {
     fx.game.play();
   }, []);
+  useEffect(() => {
+    speak(`Can you count to ${targetCount}?`);
+  }, [gameId, targetCount]);
+  useEffect(() => {
+    if (count === targetCount) {
+      setTimeout(() => {
+        speak("Well done! Let's do it again.");
+      }, 500);
+    }
+  }, [count, targetCount]);
 
   return (
     <Container
