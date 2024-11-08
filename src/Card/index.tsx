@@ -32,7 +32,7 @@ export function Card({
                 className={classNames(
                     "cursor-pointer w-24 h-24 border-2 border-black flex items-center justify-center text-4xl rounded text-black",
                     {
-                        "group-has-[input:checked]:bg-brand-accent-green group-has-[input:checked]:animate-breathe": isCorrect,
+                        "group-has-[input:checked]:bg-brand-accent-green": isCorrect,
                         "group-has-[input:checked]:bg-brand-accent-orange group-has-[input:checked]:animate-vibrate": !isCorrect,
                         "group-has-[input:not(:checked)]:bg-white": true,
                     }

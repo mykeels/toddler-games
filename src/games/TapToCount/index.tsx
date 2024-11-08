@@ -6,6 +6,7 @@ import { useHorizontalSwipe } from "@/utils/swipe";
 import { fx } from "@/utils/sound";
 import Container from "@/Container";
 import Header from "@/Header/Header";
+import Next from "@/Next";
 
 const COUNTABLES = [...FRUITS, ...ANIMALS];
 
@@ -72,7 +73,7 @@ const TapToCount = () => {
       ref={ref as React.LegacyRef<HTMLDivElement>}
     >
       <Header title="Tap to Count" onRestart={reset}></Header>
-      <div className="flex flex-col space-y-4 items-center justify-center h-full">
+      <div className="flex flex-col space-y-8 items-center justify-center h-[90%]">
         <h1
           className={classNames("font-bold py-8", {
             "text-4xl": count === 0,
@@ -86,18 +87,15 @@ const TapToCount = () => {
             Array(item.target)
               .fill("")
               .map((_, index) => (
-                <Countable key={index} value={item.text} onClick={getNextCount} />
+                <Countable key={index} value={item.text} onClick={getNextCount} isComplete={count === targetCount} />
               ))
           )}
         </div>
-        {count === targetCount && (
-          <button
-            className="border-4 border-gray-800 px-8 py-2 text-8xl rounded-md"
-            onClick={reset}
-          >
-            👍
-          </button>
-        )}
+        <div className="pt-4">
+          <Next onNext={reset} className={{
+            invisible: count !== targetCount
+          }} />
+        </div>
       </div>
     </Container>
   );
@@ -107,10 +105,14 @@ export default TapToCount;
 
 function Countable({
   value,
+  className,
   onClick,
+  isComplete
 }: {
   value: string;
+  className?: string;
   onClick: (checked: boolean) => void;
+  isComplete: boolean;
 }) {
   const [checked, setChecked] = useState(false);
   const onTap = () => {
@@ -123,12 +125,14 @@ function Countable({
     <button
       {...onTouch(onTap)}
       className={classNames(
-        "w-24 h-24 lg:w-40 lg:h-40 border-8 border-gray-800",
+        "w-24 h-24 lg:w-32 lg:h-32 border-2 border-black rounded",
         "flex items-center justify-center text-5xl lg:text-9xl font-bold",
         {
-          "bg-yellow-300 animate-breathe": checked,
-          "hover:bg-blue-200": !checked,
-        }
+          "bg-yellow-300": checked,
+          "animate-breathe": !isComplete && checked,
+          "bg-white hover:bg-blue-200": !checked,
+        },
+        className
       )}
     >
       {value}

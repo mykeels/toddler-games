@@ -4,7 +4,7 @@ import { onTouch } from "@/utils/touch";
 
 export const Next = ({ onNext, className }: { onNext: () => void, className?: string | Record<string, boolean> }) => {
     return <Button variant="secondary"
-        className={classNames("px-16 py-6 rounded-xl", className)}
+        className={classNames("px-16 py-6 rounded-xl animate-breathe", className)}
         {...onTouch(onNext)}
     >
         <img src="./icons/arrow-right.svg" alt="Next" />
