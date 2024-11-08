@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useState } from "react";
-import classNames from "clsx";
 
 import { CHARACTERS } from "@/utils/characters";
 import { useHorizontalSwipe } from "@/utils/swipe";
@@ -8,6 +7,7 @@ import Header from "@/Header/Header";
 import Container from "@/Container";
 import { vibrate } from "@/utils/vibrate";
 import Card from "@/Card";
+import Next from "@/Next";
 
 function FindAndTap({
   getCharacterSet = (set: typeof CHARACTERS) => set.uppercaseLetters,
@@ -89,7 +89,7 @@ function FindAndTap({
       <Header title="Find and Tap" onRestart={onNextClick}>
         Tap on {goal}
       </Header>
-      <div className="flex flex-col items-center justify-center h-full space-y-8">
+      <div className="flex flex-col items-center justify-center h-[90%] space-y-16">
         <div data-name="pair" className="flex justify-center space-x-8"
         >
           <Card
@@ -109,21 +109,12 @@ function FindAndTap({
             {pair[1]}
           </Card>
         </div>
-        <div
-            data-name="interlude"
-            className={classNames("flex flex-col items-center justify-center space-y-8",
-              {
-                "invisible": !(state == "interlude" && isCorrect)
-              }
-            )}
-          >
-            <button
-              onMouseDown={onNextClick}
-              className="px-16 py-8 text-8xl text-gray-800 border-8 border-gray-800 p-4 rounded-md bg-white"
-            >
-              👍
-            </button>
-          </div>
+        <Next
+          onNext={onNextClick}
+          className={{
+            invisible: !(state == "interlude" && isCorrect)
+          }}
+        />
       </div>
 
 
