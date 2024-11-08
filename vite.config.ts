@@ -17,7 +17,7 @@ export default defineConfig({
         description: "Toddler Games",
         theme_color: "#BB017A",
         background_color: "#000000",
-        display: "fullscreen",
+        display: "standalone",
         categories: ["education", "game"],
         orientation: "portrait",
         icons: [
