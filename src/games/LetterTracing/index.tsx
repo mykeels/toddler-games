@@ -8,6 +8,7 @@ import { LetterSvgProps } from "./LetterTracing.types";
 import { Screens, useMedia } from "@/utils/useMedia";
 import { useRestart } from "@/utils/restart";
 import Header from "@/Header/Header";
+import { speak } from "@/utils/speak";
 
 type LetterTracingProps = {
   Letter?: (props: LetterSvgProps) => React.ReactNode;
@@ -21,6 +22,10 @@ export const LetterTracing = ({ Letter = Across }: LetterTracingProps) => {
   const letters = useMedia([Screens.SM], [[0]], [0, 1, 2, 3]);
   const letterSize = useMedia([Screens.SM], ["60dvh"], "40dvh");
   const { life, restart } = useRestart();
+
+  useEffect(() => {
+    speak(`Let's trace ${Letter.name}.`);
+  }, []);
 
   return (
     <div className="flex flex-col h-full">
