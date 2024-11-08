@@ -44,9 +44,7 @@ function FindAndTap({
     setPair(getNextPair());
     setState("playing");
     setGameIndex(gameIndex + 1);
-    if ("vibrate" in navigator) {
-      navigator.vibrate(200);
-    }
+    vibrate();
   };
 
   useEffect(() => {
@@ -77,7 +75,7 @@ function FindAndTap({
 
   useEffect(() => {
     speak(`Tap on ${goal}`);
-  }, [goal]);
+  }, [goal, gameIndex]);
 
   return (
     <Container
