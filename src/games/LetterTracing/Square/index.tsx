@@ -12,8 +12,10 @@ export default function Square({
         <svg
             width={size}
             height={size} viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="0.5" y="0.5" width="139" height="139" fill="white" stroke={color} />
-            
+            <rect x="8" y="8" width="130" height="130" fill="white" stroke={color}
+                strokeWidth="3"
+                strokeDasharray="8 4" />
+
         </svg>
 
     );
