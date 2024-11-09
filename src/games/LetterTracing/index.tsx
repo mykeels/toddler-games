@@ -35,7 +35,7 @@ export const LetterTracing = ({ name, Letter = Across }: LetterTracingProps) => 
         <div className="flex gap-1 px-2">
           <Button onClick={() => {
             window.print();
-          }}>
+          }} className="print:hidden">
             <img src="./icons/print-white.svg" alt="Print" />
           </Button>
           <Header.Restart onRestart={restart} />
