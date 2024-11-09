@@ -11,6 +11,7 @@ import Container from "@/Container";
 import Header from "@/Header/Header";
 import { Tile } from "./Tile";
 import { speak } from "@/utils/speak";
+import FloatAround from "@/FloatAround";
 
 const GAME_LISTING: GameListing = {
   title: null!,
@@ -215,9 +216,10 @@ export const Home = () => {
         {isListingAtRoot ? <h1 className="text-4xl font-bold font-lily">Let’s Play</h1> : null}
       </Header>
       <div
-        className="flex flex-col items-center justify-center h-full p-4"
+        className="flex flex-col h-full p-4 relative"
       >
-        <ol className="list-none text-lg flex flex-wrap items-center justify-center gap-4">
+        {new Array(4).fill(null).map((_, index) => <Floaters key={index} />)}
+        <ol className="list-none text-lg h-full flex flex-wrap items-center justify-center content-center gap-4 z-10">
           {"children" in listing ? listing.children.map((child) =>
             "path" in child ? (
               <Link to={child.path}>
@@ -245,4 +247,24 @@ export const Home = () => {
       </div>
     </Container>
   );
+};
+
+const Floaters = () => {
+    return <>
+        <FloatAround>
+            <img src="./icons/123.svg" alt="123" className="opacity-20" />
+        </FloatAround>
+        <FloatAround>
+            <img src="./icons/1234.svg" alt="1234" className="opacity-20" />
+        </FloatAround>
+        <FloatAround>
+            <img src="./icons/free-draw.svg" alt="free-draw" className="opacity-20" />
+        </FloatAround>
+        <FloatAround>
+            <img src="./icons/match-image/to-lowercase.svg" className="opacity-20" />
+        </FloatAround>
+        <FloatAround>
+            <img src="./icons/match-image/to-uppercase.svg" className="opacity-20" />
+        </FloatAround>
+    </>
 };
