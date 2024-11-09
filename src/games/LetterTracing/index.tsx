@@ -21,6 +21,7 @@ export const LetterTracing = ({ name, Letter = Across }: LetterTracingProps) => 
     fx.game.play();
   }, []);
   const letters = useMedia([Screens.SM], [[0]], [0, 1, 2, 3]);
+  const printableLetters = new Array(20).fill(null).map((_, index) => index + 1);
   const { life, restart } = useRestart();
 
   useEffect(() => {
@@ -35,23 +36,33 @@ export const LetterTracing = ({ name, Letter = Across }: LetterTracingProps) => 
         ref={containerRef}
       >
         <div className={classNames(
-            "w-full h-full absolute top-0 left-0 content-center place-items-center gap-8 p-4 sm:p-16",
-            {
-              "grid grid-cols-1 grid-rows-1 md:grid-cols-2 md:grid-rows-2": letters.length > 1
-            }
-          )}>
+          "w-full h-full absolute top-0 left-0 content-center place-items-center gap-8 p-4 sm:p-16 print:hidden",
+          {
+            "grid grid-cols-1 grid-rows-1 md:grid-cols-2 md:grid-rows-2": letters.length > 1
+          }
+        )}>
           {letters.map((item) => (
             <Letter size="100%" key={item} />
           ))}
         </div>
-        <CanvasDraw
-          key={life}
-          canvasWidth={size.width}
-          canvasHeight={size.height}
-          brushRadius={10}
-          brushColor="red"
-          lazyRadius={0}
-        />
+        <div className={classNames(
+          "w-full h-full hidden flex-wrap print:flex gap-8 items-center justify-center pb-8"
+        )}>
+          {printableLetters.map((item) => (
+            <Letter size="20dvw" key={item} />
+          ))}
+        </div>
+        <div
+          className="print:hidden">
+          <CanvasDraw
+            key={life}
+            canvasWidth={size.width}
+            canvasHeight={size.height}
+            brushRadius={10}
+            brushColor="red"
+            lazyRadius={0}
+          />
+        </div>
       </div>
     </div>
   );
