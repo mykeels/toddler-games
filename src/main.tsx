@@ -10,6 +10,7 @@ import {
 import { routeTree } from "./routeTree.gen";
 
 import "./index.css";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 // Create a new router instance
 const router = createRouter({ routeTree, history: createHashHistory() });
@@ -27,13 +28,17 @@ const RenderMode = ({ children }: { children: React.ReactNode }) => {
   return isProduction ? <StrictMode>{children}</StrictMode> : children;
 }
 
+const queryClient = new QueryClient();
+
 // Render the app
 const rootElement = document.getElementById("root")!;
 if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
     <RenderMode>
-      <RouterProvider router={router} />
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
     </RenderMode>
   );
 }

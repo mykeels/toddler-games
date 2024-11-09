@@ -1,13 +1,20 @@
 import { Button } from "@/components/ui/button";
+import { Loading } from "@/Loading";
+import { fetchLatestVersion } from "@/utils/fetchLatestVersion";
 import { speak } from "@/utils/speak";
 import { useNavigate } from "@tanstack/react-router";
 import { useEffect } from "react";
+import { useQuery } from "react-query";
 
 export const Splash = () => {
     const navigate = useNavigate();
     useEffect(() => {
         speak("Welcome! Let's Play!");
     }, []);
+    const { isLoading } = useQuery({
+        queryKey: ["latest-version"],
+        queryFn: fetchLatestVersion,
+    });
     return (
         <section
             className=" h-screen"
@@ -23,8 +30,12 @@ export const Splash = () => {
                     Let’s Play!
                 </h1>
                 <Button className="text-xl py-6 px-8" onClick={() => navigate({ to: "/menu" })}>
-                    <span>Play</span>
-                    <img src="./icons/play-white.svg" alt="play" />
+                    {
+                        isLoading ? <Loading /> : <>
+                            <span>Play</span>
+                            <img src="./icons/play-white.svg" alt="play" />
+                        </>
+                    }
                 </Button>
             </div>
         </section>
