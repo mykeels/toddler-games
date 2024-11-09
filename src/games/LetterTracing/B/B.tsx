@@ -1,4 +1,4 @@
-import { LetterSvgProps } from "../LetterTracing.types";
+import { SvgProps } from "../LetterTracing.types";
 import {
   DEFAULT_LETTER_SIZE,
   DEFAULT_COLOR,
@@ -9,7 +9,7 @@ export default function B({
   size = DEFAULT_LETTER_SIZE,
   dotSize = DEFAULT_DOT_SIZE,
   color = DEFAULT_COLOR,
-}: LetterSvgProps) {
+}: SvgProps) {
   const upperCurvePoints = generateCubicCurvePoints(
     [60, 10],
     [75, 15],

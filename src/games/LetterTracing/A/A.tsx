@@ -1,4 +1,4 @@
-import { LetterSvgProps } from "../LetterTracing.types";
+import { SvgProps } from "../LetterTracing.types";
 import {
   DEFAULT_LETTER_SIZE,
   DEFAULT_DOT_SIZE,
@@ -9,7 +9,7 @@ export default function A({
   size = DEFAULT_LETTER_SIZE,
   dotSize = DEFAULT_DOT_SIZE,
   color = DEFAULT_COLOR,
-}: LetterSvgProps) {
+}: SvgProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

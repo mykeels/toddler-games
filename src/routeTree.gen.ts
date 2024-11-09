@@ -17,7 +17,10 @@ import { Route as NumberKeypadIndexImport } from './routes/number-keypad/index'
 import { Route as MenuIndexImport } from './routes/menu/index'
 import { Route as ImageToLetterMatchingIndexImport } from './routes/image-to-letter-matching/index'
 import { Route as FreeDrawIndexImport } from './routes/free-draw/index'
+import { Route as LetterTracingTriangleImport } from './routes/letter-tracing/triangle'
+import { Route as LetterTracingSquareImport } from './routes/letter-tracing/square'
 import { Route as LetterTracingDownImport } from './routes/letter-tracing/down'
+import { Route as LetterTracingCircleImport } from './routes/letter-tracing/circle'
 import { Route as LetterTracingBUpperImport } from './routes/letter-tracing/b-upper'
 import { Route as LetterTracingAcrossImport } from './routes/letter-tracing/across'
 import { Route as LetterTracingAUpperImport } from './routes/letter-tracing/a-upper'
@@ -62,8 +65,23 @@ const FreeDrawIndexRoute = FreeDrawIndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const LetterTracingTriangleRoute = LetterTracingTriangleImport.update({
+  path: '/letter-tracing/triangle',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const LetterTracingSquareRoute = LetterTracingSquareImport.update({
+  path: '/letter-tracing/square',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const LetterTracingDownRoute = LetterTracingDownImport.update({
   path: '/letter-tracing/down',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const LetterTracingCircleRoute = LetterTracingCircleImport.update({
+  path: '/letter-tracing/circle',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -187,11 +205,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LetterTracingBUpperImport
       parentRoute: typeof rootRoute
     }
+    '/letter-tracing/circle': {
+      id: '/letter-tracing/circle'
+      path: '/letter-tracing/circle'
+      fullPath: '/letter-tracing/circle'
+      preLoaderRoute: typeof LetterTracingCircleImport
+      parentRoute: typeof rootRoute
+    }
     '/letter-tracing/down': {
       id: '/letter-tracing/down'
       path: '/letter-tracing/down'
       fullPath: '/letter-tracing/down'
       preLoaderRoute: typeof LetterTracingDownImport
+      parentRoute: typeof rootRoute
+    }
+    '/letter-tracing/square': {
+      id: '/letter-tracing/square'
+      path: '/letter-tracing/square'
+      fullPath: '/letter-tracing/square'
+      preLoaderRoute: typeof LetterTracingSquareImport
+      parentRoute: typeof rootRoute
+    }
+    '/letter-tracing/triangle': {
+      id: '/letter-tracing/triangle'
+      path: '/letter-tracing/triangle'
+      fullPath: '/letter-tracing/triangle'
+      preLoaderRoute: typeof LetterTracingTriangleImport
       parentRoute: typeof rootRoute
     }
     '/free-draw/': {
@@ -245,7 +284,10 @@ export interface FileRoutesByFullPath {
   '/letter-tracing/a-upper': typeof LetterTracingAUpperRoute
   '/letter-tracing/across': typeof LetterTracingAcrossRoute
   '/letter-tracing/b-upper': typeof LetterTracingBUpperRoute
+  '/letter-tracing/circle': typeof LetterTracingCircleRoute
   '/letter-tracing/down': typeof LetterTracingDownRoute
+  '/letter-tracing/square': typeof LetterTracingSquareRoute
+  '/letter-tracing/triangle': typeof LetterTracingTriangleRoute
   '/free-draw': typeof FreeDrawIndexRoute
   '/image-to-letter-matching': typeof ImageToLetterMatchingIndexRoute
   '/menu': typeof MenuIndexRoute
@@ -264,7 +306,10 @@ export interface FileRoutesByTo {
   '/letter-tracing/a-upper': typeof LetterTracingAUpperRoute
   '/letter-tracing/across': typeof LetterTracingAcrossRoute
   '/letter-tracing/b-upper': typeof LetterTracingBUpperRoute
+  '/letter-tracing/circle': typeof LetterTracingCircleRoute
   '/letter-tracing/down': typeof LetterTracingDownRoute
+  '/letter-tracing/square': typeof LetterTracingSquareRoute
+  '/letter-tracing/triangle': typeof LetterTracingTriangleRoute
   '/free-draw': typeof FreeDrawIndexRoute
   '/image-to-letter-matching': typeof ImageToLetterMatchingIndexRoute
   '/menu': typeof MenuIndexRoute
@@ -284,7 +329,10 @@ export interface FileRoutesById {
   '/letter-tracing/a-upper': typeof LetterTracingAUpperRoute
   '/letter-tracing/across': typeof LetterTracingAcrossRoute
   '/letter-tracing/b-upper': typeof LetterTracingBUpperRoute
+  '/letter-tracing/circle': typeof LetterTracingCircleRoute
   '/letter-tracing/down': typeof LetterTracingDownRoute
+  '/letter-tracing/square': typeof LetterTracingSquareRoute
+  '/letter-tracing/triangle': typeof LetterTracingTriangleRoute
   '/free-draw/': typeof FreeDrawIndexRoute
   '/image-to-letter-matching/': typeof ImageToLetterMatchingIndexRoute
   '/menu/': typeof MenuIndexRoute
@@ -305,7 +353,10 @@ export interface FileRouteTypes {
     | '/letter-tracing/a-upper'
     | '/letter-tracing/across'
     | '/letter-tracing/b-upper'
+    | '/letter-tracing/circle'
     | '/letter-tracing/down'
+    | '/letter-tracing/square'
+    | '/letter-tracing/triangle'
     | '/free-draw'
     | '/image-to-letter-matching'
     | '/menu'
@@ -323,7 +374,10 @@ export interface FileRouteTypes {
     | '/letter-tracing/a-upper'
     | '/letter-tracing/across'
     | '/letter-tracing/b-upper'
+    | '/letter-tracing/circle'
     | '/letter-tracing/down'
+    | '/letter-tracing/square'
+    | '/letter-tracing/triangle'
     | '/free-draw'
     | '/image-to-letter-matching'
     | '/menu'
@@ -341,7 +395,10 @@ export interface FileRouteTypes {
     | '/letter-tracing/a-upper'
     | '/letter-tracing/across'
     | '/letter-tracing/b-upper'
+    | '/letter-tracing/circle'
     | '/letter-tracing/down'
+    | '/letter-tracing/square'
+    | '/letter-tracing/triangle'
     | '/free-draw/'
     | '/image-to-letter-matching/'
     | '/menu/'
@@ -361,7 +418,10 @@ export interface RootRouteChildren {
   LetterTracingAUpperRoute: typeof LetterTracingAUpperRoute
   LetterTracingAcrossRoute: typeof LetterTracingAcrossRoute
   LetterTracingBUpperRoute: typeof LetterTracingBUpperRoute
+  LetterTracingCircleRoute: typeof LetterTracingCircleRoute
   LetterTracingDownRoute: typeof LetterTracingDownRoute
+  LetterTracingSquareRoute: typeof LetterTracingSquareRoute
+  LetterTracingTriangleRoute: typeof LetterTracingTriangleRoute
   FreeDrawIndexRoute: typeof FreeDrawIndexRoute
   ImageToLetterMatchingIndexRoute: typeof ImageToLetterMatchingIndexRoute
   MenuIndexRoute: typeof MenuIndexRoute
@@ -380,7 +440,10 @@ const rootRouteChildren: RootRouteChildren = {
   LetterTracingAUpperRoute: LetterTracingAUpperRoute,
   LetterTracingAcrossRoute: LetterTracingAcrossRoute,
   LetterTracingBUpperRoute: LetterTracingBUpperRoute,
+  LetterTracingCircleRoute: LetterTracingCircleRoute,
   LetterTracingDownRoute: LetterTracingDownRoute,
+  LetterTracingSquareRoute: LetterTracingSquareRoute,
+  LetterTracingTriangleRoute: LetterTracingTriangleRoute,
   FreeDrawIndexRoute: FreeDrawIndexRoute,
   ImageToLetterMatchingIndexRoute: ImageToLetterMatchingIndexRoute,
   MenuIndexRoute: MenuIndexRoute,
@@ -410,7 +473,10 @@ export const routeTree = rootRoute
         "/letter-tracing/a-upper",
         "/letter-tracing/across",
         "/letter-tracing/b-upper",
+        "/letter-tracing/circle",
         "/letter-tracing/down",
+        "/letter-tracing/square",
+        "/letter-tracing/triangle",
         "/free-draw/",
         "/image-to-letter-matching/",
         "/menu/",
@@ -448,8 +514,17 @@ export const routeTree = rootRoute
     "/letter-tracing/b-upper": {
       "filePath": "letter-tracing/b-upper.tsx"
     },
+    "/letter-tracing/circle": {
+      "filePath": "letter-tracing/circle.tsx"
+    },
     "/letter-tracing/down": {
       "filePath": "letter-tracing/down.tsx"
+    },
+    "/letter-tracing/square": {
+      "filePath": "letter-tracing/square.tsx"
+    },
+    "/letter-tracing/triangle": {
+      "filePath": "letter-tracing/triangle.tsx"
     },
     "/free-draw/": {
       "filePath": "free-draw/index.tsx"

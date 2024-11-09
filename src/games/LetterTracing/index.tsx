@@ -4,7 +4,7 @@ import classNames from "clsx";
 import { fx } from "@/utils/sound";
 import Across from "./Across/Across";
 import { useFullScreenSize } from "@/utils/screen";
-import { LetterSvgProps } from "./LetterTracing.types";
+import { SvgProps } from "./LetterTracing.types";
 import { Screens, useMedia } from "@/utils/useMedia";
 import { useRestart } from "@/utils/restart";
 import Header from "@/Header/Header";
@@ -12,7 +12,7 @@ import { speak } from "@/utils/speak";
 
 type LetterTracingProps = {
   name: string;
-  Letter?: (props: LetterSvgProps) => React.ReactNode;
+  Letter?: (props: SvgProps) => React.ReactNode;
 };
 
 export const LetterTracing = ({ name, Letter = Across }: LetterTracingProps) => {
@@ -35,7 +35,7 @@ export const LetterTracing = ({ name, Letter = Across }: LetterTracingProps) => 
         ref={containerRef}
       >
         <div className={classNames(
-            "w-full h-full absolute top-0 left-0 content-center place-items-center gap-8 p-4",
+            "w-full h-full absolute top-0 left-0 content-center place-items-center gap-8 p-4 sm:p-16",
             {
               "grid grid-cols-1 grid-rows-1 md:grid-cols-2 md:grid-rows-2": letters.length > 1
             }

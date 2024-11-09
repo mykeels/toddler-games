@@ -93,6 +93,21 @@ const GAME_LISTING: GameListing = {
           icon: "./icons/trace/arrows-horizontal.svg",
         },
         {
+          title: "Circle",
+          path: "/letter-tracing/circle",
+          icon: "./icons/trace/circle.svg",
+        },
+        {
+          title: "Square",
+          path: "/letter-tracing/square",
+          icon: "./icons/trace/square.svg",
+        },
+        {
+          title: "Triangle",
+          path: "/letter-tracing/triangle",
+          icon: "./icons/trace/triangle.svg",
+        },
+        {
           title: "Uppercase A",
           path: "/letter-tracing/a-upper",
           icon: "./icons/trace/a-uppercase.svg",
@@ -160,6 +175,7 @@ export const Home = () => {
     return GAME_LISTING;
   };
   const { title } = useSearch({ from: "/menu/" });
+  console.log(title);
   const [listing, setListing] = useState(searchListing(title));
   const enterListing = (item: GameListing) => {
     if ("children" in item) {
