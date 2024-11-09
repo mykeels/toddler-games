@@ -155,14 +155,21 @@ export const Home = () => {
       root: GameListing,
       searchTitle: string
     ): GameListing | undefined => {
-      if (root.title === searchTitle) return root;
+      console.log(root.title, searchTitle);
+      if (root.title === searchTitle) {
+        if ("children" in root) {
+          return root;
+        } else {
+          return GAME_LISTING;
+        }
+      }
       if ("children" in root) {
         for (const child of root.children) {
           const found = findListing(child, searchTitle);
           if (found) return found;
         }
       }
-      return GAME_LISTING;
+      return undefined;
     };
 
     const found = findListing(GAME_LISTING, title ?? "");
