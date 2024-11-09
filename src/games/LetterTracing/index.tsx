@@ -9,6 +9,7 @@ import { Screens, useMedia } from "@/utils/useMedia";
 import { useRestart } from "@/utils/restart";
 import Header from "@/Header/Header";
 import { speak } from "@/utils/speak";
+import { Button } from "@/components/ui/button";
 
 type LetterTracingProps = {
   name: string;
@@ -30,7 +31,16 @@ export const LetterTracing = ({ name, Letter = Across }: LetterTracingProps) => 
 
   return (
     <div className="flex flex-col h-full">
-      <Header title="Can you trace this?" onRestart={restart} />
+      <Header title="Can you trace this?" onRestart={restart} Right={
+        <div className="flex gap-1 px-2">
+          <Button onClick={() => {
+            window.print();
+          }}>
+            <img src="./icons/print-white.svg" alt="Print" />
+          </Button>
+          <Header.Restart onRestart={restart} />
+        </div>
+      } />
       <div
         className="flex flex-col space-y-4 items-center justify-center grow relative"
         ref={containerRef}

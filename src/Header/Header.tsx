@@ -4,13 +4,15 @@ import { Link } from "@tanstack/react-router";
 
 type HeaderProps = {
   title?: string;
-  onRestart: () => void;
   children?: React.ReactNode;
   Left?: React.ReactNode;
+} & ({
+  onRestart: () => void;
+} | {
   Right?: React.ReactNode;
-};
+});
 
-export const Header = ({ title, onRestart, children, Left, Right }: HeaderProps) => {
+export const Header = ({ title, children, Left, ...props }: HeaderProps) => {
   return (
     <h1 className="text-4xl flex flex-row items-center justify-between bg-brand-primary p-2 text-white">
       {
@@ -18,7 +20,9 @@ export const Header = ({ title, onRestart, children, Left, Right }: HeaderProps)
       }
       <span className="text-center text-2xl md:text-4xl">{children ?? title}</span>
       {
-        (Right) ? Right : Right === null ? <span></span> : <Header.Restart onRestart={onRestart} />
+        ("Right" in props) 
+        ? props.Right === null ? <span></span> : props.Right 
+        : ("onRestart" in props) ? <Header.Restart onRestart={props.onRestart} /> : null
       }
     </h1>
   );
