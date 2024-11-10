@@ -13,7 +13,7 @@ const IMAGES = [...ANIMALS, ...FRUITS];
 
 export type ImageToLetterMatchingProps = {
   transformLetter?: (letter: string) => string;
-  level: number;
+  level?: number;
 }
 
 export const ImageToLetterMatching = ({

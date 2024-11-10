@@ -38,7 +38,7 @@ const TapToCount = () => {
     for (let i = 0; i < noOfItems; i++) {
       items.push({
         target: Math.floor(Math.random() * 2) + 2,
-        text: COUNTABLES[Math.floor(Math.random() * COUNTABLES.length)],
+        text: COUNTABLES[Math.floor(Math.random() * COUNTABLES.length)].value,
       });
     }
     return items;
