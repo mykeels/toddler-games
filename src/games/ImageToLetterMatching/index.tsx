@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { getNextImage } from "./ImageToLetterMatching.const";
-import { getFirstCharOptions, LETTERS } from "@/utils/characters";
+import { getFirstCharOptions, LETTERS, getNextCharacter, ANIMALS, FRUITS } from "@/utils/characters";
 import { useHorizontalSwipe } from "@/utils/swipe";
 import { fx } from "@/utils/sound";
 import Header from "@/Header/Header";
@@ -9,6 +8,8 @@ import Card from "@/Card";
 import Next from "@/Next";
 import { speak } from "@/utils/speak";
 import { useConfetti } from "@/Confetti";
+
+const IMAGES = [...ANIMALS, ...FRUITS];
 
 export type ImageToLetterMatchingProps = {
   transformLetter?: (letter: string) => string;
@@ -22,17 +23,17 @@ export const ImageToLetterMatching = ({
   const [gameIndex, setGameIndex] = useState(0);
   const [state, setState] = useState<"playing" | "interlude">("playing");
   const image = useMemo(
-    () => getNextImage(),
+    () => getNextCharacter(IMAGES),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [gameIndex]
   );
   const letters = useMemo(
     () =>
-      shuffleArray(getFirstCharOptions(LETTERS, image.word, level + 1)).map(transformLetter),
+      shuffleArray(getFirstCharOptions(LETTERS, image.name, level + 1)).map(transformLetter),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [image.word]
+    [image.name]
   );
-  const goal = transformLetter(image.word[0]);
+  const goal = transformLetter(image.name[0]);
   const [selected, setSelected] = useState<string | null>(null);
   const isCorrect = selected === goal;
 
@@ -91,8 +92,8 @@ export const ImageToLetterMatching = ({
   });
 
   useEffect(() => {
-    speak(`Does ${image.word} start with ${listOptions(letters)}?`);
-  }, [gameIndex, image.word, letters]);
+    speak(`Does ${image.name} start with ${listOptions(letters)}?`);
+  }, [gameIndex, image.name, letters]);
 
   return (
     <Container
@@ -101,11 +102,11 @@ export const ImageToLetterMatching = ({
     >
       <Header title="Match Image to Letter" onRestart={onNextClick}>
         {state === "interlude"
-          ? `${image.word} starts with ${goal}`
-          : `${image.word} starts with...`}
+          ? `${image.name} starts with ${goal}`
+          : `${image.name} starts with...`}
       </Header>
       <div className="flex flex-col items-center justify-center h-[90%] space-y-8">
-        <button className="text-center py-8 text-9xl font-bold" onClick={() => speak(image.word)}>{image.image}</button>
+        <button className="text-center py-8 text-9xl font-bold" onClick={() => speak(image.name)}>{image.value}</button>
         <div data-name="pair" className="flex justify-center space-x-8">
           {
             letters.map(letter => <Card
