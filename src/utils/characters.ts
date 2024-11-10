@@ -286,7 +286,7 @@ export function getFirstCharOptions(set: { value: string; name: string }[], word
 }
 
 let lastCharacterIndex = 0;
-export function getNextCharacter(set: Character[]): Character {
+export function getNextCharacter<T extends K[], K>(set: T): T[number] {
   let index = Math.floor(Math.random() * set.length);
   while (index === lastCharacterIndex) {
     index = Math.floor(Math.random() * set.length);

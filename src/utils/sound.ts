@@ -1,6 +1,6 @@
 import { Howl } from "howler";
 
-const audio = (src: string, options: { rate?: number } = {}) =>
+export const audio = (src: string, options: { rate?: number } = {}) =>
   new Howl({
     ...options,
     src: [src],
