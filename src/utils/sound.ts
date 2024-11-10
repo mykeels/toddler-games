@@ -1,5 +1,4 @@
 import { Howl } from "howler";
-import { LOWERCASE_LETTERS, NUMBERS, NUMBERS_TO_WORDS } from "@/utils/characters";
 
 const audio = (src: string, options: { rate?: number } = {}) =>
   new Howl({
@@ -50,31 +49,5 @@ export const fx = {
     zero: audio("./soundfx/digits/Zero.wav", { rate: digitRate }),
     ten: audio("./soundfx/digits/Ten.wav", { rate: digitRate }),
   },
-  alphabet: Object.fromEntries(
-    LOWERCASE_LETTERS.map((letter) => [
-      letter,
-      audio(`./soundfx/alphabet/${letter.toUpperCase()}.wav`, {
-        rate: digitRate,
-      }),
-    ])
-  ) as Record<keyof typeof LOWERCASE_LETTERS, Howl>,
   tapOn: audio("./soundfx/tap-on.mp3"),
-  tapOnAlphabet: Object.fromEntries(
-    LOWERCASE_LETTERS.map((letter) => [
-      letter,
-      sequence([
-        "./soundfx/tap-on.mp3",
-        `./soundfx/alphabet/${letter.toUpperCase()}.wav`,
-      ]),
-    ])
-  ) as Record<keyof typeof LOWERCASE_LETTERS, Howl>,
-  tapOnNumbers: Object.fromEntries(
-    Object.entries(NUMBERS_TO_WORDS).map(([number, word]) => [
-      number,
-      sequence([
-        "./soundfx/tap-on.mp3",
-        `./soundfx/digits/${word[0].toUpperCase() + word.slice(1)}.wav`,
-      ]),
-    ])
-  ) as Record<keyof typeof NUMBERS, Howl>,
 };

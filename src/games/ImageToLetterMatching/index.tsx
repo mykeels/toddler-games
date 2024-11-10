@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { getNextImage } from "./ImageToLetterMatching.const";
-import { UPPERCASE_LETTERS } from "@/utils/characters";
+import { getFirstCharOptions, LETTERS } from "@/utils/characters";
 import { useHorizontalSwipe } from "@/utils/swipe";
 import { fx } from "@/utils/sound";
 import Header from "@/Header/Header";
@@ -28,7 +28,7 @@ export const ImageToLetterMatching = ({
   );
   const letters = useMemo(
     () =>
-      shuffleArray(getLetterOptions(image.word, level + 1)).map(transformLetter),
+      shuffleArray(getFirstCharOptions(LETTERS, image.word, level + 1)).map(transformLetter),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [image.word]
   );
@@ -129,19 +129,6 @@ export const ImageToLetterMatching = ({
 };
 
 export default ImageToLetterMatching;
-
-function getLetterOptions(word: string, length = 2): string[] {
-  const letter1 = word[0];
-  const options = [letter1];
-  for (let i = 1; i < length; i++) {
-    let letter = UPPERCASE_LETTERS[Math.floor(Math.random() * UPPERCASE_LETTERS.length)];
-    while (options.includes(letter)) {
-      letter = UPPERCASE_LETTERS[Math.floor(Math.random() * UPPERCASE_LETTERS.length)];
-    }
-    options.push(letter);
-  }
-  return options;
-}
 
 function listOptions(letters: string[]): string {
   return letters.slice(0, -1).join(", ") + " or " + letters[letters.length - 1];

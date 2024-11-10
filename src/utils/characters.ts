@@ -1,99 +1,286 @@
-export const UPPERCASE_LETTERS = [
-    "A",
-    "B",
-    "C",
-    "D",
-    "E",
-    "F",
-    "G",
-    "H",
-    "I",
-    "J",
-    "K",
-    "L",
-    "M",
-    "N",
-    "O",
-    "P",
-    "Q",
-    "R",
-    "S",
-    "T",
-    "U",
-    "V",
-    "W",
-    "X",
-    "Y",
-    "Z",
-  ] as const;
-  export const LOWERCASE_LETTERS = [
-    "a",
-    "b",
-    "c",
-    "d",
-    "e",
-    "f",
-    "g",
-    "h",
-    "i",
-    "j",
-    "k",
-    "l",
-    "m",
-    "n",
-    "o",
-    "p",
-    "q",
-    "r",
-    "s",
-    "t",
-    "u",
-    "v",
-    "w",
-    "x",
-    "y",
-    "z",
-  ] as const;
-  
-  export const NUMBERS = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
-  export const NUMBERS_TO_WORDS = {
-    1: "one",
-    2: "two",
-    3: "three",
-    4: "four",
-    5: "five",
-    6: "six",
-    7: "seven",
-    8: "eight",
-    9: "nine",
-    0: "zero",
-  } as const;
-  
-  export const ANIMALS = [
-    "🐶",
-    "🐱",
-    "🐭",
-    "🐹",
-    "🐰",
-    "🦊",
-    "🐻",
-    "🐼",
-    "🐨",
-    "🐯",
-    "🦁",
-    "🐮",
-    "🐷",
-    "🐽",
-    "🐸",
-  ];
-  
-  export const FRUITS = ["🍎", "🍌", "🍇", "🍈", "🍉", "🍊", "🍋", "🍍", "🍎"];
-  
-  export const CHARACTERS = {
-    uppercaseLetters: UPPERCASE_LETTERS as unknown as string[],
-    lowercaseLetters: LOWERCASE_LETTERS as unknown as string[],
-    numbers: NUMBERS,
-    animals: ANIMALS,
-    fruits: FRUITS,
-  };
-  
+export type Character = {
+  value: string;
+  name: string;
+};
+
+export const LETTERS: Character[] = [
+  {
+    value: "A",
+    name: "A",
+  },
+  {
+    value: "B",
+    name: "B",
+  },
+  {
+    value: "C",
+    name: "C",
+  },
+  {
+    value: "D",
+    name: "D",
+  },
+  {
+    value: "E",
+    name: "E",
+  },
+  {
+    value: "F",
+    name: "F",
+  },
+  {
+    value: "G",
+    name: "G",
+  },
+  {
+    value: "H",
+    name: "H",
+  },
+  {
+    value: "I",
+    name: "I",
+  },
+  {
+    value: "J",
+    name: "J",
+  },
+  {
+    value: "K",
+    name: "K",
+  },
+  {
+    value: "L",
+    name: "L",
+  },
+  {
+    value: "M",
+    name: "M",
+  },
+  {
+    value: "N",
+    name: "N",
+  },
+  {
+    value: "O",
+    name: "O",
+  },
+  {
+    value: "P",
+    name: "P",
+  },
+  {
+    value: "Q",
+    name: "Q",
+  },
+  {
+    value: "R",
+    name: "R",
+  },
+  {
+    value: "S",
+    name: "S",
+  },
+  {
+    value: "T",
+    name: "T",
+  },
+  {
+    value: "U",
+    name: "U",
+  },
+  {
+    value: "V",
+    name: "V",
+  },
+  {
+    value: "W",
+    name: "W",
+  },
+  {
+    value: "X",
+    name: "X",
+  },
+  {
+    value: "Y",
+    name: "Y",
+  },
+  {
+    value: "Z",
+    name: "Z",
+  },
+];
+
+export const NUMBERS: Character[] = [
+  {
+    value: "1",
+    name: "one",
+  },
+  {
+    value: "2",
+    name: "two",
+  },
+  {
+    value: "3",
+    name: "three",
+  },
+  {
+    value: "4",
+    name: "four",
+  },
+  {
+    value: "5",
+    name: "five",
+  },
+  {
+    value: "6",
+    name: "six",
+  },
+  {
+    value: "7",
+    name: "seven",
+  },
+  {
+    value: "8",
+    name: "eight",
+  },
+  {
+    value: "9",
+    name: "nine",
+  },
+  {
+    value: "0",
+    name: "zero",
+  },
+];
+
+export const ANIMALS: Character[] = [
+  {
+    value: "🐶",
+    name: "Dog",
+  },
+  {
+    value: "🐱",
+    name: "Cat",
+  },
+  {
+    value: "🐭",
+    name: "Mouse",
+  },
+  {
+    value: "🐹",
+    name: "Hamster",
+  },
+  {
+    value: "🐰",
+    name: "Rabbit",
+  },
+  {
+    value: "🦊",
+    name: "Fox",
+  },
+  {
+    value: "🐻",
+    name: "Bear",
+  },
+  {
+    value: "🐼",
+    name: "Panda",
+  },
+  {
+    value: "🐯",
+    name: "Tiger",
+  },
+  {
+    value: "🦁",
+    name: "Lion",
+  },
+  {
+    value: "🐮",
+    name: "Cow",
+  },
+  {
+    value: "🐷",
+    name: "Pig",
+  },
+  {
+    value: "🐽",
+    name: "Pig",
+  },
+  {
+    value: "🐸",
+    name: "Frog",
+  },
+];
+
+export const FRUITS: Character[] = [
+  {
+    value: "🍌",
+    name: "Banana",
+  },
+  {
+    value: "🍎",
+    name: "Apple",
+  },
+  {
+    value: "🍓",
+    name: "Strawberry",
+  },
+  {
+    value: "🍉",
+    name: "Watermelon",
+  },
+  {
+    value: "🍇",
+    name: "Grapes",
+  },
+  {
+    value: "🍒",
+    name: "Cherry",
+  },
+  {
+    value: "🍍",
+    name: "Pineapple",
+  },
+  {
+    value: "🥥",
+    name: "Coconut",
+  },
+];
+
+export const CHARACTERS = {
+  uppercaseLetters: LETTERS,
+  lowercaseLetters: LETTERS.map((letter) => ({
+    value: letter.value.toLowerCase(),
+    name: letter.name,
+  }) as Character),
+  numbers: NUMBERS,
+  animals: ANIMALS,
+  fruits: FRUITS,
+};
+
+export function getOptions(set: { value: string; name: string }[], length = 2): { value: string; name: string }[] {
+  const options: { value: string; name: string }[] = [];
+  for (let i = 0; i < length; i++) {
+    let letter = set[Math.floor(Math.random() * set.length)];
+    while (options.find((option) => option.value === letter.value)) {
+      letter = set[Math.floor(Math.random() * set.length)];
+    }
+    options.push(letter);
+  }
+  return options;
+}
+
+
+export function getFirstCharOptions(set: { value: string; name: string }[], word: string, length = 2): string[] {
+  const letter1 = word[0];
+  const options = [letter1];
+  const setValues = set.map(character => character.value);
+  for (let i = 1; i < length; i++) {
+    let letter = setValues[Math.floor(Math.random() * setValues.length)];
+    while (options.includes(letter)) {
+      letter = setValues[Math.floor(Math.random() * setValues.length)];
+    }
+    options.push(letter);
+  }
+  return options;
+}

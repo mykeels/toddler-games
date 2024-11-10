@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 
-import { CHARACTERS } from "@/utils/characters";
+import { Character, CHARACTERS, getOptions } from "@/utils/characters";
 import { useHorizontalSwipe } from "@/utils/swipe";
 import { fx } from "@/utils/sound";
 import Header from "@/Header/Header";
@@ -11,29 +11,33 @@ import Next from "@/Next";
 import { speak } from "@/utils/speak";
 import { useConfetti } from "@/Confetti";
 
-function FindAndTap({
+export type FindAndTapProps = {
+  getCharacterSet?: (set: typeof CHARACTERS) => Character[];
+  level?: number;
+}
+
+export function FindAndTap({
   getCharacterSet = (set: typeof CHARACTERS) => set.uppercaseLetters,
-}: {
-  getCharacterSet?: (set: typeof CHARACTERS) => string[];
-} = {}) {
+  level = 1,
+}: FindAndTapProps) {
   const characters = getCharacterSet(CHARACTERS);
   const [gameIndex, setGameIndex] = useState(0);
   const [state, setState] = useState<"playing" | "interlude">("playing");
-  const getNextPair = () => getRandomPair(characters);
-  const [pair, setPair] = useState<string[]>(getNextPair());
+  const getNextPair = () => getOptions(characters, level + 1);
+  const [pair, setPair] = useState<Character[]>(getNextPair());
   const goal = useMemo(
     () => pair[Math.floor(Math.random() * pair.length)],
     [pair]
   );
-  const [selected, setSelected] = useState<string | null>(null);
-  const isCorrect = selected === goal;
+  const [selected, setSelected] = useState<Character | null>(null);
+  const isCorrect = selected?.value === goal.value;
 
   const [showConfetti, Confetti] = useConfetti();
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const onLetterOrNumberClick = (letterOrNumber: string) => {
+  const onLetterOrNumberClick = (letterOrNumber: Character) => {
     setSelected(letterOrNumber);
-    if (letterOrNumber === goal) {
+    if (letterOrNumber.value === goal.value) {
       fx.correct.play();
       showConfetti();
     } else {
@@ -78,7 +82,7 @@ function FindAndTap({
   });
 
   useEffect(() => {
-    speak(`Tap on ${goal}`);
+    speak(`Tap ${goal.name}`);
   }, [goal, gameIndex]);
 
   return (
@@ -87,29 +91,23 @@ function FindAndTap({
       key={gameIndex}
     >
       <Header title="Find and Tap" onRestart={onNextClick}>
-        Tap on {goal}
+        Tap {goal.value}
       </Header>
       <div className="flex flex-col items-center justify-center h-[90%] space-y-16">
         <div data-name="pair" className="flex justify-center space-x-8"
         >
-          <Card
-            value={pair[0]}
-            onClick={() => onLetterOrNumberClick(pair[0])}
-            selectedValue={goal}
-            name="pair"
-          >
-            {pair[0]}
-            {pair[0] === goal ? Confetti : null}
-          </Card>
-          <Card
-            value={pair[1]}
-            onClick={() => onLetterOrNumberClick(pair[1])}
-            selectedValue={goal}
-            name="pair"
-          >
-            {pair[1]}
-            {pair[1] === goal ? Confetti : null}
-          </Card>
+          {
+            pair.map(character => <Card
+              key={character.value}
+              value={character.value}
+              selectedValue={goal.value}
+              onClick={() => onLetterOrNumberClick(character)}
+              name="pair"
+            >
+              {character.value}
+              {character.value === goal.value ? Confetti : null}
+            </Card>)
+          }
         </div>
         <Next
           onNext={onNextClick}
@@ -125,12 +123,3 @@ function FindAndTap({
 }
 
 export default FindAndTap;
-
-function getRandomPair(characters: string[]): [string, string] {
-  const firstIndex = Math.floor(Math.random() * characters.length);
-  let secondIndex = Math.floor(Math.random() * characters.length);
-  while (firstIndex === secondIndex) {
-    secondIndex = Math.floor(Math.random() * characters.length);
-  }
-  return [characters[firstIndex], characters[secondIndex]];
-}
