@@ -10,6 +10,7 @@ import { useRestart } from "@/utils/restart";
 import { PHONICS_LETTERS, WORDS } from "./ReadWords.const";
 import { getNextCharacter } from "@/utils/characters";
 import Next from "@/Next";
+import { useConfetti } from "@/Confetti";
 
 type ReadWordsProps = {
   getWordSet?: (level: 2 | 3) => typeof WORDS[2 | 3];
@@ -23,7 +24,8 @@ export const ReadWords = ({ getWordSet = () => [...WORDS[2], ...WORDS[3]], level
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [life]
   );
-  const { next, letters, allLetters, characters } = useReadWord(goal);
+  const { next, letters, allLetters, characters } = useReadWord(goal.value);
+  const [showConfetti, Confetti] = useConfetti();
 
   useEffect(() => {
     fx.game.play();
@@ -33,10 +35,16 @@ export const ReadWords = ({ getWordSet = () => [...WORDS[2], ...WORDS[3]], level
     speak(`Can you read this?`);
   }, []);
 
+  useEffect(() => {
+    if (letters.length === allLetters.length) {
+      showConfetti();
+    }
+  }, [letters.length, allLetters.length]);
+
   return (
     <Container key={life}>
       <Header onRestart={restart}>
-        {goal}
+        {goal.value}
       </Header>
       <div className="flex flex-col items-center justify-center h-[90%] space-y-16">
         <div className="flex flex-wrap justify-center content-center items-center gap-4 landscape:px-[10%]">
@@ -56,6 +64,14 @@ export const ReadWords = ({ getWordSet = () => [...WORDS[2], ...WORDS[3]], level
             />
           ))}
         </div>
+        <button className={classNames("flex flex-col items-center justify-center", {
+          'invisible': letters.length !== allLetters.length
+        })} onClick={() => {
+          speak(goal.value);
+        }}>
+          {Confetti}
+          <img src={goal.image} alt={goal.value} className={classNames("w-64 h-64 border-2 border-white rounded-lg")} />
+        </button>
         <Next
           onNext={restart}
           className={{
@@ -74,12 +90,8 @@ function useReadWord(word: string) {
   const allLetters = word.split("");
   const characters = allLetters.map(character => PHONICS_LETTERS.find(letter => letter.value.toLowerCase() === character));
   const [letters, setLetters] = useState<string[]>([]);
-  console.log({
-    characters,
-  });
   const next = () => {
     const nextCharacter = characters[letters.length];
-    console.log({ nextCharacter });
     if (nextCharacter) {
       const newLetters = [...letters, nextCharacter.value];
       setLetters(newLetters);
