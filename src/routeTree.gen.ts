@@ -13,6 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
 import { Route as TapToCountIndexImport } from './routes/tap-to-count/index'
+import { Route as ReadWordsIndexImport } from './routes/read-words/index'
 import { Route as NumberKeypadIndexImport } from './routes/number-keypad/index'
 import { Route as MenuIndexImport } from './routes/menu/index'
 import { Route as ImageToLetterMatchingIndexImport } from './routes/image-to-letter-matching/index'
@@ -40,6 +41,11 @@ const IndexRoute = IndexImport.update({
 
 const TapToCountIndexRoute = TapToCountIndexImport.update({
   path: '/tap-to-count/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ReadWordsIndexRoute = ReadWordsIndexImport.update({
+  path: '/read-words/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -261,6 +267,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NumberKeypadIndexImport
       parentRoute: typeof rootRoute
     }
+    '/read-words/': {
+      id: '/read-words/'
+      path: '/read-words'
+      fullPath: '/read-words'
+      preLoaderRoute: typeof ReadWordsIndexImport
+      parentRoute: typeof rootRoute
+    }
     '/tap-to-count/': {
       id: '/tap-to-count/'
       path: '/tap-to-count'
@@ -292,6 +305,7 @@ export interface FileRoutesByFullPath {
   '/image-to-letter-matching': typeof ImageToLetterMatchingIndexRoute
   '/menu': typeof MenuIndexRoute
   '/number-keypad': typeof NumberKeypadIndexRoute
+  '/read-words': typeof ReadWordsIndexRoute
   '/tap-to-count': typeof TapToCountIndexRoute
 }
 
@@ -314,6 +328,7 @@ export interface FileRoutesByTo {
   '/image-to-letter-matching': typeof ImageToLetterMatchingIndexRoute
   '/menu': typeof MenuIndexRoute
   '/number-keypad': typeof NumberKeypadIndexRoute
+  '/read-words': typeof ReadWordsIndexRoute
   '/tap-to-count': typeof TapToCountIndexRoute
 }
 
@@ -337,6 +352,7 @@ export interface FileRoutesById {
   '/image-to-letter-matching/': typeof ImageToLetterMatchingIndexRoute
   '/menu/': typeof MenuIndexRoute
   '/number-keypad/': typeof NumberKeypadIndexRoute
+  '/read-words/': typeof ReadWordsIndexRoute
   '/tap-to-count/': typeof TapToCountIndexRoute
 }
 
@@ -361,6 +377,7 @@ export interface FileRouteTypes {
     | '/image-to-letter-matching'
     | '/menu'
     | '/number-keypad'
+    | '/read-words'
     | '/tap-to-count'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -382,6 +399,7 @@ export interface FileRouteTypes {
     | '/image-to-letter-matching'
     | '/menu'
     | '/number-keypad'
+    | '/read-words'
     | '/tap-to-count'
   id:
     | '__root__'
@@ -403,6 +421,7 @@ export interface FileRouteTypes {
     | '/image-to-letter-matching/'
     | '/menu/'
     | '/number-keypad/'
+    | '/read-words/'
     | '/tap-to-count/'
   fileRoutesById: FileRoutesById
 }
@@ -426,6 +445,7 @@ export interface RootRouteChildren {
   ImageToLetterMatchingIndexRoute: typeof ImageToLetterMatchingIndexRoute
   MenuIndexRoute: typeof MenuIndexRoute
   NumberKeypadIndexRoute: typeof NumberKeypadIndexRoute
+  ReadWordsIndexRoute: typeof ReadWordsIndexRoute
   TapToCountIndexRoute: typeof TapToCountIndexRoute
 }
 
@@ -448,6 +468,7 @@ const rootRouteChildren: RootRouteChildren = {
   ImageToLetterMatchingIndexRoute: ImageToLetterMatchingIndexRoute,
   MenuIndexRoute: MenuIndexRoute,
   NumberKeypadIndexRoute: NumberKeypadIndexRoute,
+  ReadWordsIndexRoute: ReadWordsIndexRoute,
   TapToCountIndexRoute: TapToCountIndexRoute,
 }
 
@@ -481,6 +502,7 @@ export const routeTree = rootRoute
         "/image-to-letter-matching/",
         "/menu/",
         "/number-keypad/",
+        "/read-words/",
         "/tap-to-count/"
       ]
     },
@@ -537,6 +559,9 @@ export const routeTree = rootRoute
     },
     "/number-keypad/": {
       "filePath": "number-keypad/index.tsx"
+    },
+    "/read-words/": {
+      "filePath": "read-words/index.tsx"
     },
     "/tap-to-count/": {
       "filePath": "tap-to-count/index.tsx"

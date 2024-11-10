@@ -120,6 +120,11 @@ const GAME_LISTING: GameListing = {
         },
       ],
     },
+    {
+      title: "Read Words",
+      path: "/read-words/",
+      icon: "./icons/tap-lowercase.svg",
+    }
   ],
 };
 

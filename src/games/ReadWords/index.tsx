@@ -128,7 +128,7 @@ function Readable({
       {...onTouch(onTap)}
       className={classNames(
         "w-24 h-24 lg:w-32 lg:h-32 border-2 border-black rounded text-black",
-        "flex items-center justify-center text-5xl lg:text-9xl font-bold",
+        "flex items-center justify-center text-5xl lg:text-8xl font-bold",
         {
           "bg-yellow-300": checked,
           "animate-breathe": !isComplete && checked,
