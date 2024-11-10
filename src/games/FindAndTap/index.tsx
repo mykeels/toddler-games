@@ -9,6 +9,7 @@ import { vibrate } from "@/utils/vibrate";
 import Card from "@/Card";
 import Next from "@/Next";
 import { speak } from "@/utils/speak";
+import { useConfetti } from "@/Confetti";
 
 function FindAndTap({
   getCharacterSet = (set: typeof CHARACTERS) => set.uppercaseLetters,
@@ -27,11 +28,14 @@ function FindAndTap({
   const [selected, setSelected] = useState<string | null>(null);
   const isCorrect = selected === goal;
 
+  const [showConfetti, Confetti] = useConfetti();
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const onLetterOrNumberClick = (letterOrNumber: string) => {
     setSelected(letterOrNumber);
     if (letterOrNumber === goal) {
       fx.correct.play();
+      showConfetti();
     } else {
       fx.incorrect.play();
     }
@@ -95,6 +99,7 @@ function FindAndTap({
             name="pair"
           >
             {pair[0]}
+            {pair[0] === goal ? Confetti : null}
           </Card>
           <Card
             value={pair[1]}
@@ -103,6 +108,7 @@ function FindAndTap({
             name="pair"
           >
             {pair[1]}
+            {pair[1] === goal ? Confetti : null}
           </Card>
         </div>
         <Next

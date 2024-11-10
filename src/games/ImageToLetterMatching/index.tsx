@@ -8,6 +8,7 @@ import Container from "@/Container";
 import Card from "@/Card";
 import Next from "@/Next";
 import { speak } from "@/utils/speak";
+import { useConfetti } from "@/Confetti";
 
 export const ImageToLetterMatching = ({
   transformLetter = (letter) => letter,
@@ -34,11 +35,14 @@ export const ImageToLetterMatching = ({
   const [selected, setSelected] = useState<string | null>(null);
   const isCorrect = selected === goal;
 
+  const [showConfetti, Confetti] = useConfetti();
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const onLetterClick = (letter: string) => {
     setSelected(letter);
     if (letter === goal) {
       fx.correct.play();
+      showConfetti();
     } else {
       fx.incorrect.play();
     }
@@ -109,6 +113,7 @@ export const ImageToLetterMatching = ({
             name="pair"
           >
             {letters[0]}
+            {letters[0] === goal ? Confetti : null}
           </Card>
           <Card
             value={letters[1]}
@@ -117,6 +122,7 @@ export const ImageToLetterMatching = ({
             name="pair"
           >
             {letters[1]}
+            {letters[1] === goal ? Confetti : null}
           </Card>
         </div>
         <Next onNext={onNextClick} className={{

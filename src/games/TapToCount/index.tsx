@@ -8,6 +8,7 @@ import Container from "@/Container";
 import Header from "@/Header/Header";
 import Next from "@/Next";
 import { speak } from "@/utils/speak";
+import { useConfetti } from "@/Confetti";
 
 const COUNTABLES = [...FRUITS, ...ANIMALS];
 
@@ -64,6 +65,8 @@ const TapToCount = () => {
     return () => controller.abort();
   }, [reset]);
 
+  const [showConfetti, Confetti] = useConfetti();
+
   useEffect(() => {
     fx.game.play();
   }, []);
@@ -72,10 +75,12 @@ const TapToCount = () => {
   }, [gameId, targetCount]);
   useEffect(() => {
     if (count === targetCount) {
+      showConfetti();
       setTimeout(() => {
         speak("Well done! Let's do it again.");
       }, 500);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [count, targetCount]);
 
   return (
@@ -92,6 +97,7 @@ const TapToCount = () => {
           })}
         >
           {count ? count : ""}
+          {Confetti}
         </h1>
         <div className="flex flex-wrap items-center justify-center gap-6">
           {items.map((item) =>
