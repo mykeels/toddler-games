@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { IMAGES } from "./ImageToLetterMatching.const";
+import { getNextImage } from "./ImageToLetterMatching.const";
 import { UPPERCASE_LETTERS } from "@/utils/characters";
 import { useHorizontalSwipe } from "@/utils/swipe";
 import { fx } from "@/utils/sound";
@@ -10,24 +10,25 @@ import Next from "@/Next";
 import { speak } from "@/utils/speak";
 import { useConfetti } from "@/Confetti";
 
+export type ImageToLetterMatchingProps = {
+  transformLetter?: (letter: string) => string;
+  level: number;
+}
+
 export const ImageToLetterMatching = ({
   transformLetter = (letter) => letter,
-}: {
-  transformLetter?: (letter: string) => string;
-}) => {
+  level = 1,
+}: ImageToLetterMatchingProps) => {
   const [gameIndex, setGameIndex] = useState(0);
   const [state, setState] = useState<"playing" | "interlude">("playing");
   const image = useMemo(
-    () => IMAGES[Math.floor(Math.random() * IMAGES.length)],
+    () => getNextImage(),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [gameIndex]
   );
   const letters = useMemo(
     () =>
-      shuffleArray([
-        image.word[0],
-        UPPERCASE_LETTERS[Math.floor(Math.random() * UPPERCASE_LETTERS.length)],
-      ]).map(transformLetter),
+      shuffleArray(getLetterOptions(image.word, level + 1)).map(transformLetter),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [image.word]
   );
@@ -90,7 +91,7 @@ export const ImageToLetterMatching = ({
   });
 
   useEffect(() => {
-    speak(`Does ${image.word} start with ${letters[0]} or ${letters[1]}?`);
+    speak(`Does ${image.word} start with ${listOptions(letters)}?`);
   }, [gameIndex, image.word, letters]);
 
   return (
@@ -104,26 +105,20 @@ export const ImageToLetterMatching = ({
           : `${image.word} starts with...`}
       </Header>
       <div className="flex flex-col items-center justify-center h-[90%] space-y-8">
-        <div className="text-center py-8 text-9xl font-bold">{image.image}</div>
+        <button className="text-center py-8 text-9xl font-bold" onClick={() => speak(image.word)}>{image.image}</button>
         <div data-name="pair" className="flex justify-center space-x-8">
-          <Card
-            value={letters[0]}
-            selectedValue={goal}
-            onClick={() => onLetterClick(letters[0])}
-            name="pair"
-          >
-            {letters[0]}
-            {letters[0] === goal ? Confetti : null}
-          </Card>
-          <Card
-            value={letters[1]}
-            selectedValue={goal}
-            onClick={() => onLetterClick(letters[1])}
-            name="pair"
-          >
-            {letters[1]}
-            {letters[1] === goal ? Confetti : null}
-          </Card>
+          {
+            letters.map(letter => <Card
+              key={letter}
+              value={letter}
+              selectedValue={goal}
+              onClick={() => onLetterClick(letter)}
+              name="pair"
+            >
+              {letter}
+              {letter === goal ? Confetti : null}
+            </Card>)
+          }
         </div>
         <Next onNext={onNextClick} className={{
           'invisible': !(state == "interlude" && selected && isCorrect)
@@ -134,6 +129,23 @@ export const ImageToLetterMatching = ({
 };
 
 export default ImageToLetterMatching;
+
+function getLetterOptions(word: string, length = 2): string[] {
+  const letter1 = word[0];
+  const options = [letter1];
+  for (let i = 1; i < length; i++) {
+    let letter = UPPERCASE_LETTERS[Math.floor(Math.random() * UPPERCASE_LETTERS.length)];
+    while (options.includes(letter)) {
+      letter = UPPERCASE_LETTERS[Math.floor(Math.random() * UPPERCASE_LETTERS.length)];
+    }
+    options.push(letter);
+  }
+  return options;
+}
+
+function listOptions(letters: string[]): string {
+  return letters.slice(0, -1).join(", ") + " or " + letters[letters.length - 1];
+}
 
 function shuffleArray<T>(array: T[]): T[] {
   const shuffled = [...array];
