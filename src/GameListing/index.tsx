@@ -156,7 +156,6 @@ export const Home = () => {
       root: GameListing,
       searchTitle: string
     ): GameListing | undefined => {
-      console.log(root.title, searchTitle);
       if (root.title === searchTitle) {
         if ("children" in root) {
           return root;
@@ -183,7 +182,6 @@ export const Home = () => {
     return GAME_LISTING;
   };
   const { title } = useSearch({ from: "/menu/" });
-  console.log(title);
   const [listing, setListing] = useState(searchListing(title));
   const enterListing = (item: GameListing) => {
     if ("children" in item) {
