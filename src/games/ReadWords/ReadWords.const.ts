@@ -1,109 +1,113 @@
-import { speak } from "@/utils/speak";
+import { fx } from "@/utils/sound";
 
 export const PHONICS_LETTERS = [
   {
     value: "a",
-    speak: () => speak("ah"),
+    speak: () => fx.phonics.a.play(),
   },
   {
     value: "b",
-    speak: () => speak("buh"),
+    speak: () => fx.phonics.b.play(),
   },
   {
     value: "c",
-    speak: () => speak("kuh"),
+    speak: () => fx.phonics.c.play(),
   },
   {
     value: "d",
-    speak: () => speak("duh"),
+    speak: () => fx.phonics.d.play(),
   },
   {
     value: "e",
-    speak: () => speak("eh"),
+    speak: () => fx.phonics.e.play(),
   },
   {
     value: "f",
-    speak: () => speak("fuh"),
+    speak: () => fx.phonics.f.play(),
   },
   {
     value: "g",
-    speak: () => speak("gah"),
+    speak: () => fx.phonics.g.play(),
   },
   {
     value: "h",
-    speak: () => speak("hah"),
+    speak: () => fx.phonics.h.play(),
   },
   {
     value: "i",
-    speak: () => speak("ee"),
+    speak: () => fx.phonics.i.play(),
   },
   {
     value: "j",
-    speak: () => speak("juh"),
+    speak: () => fx.phonics.j.play(),
   },
   {
     value: "k",
-    speak: () => speak("kuh"),
+    speak: () => fx.phonics.k.play(),
   },
   {
     value: "l",
-    speak: () => speak("luh"),
+    speak: () => fx.phonics.l.play(),
   },
   {
     value: "m",
-    speak: () => speak("muh"),
+    speak: () => fx.phonics.m.play(),
   },
   {
     value: "n",
-    speak: () => speak("nih"),
+    speak: () => fx.phonics.n.play(),
   },
   {
     value: "o",
-    speak: () => speak("aw"),
+    speak: () => fx.phonics.o.play(),
+  },
+  {
+    value: "ō",
+    speak: () => fx.phonics["ō"].play(),
   },
   {
     value: "p",
-    speak: () => speak("puh"),
+    speak: () => fx.phonics.p.play(),
   },
   {
     value: "q",
-    speak: () => speak("kwuh"),
+    speak: () => fx.phonics.q.play(),
   },
   {
     value: "r",
-    speak: () => speak("ruh"),
+    speak: () => fx.phonics.r.play(),
   },
   {
     value: "s",
-    speak: () => speak("sih"),
+    speak: () => fx.phonics.s.play(),
   },
   {
     value: "t",
-    speak: () => speak("tuh"),
+    speak: () => fx.phonics.t.play(),
   },
   {
     value: "u",
-    speak: () => speak("ooh"),
+    speak: () => fx.phonics.u.play(),
   },
   {
     value: "v",
-    speak: () => speak("vuh"),
+    speak: () => fx.phonics.v.play(),
   },
   {
     value: "w",
-    speak: () => speak("wuh"),
+    speak: () => fx.phonics.w.play(),
   },
   {
     value: "x",
-    speak: () => speak("eks"),
+    speak: () => fx.phonics.x.play(),
   },
   {
     value: "y",
-    speak: () => speak("yih"),
+    speak: () => fx.phonics.y.play(),
   },
   {
     value: "z",
-    speak: () => speak("zi"),
+    speak: () => fx.phonics.z.play(),
   },
 ];
 
@@ -115,21 +119,25 @@ const TWO_LETTER_WORDS = [
   },
   {
     value: "up",
+    pronunciation: "op",
     image:
       "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExMGpxZjFrZTg4aGF6dGhmM3RsbDBjOGFnMnJ6M3E3ejdybHI3cmNhbyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/iZGpuaRKdEZoI/giphy.webp",
   },
   {
     value: "go",
+    pronunciation: "gō",
     image:
       "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHpuaWNsNjJpa2w2bHp4czJlMGExZGtjY21oYWoxc281bjBraXZrcSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7ZetIsjtbkgNE1I4/200.webp",
   },
   {
     value: "no",
+    pronunciation: "nō",
     image:
       "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExbzB2eHRyYW12dmU2M2lvNnRvczlkZjRzOGNkNHB3dXc4NGtqYjd3MiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/izHlHlaz9n99skGyUt/giphy.webp",
   },
   {
     value: "me",
+    pronunciation: "mi",
     image:
       "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExbXJqOTUwaXo0ZHl5cXQ2a3dqcWc4cTc0a2RkYWtjbTExZjdmN2hoYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/i3L6JoWcVZj1HuURSE/giphy.webp",
   },
@@ -162,6 +170,7 @@ const THREE_LETTER_WORDS = [
   },
   {
     value: "sun",
+    pronunciation: "son",
     image: "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcXhtaHJzNnVvMmllZ29ldTE0ZGMxdmFlNG9xYnkybGJ5cmNrcGdoNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/1Fm7jEapE18HwS6fkT/giphy.webp",
   },
 ];

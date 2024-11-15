@@ -24,7 +24,7 @@ export const ReadWords = ({ getWordSet = () => [...WORDS[2], ...WORDS[3]], level
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [life]
   );
-  const { next, letters, allLetters, characters } = useReadWord(goal.value);
+  const { next, letters, allLetters, characters } = useReadWord(goal);
   const [showConfetti, Confetti] = useConfetti();
 
   useEffect(() => {
@@ -54,7 +54,9 @@ export const ReadWords = ({ getWordSet = () => [...WORDS[2], ...WORDS[3]], level
               value={letter}
               isReady={letters.length === index}
               onClick={() => {
-                next();
+                if (letters.length === index) {
+                  next();
+                }
                 if (letters.length >= index) {
                   vibrate();
                   characters[index]?.speak();
@@ -86,9 +88,12 @@ export const ReadWords = ({ getWordSet = () => [...WORDS[2], ...WORDS[3]], level
 
 export default ReadWords;
 
-function useReadWord(word: string) {
-  const allLetters = word.split("");
-  const characters = allLetters.map(character => PHONICS_LETTERS.find(letter => letter.value.toLowerCase() === character));
+function useReadWord(word: {
+  value: string;
+  pronunciation?: string;
+}) {
+  const allLetters = word.value.split("");
+  const characters = (word.pronunciation || word.value).split("").map(character => PHONICS_LETTERS.find(letter => letter.value.toLowerCase() === character));
   const [letters, setLetters] = useState<string[]>([]);
   const next = () => {
     const nextCharacter = characters[letters.length];
@@ -98,7 +103,7 @@ function useReadWord(word: string) {
 
       if (newLetters.length === allLetters.length) {
         setTimeout(() => {
-          speak(word);
+          speak(word.value);
         }, 1000);
       }
     }
