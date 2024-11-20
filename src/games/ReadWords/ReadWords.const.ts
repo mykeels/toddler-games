@@ -173,6 +173,16 @@ const THREE_LETTER_WORDS = [
     pronunciation: "son",
     image: "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcXhtaHJzNnVvMmllZ29ldTE0ZGMxdmFlNG9xYnkybGJ5cmNrcGdoNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/1Fm7jEapE18HwS6fkT/giphy.webp",
   },
+  {
+    value: "big",
+    pronunciation: "big",
+    image: "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNmE1ajZ4MHNld3hmcDNlbGVvbnNzM3FwcmZhZzV3MXd0dG1sYTF4cyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/85AU17hrcbCCMko/giphy.webp"
+  },
+  {
+    value: "boy",
+    pronunciation: "boy",
+    image: "https://plus.unsplash.com/premium_photo-1672243483821-5d3855a21809?q=80&w=2788&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  },
 ];
 
 export const WORDS = {
