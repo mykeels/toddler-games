@@ -108,7 +108,7 @@ function useReadWord(word: {
       if (newLetters.length >= allLetters.length) {
         setTimeout(() => {
           speak(word.value);
-        }, 1000);
+        }, 1200);
       }
     }
   };
