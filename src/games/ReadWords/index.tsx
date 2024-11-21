@@ -7,17 +7,17 @@ import Container from "@/Container";
 import { vibrate } from "@/utils/vibrate";
 import { speak } from "@/utils/speak";
 import { useRestart } from "@/utils/restart";
-import { PHONICS_LETTERS, WORDS } from "./ReadWords.const";
+import { type Levels, ALL_WORDS, PHONICS_LETTERS, WORDS } from "./ReadWords.const";
 import { getNextCharacter } from "@/utils/characters";
 import Next from "@/Next";
 import { useConfetti } from "@/Confetti";
 
 type ReadWordsProps = {
-  getWordSet?: (level: 2 | 3) => typeof WORDS[2 | 3];
-  level?: 2 | 3;
+  getWordSet?: (level: Levels) => typeof WORDS[Levels];
+  level?: Levels;
 }
 
-export const ReadWords = ({ getWordSet = () => [...WORDS[2], ...WORDS[3]], level = 2 }: ReadWordsProps) => {
+export const ReadWords = ({ getWordSet = () => ALL_WORDS, level = 2 }: ReadWordsProps) => {
   const { life, restart } = useRestart();
   const goal = useMemo(
     () => getNextCharacter(getWordSet(level)),
@@ -52,7 +52,7 @@ export const ReadWords = ({ getWordSet = () => [...WORDS[2], ...WORDS[3]], level
             <Readable
               key={index}
               value={letter}
-              isReady={letters.length === index}
+              isReady={letters.length >= index}
               onClick={() => {
                 if (letters.length === index) {
                   next();
@@ -63,6 +63,7 @@ export const ReadWords = ({ getWordSet = () => [...WORDS[2], ...WORDS[3]], level
                 }
               }}
               isComplete={letters.length === allLetters.length}
+              isChecked={letters.length >= index + 1}
             />
           ))}
         </div>
@@ -93,15 +94,18 @@ function useReadWord(word: {
   pronunciation?: string;
 }) {
   const allLetters = word.value.split("");
-  const characters = (word.pronunciation || word.value).split("").map(character => PHONICS_LETTERS.find(letter => letter.value.toLowerCase() === character));
+  const characters = (word.pronunciation || word.value).split("")
+    .map(character => PHONICS_LETTERS.find(letter => letter.value.toLowerCase() === character));
   const [letters, setLetters] = useState<string[]>([]);
   const next = () => {
     const nextCharacter = characters[letters.length];
+    const twinCharacter = characters[letters.length + 1];
+    const isTwin = nextCharacter?.value.toLowerCase() === twinCharacter?.value.toLowerCase();
     if (nextCharacter) {
-      const newLetters = [...letters, nextCharacter.value];
+      const newLetters = [...letters, nextCharacter.value, ...((isTwin && twinCharacter) ? [twinCharacter.value] : [])];
       setLetters(newLetters);
 
-      if (newLetters.length === allLetters.length) {
+      if (newLetters.length >= allLetters.length) {
         setTimeout(() => {
           speak(word.value);
         }, 1000);
@@ -124,21 +128,21 @@ function Readable({
   className,
   onClick,
   isReady,
-  isComplete
+  isComplete,
+  isChecked
 }: {
   value: string;
   className?: string;
   onClick: () => void;
   isReady: boolean;
   isComplete: boolean;
+  isChecked: boolean;
 }) {
-  const [checked, setChecked] = useState(false);
   const onTap = () => {
     onClick();
     if (!isReady) {
       return;
     }
-    setChecked(true);
   };
   return (
     <button
@@ -147,9 +151,9 @@ function Readable({
         "w-24 h-24 lg:w-32 lg:h-32 border-2 border-black rounded text-black",
         "flex items-center justify-center text-5xl lg:text-8xl font-bold",
         {
-          "bg-yellow-300": checked,
-          "animate-breathe": !isComplete && checked,
-          "bg-white hover:bg-blue-200": !checked,
+          "bg-yellow-300": isChecked,
+          "animate-breathe": !isComplete && isChecked,
+          "bg-white hover:bg-blue-200": !isChecked,
         },
         className
       )}
