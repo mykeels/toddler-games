@@ -46,7 +46,7 @@ export const ReadWords = ({ getWordSet = () => ALL_WORDS, level = 2 }: ReadWords
       <Header onRestart={restart}>
         {goal.value}
       </Header>
-      <div className="flex flex-col items-center justify-center h-[90%] space-y-16">
+      <div className="flex flex-col items-center justify-center h-[90%] space-y-8 hsx:space-y-2">
         <div className="flex flex-wrap justify-center content-center items-center gap-4 landscape:px-[10%]">
           {allLetters.map((letter, index) => (
             <Readable
@@ -73,7 +73,7 @@ export const ReadWords = ({ getWordSet = () => ALL_WORDS, level = 2 }: ReadWords
           speak(goal.value);
         }}>
           {Confetti}
-          <img src={goal.image} alt={goal.value} className={classNames("w-64 h-64 border-2 border-white rounded-lg")} />
+          <img src={goal.image} alt={goal.value} className={classNames("w-56 h-56 hsx:w-32 hsx:h-32 border-2 border-white rounded-lg")} />
         </button>
         <Next
           onNext={restart}
@@ -148,8 +148,10 @@ function Readable({
     <button
       {...onTouch(onTap)}
       className={classNames(
-        "w-24 h-24 lg:w-32 lg:h-32 border-2 border-black rounded text-black",
-        "flex items-center justify-center text-5xl lg:text-8xl font-bold",
+        "w-24 h-24 hsx:w-16 hsx:h-16 portrait:lg:w-32 portrait:lg:h-32",
+        "text-5xl portrait:lg:text-8xl hsx:text-3xl",
+        "border-2 border-black rounded text-black",
+        "flex items-center justify-center font-bold",
         {
           "bg-yellow-300": isChecked,
           "animate-breathe": !isComplete && isChecked,

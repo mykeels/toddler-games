@@ -44,6 +44,9 @@ export default {
         retina: {
           raw: "@media not all and (-webkit-min-device-pixel-ratio: 2), (min-device-pixel-ratio: 2), (min-resolution: 192dpi)",
         },
+        hsx: {
+          raw: "(max-height: 320px)"
+        }
       },
       animation: {
         breathe: "breathe 1s infinite",
