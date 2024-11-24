@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import classNames from "clsx";
 import { onTouch } from "@/utils/touch";
 import { fx } from "@/utils/sound";
@@ -7,7 +7,7 @@ import Container from "@/Container";
 import { vibrate } from "@/utils/vibrate";
 import { speak } from "@/utils/speak";
 import { useRestart } from "@/utils/restart";
-import { type Levels, ALL_WORDS, PHONICS_LETTERS, WORDS } from "./ReadWords.const";
+import { type Levels, ALL_WORDS, WORDS } from "./ReadWords.const";
 import { getNextCharacter } from "@/utils/characters";
 import Next from "@/Next";
 import { useConfetti } from "@/Confetti";
@@ -47,11 +47,12 @@ export const ReadWords = ({ getWordSet = (level) => level ? WORDS[level] : ALL_W
         {goal.value}
       </Header>
       <div className="flex flex-col items-center justify-center h-[90%] space-y-8 hsx:space-y-2">
-        <div className="flex flex-wrap justify-center content-center items-center gap-4 landscape:px-[10%]">
+        <div className="flex flex-wrap justify-center content-center items-center portrait:gap-2 landscape:gap-4 landscape:px-[10%]">
           {allLetters.map((letter, index) => (
             <Readable
               key={index}
               value={letter}
+              character={characters[index]}
               isReady={letters.length >= index}
               onClick={() => {
                 if (letters.length === index) {
@@ -89,18 +90,54 @@ export const ReadWords = ({ getWordSet = (level) => level ? WORDS[level] : ALL_W
 
 export default ReadWords;
 
+function useTwin() {
+  const index = useRef(0);
+  const lastTwin = useRef<string | undefined>(undefined);
+  const next = (character: string, isTwin: boolean) => {
+    if (isTwin) {
+      if (lastTwin.current && lastTwin.current !== character) {
+        index.current = index.current + 1;
+      } else if (lastTwin.current === character) {
+        // do nothing
+      } else {
+        index.current = index.current + 1;
+      }
+      lastTwin.current = character;
+    } else {
+      lastTwin.current = undefined;
+      index.current = 0;
+    }
+    console.log({
+      isTwin,
+      index: index.current,
+      lastTwin: lastTwin.current
+    });
+    return index.current;
+  }
+  return {
+    next,
+    index
+  }
+}
+
 function useReadWord(word: {
   value: string;
   pronunciation?: string;
 }) {
   const allLetters = word.value.split("");
-  const characters = (word.pronunciation || word.value).split("")
-    .map(character => PHONICS_LETTERS.find(letter => letter.value.toLowerCase() === character));
+  const charactersWord = (word.pronunciation || word.value);
+  const twin = useTwin();
+  const characters = charactersWord.split("")
+    .map((character, index) => ({
+      value: character,
+      speak: () => character in fx.phonics && fx.phonics[character as keyof typeof fx.phonics]?.play(),
+      twin: twin.next(character, charactersWord[index + 1] === character || charactersWord[index - 1] === character)
+    }));
   const [letters, setLetters] = useState<string[]>([]);
   const next = () => {
     const nextCharacter = characters[letters.length];
     const twinCharacter = characters[letters.length + 1];
-    const isTwin = nextCharacter?.value.toLowerCase() === twinCharacter?.value.toLowerCase();
+    const isTwin = nextCharacter.twin;
     if (nextCharacter) {
       const newLetters = [...letters, nextCharacter.value, ...((isTwin && twinCharacter) ? [twinCharacter.value] : [])];
       setLetters(newLetters);
@@ -125,6 +162,7 @@ function useReadWord(word: {
 
 function Readable({
   value,
+  character,
   className,
   onClick,
   isReady,
@@ -132,6 +170,9 @@ function Readable({
   isChecked
 }: {
   value: string;
+  character: {
+    twin: number;
+  };
   className?: string;
   onClick: () => void;
   isReady: boolean;
@@ -148,12 +189,14 @@ function Readable({
     <button
       {...onTouch(onTap)}
       className={classNames(
-        "w-24 h-24 hsx:w-16 hsx:h-16 hsm:w-20 hsm:h-20 portrait:lg:w-32 portrait:lg:h-32",
-        "text-5xl portrait:lg:text-8xl hsx:text-3xl hsm:text-4xl",
+        "landscape:w-24 landscape:h-24 portrait:w-16 portrait:h-16 landscape:hsx:w-16 landscape:hsx:h-16 landscape:hsm:w-20 landscape:hsm:h-20 portrait:lg:w-32 portrait:lg:h-32",
+        "landscape:text-5xl portrait:text-4xl portrait:lg:text-8xl landscape:hsx:text-3xl landscape:hsm:text-4xl",
         "border-2 border-black rounded text-black",
         "flex items-center justify-center font-bold",
         {
-          "bg-yellow-300": isChecked,
+          "bg-yellow-300": isChecked && !character.twin,
+          "bg-green-400": isChecked && character.twin && character.twin % 2 === 1,
+          "bg-purple-300": isChecked && character.twin && character.twin % 2 === 0,
           "animate-breathe": !isComplete && isChecked,
           "bg-white hover:bg-blue-200": !isChecked,
         },

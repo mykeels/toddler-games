@@ -81,3 +81,6 @@ export const fx = {
     z: audio("./soundfx/phonics/z.mp3"),
   },
 };
+
+export const isVowel = (character: string) =>
+  ["a", "e", "i", "o", "u", "ī", "ō"].includes(character);
