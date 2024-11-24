@@ -48,7 +48,7 @@ export default {
           raw: "(max-height: 320px)"
         },
         hsm: {
-          raw: "not all and (max-height: 320px) and (max-height: 480px)"
+          raw: "(min-height: 321px) and (max-height: 480px)"
         }
       },
       animation: {
