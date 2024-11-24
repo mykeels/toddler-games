@@ -46,6 +46,9 @@ export default {
         },
         hsx: {
           raw: "(max-height: 320px)"
+        },
+        hsm: {
+          raw: "not all and (max-height: 320px) and (max-height: 480px)"
         }
       },
       animation: {

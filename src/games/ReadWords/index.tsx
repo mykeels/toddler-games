@@ -73,7 +73,7 @@ export const ReadWords = ({ getWordSet = () => ALL_WORDS, level = 2 }: ReadWords
           speak(goal.value);
         }}>
           {Confetti}
-          <img src={goal.image} alt={goal.value} className={classNames("w-56 h-56 hsx:w-32 hsx:h-32 border-2 border-white rounded-lg")} />
+          <img src={goal.image} alt={goal.value} className={classNames("w-56 h-56 hsx:w-32 hsx:h-32 hsm:w-32 hsm:h-32 border-2 border-white rounded-lg")} />
         </button>
         <Next
           onNext={restart}
@@ -148,8 +148,8 @@ function Readable({
     <button
       {...onTouch(onTap)}
       className={classNames(
-        "w-24 h-24 hsx:w-16 hsx:h-16 portrait:lg:w-32 portrait:lg:h-32",
-        "text-5xl portrait:lg:text-8xl hsx:text-3xl",
+        "w-24 h-24 hsx:w-16 hsx:h-16 hsm:w-20 hsm:h-20 portrait:lg:w-32 portrait:lg:h-32",
+        "text-5xl portrait:lg:text-8xl hsx:text-3xl hsm:text-4xl",
         "border-2 border-black rounded text-black",
         "flex items-center justify-center font-bold",
         {
