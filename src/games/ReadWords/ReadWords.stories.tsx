@@ -5,6 +5,12 @@ export default {
   component: ReadWords,
 };
 
-export const Level2 = () => <ReadWords level={2} />;
+export const AllWords = () => <ReadWords />;
 
-export const Level3 = () => <ReadWords level={3} />;
+export const Level2Letters = () => <ReadWords level={2} />;
+
+export const Level3Letters = () => <ReadWords level={3} />;
+
+export const Level4Letters = () => <ReadWords level={4} />;
+
+export const Level5Letters = () => <ReadWords level={5} />;

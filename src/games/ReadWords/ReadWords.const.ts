@@ -1,5 +1,11 @@
 import { fx } from "@/utils/sound";
 
+/**
+ * In pronunciations,
+ * The phonics sound "oh" is represented as "ō"
+ * The phonics sound "ee" is represented as "ī"
+ */
+
 export const PHONICS_LETTERS = [
   {
     value: "a",
@@ -36,6 +42,10 @@ export const PHONICS_LETTERS = [
   {
     value: "i",
     speak: () => fx.phonics.i.play(),
+  },
+  {
+    value: "ī",
+    speak: () => fx.phonics["ī"].play(),
   },
   {
     value: "j",
@@ -216,10 +226,37 @@ const FOUR_LETTER_WORDS = [
   },
 ];
 
+const FIVE_LETTER_WORDS = [
+  {
+    value: "apple",
+    pronunciation: "appll",
+    image:
+      "https://plus.unsplash.com/premium_photo-1661322640130-f6a1e2c36653?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    value: "house",
+    pronunciation: "hōuss",
+    image:
+      "https://plus.unsplash.com/premium_photo-1689609950112-d66095626efb?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    value: "happy",
+    image:
+      "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHVvaXJ3Mm0wMHRrdHRhOWxkN3YycnRqaHVkcmIyenBiOGIwaGk1bSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/fPRwBcYd71Lox1v7p2/giphy.webp",
+  },
+  {
+    value: "bikes",
+    pronunciation: "bīkss",
+    image:
+      "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExc3lrNzI4cDA2N3Jobzg0dTd0b2NydTcxcGtqZGIxc2FydXdnNHN4ZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/q9XePYwXATVa53K899/giphy.webp",
+  },
+];
+
 export const WORDS = {
   2: TWO_LETTER_WORDS,
   3: THREE_LETTER_WORDS,
   4: FOUR_LETTER_WORDS,
+  5: FIVE_LETTER_WORDS,
 };
 
 export type Levels = keyof typeof WORDS;
@@ -228,4 +265,5 @@ export const ALL_WORDS = [
   ...TWO_LETTER_WORDS,
   ...THREE_LETTER_WORDS,
   ...FOUR_LETTER_WORDS,
+  ...FIVE_LETTER_WORDS,
 ];

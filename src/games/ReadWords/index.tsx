@@ -13,11 +13,11 @@ import Next from "@/Next";
 import { useConfetti } from "@/Confetti";
 
 type ReadWordsProps = {
-  getWordSet?: (level: Levels) => typeof WORDS[Levels];
+  getWordSet?: (level?: Levels) => typeof WORDS[Levels];
   level?: Levels;
 }
 
-export const ReadWords = ({ getWordSet = () => ALL_WORDS, level = 2 }: ReadWordsProps) => {
+export const ReadWords = ({ getWordSet = (level) => level ? WORDS[level] : ALL_WORDS, level = undefined }: ReadWordsProps) => {
   const { life, restart } = useRestart();
   const goal = useMemo(
     () => getNextCharacter(getWordSet(level)),

@@ -60,6 +60,7 @@ export const fx = {
     g: audio("./soundfx/phonics/g.wav"),
     h: audio("./soundfx/phonics/h.wav"),
     i: audio("./soundfx/phonics/i.wav"),
+    "ī": audio("./soundfx/alphabet/I.wav"),
     j: audio("./soundfx/phonics/j.wav"),
     k: audio("./soundfx/phonics/k.wav"),
     l: audio("./soundfx/phonics/l.wav"),
