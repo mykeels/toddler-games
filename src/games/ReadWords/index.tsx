@@ -189,7 +189,7 @@ function Readable({
     <button
       {...onTouch(onTap)}
       className={classNames(
-        "landscape:w-24 landscape:h-24 portrait:w-16 portrait:h-16 landscape:hsx:w-16 landscape:hsx:h-16 landscape:hsm:w-20 landscape:hsm:h-20 portrait:lg:w-32 portrait:lg:h-32",
+        "portrait:w-[16dvw] portrait:h-[16dvw] landscape:w-[18dvh] landscape:h-[18dvh]",
         "landscape:text-5xl portrait:text-4xl portrait:lg:text-8xl landscape:hsx:text-3xl landscape:hsm:text-4xl",
         "border-2 border-black rounded text-black",
         "flex items-center justify-center font-bold",
