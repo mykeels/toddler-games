@@ -250,6 +250,22 @@ const FIVE_LETTER_WORDS = [
     image:
       "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExc3lrNzI4cDA2N3Jobzg0dTd0b2NydTcxcGtqZGIxc2FydXdnNHN4ZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/q9XePYwXATVa53K899/giphy.webp",
   },
+  {
+    value: "quick",
+    pronunciation: "kuikk",
+    image:
+      "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExeHdydXIwcjRoc2RueGlub2duanRsYnVwNmpzaGpxNWRobmZndXdveiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/VIEsDrchn6SQ62MoVc/giphy.webp",
+  },
+  {
+    value: "bison",
+    pronunciation: "bīsnn",
+    image: "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMHo3MGR2NzF0YmNwM2I2aXJtdGRlbWhhbXJ6eW5xMTRqMzZvYm44NCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/2NXKAc1o9w2rW1uZE6/giphy.webp"
+  },
+  {
+    value: "nurse",
+    pronunciation: "norss",
+    image: "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExMXJwOWQ1aTB2ZXdsajN1bDZheHltbmltanJsdnRuMmxwOTFwb2o3biZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/6R27TTGsfTbRRLKanA/giphy.webp"
+  }
 ];
 
 export const WORDS = {
