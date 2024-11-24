@@ -191,12 +191,13 @@ function Readable({
       className={classNames(
         "portrait:w-[16dvw] portrait:h-[16dvw] landscape:w-[18dvh] landscape:h-[18dvh]",
         "landscape:text-5xl portrait:text-4xl portrait:lg:text-8xl landscape:hsx:text-3xl landscape:hsm:text-4xl",
-        "border-2 border-black rounded text-black",
+        "border-4 rounded text-black",
         "flex items-center justify-center font-bold",
         {
-          "bg-yellow-300": isChecked && !character.twin,
-          "bg-green-400": isChecked && character.twin && character.twin % 2 === 1,
-          "bg-purple-300": isChecked && character.twin && character.twin % 2 === 0,
+          "bg-yellow-300": isChecked,
+          "border-black": isChecked && !character.twin,
+          "border-green-700 text-green-700": isChecked && character.twin && character.twin % 2 === 1,
+          "border-purple-700 text-purple-700": isChecked && character.twin && character.twin % 2 === 0,
           "animate-breathe": !isComplete && isChecked,
           "bg-white hover:bg-blue-200": !isChecked,
         },
