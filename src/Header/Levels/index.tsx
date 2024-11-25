@@ -6,9 +6,10 @@ import { createContext, useContext, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { StoryFn } from "@storybook/react";
 import { useDebouncedCallback } from 'use-debounce';
+import { useClickOutside } from "../useClickOutside";
 
 export const Levels = () => {
-    const { isOpen, toggleMenu } = useToggleMenu({ open: false });
+    const { isOpen, toggleMenu, closeMenu } = useToggleMenu({ open: false });
     const { level, setLevel } = useContext(LevelContext);
     const titleRef = useRef<HTMLHeadingElement>(null);
     const updateTitle = (value: number) => {
@@ -16,7 +17,8 @@ export const Levels = () => {
             titleRef.current.textContent = `Level ${value}`;
         }
     }
-    return <div className="flex flex-row gap-2 relative">
+    const ref = useClickOutside(closeMenu);
+    return <div className="flex flex-row gap-2 relative" ref={ref}>
         <button {...onTouch(toggleMenu)}>
             <img src="./icons/ladder-white.svg" alt="ladder" className={
                 clsx("transform duration-300", {
@@ -37,7 +39,7 @@ export const Levels = () => {
                     duration: 0.2,
                     ease: "easeOut"
                 }}
-                className="absolute right-0 top-[-50%] w-48 bg-brand-primary p-1 mr-8 rounded flex flex-col gap-2"
+                className="absolute right-0 top-[-50%] w-48 bg-brand-accent-pink p-1 mr-8 flex flex-col gap-2 shadow border border-white rounded"
             >
                 <h4 className="text-white text-sm text-center" ref={titleRef}>{`Level ${level}`}</h4>
                 <input
