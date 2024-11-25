@@ -2,6 +2,8 @@ import "../src/index.css";
 
 import type { Preview } from "@storybook/react";
 import { withRouter } from "../src/utils/withRouter";
+import { withLevels } from "../src/Header/Levels";
+
 const preview: Preview = {
   parameters: {
     controls: {
@@ -11,7 +13,7 @@ const preview: Preview = {
       },
     },
   },
-  decorators: [withRouter],
+  decorators: [withRouter, withLevels],
 };
 
 export default preview;
