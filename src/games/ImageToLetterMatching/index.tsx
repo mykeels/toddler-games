@@ -8,6 +8,7 @@ import Card from "@/Card";
 import Next from "@/Next";
 import { speak } from "@/utils/speak";
 import { useConfetti } from "@/Confetti";
+import { useLevel } from "@/Header/Levels";
 
 const IMAGES = [...ANIMALS, ...FRUITS];
 
@@ -18,7 +19,7 @@ export type ImageToLetterMatchingProps = {
 
 export const ImageToLetterMatching = ({
   transformLetter = (letter) => letter,
-  level = 1,
+  ...props
 }: ImageToLetterMatchingProps) => {
   const [gameIndex, setGameIndex] = useState(0);
   const [state, setState] = useState<"playing" | "interlude">("playing");
@@ -27,11 +28,13 @@ export const ImageToLetterMatching = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [gameIndex]
   );
+  const level = useLevel();
+  const noOfOptions = (props.level ?? level) + 1;
   const letters = useMemo(
     () =>
-      shuffleArray(getFirstCharOptions(LETTERS, image.name, level + 1)).map(transformLetter),
+      shuffleArray(getFirstCharOptions(LETTERS, image.name, noOfOptions)).map(transformLetter),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [image.name]
+    [image.name, noOfOptions]
   );
   const goal = transformLetter(image.name[0]);
   const [selected, setSelected] = useState<string | null>(null);
@@ -107,7 +110,7 @@ export const ImageToLetterMatching = ({
       </Header>
       <div className="flex flex-col items-center justify-center h-[90%] space-y-8">
         <button className="text-center py-8 text-9xl font-bold" onClick={() => speak(image.name)}>{image.value}</button>
-        <div data-name="pair" className="flex justify-center space-x-8">
+        <div data-name="pair" className="flex justify-center flex-wrap gap-4">
           {
             letters.map(letter => <Card
               key={letter}
