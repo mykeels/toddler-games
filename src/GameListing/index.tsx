@@ -215,7 +215,7 @@ export const Home = () => {
   return (
     <Container
       ref={ref as React.LegacyRef<HTMLDivElement>}>
-      <Header title={listing.title} onRestart={() => { }} Left={<Header.BackToHome />} Right={null}>
+      <Header title={listing.title} onRestart={undefined} Left={<Header.BackToHome />} noLevels>
         {isListingAtRoot ? <h1 className="text-4xl font-bold font-lily">Let’s Play</h1> : null}
       </Header>
       <div
