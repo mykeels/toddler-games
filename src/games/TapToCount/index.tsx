@@ -37,7 +37,7 @@ const TapToCount = ({ ...props }: { level?: number }) => {
   };
   function getNextItems(level: number) {
     const items = [];
-    const noOfItems = Math.floor(Math.random() * (level * 2)) + 2;
+    const noOfItems = Math.max(Math.floor(Math.random() * (level * 2)) + 2, level);
     for (let i = 0; i < noOfItems; i++) {
       items.push({
         target: 1,
@@ -95,14 +95,14 @@ const TapToCount = ({ ...props }: { level?: number }) => {
       ref={ref as React.LegacyRef<HTMLDivElement>}
     >
       <Header title="Tap to Count" onRestart={reset}></Header>
-      <div className="flex flex-col portrait:gap-8 landscape:gap-1 items-center justify-center h-[90%]">
+      <div className="flex flex-col portrait:gap-8 landscape:gap-4 landscape:hsx:gap-1 items-center justify-center h-[90%]">
         <h1
-          className={classNames("font-bold portrait:text-6xl landscape:text-4xl")}
+          className={classNames("font-bold text-6xl landscape:hsx:text-4xl")}
         >
           {count ? count : ""}
           {Confetti}
         </h1>
-        <div className="flex flex-wrap items-center justify-center gap-6">
+        <div className="flex flex-wrap items-center justify-center gap-4">
           {items.map((item) =>
             Array(item.target)
               .fill("")
