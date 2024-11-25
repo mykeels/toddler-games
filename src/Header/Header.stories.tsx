@@ -15,6 +15,9 @@ export const WithMenu = () => <Header title="Header" onRestart={() => { }} Right
         <Header.Restart onRestart={() => { }} />
     </Menu.Item>
     <Menu.Item>
+        <Header.Levels />
+    </Menu.Item>
+    <Menu.Item>
         <Header.BackToHome />
     </Menu.Item>
 </Header.Menu>} />;

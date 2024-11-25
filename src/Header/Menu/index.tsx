@@ -1,7 +1,8 @@
 import React from "react";
 import { onTouch } from "@/utils/touch";
-import { useState } from "react";
 import { motion } from "framer-motion";
+import { useToggleMenu } from "../useToggleMenu";
+import { useClickOutside } from "../useClickOutside";
 export type MenuProps = {
     open?: boolean;
     children?: React.ReactNode;
@@ -12,8 +13,8 @@ export const Menu = ({
     children
 }: MenuProps) => {
     const { isOpen, toggleMenu } = useToggleMenu({ open });
-
-    return <div className="flex flex-col items-center justify-center relative bg-brand-primary">
+    const ref = useClickOutside(toggleMenu);
+    return <div className="flex flex-col items-center justify-center relative bg-brand-primary" ref={ref}>
         <button {...onTouch(toggleMenu)}>
             <motion.div
                 animate={{
@@ -46,7 +47,7 @@ export const Menu = ({
             >
                 {React.Children.map(children, (child) => {
                     if (React.isValidElement(child) && child.type === Menu.Item) {
-                        return <li className="flex">
+                        return <li className="flex hover:scale-110 transition-all duration-300">
                             {child}
                         </li>
                     }
@@ -65,13 +66,3 @@ const Item = ({
 }
 
 Menu.Item = Item;
-
-export const useToggleMenu = ({
-    open
-}: {
-    open?: boolean;
-}) => {
-    const [isOpen, setIsOpen] = useState(open ?? false);
-    const toggleMenu = () => setIsOpen(!isOpen);
-    return { isOpen, toggleMenu };
-}

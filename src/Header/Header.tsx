@@ -2,6 +2,7 @@ import { onTouch } from "@/utils/touch";
 import { useNavigateToRoot } from "@/utils/useNavigateToRoot";
 import { Link } from "@tanstack/react-router";
 import { Menu } from "./Menu";
+import { Levels } from "./Levels";
 
 type HeaderProps = {
   title?: string;
@@ -54,3 +55,4 @@ Header.BackToMenu = BackToMenu;
 Header.BackToHome = BackToHome;
 Header.Restart = Restart;
 Header.Menu = Menu;
+Header.Levels = Levels;
