@@ -9,17 +9,20 @@ import Header from "@/Header/Header";
 import Next from "@/Next";
 import { speak } from "@/utils/speak";
 import { useConfetti } from "@/Confetti";
+import { useLevel } from "@/Header/Levels";
 
 const COUNTABLES = [...FRUITS, ...ANIMALS];
 
-const TapToCount = () => {
+const TapToCount = ({ ...props }: { level?: number }) => {
   const [gameId, setGameId] = useState(0);
+  const level = useLevel();
+  const noOfItemsToCount = (props.level ?? level) + 1;
   const [items, setItems] = useState<
     {
       target: number;
       text: string;
     }[]
-  >(getNextItems());
+  >(getNextItems(noOfItemsToCount));
   const { ref } = useHorizontalSwipe({
     onSwipe: () => reset()
   });
@@ -32,12 +35,12 @@ const TapToCount = () => {
       navigator.vibrate(200);
     }
   };
-  function getNextItems() {
-    const noOfItems = Math.floor(Math.random() * 2) + 1;
+  function getNextItems(level: number) {
     const items = [];
+    const noOfItems = Math.floor(Math.random() * (level * 2)) + 2;
     for (let i = 0; i < noOfItems; i++) {
       items.push({
-        target: Math.floor(Math.random() * 2) + 2,
+        target: 1,
         text: COUNTABLES[Math.floor(Math.random() * COUNTABLES.length)].value,
       });
     }
@@ -45,12 +48,15 @@ const TapToCount = () => {
   }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   function reset() {
-    setItems(getNextItems());
+    setItems(getNextItems(noOfItemsToCount));
     setCount(0);
     setGameId(gameId + 1);
     fx.correct.play();
   }
 
+  useEffect(() => {
+    setItems(getNextItems(noOfItemsToCount));
+  }, [noOfItemsToCount]);
   useEffect(() => {
     const controller = new AbortController();
     const handleKeyPress = (event: KeyboardEvent) => {
@@ -89,12 +95,9 @@ const TapToCount = () => {
       ref={ref as React.LegacyRef<HTMLDivElement>}
     >
       <Header title="Tap to Count" onRestart={reset}></Header>
-      <div className="flex flex-col space-y-8 items-center justify-center h-[90%]">
+      <div className="flex flex-col portrait:gap-8 landscape:gap-1 items-center justify-center h-[90%]">
         <h1
-          className={classNames("font-bold py-8", {
-            "text-4xl": count === 0,
-            "text-8xl": count > 0,
-          })}
+          className={classNames("font-bold portrait:text-6xl landscape:text-4xl")}
         >
           {count ? count : ""}
           {Confetti}
@@ -142,7 +145,8 @@ function Countable({
     <button
       {...onTouch(onTap)}
       className={classNames(
-        "w-24 h-24 lg:w-32 lg:h-32 border-2 border-black rounded",
+        "portrait:w-[16dvw] portrait:h-[16dvw] landscape:w-[18dvh] landscape:h-[18dvh]",
+        "border-2 border-black rounded",
         "flex items-center justify-center text-5xl lg:text-9xl font-bold",
         {
           "bg-yellow-300": checked,
