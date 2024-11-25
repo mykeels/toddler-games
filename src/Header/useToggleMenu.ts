@@ -8,5 +8,6 @@ export const useToggleMenu = ({
 }) => {
     const [isOpen, setIsOpen] = useState(open ?? false);
     const toggleMenu = () => setIsOpen(!isOpen);
-    return { isOpen, toggleMenu };
+    const closeMenu = () => setIsOpen(false);
+    return { isOpen, toggleMenu, closeMenu };
 }

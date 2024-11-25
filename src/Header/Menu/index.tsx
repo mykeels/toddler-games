@@ -12,8 +12,8 @@ export const Menu = ({
     open,
     children
 }: MenuProps) => {
-    const { isOpen, toggleMenu } = useToggleMenu({ open });
-    const ref = useClickOutside(toggleMenu);
+    const { isOpen, toggleMenu, closeMenu } = useToggleMenu({ open });
+    const ref = useClickOutside(closeMenu);
     return <div className="flex flex-col items-center justify-center relative bg-brand-primary print:hidden" ref={ref}>
         <button {...onTouch(toggleMenu)}>
             <motion.div

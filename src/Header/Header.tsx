@@ -33,9 +33,9 @@ export const Header = ({ title, children, Left, ...props }: HeaderProps) => {
             <Header.Levels />
           </Menu.Item> : null
         }
-        <Menu.Item>{
-          ("Right" in props) ? props.Right : null
-        }</Menu.Item>
+        {
+          ("Right" in props) ? <Menu.Item>{props.Right}</Menu.Item> : null
+        }
         <Menu.Item>
           <Header.BackToHome />
         </Menu.Item>
