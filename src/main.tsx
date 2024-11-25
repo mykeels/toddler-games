@@ -11,6 +11,7 @@ import { routeTree } from "./routeTree.gen";
 
 import "./index.css";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { LevelContextProvider } from "./Header/Levels";
 
 // Create a new router instance
 const router = createRouter({ routeTree, history: createHashHistory() });
@@ -37,7 +38,9 @@ if (!rootElement.innerHTML) {
   root.render(
     <RenderMode>
       <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
+        <LevelContextProvider>
+          <RouterProvider router={router} />
+        </LevelContextProvider>
       </QueryClientProvider>
     </RenderMode>
   );
