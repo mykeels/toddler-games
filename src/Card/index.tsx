@@ -30,7 +30,8 @@ export function Card({
                     }
                 })}
                 className={classNames(
-                    "cursor-pointer w-24 h-24 border-2 border-black flex items-center justify-center text-4xl rounded text-black",
+                    "portrait:w-[16dvw] portrait:h-[16dvw] landscape:w-[18dvh] landscape:h-[18dvh]",
+                    "cursor-pointer border-2 border-black flex items-center justify-center text-4xl rounded text-black",
                     {
                         "group-has-[input:checked]:bg-brand-accent-green": isCorrect,
                         "group-has-[input:checked]:bg-brand-accent-orange group-has-[input:checked]:animate-vibrate": !isCorrect,

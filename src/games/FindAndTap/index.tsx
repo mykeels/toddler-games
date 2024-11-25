@@ -10,6 +10,7 @@ import Card from "@/Card";
 import Next from "@/Next";
 import { speak } from "@/utils/speak";
 import { useConfetti } from "@/Confetti";
+import { useLevel } from "@/Header/Levels";
 
 export type FindAndTapProps = {
   getCharacterSet?: (set: typeof CHARACTERS) => Character[];
@@ -18,13 +19,19 @@ export type FindAndTapProps = {
 
 export function FindAndTap({
   getCharacterSet = (set: typeof CHARACTERS) => set.uppercaseLetters,
-  level = 1,
+  ...props
 }: FindAndTapProps) {
   const characters = getCharacterSet(CHARACTERS);
   const [gameIndex, setGameIndex] = useState(0);
   const [state, setState] = useState<"playing" | "interlude">("playing");
-  const getNextPair = () => getOptions(characters, level + 1);
+  const level = useLevel();
+  const noOfOptions = (props.level ?? level) + 1;
+  const getNextPair = () => getOptions(characters, noOfOptions);
   const [pair, setPair] = useState<Character[]>(getNextPair());
+  useEffect(() => {
+    setPair(getNextPair());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [noOfOptions]);
   const goal = useMemo(
     () => pair[Math.floor(Math.random() * pair.length)],
     [pair]
@@ -88,13 +95,13 @@ export function FindAndTap({
   return (
     <Container
       ref={ref as React.LegacyRef<HTMLDivElement>}
-      key={gameIndex}
+      key={`game:${gameIndex}-options:${noOfOptions}`}
     >
       <Header title="Find and Tap" onRestart={onNextClick}>
         Tap {goal.value}
       </Header>
       <div className="flex flex-col items-center justify-center h-[90%] space-y-16">
-        <div data-name="pair" className="flex justify-center space-x-8"
+        <div data-name="pair" className="flex justify-center flex-wrap gap-4"
         >
           {
             pair.map(character => <Card
