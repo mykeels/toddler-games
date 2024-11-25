@@ -16,16 +16,27 @@ type HeaderProps = {
 
 export const Header = ({ title, children, Left, ...props }: HeaderProps) => {
   return (
-    <h1 className="text-4xl flex flex-row items-center justify-between bg-brand-primary p-2 text-white select-none">
+    <h1 className="text-4xl flex flex-row items-center justify-between bg-brand-primary p-2 text-white select-none z-10">
       {
         Left ? Left : <Header.BackToMenu title={title} />
       }
       <span className="text-center text-2xl md:text-4xl">{children ?? title}</span>
-      {
-        ("Right" in props)
-          ? props.Right === null ? <span></span> : props.Right
-          : ("onRestart" in props) ? <Header.Restart onRestart={props.onRestart} /> : null
-      }
+      <Header.Menu>
+        {
+          ("onRestart" in props) ? <Menu.Item>
+            <Header.Restart onRestart={props.onRestart} />
+          </Menu.Item> : null
+        }
+        <Menu.Item>
+          <Header.Levels />
+        </Menu.Item>
+        <Menu.Item>{
+          ("Right" in props) ? props.Right : null
+        }</Menu.Item>
+        <Menu.Item>
+          <Header.BackToHome />
+        </Menu.Item>
+      </Header.Menu>
     </h1>
   );
 };

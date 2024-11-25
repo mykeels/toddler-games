@@ -14,7 +14,7 @@ export const Menu = ({
 }: MenuProps) => {
     const { isOpen, toggleMenu } = useToggleMenu({ open });
     const ref = useClickOutside(toggleMenu);
-    return <div className="flex flex-col items-center justify-center relative bg-brand-primary" ref={ref}>
+    return <div className="flex flex-col items-center justify-center relative bg-brand-primary print:hidden" ref={ref}>
         <button {...onTouch(toggleMenu)}>
             <motion.div
                 animate={{
