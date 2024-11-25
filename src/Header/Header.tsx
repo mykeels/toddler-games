@@ -8,6 +8,7 @@ type HeaderProps = {
   title?: string;
   children?: React.ReactNode;
   Left?: React.ReactNode;
+  noLevels?: boolean;
 } & ({
   onRestart: () => void;
 } | {
@@ -27,9 +28,11 @@ export const Header = ({ title, children, Left, ...props }: HeaderProps) => {
             <Header.Restart onRestart={props.onRestart} />
           </Menu.Item> : null
         }
-        <Menu.Item>
-          <Header.Levels />
-        </Menu.Item>
+        {
+          !props.noLevels ? <Menu.Item>
+            <Header.Levels />
+          </Menu.Item> : null
+        }
         <Menu.Item>{
           ("Right" in props) ? props.Right : null
         }</Menu.Item>

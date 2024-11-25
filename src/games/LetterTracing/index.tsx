@@ -30,7 +30,7 @@ export const LetterTracing = ({ name, Letter = Across }: LetterTracingProps) => 
 
   return (
     <div className="flex flex-col h-full">
-      <Header title="Can you trace this?" onRestart={restart} Right={
+      <Header title="Can you trace this?" onRestart={restart} noLevels Right={
         <button onClick={() => {
           window.print();
         }} className="print:hidden">
