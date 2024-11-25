@@ -44,7 +44,7 @@ export const FreeDraw = () => {
 
   return (
     <div className="flex flex-col h-full">
-      <Header onRestart={restart}>Free Draw</Header>
+      <Header onRestart={restart} noLevels>Free Draw</Header>
       <div
         className="flex flex-col space-y-4 items-center justify-center grow"
         ref={containerRef}
