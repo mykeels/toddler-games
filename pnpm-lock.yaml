@@ -65,6 +65,9 @@ dependencies:
   tailwindcss-animate:
     specifier: ^1.0.7
     version: 1.0.7(tailwindcss@3.4.11)
+  use-debounce:
+    specifier: ^10.0.4
+    version: 10.0.4(react@18.3.1)
   use-sound:
     specifier: ^4.0.3
     version: 4.0.3(react@18.3.1)
@@ -8738,6 +8741,15 @@ packages:
       '@types/react': 18.3.5
       react: 18.3.1
       tslib: 2.7.0
+    dev: false
+
+  /use-debounce@10.0.4(react@18.3.1):
+    resolution: {integrity: sha512-6Cf7Yr7Wk7Kdv77nnJMf6de4HuDE4dTxKij+RqE9rufDsI6zsbjyAxcH5y2ueJCQAnfgKbzXbZHYlkFwmBlWkw==}
+    engines: {node: '>= 16.0.0'}
+    peerDependencies:
+      react: '*'
+    dependencies:
+      react: 18.3.1
     dev: false
 
   /use-sidecar@1.1.2(@types/react@18.3.5)(react@18.3.1):
