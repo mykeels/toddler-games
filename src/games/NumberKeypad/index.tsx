@@ -25,7 +25,7 @@ export const NumberKeypad = () => {
 
   return (
     <Container>
-      <Header onRestart={reset}>
+      <Header onRestart={reset} noLevels>
         {recipient || "#"}
       </Header>
       <div className="flex flex-wrap justify-center content-center items-center gap-4 landscape:px-[10%] h-[90%]">
