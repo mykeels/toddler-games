@@ -34,6 +34,16 @@ export default {
             purple: "#803EC2",
           },
         },
+        sidebar: {
+          DEFAULT: "hsl(var(--sidebar-background))",
+          foreground: "hsl(var(--sidebar-foreground))",
+          primary: "hsl(var(--sidebar-primary))",
+          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
+          accent: "hsl(var(--sidebar-accent))",
+          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
+          border: "hsl(var(--sidebar-border))",
+          ring: "hsl(var(--sidebar-ring))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -45,16 +55,16 @@ export default {
           raw: "@media not all and (-webkit-min-device-pixel-ratio: 2), (min-device-pixel-ratio: 2), (min-resolution: 192dpi)",
         },
         hsx: {
-          raw: "(max-height: 320px)"
+          raw: "(max-height: 320px)",
         },
         hsm: {
-          raw: "(min-height: 321px) and (max-height: 480px)"
-        }
+          raw: "(min-height: 321px) and (max-height: 480px)",
+        },
       },
       animation: {
         breathe: "breathe 1s infinite",
-        vibrate: "vibrate 0.4s linear"
-      }
+        vibrate: "vibrate 0.4s linear",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],
