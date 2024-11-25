@@ -21,7 +21,7 @@ type ReadWordsProps = {
 export const ReadWords = ({ getWordSet = (level) => level ? WORDS[level] : ALL_WORDS, ...props }: ReadWordsProps) => {
   const { life, restart } = useRestart();
   const level = useLevel();
-  const noOfWordCharacters = Math.min((Number(props.level) || level) + 1, 5) as Levels;
+  const noOfWordCharacters = Math.min((Number(props.level) || level) + 1, 6) as Levels;
   const goal = useMemo(
     () => getNextCharacter(getWordSet(noOfWordCharacters)),
     // eslint-disable-next-line react-hooks/exhaustive-deps

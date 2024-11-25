@@ -142,13 +142,36 @@ const FIVE_LETTER_WORDS = [
   {
     value: "bison",
     pronunciation: "bīsnn",
-    image: "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMHo3MGR2NzF0YmNwM2I2aXJtdGRlbWhhbXJ6eW5xMTRqMzZvYm44NCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/2NXKAc1o9w2rW1uZE6/giphy.webp"
+    image:
+      "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMHo3MGR2NzF0YmNwM2I2aXJtdGRlbWhhbXJ6eW5xMTRqMzZvYm44NCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/2NXKAc1o9w2rW1uZE6/giphy.webp",
   },
   {
     value: "nurse",
     pronunciation: "norss",
-    image: "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExMXJwOWQ1aTB2ZXdsajN1bDZheHltbmltanJsdnRuMmxwOTFwb2o3biZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/6R27TTGsfTbRRLKanA/giphy.webp"
-  }
+    image:
+      "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExMXJwOWQ1aTB2ZXdsajN1bDZheHltbmltanJsdnRuMmxwOTFwb2o3biZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/6R27TTGsfTbRRLKanA/giphy.webp",
+  },
+];
+
+const SIX_LETTER_WORDS = [
+  {
+    value: "jungle",
+    pronunciation: "jongll",
+    image:
+      "https://plus.unsplash.com/premium_photo-1687428554400-3ebabab7de29?q=80&w=2789&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    value: "banana",
+    pronunciation: "banana",
+    image:
+      "https://images.unsplash.com/photo-1528825871115-3581a5387919?q=80&w=2791&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    value: "bubble",
+    pronunciation: "bobbll",
+    image:
+      "https://images.unsplash.com/photo-1554566490-b43da2d4c8fe?q=80&w=2767&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
 ];
 
 export const WORDS = {
@@ -156,6 +179,7 @@ export const WORDS = {
   3: THREE_LETTER_WORDS,
   4: FOUR_LETTER_WORDS,
   5: FIVE_LETTER_WORDS,
+  6: SIX_LETTER_WORDS
 };
 
 export type Levels = keyof typeof WORDS;
@@ -165,4 +189,5 @@ export const ALL_WORDS = [
   ...THREE_LETTER_WORDS,
   ...FOUR_LETTER_WORDS,
   ...FIVE_LETTER_WORDS,
+  ...SIX_LETTER_WORDS,
 ];
