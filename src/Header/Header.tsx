@@ -1,6 +1,7 @@
 import { onTouch } from "@/utils/touch";
 import { useNavigateToRoot } from "@/utils/useNavigateToRoot";
 import { Link } from "@tanstack/react-router";
+import { Menu } from "./Menu";
 
 type HeaderProps = {
   title?: string;
@@ -14,15 +15,15 @@ type HeaderProps = {
 
 export const Header = ({ title, children, Left, ...props }: HeaderProps) => {
   return (
-    <h1 className="text-4xl flex flex-row items-center justify-between bg-brand-primary p-2 text-white">
+    <h1 className="text-4xl flex flex-row items-center justify-between bg-brand-primary p-2 text-white select-none">
       {
         Left ? Left : <Header.BackToMenu title={title} />
       }
       <span className="text-center text-2xl md:text-4xl">{children ?? title}</span>
       {
-        ("Right" in props) 
-        ? props.Right === null ? <span></span> : props.Right 
-        : ("onRestart" in props) ? <Header.Restart onRestart={props.onRestart} /> : null
+        ("Right" in props)
+          ? props.Right === null ? <span></span> : props.Right
+          : ("onRestart" in props) ? <Header.Restart onRestart={props.onRestart} /> : null
       }
     </h1>
   );
@@ -52,3 +53,4 @@ const Restart = ({ onRestart }: { onRestart: () => void }) => {
 Header.BackToMenu = BackToMenu;
 Header.BackToHome = BackToHome;
 Header.Restart = Restart;
+Header.Menu = Menu;
