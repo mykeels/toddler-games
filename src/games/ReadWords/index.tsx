@@ -11,18 +11,21 @@ import { type Levels, ALL_WORDS, WORDS } from "./ReadWords.const";
 import { getNextCharacter } from "@/utils/characters";
 import Next from "@/Next";
 import { useConfetti } from "@/Confetti";
+import { useLevel } from "@/Header/Levels";
 
 type ReadWordsProps = {
   getWordSet?: (level?: Levels) => typeof WORDS[Levels];
   level?: Levels;
 }
 
-export const ReadWords = ({ getWordSet = (level) => level ? WORDS[level] : ALL_WORDS, level = undefined }: ReadWordsProps) => {
+export const ReadWords = ({ getWordSet = (level) => level ? WORDS[level] : ALL_WORDS, ...props }: ReadWordsProps) => {
   const { life, restart } = useRestart();
+  const level = useLevel();
+  const noOfWordCharacters = Math.min((Number(props.level) || level) + 1, 5) as Levels;
   const goal = useMemo(
-    () => getNextCharacter(getWordSet(level)),
+    () => getNextCharacter(getWordSet(noOfWordCharacters)),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [life]
+    [life, noOfWordCharacters]
   );
   const { next, letters, allLetters, characters } = useReadWord(goal);
   const [showConfetti, Confetti] = useConfetti();
