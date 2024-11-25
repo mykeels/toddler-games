@@ -23,7 +23,7 @@ export const Header = ({ title, children, Left, ...props }: HeaderProps) => {
       <span className="text-center text-2xl md:text-4xl">{children ?? title}</span>
       <Header.Menu>
         {
-          ("onRestart" in props) ? <Menu.Item>
+          ("onRestart" in props && props.onRestart) ? <Menu.Item>
             <Header.Restart onRestart={props.onRestart} />
           </Menu.Item> : null
         }
