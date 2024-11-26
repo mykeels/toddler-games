@@ -6,6 +6,7 @@ export const fetchLatestVersion = async () => {
       }
     });
   }
+  await new Promise(resolve => setTimeout(resolve, 1000));
 };
 
 export const isNewVersionAvailable = async () => {
