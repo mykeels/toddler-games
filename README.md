@@ -2,6 +2,8 @@
 
 This codebase represents a collection of educational games for toddlers called "Toddler Games". It's a React-based web application that includes several interactive games designed to help toddlers learn various concepts. 
 
+![Toddler Games](./public/screenshots/game-listing.png)
+
 Here's some games included:
 
 - [Find and Tap](./src/FindAndTap/README.md): A game where toddlers identify and tap on specific letters, numbers, or objects on the screen.
@@ -15,6 +17,8 @@ Here's some games included:
 - [Letter Tracing](./src/LetterTracing/README.md): An interactive game that helps toddlers practice writing letters by tracing them on the screen with their finger or a stylus.
 
 - [Number Matching](./src/NumberMatching/README.md): A game where toddlers match numbers with the corresponding quantity of objects, reinforcing number recognition and counting skills.
+
+- [Read Words](./src/ReadWords/README.md): A game where toddlers read words by tapping on the corresponding letter, helping them learn to associate letters with sounds.
 
 - [Phonics Flashcards](./src/PhonicsFlashcards/README.md): Digital flashcards that display letters or simple words, encouraging toddlers to practice phonics by sounding out the letters and words.
 
