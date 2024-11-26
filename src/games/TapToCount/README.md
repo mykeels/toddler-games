@@ -2,7 +2,13 @@
 
 An interactive game that presents various objects for toddlers to count by tapping, helping them learn numbers and basic addition.
 
-## How to play
+![Tap to Count](../../../public/screenshots/tap-to-count.png)
+
+![Tap to Count with 3 cards tapped](../../../public/screenshots/tap-to-count-2.png)
+
+![Tap to Count with all cards tapped](../../../public/screenshots/tap-to-count-3.png)
+
+## Gameplay
 
 1. The game will display a number of objects on the screen.
 2. Tap the screen to count the objects.
