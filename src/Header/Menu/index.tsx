@@ -1,5 +1,4 @@
 import React from "react";
-import { onTouch } from "@/utils/touch";
 import { motion } from "framer-motion";
 import { useToggleMenu } from "../useToggleMenu";
 import { useClickOutside } from "../useClickOutside";
@@ -15,7 +14,7 @@ export const Menu = ({
     const { isOpen, toggleMenu, closeMenu } = useToggleMenu({ open });
     const ref = useClickOutside(closeMenu);
     return <div className="flex flex-col items-center justify-center relative bg-brand-primary shadow print:hidden" ref={ref}>
-        <button {...onTouch(toggleMenu)}>
+        <button onClick={toggleMenu}>
             <motion.div
                 animate={{
                     rotate: isOpen ? 180 : 0,

@@ -1,7 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 import clsx from "clsx";
 import { useToggleMenu } from "../useToggleMenu";
-import { onTouch } from "@/utils/touch";
 import { createContext, useContext, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { StoryFn } from "@storybook/react";
@@ -19,7 +18,7 @@ export const Levels = () => {
     }
     const ref = useClickOutside(closeMenu);
     return <div className="flex flex-row gap-2 relative" ref={ref}>
-        <button {...onTouch(toggleMenu)}>
+        <button onClick={toggleMenu}>
             <img src="./icons/ladder-white.svg" alt="ladder" className={
                 clsx("transform duration-300", {
                     "rotate-[30deg]": isOpen,
