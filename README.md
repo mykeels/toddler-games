@@ -10,15 +10,17 @@ Here's some games included:
 
 - [Tap to Count](./src/CountingGame/README.md): An interactive game that presents various objects for toddlers to count by tapping, helping them learn numbers and basic addition.
 
-- [Free Draw](./src/FreeDraw/README.md): A game where toddlers can draw with different colors. The colors change every 5 seconds.
+- [Free Draw](./src/games/FreeDraw/README.md): A game where toddlers can draw with different colors. The colors change every 5 seconds.
 
-- [Image to Letter Matching](./src/ImageToLetterMatching/README.md): An interactive game that helps toddlers identify letters by matching them with the corresponding image.
+- [Number Keypad](./src/games/NumberKeypad/README.md): A game where toddlers can tap on the numbers 0-10 to hear the corresponding number.
 
-- [Letter Tracing](./src/LetterTracing/README.md): An interactive game that helps toddlers practice writing letters by tracing them on the screen with their finger or a stylus.
+- [Match Image to Letter](./src/games/ImageToLetterMatching/README.md): An interactive game that helps toddlers identify letters by matching them with the corresponding image.
 
-- [Number Matching](./src/NumberMatching/README.md): A game where toddlers match numbers with the corresponding quantity of objects, reinforcing number recognition and counting skills.
+- [Letter Tracing](./src/games/LetterTracing/README.md): An interactive game that helps toddlers practice writing letters by tracing them on the screen with their finger or a stylus.
 
-- [Read Words](./src/ReadWords/README.md): A game where toddlers read words by tapping on the corresponding letter, helping them learn to associate letters with sounds.
+- [Number Matching](./src/games/NumberMatching/README.md): A game where toddlers match numbers with the corresponding quantity of objects, reinforcing number recognition and counting skills.
+
+- [Read Words](./src/games/ReadWords/README.md): A game where toddlers read words by tapping on the corresponding letter, helping them learn to associate letters with sounds.
 
 - [Phonics Flashcards](./src/PhonicsFlashcards/README.md): Digital flashcards that display letters or simple words, encouraging toddlers to practice phonics by sounding out the letters and words.
 
