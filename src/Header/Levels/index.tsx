@@ -38,7 +38,7 @@ export const Levels = () => {
                     duration: 0.2,
                     ease: "easeOut"
                 }}
-                className="absolute right-0 top-[-20%] w-48 bg-brand-accent-pink p-1 mr-10 flex flex-col gap-2 shadow border border-white rounded"
+                className="absolute right-0 top-[-20%] w-48 bg-brand-accent-pink p-1 mr-12 flex flex-col gap-2 shadow border border-white rounded"
             >
                 <h4 className="text-white text-sm text-center" ref={titleRef}>{`Level ${level}`}</h4>
                 <input

@@ -17,7 +17,7 @@ type HeaderProps = {
 
 export const Header = ({ title, children, Left, ...props }: HeaderProps) => {
   return (
-    <h1 className="text-4xl flex flex-row items-center justify-between bg-brand-primary p-2 text-white select-none z-10">
+    <h1 className="text-4xl flex flex-row items-center justify-between bg-brand-primary px-2 text-white select-none z-10">
       {
         Left ? Left : <Header.BackToMenu title={title} />
       }
@@ -47,20 +47,20 @@ export const Header = ({ title, children, Left, ...props }: HeaderProps) => {
 export default Header;
 
 const BackToMenu = ({ title }: { title?: string }) => {
-  return <Link to="/menu" search={{ title }}>
+  return <Link to="/menu" search={{ title }} className="flex p-2 self-stretch">
     <img src="./icons/arrow-left.svg" alt="back" />
   </Link>
 }
 
 const BackToHome = () => {
   const navigateToRoot = useNavigateToRoot();
-  return <Link to="/" onClick={async () => await navigateToRoot()}>
+  return <Link to="/" onClick={async () => await navigateToRoot()} className="flex p-2 self-stretch">
     <img src="./icons/home-white.svg" alt="home" />
   </Link>
 }
 
 const Restart = ({ onRestart, isLoading }: { onRestart: () => void, isLoading?: boolean }) => {
-  return <button onClick={onRestart}>
+  return <button onClick={onRestart} className="flex p-2 self-stretch justify-center">
     <img src="./icons/restart-white.svg" alt="restart" className={clsx("w-10 h-10", {
       "animate-spin": isLoading
     })} />

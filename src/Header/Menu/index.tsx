@@ -45,7 +45,7 @@ export const Menu = ({
                         duration: 0.2,
                         ease: "easeOut"
                     }}
-                    className="absolute top-full left-[-50%] w-[200%] bg-brand-accent-pink text-black p-2 shadow-lg mt-4 rounded 
+                    className="absolute top-full left-[-50%] w-[200%] bg-brand-accent-pink text-black shadow-lg mt-4 rounded 
             flex flex-col items-center justify-center gap-4 border border-t-0 border-white rounded-t-none"
                 >
                     {React.Children.map(children, (child) => {
