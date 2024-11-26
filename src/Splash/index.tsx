@@ -2,16 +2,18 @@ import { Button } from "@/components/ui/button";
 import Header from "@/Header/Header";
 import { fetchLatestVersion } from "@/utils/fetchLatestVersion";
 import { speak } from "@/utils/speak";
+import { useNavigateToRoot } from "@/utils/useNavigateToRoot";
 import { useNavigate } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { useQuery } from "react-query";
 
 export const Splash = () => {
     const navigate = useNavigate();
+    const navigateToRoot = useNavigateToRoot();
     useEffect(() => {
         speak("Welcome! Let's Play!");
     }, []);
-    const { isFetching, isLoading, refetch } = useQuery({
+    const { isFetching, isLoading } = useQuery({
         queryKey: ["latest-version"],
         queryFn: fetchLatestVersion
     });
@@ -35,7 +37,7 @@ export const Splash = () => {
                         <img src="./icons/play-white.svg" alt="play" />
                     </>
                 </Button>
-                <Header.Restart onRestart={refetch} isLoading={isFetching || isLoading} />
+                <Header.Restart onRestart={navigateToRoot} isLoading={isFetching || isLoading} />
             </div>
         </section>
     );
