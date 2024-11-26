@@ -2,6 +2,7 @@ import { useNavigateToRoot } from "@/utils/useNavigateToRoot";
 import { Link } from "@tanstack/react-router";
 import { Menu } from "./Menu";
 import { Levels } from "./Levels";
+import clsx from "clsx";
 
 type HeaderProps = {
   title?: string;
@@ -58,9 +59,11 @@ const BackToHome = () => {
   </Link>
 }
 
-const Restart = ({ onRestart }: { onRestart: () => void }) => {
+const Restart = ({ onRestart, isLoading }: { onRestart: () => void, isLoading?: boolean }) => {
   return <button onClick={onRestart}>
-    <img src="./icons/restart-white.svg" alt="restart" className="w-10 h-10" />
+    <img src="./icons/restart-white.svg" alt="restart" className={clsx("w-10 h-10", {
+      "animate-spin": isLoading
+    })} />
   </button>
 }
 

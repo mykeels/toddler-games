@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Loading } from "@/Loading";
+import Header from "@/Header/Header";
 import { fetchLatestVersion } from "@/utils/fetchLatestVersion";
 import { speak } from "@/utils/speak";
 import { useNavigate } from "@tanstack/react-router";
@@ -11,9 +11,9 @@ export const Splash = () => {
     useEffect(() => {
         speak("Welcome! Let's Play!");
     }, []);
-    const { isLoading } = useQuery({
+    const { isFetching, isLoading, refetch } = useQuery({
         queryKey: ["latest-version"],
-        queryFn: fetchLatestVersion,
+        queryFn: fetchLatestVersion
     });
     return (
         <section
@@ -30,13 +30,12 @@ export const Splash = () => {
                     Let’s Play!
                 </h1>
                 <Button className="text-xl py-6 px-8" onClick={() => navigate({ to: "/menu" })}>
-                    {
-                        isLoading ? <Loading /> : <>
-                            <span>Play</span>
-                            <img src="./icons/play-white.svg" alt="play" />
-                        </>
-                    }
+                    <>
+                        <span>Play</span>
+                        <img src="./icons/play-white.svg" alt="play" />
+                    </>
                 </Button>
+                <Header.Restart onRestart={refetch} isLoading={isFetching || isLoading} />
             </div>
         </section>
     );
