@@ -2,9 +2,9 @@
 
 An interactive game that helps toddlers identify letters by matching them with the corresponding image.
 
-![Does Banana start with L or B?](../../../public/screenshots/image-to-letter-matching-level-1.png)
+[![Does Banana start with L or B?](../../../public/screenshots/image-to-letter-matching-level-1.png)](https://mykeels.github.io/toddler-games/#/image-to-letter-matching)
 
-![Does Rabbit start with D, E, R, or P?](../../../public/screenshots/image-to-letter-matching-level-3.png)
+[![Does Rabbit start with D, E, R, or P?](../../../public/screenshots/image-to-letter-matching-level-3.png)](https://mykeels.github.io/toddler-games/#/image-to-letter-matching)
 
 ## Gameplay
 

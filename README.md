@@ -2,13 +2,15 @@
 
 This codebase represents a collection of educational games for toddlers called "Toddler Games". It's a React-based web application that includes several interactive games designed to help toddlers learn various concepts. 
 
-![Toddler Games](./public/screenshots/game-listing.png)
+Demo: [https://mykeels.github.io/toddler-games/](https://mykeels.github.io/toddler-games/)
+
+[![Toddler Games](./public/screenshots/game-listing.png)](https://mykeels.github.io/toddler-games/)
 
 Here's some games included:
 
-- [Find and Tap](./src/FindAndTap/README.md): A game where toddlers identify and tap on specific letters, numbers, or objects on the screen.
+- [Find and Tap](./src/games/FindAndTap/README.md): A game where toddlers identify and tap on specific letters, numbers, or objects on the screen.
 
-- [Tap to Count](./src/CountingGame/README.md): An interactive game that presents various objects for toddlers to count by tapping, helping them learn numbers and basic addition.
+- [Tap to Count](./src/games/TapToCount/README.md): An interactive game that presents various objects for toddlers to count by tapping, helping them learn numbers and basic addition.
 
 - [Free Draw](./src/games/FreeDraw/README.md): A game where toddlers can draw with different colors. The colors change every 5 seconds.
 
@@ -18,17 +20,17 @@ Here's some games included:
 
 - [Letter Tracing](./src/games/LetterTracing/README.md): An interactive game that helps toddlers practice writing letters by tracing them on the screen with their finger or a stylus.
 
-- [Number Matching](./src/games/NumberMatching/README.md): A game where toddlers match numbers with the corresponding quantity of objects, reinforcing number recognition and counting skills.
-
 - [Read Words](./src/games/ReadWords/README.md): A game where toddlers read words by tapping on the corresponding letter, helping them learn to associate letters with sounds.
 
-- [Phonics Flashcards](./src/PhonicsFlashcards/README.md): Digital flashcards that display letters or simple words, encouraging toddlers to practice phonics by sounding out the letters and words.
+<!-- - [Number Matching](./src/games/NumberMatching/README.md): A game where toddlers match numbers with the corresponding quantity of objects, reinforcing number recognition and counting skills. -->
 
-- [Rhyming Words](./src/RhymingWords/README.md): A game that introduces toddlers to rhyming by presenting a word and asking them to choose the picture that rhymes with it from a set of options.
+<!-- - [Phonics Flashcards](./src/games/PhonicsFlashcards/README.md): Digital flashcards that display letters or simple words, encouraging toddlers to practice phonics by sounding out the letters and words.
 
-- [Alphabet Puzzle](./src/AlphabetPuzzle/README.md): A digital puzzle game where toddlers drag and drop letter pieces to complete the alphabet, enhancing letter recognition and order.
+- [Rhyming Words](./src/games/RhymingWords/README.md): A game that introduces toddlers to rhyming by presenting a word and asking them to choose the picture that rhymes with it from a set of options.
 
-- [Story Time](./src/StoryTime/README.md): A simple, interactive storybook app that highlights words as they are read aloud, encouraging toddlers to follow along and associate written words with their spoken counterparts.
+- [Alphabet Puzzle](./src/games/AlphabetPuzzle/README.md): A digital puzzle game where toddlers drag and drop letter pieces to complete the alphabet, enhancing letter recognition and order.
+
+- [Story Time](./src/games/StoryTime/README.md): A simple, interactive storybook app that highlights words as they are read aloud, encouraging toddlers to follow along and associate written words with their spoken counterparts. -->
 
 
 ## Using the template

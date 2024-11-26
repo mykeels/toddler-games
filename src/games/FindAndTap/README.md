@@ -2,9 +2,9 @@
 
 A game where toddlers find and tap on the correct card.
 
-![Find and Tap](../../../public/screenshots/find-and-tap.png)
+[![Find and Tap](../../../public/screenshots/find-and-tap.png)](https://mykeels.github.io/toddler-games/#/menu?title=Find%20and%20Tap)
 
-![Find and Tap with correct answer](../../../public/screenshots/find-and-tap-filled.png)
+[![Find and Tap with correct answer](../../../public/screenshots/find-and-tap-filled.png)](https://mykeels.github.io/toddler-games/#/menu?title=Find%20and%20Tap)
 
 ## Gameplay
 
