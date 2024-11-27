@@ -28,27 +28,12 @@ export const sequence = (
   return audio;
 };
 
-const digitRate = 1.2;
-
 export const fx = {
   click: audio("./soundfx/click.mp3"),
   correct: audio("./soundfx/correct.mp3"),
   incorrect: audio("./soundfx/incorrect.mp3"),
   home: audio("./soundfx/home.mp3"),
   game: audio("./soundfx/game.mp3"),
-  digits: {
-    one: audio("./soundfx/digits/1.wav", { rate: digitRate }),
-    two: audio("./soundfx/digits/2.wav", { rate: digitRate }),
-    three: audio("./soundfx/digits/3.wav", { rate: digitRate }),
-    four: audio("./soundfx/digits/4.wav", { rate: digitRate }),
-    five: audio("./soundfx/digits/5.wav", { rate: digitRate }),
-    six: audio("./soundfx/digits/6.wav", { rate: digitRate }),
-    seven: audio("./soundfx/digits/7.wav", { rate: digitRate }),
-    eight: audio("./soundfx/digits/8.wav", { rate: digitRate }),
-    nine: audio("./soundfx/digits/9.wav", { rate: digitRate }),
-    zero: audio("./soundfx/digits/0.wav", { rate: digitRate }),
-    ten: audio("./soundfx/digits/10.wav", { rate: digitRate }),
-  },
   tapOn: audio("./soundfx/tap-on.mp3"),
   phonics: {
     a: audio("./soundfx/phonics/a.mp3"),
