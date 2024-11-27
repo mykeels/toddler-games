@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import Draggable from "react-draggable";
+import { DEFAULT_LETTER_COLOR, DEFAULT_LETTER_FONT_SIZE } from "../PlaceTheLetters.consts";
 
 type LetterProps = {
     value: string;
@@ -11,15 +12,20 @@ type LetterProps = {
     };
 };
 
-export const Letter = ({ value, fontSize = "text-9xl", color = "#000", defaultPosition }: LetterProps) => {
+export const Letter = ({ 
+    value, 
+    fontSize = DEFAULT_LETTER_FONT_SIZE, 
+    color = DEFAULT_LETTER_COLOR, 
+    defaultPosition 
+}: LetterProps) => {
     return <Draggable defaultPosition={defaultPosition}>
         <span
             className={clsx(
-                `px-4 font-bold fixed cursor-move draggable-letter`,
-                fontSize,
+                `px-4 font-bold fixed cursor-move draggable-letter text-9xl`,
             )}
             style={{
                 userSelect: 'none',
+                fontSize,
                 color
             }}
         >
