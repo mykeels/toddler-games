@@ -11,16 +11,16 @@ type LetterProps = {
     };
 };
 
-export const Letter = ({ value, fontSize = "text-9xl", color = "text-black", defaultPosition }: LetterProps) => {
+export const Letter = ({ value, fontSize = "text-9xl", color = "#000", defaultPosition }: LetterProps) => {
     return <Draggable defaultPosition={defaultPosition}>
         <span
             className={clsx(
                 `px-4 font-bold fixed cursor-move draggable-letter`,
                 fontSize,
-                color,
             )}
             style={{
                 userSelect: 'none',
+                color
             }}
         >
             <span className="animate-distort absolute">
