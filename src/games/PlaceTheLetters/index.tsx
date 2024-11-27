@@ -3,14 +3,37 @@ import Header from "@/Header/Header";
 import { useLevel } from "@/Header/Levels";
 import Next from "@/Next";
 import { useRestart } from "@/utils/restart";
-import { useEffect, useState } from "react";
+import { Levels, WORDS } from "@/utils/words";
+import { useConfetti } from "@/Confetti";
+import { useEffect, useMemo, useState } from "react";
 import LetterSlot from "./LetterSlot/LetterSlot";
 import Letter from "./Letter/Letter";
+import { speak } from "@/utils/speak";
 
 export const PlaceTheLetters = () => {
   const { life, restart } = useRestart();
   const level = useLevel();
-  const { characters, placeCharacter } = useWord("APPLE");
+  const word = useMemo(() => {
+    const words = WORDS[level + 1 as Levels] || [{
+      value: "NONE"
+    }];
+    const randomIndex = Math.floor(Math.random() * words.length);
+    return words[randomIndex].value;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [level, life]);
+  const { characters, placeCharacter } = useWord(word);
+  const isCompleted = characters.every(character => character.placed);
+  const [showConfetti, Confetti] = useConfetti();
+  useEffect(() => {
+    if (isCompleted) {
+      showConfetti();
+      speak("Well done!");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isCompleted]);
+  useEffect(() => {
+    speak(`Let's spell, ${word}`);
+  }, [word]);
 
   return <Container key={life}>
     <Header onRestart={restart}>
@@ -31,19 +54,22 @@ export const PlaceTheLetters = () => {
           )
         }
       </div>
-      <Next
-        onNext={restart}
-        className={{
-          invisible: true
-        }}
-      />
+      <>
+        {Confetti}
+        <Next
+          onNext={restart}
+          className={{
+            invisible: !isCompleted
+          }}
+        />
+      </>
     </div>
 
   </Container>;
 };
 
 const useWord = (word: string) => {
-  const splitWord = word.split("");
+  const splitWord = useMemo(() => word.toUpperCase().split(""), [word]);
   const [characters, setCharacters] = useState(splitWord.map((character, index) => ({
     character,
     id: `${character}-${index}`,
@@ -67,15 +93,16 @@ const useWord = (word: string) => {
       ),
       max / 2 * 0.7
     );
-    setCharacters(characters.map(character => ({
-      ...character,
+    setCharacters(splitWord.map((character, index) => ({
+      character,
+      id: `${character}-${index}`,
+      placed: false,
       position: {
-        // Math.floor(Math.random() * (-window.innerWidth + 380) * -1.3)
         x: randomPosition(window.innerWidth), // Subtract letter width to keep within viewport
         y: randomPosition(window.innerHeight)
       }
     })));
-  }, [word]);
+  }, [splitWord]);
   console.log(characters.map(character => character.position));
   return {
     characters,

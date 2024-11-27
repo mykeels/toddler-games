@@ -7,7 +7,7 @@ import Container from "@/Container";
 import { vibrate } from "@/utils/vibrate";
 import { speak } from "@/utils/speak";
 import { useRestart } from "@/utils/restart";
-import { type Levels, ALL_WORDS, WORDS } from "./ReadWords.const";
+import { type Levels, ALL_WORDS, WORDS } from "@/utils/words";
 import { getNextCharacter } from "@/utils/characters";
 import Next from "@/Next";
 import { useConfetti } from "@/Confetti";
