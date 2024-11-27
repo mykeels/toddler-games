@@ -5,4 +5,6 @@ export default {
   component: Letter,
 };
 
-export const A = () => <Letter value="A" defaultPosition={{ x: 100, y: 100 }} />;
+export const DraggableA = () => <Letter value="A" draggable={{ position: { x: 100, y: 100 } }} />;
+
+export const NonDraggableA = () => <Letter value="A" />;
