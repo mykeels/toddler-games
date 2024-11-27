@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import "./Slot.css";
+import "./LetterSlot.css";
 
 type LetterSlotProps = {
   value: string;
