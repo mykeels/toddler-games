@@ -84,6 +84,7 @@ export const Letter = ({
                 const mouseY = (e as MouseEvent).clientY || (e as TouchEvent).touches?.[0]?.clientY;
 
                 console.log(mouseX, mouseY);
+                if (!mouseX || !mouseY) return;
 
                 const elementsUnderCursor = document.elementsFromPoint(mouseX, mouseY);
                 const elementsBehind = elementsUnderCursor.filter(el => el !== distortableRef.current);
