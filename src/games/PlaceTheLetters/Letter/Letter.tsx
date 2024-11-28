@@ -25,20 +25,21 @@ const useDraggableWrapper = (draggable: LetterProps["draggable"]) =>
         onDragStart?: (e: DraggableEvent) => void,
         onDragStop?: (e: DraggableEvent) => void
     }) => {
-        return draggable
-            ? <Draggable
-                defaultPosition={draggable.position}
-                allowAnyClick
-                enableUserSelectHack
-                onStart={(e) => {
-                    props.onDrag(e, true);
-                    // props.onDragStart?.(e);
-                    (e.target as HTMLElement).dataset.value = (e.target as HTMLElement).textContent || "";
-                }}
-                onStop={(e) => props.onDrag(e, false)}
-                onDrag={(e) => props.onDrag(e, true)}
-            >{props.children}</Draggable>
-            : <>{props.children}</>;
+        return <Draggable
+            defaultPosition={draggable?.position}
+            allowAnyClick
+            enableUserSelectHack
+            disabled={!draggable}
+            onStart={(e) => {
+                props.onDrag(e, true);
+                // props.onDragStart?.(e);
+                (e.target as HTMLElement).dataset.value = (e.target as HTMLElement).textContent || "";
+            }}
+            onStop={(e) => props.onDrag(e, false)}
+            onDrag={(e) => props.onDrag(e, true)}
+        >
+            {props.children}
+        </Draggable>;
     }
 
 const throttle = (func: (...args: unknown[]) => void, limit: number) => {
