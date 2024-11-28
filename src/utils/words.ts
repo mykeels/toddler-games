@@ -172,14 +172,26 @@ const SIX_LETTER_WORDS = [
     image:
       "https://images.unsplash.com/photo-1554566490-b43da2d4c8fe?q=80&w=2767&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
+  {
+    value: "jaguar",
+    pronunciation: "jaguaa",
+    image:
+      "https://plus.unsplash.com/premium_photo-1664304400278-8152cba3da20?q=80&w=2976&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    value: "monkey",
+    pronunciation: "monkii",
+    image:
+      "https://images.unsplash.com/photo-1516708274537-6f91e34ccaf2?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
 ];
 
 export const WORDS = {
   2: TWO_LETTER_WORDS,
-  3: THREE_LETTER_WORDS,
-  4: FOUR_LETTER_WORDS,
-  5: FIVE_LETTER_WORDS,
-  6: SIX_LETTER_WORDS
+  3: [...TWO_LETTER_WORDS, ...THREE_LETTER_WORDS],
+  4: [...TWO_LETTER_WORDS, ...THREE_LETTER_WORDS, ...FOUR_LETTER_WORDS],
+  5: [...THREE_LETTER_WORDS, ...FOUR_LETTER_WORDS, ...FIVE_LETTER_WORDS],
+  6: [...FOUR_LETTER_WORDS, ...FIVE_LETTER_WORDS, ...SIX_LETTER_WORDS],
 };
 
 export type Levels = keyof typeof WORDS;
