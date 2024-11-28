@@ -107,6 +107,24 @@ const FOUR_LETTER_WORDS = [
     image:
       "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExaGExdGFma2FkOWdvemJ1azdpeXg4YmYyeGVsMm53N2s0eGNkZDhtbiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/NDjtmyXAAUWKQ/200.webp",
   },
+  {
+    value: "home",
+    pronunciation: "hōmm",
+    image:
+      "https://plus.unsplash.com/premium_photo-1689609950112-d66095626efb?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aG9tZXxlbnwwfHwwfHx8MA%3D%3D",
+  },
+  {
+    value: "tree",
+    pronunciation: "trii",
+    image:
+      "https://images.unsplash.com/reserve/bOvf94dPRxWu0u3QsPjF_tree.jpg?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dHJlZXxlbnwwfHwwfHx8MA%3D%3D",
+  },
+  {
+    value: "four",
+    pronunciation: "foor",
+    image:
+      "https://images.unsplash.com/photo-1580892934698-cd589f9538a4?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
 ];
 
 const FIVE_LETTER_WORDS = [
@@ -189,6 +207,12 @@ const SIX_LETTER_WORDS = [
     pronunciation: "monkii",
     image:
       "https://images.unsplash.com/photo-1516708274537-6f91e34ccaf2?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    value: "eleven",
+    pronunciation: "ilevnn",
+    image:
+      "https://images.unsplash.com/photo-1722411487086-38c61ce73a9c?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGVsZXZlbnxlbnwwfHwwfHx8MA%3D%3D",
   },
 ];
 
