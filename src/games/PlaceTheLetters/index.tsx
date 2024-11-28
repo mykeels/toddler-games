@@ -109,9 +109,9 @@ const useWord = (word: string) => {
     const randomPosition = (max: number) => Math.min(
       Math.max(
         Math.floor((Math.random() * max) - (max / 2)),
-        (-max / 2 * 0.7)
+        ((-max / 2) * 0.4)
       ),
-      max / 2 * 0.7
+      (max / 2) * 0.4
     );
     setCharacters(splitWord.map((character, index) => ({
       character,

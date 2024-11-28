@@ -124,6 +124,11 @@ const GAME_LISTING: GameListing = {
       title: "Read Words",
       path: "/read-words/",
       icon: "./icons/tap-lowercase.svg",
+    },
+    {
+      title: "Place the Letters",
+      path: "/place-the-letters/",
+      icon: "./icons/tap-uppercase.svg",
     }
   ],
 };
