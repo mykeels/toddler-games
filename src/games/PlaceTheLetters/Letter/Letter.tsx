@@ -83,6 +83,8 @@ export const Letter = ({
                 const mouseX = (e as MouseEvent).clientX || (e as TouchEvent).touches?.[0]?.clientX;
                 const mouseY = (e as MouseEvent).clientY || (e as TouchEvent).touches?.[0]?.clientY;
 
+                console.log(mouseX, mouseY);
+
                 const elementsUnderCursor = document.elementsFromPoint(mouseX, mouseY);
                 const elementsBehind = elementsUnderCursor.filter(el => el !== distortableRef.current);
                 const dragOverSlots = elementsBehind.filter(el => el.classList.contains('letter-slot'));
