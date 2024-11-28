@@ -35,6 +35,7 @@ export const PlaceTheLetters = () => {
   useEffect(() => {
     speak(`Let's spell, ${word}`);
   }, [word]);
+  const fontSize = `${(90 / (characters.length + 2))}dvw`;
 
   return <Container key={life}>
     <Header onRestart={restart}>
@@ -45,13 +46,31 @@ export const PlaceTheLetters = () => {
         {
           characters.map((character) => (
             character.placed
-              ? <Letter key={character.id} value={character.character} color={getRainbowColor(character.id)} />
-              : <LetterSlot key={character.id} value={character.character} onDrop={() => placeCharacter(character.id)} />
+              ? <Letter
+                  key={character.id}
+                  value={character.character}
+                  color={getRainbowColor(character.id)}
+                  fontSize={fontSize}
+                />
+              : <LetterSlot
+                  key={character.id}
+                  value={character.character}
+                  onDrop={() => placeCharacter(character.id)}
+                  fontSize={fontSize}
+                />
           ))
         }
         {
-          characters.filter(character => !character.placed).map((character) =>
-            <Letter key={character.id} value={character.character} draggable={{ position: character.position }} color={getRainbowColor(character.id)} />
+          characters.map((character) =>
+            character.placed
+              ? null
+              : <Letter
+                  key={character.id}
+                  value={character.character}
+                  draggable={{ position: character.position }}
+                  color={getRainbowColor(character.id)}
+                  fontSize={fontSize}
+                />
           )
         }
       </div>
@@ -104,7 +123,6 @@ const useWord = (word: string) => {
       }
     })));
   }, [splitWord]);
-  console.log(characters.map(character => character.position));
   return {
     characters,
     placeCharacter
