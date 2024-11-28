@@ -18,7 +18,7 @@ type LetterProps = {
 };
 
 
-const useDraggableWrapper = (draggable: LetterProps["draggable"]) =>
+const useDraggableWrapper = (draggable: LetterProps["draggable"], nodeRef: React.RefObject<HTMLDivElement>) =>
     (props: {
         children: React.ReactNode,
         onDrag: (e: DraggableEvent, isDragging: boolean) => void,
@@ -28,7 +28,6 @@ const useDraggableWrapper = (draggable: LetterProps["draggable"]) =>
         return <Draggable
             defaultPosition={draggable?.position}
             allowAnyClick
-            enableUserSelectHack
             disabled={!draggable}
             onStart={(e) => {
                 props.onDrag(e, true);
@@ -37,6 +36,10 @@ const useDraggableWrapper = (draggable: LetterProps["draggable"]) =>
             }}
             onStop={(e) => props.onDrag(e, false)}
             onDrag={(e) => props.onDrag(e, true)}
+            bounds="body"
+            cancel=".no-drag"
+            enableUserSelectHack={false}
+            nodeRef={nodeRef}
         >
             {props.children}
         </Draggable>;
@@ -58,7 +61,8 @@ export const Letter = ({
     color = DEFAULT_LETTER_COLOR,
     draggable
 }: LetterProps) => {
-    const DraggableWrapper = useDraggableWrapper(draggable);
+    const nodeRef = useRef<HTMLDivElement>(null);
+    const DraggableWrapper = useDraggableWrapper(draggable, nodeRef);
     const distortableRef = useRef<HTMLSpanElement>(null);
     const rateRef = useRef(1);
     const speakLetter = throttle(() => {
@@ -120,6 +124,7 @@ export const Letter = ({
                     fontSize,
                     color
                 }}
+                ref={nodeRef}
             >
                 <span
                     className={clsx("stroke-white", {
