@@ -3,6 +3,7 @@ import Draggable, { DraggableEvent } from "react-draggable";
 import { DEFAULT_LETTER_COLOR, DEFAULT_LETTER_FONT_SIZE } from "../PlaceTheLetters.consts";
 import { useRef } from "react";
 import { speak } from "@/utils/speak";
+import { useFloatAround } from "@/FloatAround";
 
 type LetterProps = {
     value: string;
@@ -60,10 +61,16 @@ export const Letter = ({
         rateRef.current = 1 + Math.abs(Math.sin(Date.now() / 200) * 0.5);
         speak(value.toLowerCase(), { rate: rateRef.current });
     }, 300);
+    const { classId, style } = useFloatAround(3);
+
     return <>
+        <style>{style}</style>
         <DraggableWrapper
+            onDragStart={() => {
+            }}
             onDrag={(e, isDragging) => {
                 distortableRef.current?.classList.toggle("animate-distort", isDragging);
+                distortableRef.current?.classList?.toggle(classId, !isDragging);
                 speakLetter();
                 const mouseX = (e as MouseEvent).clientX;
                 const mouseY = (e as MouseEvent).clientY;
@@ -112,7 +119,8 @@ export const Letter = ({
             >
                 <span
                     className={clsx("stroke-white", {
-                        "absolute": draggable
+                        "absolute": draggable,
+                        [classId]: true
                     })}
                     ref={distortableRef}
                     style={{
