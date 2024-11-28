@@ -76,3 +76,5 @@ export const fx = {
 
 export const isVowel = (character: string) =>
   ["a", "e", "i", "o", "u", "ī", "ō"].includes(character);
+
+export type Phonics = Exclude<keyof typeof fx.phonics, "play">;

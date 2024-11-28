@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import classNames from "clsx";
 import { onTouch } from "@/utils/touch";
-import { fx } from "@/utils/sound";
+import { fx, Phonics } from "@/utils/sound";
 import Header from "@/Header/Header";
 import Container from "@/Container";
 import { vibrate } from "@/utils/vibrate";
@@ -133,7 +133,7 @@ function useReadWord(word: {
   const characters = charactersWord.split("")
     .map((character, index) => ({
       value: character,
-      speak: () => character in fx.phonics && fx.phonics[character as keyof typeof fx.phonics]?.play(),
+      speak: () => character in fx.phonics && fx.phonics[character as Phonics]?.play(),
       twin: twin.next(character, charactersWord[index + 1] === character || charactersWord[index - 1] === character)
     }));
   const [letters, setLetters] = useState<string[]>([]);
