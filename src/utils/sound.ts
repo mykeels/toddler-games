@@ -36,6 +36,13 @@ export const fx = {
   game: audio("./soundfx/game.mp3"),
   tapOn: audio("./soundfx/tap-on.mp3"),
   phonics: {
+    play: (letter: string, options: { rate?: number } = {}) => {
+      if (["ī", "ō"].includes(letter)) {
+        audio("./soundfx/alphabet/" + letter.toLowerCase() + ".mp3", options).play();
+      } else {
+        audio("./soundfx/phonics/" + letter.toLowerCase() + ".mp3", options).play();
+      }
+    },
     a: audio("./soundfx/phonics/a.mp3"),
     b: audio("./soundfx/phonics/b.mp3"),
     c: audio("./soundfx/phonics/c.mp3"),

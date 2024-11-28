@@ -2,8 +2,8 @@ import clsx from "clsx";
 import Draggable, { DraggableEvent } from "react-draggable";
 import { DEFAULT_LETTER_COLOR, DEFAULT_LETTER_FONT_SIZE } from "../PlaceTheLetters.consts";
 import { useRef } from "react";
-import { speak } from "@/utils/speak";
 import { useFloatAround } from "@/FloatAround";
+import { fx } from "@/utils/sound";
 
 type LetterProps = {
     value: string;
@@ -59,7 +59,7 @@ export const Letter = ({
     const rateRef = useRef(1);
     const speakLetter = throttle(() => {
         rateRef.current = 1 + Math.abs(Math.sin(Date.now() / 200) * 0.5);
-        speak(value.toLowerCase(), { rate: rateRef.current });
+        fx.phonics.play(value, { rate: rateRef.current });
     }, 300);
     const { classId, style } = useFloatAround(3);
 
