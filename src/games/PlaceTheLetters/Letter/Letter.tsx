@@ -2,6 +2,7 @@ import clsx from "clsx";
 import Draggable, { DraggableEvent } from "react-draggable";
 import { DEFAULT_LETTER_COLOR, DEFAULT_LETTER_FONT_SIZE } from "../PlaceTheLetters.consts";
 import { useRef } from "react";
+import { speak } from "@/utils/speak";
 
 type LetterProps = {
     value: string;
@@ -17,11 +18,17 @@ type LetterProps = {
 
 
 const useDraggableWrapper = (draggable: LetterProps["draggable"]) =>
-    (props: { children: React.ReactNode, onDrag: (e: DraggableEvent, isDragging: boolean) => void }) => {
+    (props: {
+        children: React.ReactNode,
+        onDrag: (e: DraggableEvent, isDragging: boolean) => void,
+        onDragStart?: (e: DraggableEvent) => void,
+        onDragStop?: (e: DraggableEvent) => void
+    }) => {
         return draggable
             ? <Draggable defaultPosition={draggable.position}
                 onStart={(e) => {
                     props.onDrag(e, true);
+                    // props.onDragStart?.(e);
                     (e.target as HTMLElement).dataset.value = (e.target as HTMLElement).textContent || "";
                 }}
                 onStop={(e) => props.onDrag(e, false)}
@@ -29,6 +36,16 @@ const useDraggableWrapper = (draggable: LetterProps["draggable"]) =>
             >{props.children}</Draggable>
             : <>{props.children}</>;
     }
+
+const throttle = (func: (...args: unknown[]) => void, limit: number) => {
+    let inThrottle: NodeJS.Timeout | false | undefined = undefined;
+    return (...args: unknown[]) => {
+        if (!inThrottle) {
+            func(...args)
+            inThrottle = setTimeout(() => inThrottle = false, limit)
+        }
+    }
+}
 
 export const Letter = ({
     value,
@@ -38,41 +55,48 @@ export const Letter = ({
 }: LetterProps) => {
     const DraggableWrapper = useDraggableWrapper(draggable);
     const distortableRef = useRef<HTMLSpanElement>(null);
-console.log({ value, color })
+    const rateRef = useRef(1);
+    const speakLetter = throttle(() => {
+        rateRef.current = 1 + Math.abs(Math.sin(Date.now() / 200) * 0.5);
+        speak(value.toLowerCase(), { rate: rateRef.current });
+    }, 300);
     return <>
-        <DraggableWrapper onDrag={(e, isDragging) => {
-            distortableRef.current?.classList.toggle("animate-distort", isDragging);
-            const mouseX = (e as MouseEvent).clientX;
-            const mouseY = (e as MouseEvent).clientY;
+        <DraggableWrapper
+            onDrag={(e, isDragging) => {
+                distortableRef.current?.classList.toggle("animate-distort", isDragging);
+                speakLetter();
+                const mouseX = (e as MouseEvent).clientX;
+                const mouseY = (e as MouseEvent).clientY;
 
-            const elementsUnderCursor = document.elementsFromPoint(mouseX, mouseY);
-            const elementsBehind = elementsUnderCursor.filter(el => el !== distortableRef.current);
-            const dragOverSlots = elementsBehind.filter(el => el.classList.contains('letter-slot'));
-            const allSlots = document.querySelectorAll('.letter-slot');
-            const dispatchEvent = (el: Element, name: string) => {
-                const event = new DragEvent(name, {
-                    bubbles: true,
-                    cancelable: true,
-                    clientX: mouseX,
-                    clientY: mouseY,
-                    dataTransfer: new DataTransfer(),
-                    relatedTarget: distortableRef.current
-                });
-                event.dataTransfer?.setData('text/plain', value);
-                el.dispatchEvent(event);
-            }
-            allSlots.forEach(slot => {
-                if (dragOverSlots.includes(slot)) {
-                    if (isDragging) {
-                        dispatchEvent(slot, 'dragover');
-                    } else {
-                        dispatchEvent(slot, 'drop');
-                    }
-                } else {
-                    dispatchEvent(slot, 'dragleave');
+                const elementsUnderCursor = document.elementsFromPoint(mouseX, mouseY);
+                const elementsBehind = elementsUnderCursor.filter(el => el !== distortableRef.current);
+                const dragOverSlots = elementsBehind.filter(el => el.classList.contains('letter-slot'));
+                const allSlots = document.querySelectorAll('.letter-slot');
+                const dispatchEvent = (el: Element, name: string) => {
+                    const event = new DragEvent(name, {
+                        bubbles: true,
+                        cancelable: true,
+                        clientX: mouseX,
+                        clientY: mouseY,
+                        dataTransfer: new DataTransfer(),
+                        relatedTarget: distortableRef.current
+                    });
+                    event.dataTransfer?.setData('text/plain', value);
+                    el.dispatchEvent(event);
                 }
-            });
-        }}>
+                allSlots.forEach(slot => {
+                    if (dragOverSlots.includes(slot)) {
+                        if (isDragging) {
+                            dispatchEvent(slot, 'dragover');
+                        } else {
+                            dispatchEvent(slot, 'drop');
+                        }
+                    } else {
+                        dispatchEvent(slot, 'dragleave');
+                    }
+                });
+            }}
+        >
             <span
                 className={clsx(
                     `px-4 font-bold`,
@@ -86,12 +110,15 @@ console.log({ value, color })
                     color
                 }}
             >
-                <span className={clsx("stroke-white", {
-                    "absolute": draggable
-                })} ref={distortableRef}
-                style={{
-                    color
-                }}>
+                <span
+                    className={clsx("stroke-white", {
+                        "absolute": draggable
+                    })}
+                    ref={distortableRef}
+                    style={{
+                        color
+                    }}
+                >
                     {value}
                 </span>
             </span>
