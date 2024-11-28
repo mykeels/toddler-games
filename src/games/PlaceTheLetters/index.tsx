@@ -9,6 +9,7 @@ import { useEffect, useMemo, useState } from "react";
 import LetterSlot from "./LetterSlot/LetterSlot";
 import Letter from "./Letter/Letter";
 import { speak } from "@/utils/speak";
+import { getRainbowColor } from "@/utils/colors";
 
 export const PlaceTheLetters = () => {
   const { life, restart } = useRestart();
@@ -44,13 +45,13 @@ export const PlaceTheLetters = () => {
         {
           characters.map((character) => (
             character.placed
-              ? <Letter key={character.id} value={character.character} />
+              ? <Letter key={character.id} value={character.character} color={getRainbowColor(character.id)} />
               : <LetterSlot key={character.id} value={character.character} onDrop={() => placeCharacter(character.id)} />
           ))
         }
         {
           characters.filter(character => !character.placed).map((character) =>
-            <Letter key={character.id} value={character.character} draggable={{ position: character.position }} />
+            <Letter key={character.id} value={character.character} draggable={{ position: character.position }} color={getRainbowColor(character.id)} />
           )
         }
       </div>

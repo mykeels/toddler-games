@@ -38,7 +38,7 @@ export const Letter = ({
 }: LetterProps) => {
     const DraggableWrapper = useDraggableWrapper(draggable);
     const distortableRef = useRef<HTMLSpanElement>(null);
-
+console.log({ value, color })
     return <>
         <DraggableWrapper onDrag={(e, isDragging) => {
             distortableRef.current?.classList.toggle("animate-distort", isDragging);
@@ -86,9 +86,12 @@ export const Letter = ({
                     color
                 }}
             >
-                <span className={clsx("stroke-black", {
+                <span className={clsx("stroke-white", {
                     "absolute": draggable
-                })} ref={distortableRef}>
+                })} ref={distortableRef}
+                style={{
+                    color
+                }}>
                     {value}
                 </span>
             </span>

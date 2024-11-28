@@ -21,7 +21,7 @@ export const LetterSlot = ({
   return <span
     ref={spanRef}
     className={clsx(
-      `inline-block text-white px-4 font-bold stroke-black letter-slot`,
+      `inline-block text-white px-4 font-bold stroke-black letter-slot opacity-25`,
     )}
     style={{ fontSize }}
     onDrop={e => {
@@ -50,10 +50,12 @@ export const LetterSlot = ({
 const useAnimateSlot = (ref: RefObject<HTMLElement>) => {
   return {
     onDragLeave: () => {
-      ref.current?.classList.remove('animate-breathe', 'text-red-300');
+      ref.current?.classList.remove('animate-breathe', 'text-white');
+      ref.current?.classList.add('opacity-25');
     },
     onDragOver: () => {
-      ref.current?.classList.add('animate-breathe', 'text-red-300');
+      ref.current?.classList.add('animate-breathe', 'text-white');
+      ref.current?.classList.remove('opacity-25');
     },
     onDragError: () => {
       fx.incorrect.play();
