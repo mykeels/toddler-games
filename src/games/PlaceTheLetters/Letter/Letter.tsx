@@ -80,8 +80,8 @@ export const Letter = ({
                 distortableRef.current?.classList.toggle("animate-distort", isDragging);
                 distortableRef.current?.classList?.toggle(classId, !isDragging);
                 speakLetter();
-                const mouseX = (e as MouseEvent).clientX || (e as TouchEvent).touches?.[0]?.clientX;
-                const mouseY = (e as MouseEvent).clientY || (e as TouchEvent).touches?.[0]?.clientY;
+                const mouseX = (e as MouseEvent).clientX || (e as TouchEvent).changedTouches?.[0]?.clientX;
+                const mouseY = (e as MouseEvent).clientY || (e as TouchEvent).changedTouches?.[0]?.clientY;
 
                 console.log(mouseX, mouseY);
                 if (!mouseX || !mouseY) {
