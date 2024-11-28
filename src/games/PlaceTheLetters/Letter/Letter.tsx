@@ -26,7 +26,10 @@ const useDraggableWrapper = (draggable: LetterProps["draggable"]) =>
         onDragStop?: (e: DraggableEvent) => void
     }) => {
         return draggable
-            ? <Draggable defaultPosition={draggable.position}
+            ? <Draggable
+                defaultPosition={draggable.position}
+                allowAnyClick
+                enableUserSelectHack
                 onStart={(e) => {
                     props.onDrag(e, true);
                     // props.onDragStart?.(e);
