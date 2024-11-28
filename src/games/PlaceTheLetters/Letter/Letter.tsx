@@ -83,16 +83,13 @@ export const Letter = ({
                 const mouseX = (e as MouseEvent).clientX || (e as TouchEvent).changedTouches?.[0]?.clientX;
                 const mouseY = (e as MouseEvent).clientY || (e as TouchEvent).changedTouches?.[0]?.clientY;
 
-                console.log(mouseX, mouseY);
                 if (!mouseX || !mouseY) {
-                    console.log(e);
                     return;
                 }
 
                 const elementsUnderCursor = document.elementsFromPoint(mouseX, mouseY);
                 const elementsBehind = elementsUnderCursor.filter(el => el !== distortableRef.current);
                 const dragOverSlots = elementsBehind.filter(el => el.classList.contains('letter-slot'));
-                console.log(dragOverSlots.length);
                 const allSlots = document.querySelectorAll('.letter-slot');
                 const dispatchEvent = (el: Element, name: string) => {
                     const event = new DragEvent(name, {
