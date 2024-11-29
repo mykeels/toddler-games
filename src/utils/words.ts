@@ -251,6 +251,30 @@ const FIVE_LETTER_WORDS = [
     image:
       "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdmk0N2h6MGd4emNjdWc1aHNhdXB0NXh1dm4xc2poOGozaDVoNzRzbiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l2JebisijdzVL2Cqs/giphy.webp",
   },
+  {
+    value: "three",
+    pronunciation: "thrii",
+    image:
+      "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZThuZjllOXVvemI3OGJ1djJ4aDkxZ2dmamZmZ2Z5bnM0OXlrNWdzcyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/fYHEmYNQzl0mWjzdoA/giphy.webp",
+  },
+  {
+    value: "paper",
+    pronunciation: "pāpar",
+    image:
+      "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExOGEyeDVmaGUzZnh5YmppbmhuNmx4cnBpdnJqbnI4bXBmY3dkMW1mYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/gbDsm8Hn7aIuc/giphy.webp",
+  },
+  {
+    value: "climb",
+    pronunciation: "clīmb",
+    image:
+      "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExZjJjd25jZDJ0cTl3emJzeG93dGd5Zm1jMnd5enlvdXdneHN3c205dSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/29HWHVyD4wB3MRmtIg/giphy.webp",
+  },
+  {
+    value: "dream",
+    pronunciation: "driim",
+    image:
+      "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3BnZmF0bmdpaDNsaGZvNjJoanNqeWtwbTJsYmo0ajFqaWl4amoxcyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l2SpUc5nqKBG79Mti/giphy.webp",
+  },
 ];
 
 const SIX_LETTER_WORDS = [
