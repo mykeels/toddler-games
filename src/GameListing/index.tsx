@@ -203,7 +203,7 @@ export const Home = () => {
     if ("children" in item) {
       setListing({
         ...item,
-        back: () => listing,
+        back: item.back ?? (() => listing),
       });
     } else {
       navigate({
@@ -215,7 +215,7 @@ export const Home = () => {
   const { ref } = useHorizontalSwipe({
     onSwipe: ({ directions }) => {
       if (directions.right && !isListingAtRoot) {
-        enterListing(listing.back!());
+        enterListing(GAME_LISTING);
       }
     },
   });
