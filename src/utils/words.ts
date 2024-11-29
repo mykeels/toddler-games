@@ -223,6 +223,30 @@ const FIVE_LETTER_WORDS = [
     image:
       "https://plus.unsplash.com/premium_photo-1667066432588-9497038b21f9?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
+  {
+    value: "water",
+    pronunciation: "wotar",
+    image:
+      "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDV2OHdrYzlqcnh6OHkxYnpmdHNjMmFsN3BibDQyemFweGxlNXc4aSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/h6x0ROdzJy4TKyUu1b/giphy.webp",
+  },
+  {
+    value: "train",
+    pronunciation: "trāān",
+    image:
+      "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExb3ZpNWJ3bmE0dG9rd2piOTBoM3NqbGd6YzQ0OWY1c2pmcjIyODh1YyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/IAgKhlQ9fg30A/giphy.webp",
+  },
+  {
+    value: "plane",
+    pronunciation: "plānn",
+    image:
+      "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExa2FtaHJkZmRkb2c3N2g5YmppaHdzZ2ZxaTU3YmJtZ2E0M2RpOTA2eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xqGstZXPv7V91mdwGA/giphy.webp",
+  },
+  {
+    value: "light",
+    pronunciation: "lìììt",
+    image:
+      "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdmk0N2h6MGd4emNjdWc1aHNhdXB0NXh1dm4xc2poOGozaDVoNzRzbiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l2JebisijdzVL2Cqs/giphy.webp",
+  },
 ];
 
 const SIX_LETTER_WORDS = [
