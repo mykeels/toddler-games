@@ -177,6 +177,12 @@ const FOUR_LETTER_WORDS = [
     image:
       "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZWxlZjBweXFoNXRhY3p1NGt4OW12ajZseWhzcXo2OHZxbXpqMmptayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/iKOcmnyTJ3Daw/giphy.webp",
   },
+  {
+    value: "stars",
+    pronunciation: "stars",
+    image:
+      "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExY2M2NzhpNzAzajk4OHVkMTV4bjNranBiZ3BmZmtocHBtcjNqcDJ3YyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/u1ebtrL6vnKf2dYfYr/giphy.webp",
+  },
 ];
 
 const FIVE_LETTER_WORDS = [
@@ -313,6 +319,12 @@ const SIX_LETTER_WORDS = [
     pronunciation: "ilevnn",
     image:
       "https://images.unsplash.com/photo-1722411487086-38c61ce73a9c?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGVsZXZlbnxlbnwwfHwwfHx8MA%3D%3D",
+  },
+  {
+    value: "turtle",
+    pronunciation: "tortll",
+    image:
+      "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExc2NndWUxNHh4bGw0OHM3dDQ1YWRibmpqb2Npd2RwYjB2OXp3eHJzaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/UWhe73bSwu8XR6xdem/giphy.webp",
   },
 ];
 
