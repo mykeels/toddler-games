@@ -132,6 +132,7 @@ function useReadWord(word: {
   const twin = useTwin();
   const characters = charactersWord.split("")
     .map((character, index) => ({
+      index,
       value: character,
       speak: () => character in fx.phonics && fx.phonics[character as Phonics]?.play(),
       twin: twin.next(character, charactersWord[index + 1] === character || charactersWord[index - 1] === character)
@@ -175,6 +176,7 @@ function Readable({
   value: string;
   character: {
     twin: number;
+    index: number;
   };
   className?: string;
   onClick: () => void;
@@ -188,9 +190,22 @@ function Readable({
       return;
     }
   };
+  const characterId = character.twin ? `twin-${character.twin}` : `char-${character.index}`;
   return (
     <button
-      {...onTouch(onTap)}
+      {...onTouch(() => {
+        onTap();
+        const allButtons = document.querySelectorAll(`[data-character-id="${characterId}"]`);
+        allButtons.forEach((button) => {
+          button.classList.add("animate-vibrate");
+        });
+        setTimeout(() => {
+          allButtons.forEach((button) => {
+            button.classList.remove("animate-vibrate");
+          });
+        }, 300);
+      })}
+      data-character-id={characterId}
       className={classNames(
         "portrait:w-[16dvw] portrait:h-[16dvw] landscape:w-[18dvh] landscape:h-[18dvh]",
         "landscape:text-5xl portrait:text-4xl portrait:lg:text-8xl landscape:hsx:text-3xl landscape:hsm:text-4xl",
