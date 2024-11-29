@@ -18,35 +18,51 @@ const GAME_LISTING: GameListing = {
   icon: "./icons/toddler.svg",
   children: [
     {
-      title: "Find and Tap",
-      icon: "./icons/tap.svg",
+      title: "Letters, Numbers, and Symbols",
+      icon: "./icons/tap-uppercase.svg",
       children: [
         {
-          title: "Uppercase Letters only",
-          path: "/find-and-tap/uppercase",
+          title: "Place the Letters",
+          path: "/place-the-letters/",
           icon: "./icons/tap-uppercase.svg",
         },
         {
-          title: "Lowercase Letters only",
-          path: "/find-and-tap/lowercase",
-          icon: "./icons/tap-lowercase.svg",
+          title: "Find and Tap",
+          icon: "./icons/tap.svg",
+          children: [
+            {
+              title: "Uppercase Letters only",
+              path: "/find-and-tap/uppercase",
+              icon: "./icons/tap-uppercase.svg",
+            },
+            {
+              title: "Lowercase Letters only",
+              path: "/find-and-tap/lowercase",
+              icon: "./icons/tap-lowercase.svg",
+            },
+            {
+              title: "Numbers only",
+              path: "/find-and-tap/numbers",
+              icon: "./icons/tap-numbers.svg",
+            },
+            {
+              title: "Fruits only",
+              path: "/find-and-tap/fruits",
+              icon: "./icons/tap-fruits.svg",
+            },
+            {
+              title: "Animals only",
+              path: "/find-and-tap/animals",
+              icon: "./icons/tap-animals.svg",
+            },
+          ],
         },
         {
-          title: "Numbers only",
-          path: "/find-and-tap/numbers",
-          icon: "./icons/tap-numbers.svg",
+          title: "Number Keypad",
+          path: "/number-keypad/",
+          icon: "./icons/123.svg",
         },
-        {
-          title: "Fruits only",
-          path: "/find-and-tap/fruits",
-          icon: "./icons/tap-fruits.svg",
-        },
-        {
-          title: "Animals only",
-          path: "/find-and-tap/animals",
-          icon: "./icons/tap-animals.svg",
-        },
-      ],
+      ]
     },
     {
       title: "Tap to Count",
@@ -54,30 +70,25 @@ const GAME_LISTING: GameListing = {
       icon: "./icons/1234.svg",
     },
     {
-      title: "Free Draw",
-      path: "/free-draw/",
-      icon: "./icons/free-draw.svg",
+      title: "Read Words",
+      path: "/read-words/",
+      icon: "./icons/tap-lowercase.svg",
     },
     {
       title: "Match Image to Letter",
       icon: "./icons/match-image/index.svg",
       children: [
         {
-          title: "Uppercase Letters only",
+          title: "Uppercase Letters",
           path: "/image-to-letter-matching/",
           icon: "./icons/match-image/to-uppercase.svg",
         },
         {
-          title: "Lowercase Letters only",
+          title: "Lowercase Letters",
           path: "/image-to-letter-matching/lowercase",
           icon: "./icons/match-image/to-lowercase.svg",
         },
       ],
-    },
-    {
-      title: "Number Keypad",
-      path: "/number-keypad/",
-      icon: "./icons/123.svg",
     },
     {
       title: "Can you trace this?",
@@ -121,15 +132,10 @@ const GAME_LISTING: GameListing = {
       ],
     },
     {
-      title: "Read Words",
-      path: "/read-words/",
-      icon: "./icons/tap-lowercase.svg",
+      title: "Free Draw",
+      path: "/free-draw/",
+      icon: "./icons/free-draw.svg",
     },
-    {
-      title: "Place the Letters",
-      path: "/place-the-letters/",
-      icon: "./icons/tap-uppercase.svg",
-    }
   ],
 };
 
@@ -226,6 +232,7 @@ export const Home = () => {
       <div
         className="flex flex-col p-2 md:p-4 relative h-[80dvh]"
       >
+        {new Array(4).fill(null).map((_, index) => <Floaters key={index} />)}
         <ol className="list-none text-lg h-full overflow-y-auto snap-y flex portrait:max-md:flex-col md:flex-wrap items-center md:justify-center content-center gap-4 z-10">
           {"children" in listing ? listing.children.map((child) =>
             "path" in child ? (
