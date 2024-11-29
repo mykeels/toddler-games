@@ -1,7 +1,11 @@
 /**
  * In pronunciations,
- * The phonics sound "oh" is represented as "ō"
- * The phonics sound "ee" is represented as "ī"
+ * The long "a" sound is represented as "ā"
+ * The long "e" sound is represented as "ē"
+ * The long "i" sound is represented as "ī"
+ * The long "o" sound is represented as "ō"
+ * The long "u" sound is represented as "ū"
+ * Every other sound is represented as its short sound
  */
 
 const TWO_LETTER_WORDS = [
