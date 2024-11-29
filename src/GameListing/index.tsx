@@ -221,6 +221,7 @@ export const Home = () => {
   });
   useEffect(() => {
     speak(listing.title ?? `Which game would you like to play?`);
+    fx.click.play();
   }, [listing.title]);
 
   return (
