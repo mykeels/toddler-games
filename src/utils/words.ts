@@ -125,6 +125,54 @@ const FOUR_LETTER_WORDS = [
     image:
       "https://images.unsplash.com/photo-1580892934698-cd589f9538a4?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
+  {
+    value: "five",
+    pronunciation: "fīvv",
+    image:
+      "https://plus.unsplash.com/premium_photo-1669349127530-23d9e3dab307?q=80&w=2960&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    value: "bark",
+    pronunciation: "bark",
+    image:
+      "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZnljaWN3N2s3cTllM2ZvODRzdHd1MmwzZzBjd3V2c2d6ZjV3MXdmdSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3oGRFIjETeuYgyLyo0/giphy.webp",
+  },
+  {
+    value: "ball",
+    pronunciation: "boll",
+    image:
+      "https://plus.unsplash.com/premium_photo-1709589145461-4797b4e80e9c?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    value: "bear",
+    pronunciation: "beer",
+    image:
+      "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExa280MXNheDNoenBudWtiZnkxNXEyZnl0dDJpb2NsaWFhYXBmOTc4dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/QEIC6GZIEGStO/giphy.webp",
+  },
+  {
+    value: "bird",
+    pronunciation: "brrd",
+    image:
+      "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExd3o4cWU2b21jeG91dDdiYmd3aXFheTc4ZWhkY2ZjaXh5a29ic2w3NSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WXgQucWm9SUHm/giphy.webp",
+  },
+  {
+    value: "snow",
+    pronunciation: "snōw",
+    image:
+      "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExN2Nwb2VqZnA1dHQ1am5kM2t3bHNiMmptMjA3M3p2N20yem03b2o5eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/14uJKhQMZ1wLfO/giphy.webp",
+  },
+  {
+    value: "rain",
+    pronunciation: "rāān",
+    image:
+      "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExanZ2MTAwamVuNDE1amgyMTMzYjhicXpsa3d6czdlemtyZjJiaDh1ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o85xsNYU6Rlnw9cly/giphy.webp",
+  },
+  {
+    value: "boat",
+    pronunciation: "bōōt",
+    image:
+      "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZWxlZjBweXFoNXRhY3p1NGt4OW12ajZseWhzcXo2OHZxbXpqMmptayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/iKOcmnyTJ3Daw/giphy.webp",
+  },
 ];
 
 const FIVE_LETTER_WORDS = [

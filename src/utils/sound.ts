@@ -44,6 +44,7 @@ export const fx = {
       }
     },
     a: audio("./soundfx/phonics/a.mp3"),
+    "ā": audio("./soundfx/alphabet/a.mp3"),
     b: audio("./soundfx/phonics/b.mp3"),
     c: audio("./soundfx/phonics/c.mp3"),
     d: audio("./soundfx/phonics/d.mp3"),
