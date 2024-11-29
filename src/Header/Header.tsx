@@ -52,6 +52,12 @@ const BackToMenu = ({ title }: { title?: string }) => {
   </Link>
 }
 
+const Back = ({ onClick }: { onClick: () => void }) => {
+  return <button onClick={onClick} className="flex p-2 self-stretch">
+    <img src="./icons/arrow-left.svg" alt="back" />
+  </button>
+}
+
 const BackToHome = () => {
   const navigateToRoot = useNavigateToRoot();
   return <Link to="/" onClick={async () => await navigateToRoot()} className="flex p-2 self-stretch">
@@ -67,6 +73,7 @@ const Restart = ({ onRestart, isLoading }: { onRestart: () => void, isLoading?: 
   </button>
 }
 
+Header.Back = Back;
 Header.BackToMenu = BackToMenu;
 Header.BackToHome = BackToHome;
 Header.Restart = Restart;

@@ -226,7 +226,14 @@ export const Home = () => {
   return (
     <Container
       ref={ref as React.LegacyRef<HTMLDivElement>}>
-      <Header title={listing.title} onRestart={undefined} Left={<Header.BackToHome />} noLevels>
+      <Header
+        title={listing.title}
+        onRestart={undefined}
+        Left={
+          isListingAtRoot ? <Header.BackToHome /> : <Header.Back onClick={() => enterListing(GAME_LISTING)} />
+        }
+        noLevels
+      >
         {isListingAtRoot ? <h1 className="text-4xl font-bold font-lily">Let’s Play</h1> : null}
       </Header>
       <div
