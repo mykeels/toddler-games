@@ -230,7 +230,7 @@ export const Home = () => {
         title={listing.title}
         onRestart={undefined}
         Left={
-          isListingAtRoot ? <Header.BackToHome /> : <Header.Back onClick={() => enterListing(GAME_LISTING)} />
+          isListingAtRoot ? <Header.BackToHome /> : <Header.Back onClick={() => enterListing(listing.back?.() ?? GAME_LISTING)} />
         }
         noLevels
       >
