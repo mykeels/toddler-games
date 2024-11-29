@@ -60,6 +60,9 @@ export default {
         hsm: {
           raw: "(min-height: 321px) and (max-height: 480px)",
         },
+        "max-md": {
+          raw: "(max-width: 768px)",
+        },
       },
       animation: {
         breathe: "breathe 1s infinite",

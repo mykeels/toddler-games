@@ -224,17 +224,16 @@ export const Home = () => {
         {isListingAtRoot ? <h1 className="text-4xl font-bold font-lily">Let’s Play</h1> : null}
       </Header>
       <div
-        className="flex flex-col h-full p-4 relative"
+        className="flex flex-col p-2 md:p-4 relative h-[80dvh]"
       >
-        {new Array(4).fill(null).map((_, index) => <Floaters key={index} />)}
-        <ol className="list-none text-lg h-full flex flex-wrap items-center justify-center content-center gap-4 z-10">
+        <ol className="list-none text-lg h-full overflow-y-auto snap-y flex portrait:max-md:flex-col md:flex-wrap items-center md:justify-center content-center gap-4 z-10">
           {"children" in listing ? listing.children.map((child) =>
             "path" in child ? (
-              <Link to={child.path}>
+              <Link key={child.title} className="snap-center" to={child.path}>
                 <Tile title={child.title} imageSourcePath={child.icon} />
               </Link>
             ) : (
-              <li key={child.title} onClick={() => enterListing(child)}>
+              <li key={child.title} className="snap-center" onClick={() => enterListing(child)}>
                 <Link
                   to="."
                   search={{
