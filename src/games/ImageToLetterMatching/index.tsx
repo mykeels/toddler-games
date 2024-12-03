@@ -9,7 +9,7 @@ import Next from "@/Next";
 import { speak } from "@/utils/speak";
 import { useConfetti } from "@/Confetti";
 import { useLevel } from "@/Header/Levels";
-
+import README from "./README.md";
 const IMAGES = [...ANIMALS, ...FRUITS];
 
 export type ImageToLetterMatchingProps = {
@@ -103,7 +103,13 @@ export const ImageToLetterMatching = ({
       key={gameIndex}
       ref={ref as React.LegacyRef<HTMLDivElement>}
     >
-      <Header title="Match Image to Letter" onRestart={onNextClick}>
+      <Header
+        title="Match Image to Letter"
+        onRestart={onNextClick}
+        Right={
+          <Header.Info description={README} />
+        }
+      >
         {state === "interlude"
           ? `${image.name} starts with ${goal}`
           : `${image.name} starts with...`}

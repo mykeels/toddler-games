@@ -10,7 +10,7 @@ import LetterSlot from "./LetterSlot/LetterSlot";
 import Letter from "./Letter/Letter";
 import { speak } from "@/utils/speak";
 import { getRainbowColor } from "@/utils/colors";
-
+import README from "./README.md";
 export const PlaceTheLetters = () => {
   const { life, restart } = useRestart();
   const level = useLevel();
@@ -38,7 +38,12 @@ export const PlaceTheLetters = () => {
   const fontSize = `${(90 / (characters.length + 2))}dvw`;
 
   return <Container key={life}>
-    <Header onRestart={restart}>
+    <Header
+      onRestart={restart}
+      Right={
+        <Header.Info description={README} />
+      }
+    >
       Place the letters in the word
     </Header>
     <div className="flex flex-col items-center justify-center h-[90%] space-y-8 hsx:space-y-2">

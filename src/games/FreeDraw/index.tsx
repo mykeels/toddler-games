@@ -4,7 +4,7 @@ import { fx } from "@/utils/sound";
 import Header from "@/Header/Header";
 import { useRestart } from "@/utils/restart";
 import { speak } from "@/utils/speak";
-
+import README from "./README.md";
 export const FreeDraw = () => {
   const [size, setSize] = useState({ width: 500, height: 500 });
   const containerRef = useRef<HTMLDivElement>(null);
@@ -44,7 +44,13 @@ export const FreeDraw = () => {
 
   return (
     <div className="flex flex-col h-full">
-      <Header onRestart={restart} noLevels>Free Draw</Header>
+      <Header
+        onRestart={restart}
+        Right={
+          <Header.Info description={README} />
+        }
+        noLevels
+      >Free Draw</Header>
       <div
         className="flex flex-col space-y-4 items-center justify-center grow"
         ref={containerRef}

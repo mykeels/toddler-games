@@ -3,6 +3,8 @@ import { Link } from "@tanstack/react-router";
 import { Menu } from "./Menu";
 import { Levels } from "./Levels";
 import clsx from "clsx";
+import { Info } from "./Info";
+import React from "react";
 
 type HeaderProps = {
   title?: string;
@@ -34,7 +36,11 @@ export const Header = ({ title, children, Left, ...props }: HeaderProps) => {
           </Menu.Item> : null
         }
         {
-          ("Right" in props) ? <Menu.Item>{props.Right}</Menu.Item> : null
+          ("Right" in props)
+            ? (React.isValidElement(props.Right) && props.Right.type === React.Fragment)
+              ? React.Children.map(props.Right.props.children, (child) => child)
+              : <Menu.Item>{props.Right}</Menu.Item>
+            : null
         }
         <Menu.Item>
           <Header.BackToHome />
@@ -79,3 +85,4 @@ Header.BackToHome = BackToHome;
 Header.Restart = Restart;
 Header.Menu = Menu;
 Header.Levels = Levels;
+Header.Info = Info;

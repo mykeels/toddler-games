@@ -11,6 +11,7 @@ import Next from "@/Next";
 import { speak } from "@/utils/speak";
 import { useConfetti } from "@/Confetti";
 import { useLevel } from "@/Header/Levels";
+import README from "./README.md";
 
 export type FindAndTapProps = {
   getCharacterSet?: (set: typeof CHARACTERS) => Character[];
@@ -97,7 +98,13 @@ export function FindAndTap({
       ref={ref as React.LegacyRef<HTMLDivElement>}
       key={`game:${gameIndex}-options:${noOfOptions}`}
     >
-      <Header title="Find and Tap" onRestart={onNextClick}>
+      <Header
+        title="Find and Tap"
+        onRestart={onNextClick}
+        Right={
+          <Header.Info description={README} />
+        }
+      >
         Tap {goal.value}
       </Header>
       <div className="flex flex-col items-center justify-center h-[90%] space-y-16">

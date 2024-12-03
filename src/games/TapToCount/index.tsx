@@ -10,7 +10,7 @@ import Next from "@/Next";
 import { speak } from "@/utils/speak";
 import { useConfetti } from "@/Confetti";
 import { useLevel } from "@/Header/Levels";
-
+import README from "./README.md";
 const COUNTABLES = [...FRUITS, ...ANIMALS];
 
 const TapToCount = ({ ...props }: { level?: number }) => {
@@ -94,7 +94,14 @@ const TapToCount = ({ ...props }: { level?: number }) => {
       key={gameId}
       ref={ref as React.LegacyRef<HTMLDivElement>}
     >
-      <Header title="Tap to Count" onRestart={reset}></Header>
+      <Header 
+        title="Tap to Count" 
+        onRestart={reset}
+        Right={
+          <Header.Info description={README} />
+        }
+      >
+      </Header>
       <div className="flex flex-col portrait:gap-8 landscape:gap-4 landscape:hsx:gap-1 items-center justify-center h-[90%]">
         <h1
           className={classNames("font-bold text-6xl landscape:hsx:text-4xl")}

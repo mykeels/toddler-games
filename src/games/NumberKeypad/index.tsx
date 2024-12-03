@@ -6,6 +6,7 @@ import Header from "@/Header/Header";
 import Container from "@/Container";
 import { vibrate } from "@/utils/vibrate";
 import { speak } from "@/utils/speak";
+import README from "./README.md";
 
 export const NumberKeypad = () => {
   const [recipient, setRecipient] = useState<string>("");
@@ -25,7 +26,13 @@ export const NumberKeypad = () => {
 
   return (
     <Container>
-      <Header onRestart={reset} noLevels>
+      <Header 
+        onRestart={reset}
+        noLevels
+        Right={
+          <Header.Info description={README} />
+        }
+      >
         {recipient || "#"}
       </Header>
       <div className="flex flex-wrap justify-center content-center items-center gap-4 landscape:px-[10%] h-[90%]">

@@ -12,6 +12,7 @@ import { getNextCharacter } from "@/utils/characters";
 import Next from "@/Next";
 import { useConfetti } from "@/Confetti";
 import { useLevel } from "@/Header/Levels";
+import README from "./README.md";
 
 type ReadWordsProps = {
   getWordSet?: (level?: Levels) => typeof WORDS[Levels];
@@ -46,7 +47,12 @@ export const ReadWords = ({ getWordSet = (level) => level ? WORDS[level] : ALL_W
 
   return (
     <Container key={life}>
-      <Header onRestart={restart}>
+      <Header
+        onRestart={restart}
+        Right={
+          <Header.Info description={README} />
+        }
+      >
         {goal.value}
       </Header>
       <div className="flex flex-col items-center justify-center h-[90%] space-y-8 hsx:space-y-2">

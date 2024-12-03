@@ -1,4 +1,4 @@
-## Find and Tap
+# Find and Tap
 
 A game where toddlers find and tap on the correct card.
 
