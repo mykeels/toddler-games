@@ -40,7 +40,7 @@ export const Markdown = ({ children }: { children: string }) => {
           ),
           img: ({ src, alt }) => (
             <img
-              src={src}
+              src={src?.replace("../../../public/", import.meta.env.BASE_URL || "./")}
               alt={alt}
               className="w-full border border-brand-pink-500/75 shadow-md rounded my-1"
             />
