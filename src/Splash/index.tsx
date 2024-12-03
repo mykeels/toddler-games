@@ -21,7 +21,7 @@ export const Splash = () => {
         <section
             className=" h-screen"
             style={{
-                backgroundImage: `url(./splash.png)`,
+                backgroundImage: `url(./splash.webp)`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
             }}
