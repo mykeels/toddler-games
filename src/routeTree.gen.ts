@@ -22,7 +22,9 @@ import { Route as FreeDrawIndexImport } from './routes/free-draw/index'
 import { Route as LetterTracingTriangleImport } from './routes/letter-tracing/triangle'
 import { Route as LetterTracingSquareImport } from './routes/letter-tracing/square'
 import { Route as LetterTracingRightSlashImport } from './routes/letter-tracing/right-slash'
+import { Route as LetterTracingRightCurveImport } from './routes/letter-tracing/right-curve'
 import { Route as LetterTracingLeftSlashImport } from './routes/letter-tracing/left-slash'
+import { Route as LetterTracingLeftCurveImport } from './routes/letter-tracing/left-curve'
 import { Route as LetterTracingDownImport } from './routes/letter-tracing/down'
 import { Route as LetterTracingCircleImport } from './routes/letter-tracing/circle'
 import { Route as LetterTracingBUpperImport } from './routes/letter-tracing/b-upper'
@@ -94,8 +96,18 @@ const LetterTracingRightSlashRoute = LetterTracingRightSlashImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const LetterTracingRightCurveRoute = LetterTracingRightCurveImport.update({
+  path: '/letter-tracing/right-curve',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const LetterTracingLeftSlashRoute = LetterTracingLeftSlashImport.update({
   path: '/letter-tracing/left-slash',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const LetterTracingLeftCurveRoute = LetterTracingLeftCurveImport.update({
+  path: '/letter-tracing/left-curve',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -243,11 +255,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LetterTracingDownImport
       parentRoute: typeof rootRoute
     }
+    '/letter-tracing/left-curve': {
+      id: '/letter-tracing/left-curve'
+      path: '/letter-tracing/left-curve'
+      fullPath: '/letter-tracing/left-curve'
+      preLoaderRoute: typeof LetterTracingLeftCurveImport
+      parentRoute: typeof rootRoute
+    }
     '/letter-tracing/left-slash': {
       id: '/letter-tracing/left-slash'
       path: '/letter-tracing/left-slash'
       fullPath: '/letter-tracing/left-slash'
       preLoaderRoute: typeof LetterTracingLeftSlashImport
+      parentRoute: typeof rootRoute
+    }
+    '/letter-tracing/right-curve': {
+      id: '/letter-tracing/right-curve'
+      path: '/letter-tracing/right-curve'
+      fullPath: '/letter-tracing/right-curve'
+      preLoaderRoute: typeof LetterTracingRightCurveImport
       parentRoute: typeof rootRoute
     }
     '/letter-tracing/right-slash': {
@@ -338,7 +364,9 @@ export interface FileRoutesByFullPath {
   '/letter-tracing/b-upper': typeof LetterTracingBUpperRoute
   '/letter-tracing/circle': typeof LetterTracingCircleRoute
   '/letter-tracing/down': typeof LetterTracingDownRoute
+  '/letter-tracing/left-curve': typeof LetterTracingLeftCurveRoute
   '/letter-tracing/left-slash': typeof LetterTracingLeftSlashRoute
+  '/letter-tracing/right-curve': typeof LetterTracingRightCurveRoute
   '/letter-tracing/right-slash': typeof LetterTracingRightSlashRoute
   '/letter-tracing/square': typeof LetterTracingSquareRoute
   '/letter-tracing/triangle': typeof LetterTracingTriangleRoute
@@ -364,7 +392,9 @@ export interface FileRoutesByTo {
   '/letter-tracing/b-upper': typeof LetterTracingBUpperRoute
   '/letter-tracing/circle': typeof LetterTracingCircleRoute
   '/letter-tracing/down': typeof LetterTracingDownRoute
+  '/letter-tracing/left-curve': typeof LetterTracingLeftCurveRoute
   '/letter-tracing/left-slash': typeof LetterTracingLeftSlashRoute
+  '/letter-tracing/right-curve': typeof LetterTracingRightCurveRoute
   '/letter-tracing/right-slash': typeof LetterTracingRightSlashRoute
   '/letter-tracing/square': typeof LetterTracingSquareRoute
   '/letter-tracing/triangle': typeof LetterTracingTriangleRoute
@@ -391,7 +421,9 @@ export interface FileRoutesById {
   '/letter-tracing/b-upper': typeof LetterTracingBUpperRoute
   '/letter-tracing/circle': typeof LetterTracingCircleRoute
   '/letter-tracing/down': typeof LetterTracingDownRoute
+  '/letter-tracing/left-curve': typeof LetterTracingLeftCurveRoute
   '/letter-tracing/left-slash': typeof LetterTracingLeftSlashRoute
+  '/letter-tracing/right-curve': typeof LetterTracingRightCurveRoute
   '/letter-tracing/right-slash': typeof LetterTracingRightSlashRoute
   '/letter-tracing/square': typeof LetterTracingSquareRoute
   '/letter-tracing/triangle': typeof LetterTracingTriangleRoute
@@ -419,7 +451,9 @@ export interface FileRouteTypes {
     | '/letter-tracing/b-upper'
     | '/letter-tracing/circle'
     | '/letter-tracing/down'
+    | '/letter-tracing/left-curve'
     | '/letter-tracing/left-slash'
+    | '/letter-tracing/right-curve'
     | '/letter-tracing/right-slash'
     | '/letter-tracing/square'
     | '/letter-tracing/triangle'
@@ -444,7 +478,9 @@ export interface FileRouteTypes {
     | '/letter-tracing/b-upper'
     | '/letter-tracing/circle'
     | '/letter-tracing/down'
+    | '/letter-tracing/left-curve'
     | '/letter-tracing/left-slash'
+    | '/letter-tracing/right-curve'
     | '/letter-tracing/right-slash'
     | '/letter-tracing/square'
     | '/letter-tracing/triangle'
@@ -469,7 +505,9 @@ export interface FileRouteTypes {
     | '/letter-tracing/b-upper'
     | '/letter-tracing/circle'
     | '/letter-tracing/down'
+    | '/letter-tracing/left-curve'
     | '/letter-tracing/left-slash'
+    | '/letter-tracing/right-curve'
     | '/letter-tracing/right-slash'
     | '/letter-tracing/square'
     | '/letter-tracing/triangle'
@@ -496,7 +534,9 @@ export interface RootRouteChildren {
   LetterTracingBUpperRoute: typeof LetterTracingBUpperRoute
   LetterTracingCircleRoute: typeof LetterTracingCircleRoute
   LetterTracingDownRoute: typeof LetterTracingDownRoute
+  LetterTracingLeftCurveRoute: typeof LetterTracingLeftCurveRoute
   LetterTracingLeftSlashRoute: typeof LetterTracingLeftSlashRoute
+  LetterTracingRightCurveRoute: typeof LetterTracingRightCurveRoute
   LetterTracingRightSlashRoute: typeof LetterTracingRightSlashRoute
   LetterTracingSquareRoute: typeof LetterTracingSquareRoute
   LetterTracingTriangleRoute: typeof LetterTracingTriangleRoute
@@ -522,7 +562,9 @@ const rootRouteChildren: RootRouteChildren = {
   LetterTracingBUpperRoute: LetterTracingBUpperRoute,
   LetterTracingCircleRoute: LetterTracingCircleRoute,
   LetterTracingDownRoute: LetterTracingDownRoute,
+  LetterTracingLeftCurveRoute: LetterTracingLeftCurveRoute,
   LetterTracingLeftSlashRoute: LetterTracingLeftSlashRoute,
+  LetterTracingRightCurveRoute: LetterTracingRightCurveRoute,
   LetterTracingRightSlashRoute: LetterTracingRightSlashRoute,
   LetterTracingSquareRoute: LetterTracingSquareRoute,
   LetterTracingTriangleRoute: LetterTracingTriangleRoute,
@@ -559,7 +601,9 @@ export const routeTree = rootRoute
         "/letter-tracing/b-upper",
         "/letter-tracing/circle",
         "/letter-tracing/down",
+        "/letter-tracing/left-curve",
         "/letter-tracing/left-slash",
+        "/letter-tracing/right-curve",
         "/letter-tracing/right-slash",
         "/letter-tracing/square",
         "/letter-tracing/triangle",
@@ -608,8 +652,14 @@ export const routeTree = rootRoute
     "/letter-tracing/down": {
       "filePath": "letter-tracing/down.tsx"
     },
+    "/letter-tracing/left-curve": {
+      "filePath": "letter-tracing/left-curve.tsx"
+    },
     "/letter-tracing/left-slash": {
       "filePath": "letter-tracing/left-slash.tsx"
+    },
+    "/letter-tracing/right-curve": {
+      "filePath": "letter-tracing/right-curve.tsx"
     },
     "/letter-tracing/right-slash": {
       "filePath": "letter-tracing/right-slash.tsx"

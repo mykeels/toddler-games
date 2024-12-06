@@ -139,6 +139,16 @@ const GAME_LISTING: GameListing = {
           path: "/letter-tracing/right-slash",
           icon: "./icons/trace/right-slash.svg",
         },
+        {
+          title: "Left Curve",
+          path: "/letter-tracing/left-curve",
+          icon: "./icons/trace/left-curve.svg",
+        },
+        {
+          title: "Right Curve",
+          path: "/letter-tracing/right-curve",
+          icon: "./icons/trace/right-curve.svg",
+        },
       ],
     },
     {
