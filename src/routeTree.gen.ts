@@ -21,6 +21,8 @@ import { Route as ImageToLetterMatchingIndexImport } from './routes/image-to-let
 import { Route as FreeDrawIndexImport } from './routes/free-draw/index'
 import { Route as LetterTracingTriangleImport } from './routes/letter-tracing/triangle'
 import { Route as LetterTracingSquareImport } from './routes/letter-tracing/square'
+import { Route as LetterTracingRightSlashImport } from './routes/letter-tracing/right-slash'
+import { Route as LetterTracingLeftSlashImport } from './routes/letter-tracing/left-slash'
 import { Route as LetterTracingDownImport } from './routes/letter-tracing/down'
 import { Route as LetterTracingCircleImport } from './routes/letter-tracing/circle'
 import { Route as LetterTracingBUpperImport } from './routes/letter-tracing/b-upper'
@@ -84,6 +86,16 @@ const LetterTracingTriangleRoute = LetterTracingTriangleImport.update({
 
 const LetterTracingSquareRoute = LetterTracingSquareImport.update({
   path: '/letter-tracing/square',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const LetterTracingRightSlashRoute = LetterTracingRightSlashImport.update({
+  path: '/letter-tracing/right-slash',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const LetterTracingLeftSlashRoute = LetterTracingLeftSlashImport.update({
+  path: '/letter-tracing/left-slash',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -231,6 +243,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LetterTracingDownImport
       parentRoute: typeof rootRoute
     }
+    '/letter-tracing/left-slash': {
+      id: '/letter-tracing/left-slash'
+      path: '/letter-tracing/left-slash'
+      fullPath: '/letter-tracing/left-slash'
+      preLoaderRoute: typeof LetterTracingLeftSlashImport
+      parentRoute: typeof rootRoute
+    }
+    '/letter-tracing/right-slash': {
+      id: '/letter-tracing/right-slash'
+      path: '/letter-tracing/right-slash'
+      fullPath: '/letter-tracing/right-slash'
+      preLoaderRoute: typeof LetterTracingRightSlashImport
+      parentRoute: typeof rootRoute
+    }
     '/letter-tracing/square': {
       id: '/letter-tracing/square'
       path: '/letter-tracing/square'
@@ -312,6 +338,8 @@ export interface FileRoutesByFullPath {
   '/letter-tracing/b-upper': typeof LetterTracingBUpperRoute
   '/letter-tracing/circle': typeof LetterTracingCircleRoute
   '/letter-tracing/down': typeof LetterTracingDownRoute
+  '/letter-tracing/left-slash': typeof LetterTracingLeftSlashRoute
+  '/letter-tracing/right-slash': typeof LetterTracingRightSlashRoute
   '/letter-tracing/square': typeof LetterTracingSquareRoute
   '/letter-tracing/triangle': typeof LetterTracingTriangleRoute
   '/free-draw': typeof FreeDrawIndexRoute
@@ -336,6 +364,8 @@ export interface FileRoutesByTo {
   '/letter-tracing/b-upper': typeof LetterTracingBUpperRoute
   '/letter-tracing/circle': typeof LetterTracingCircleRoute
   '/letter-tracing/down': typeof LetterTracingDownRoute
+  '/letter-tracing/left-slash': typeof LetterTracingLeftSlashRoute
+  '/letter-tracing/right-slash': typeof LetterTracingRightSlashRoute
   '/letter-tracing/square': typeof LetterTracingSquareRoute
   '/letter-tracing/triangle': typeof LetterTracingTriangleRoute
   '/free-draw': typeof FreeDrawIndexRoute
@@ -361,6 +391,8 @@ export interface FileRoutesById {
   '/letter-tracing/b-upper': typeof LetterTracingBUpperRoute
   '/letter-tracing/circle': typeof LetterTracingCircleRoute
   '/letter-tracing/down': typeof LetterTracingDownRoute
+  '/letter-tracing/left-slash': typeof LetterTracingLeftSlashRoute
+  '/letter-tracing/right-slash': typeof LetterTracingRightSlashRoute
   '/letter-tracing/square': typeof LetterTracingSquareRoute
   '/letter-tracing/triangle': typeof LetterTracingTriangleRoute
   '/free-draw/': typeof FreeDrawIndexRoute
@@ -387,6 +419,8 @@ export interface FileRouteTypes {
     | '/letter-tracing/b-upper'
     | '/letter-tracing/circle'
     | '/letter-tracing/down'
+    | '/letter-tracing/left-slash'
+    | '/letter-tracing/right-slash'
     | '/letter-tracing/square'
     | '/letter-tracing/triangle'
     | '/free-draw'
@@ -410,6 +444,8 @@ export interface FileRouteTypes {
     | '/letter-tracing/b-upper'
     | '/letter-tracing/circle'
     | '/letter-tracing/down'
+    | '/letter-tracing/left-slash'
+    | '/letter-tracing/right-slash'
     | '/letter-tracing/square'
     | '/letter-tracing/triangle'
     | '/free-draw'
@@ -433,6 +469,8 @@ export interface FileRouteTypes {
     | '/letter-tracing/b-upper'
     | '/letter-tracing/circle'
     | '/letter-tracing/down'
+    | '/letter-tracing/left-slash'
+    | '/letter-tracing/right-slash'
     | '/letter-tracing/square'
     | '/letter-tracing/triangle'
     | '/free-draw/'
@@ -458,6 +496,8 @@ export interface RootRouteChildren {
   LetterTracingBUpperRoute: typeof LetterTracingBUpperRoute
   LetterTracingCircleRoute: typeof LetterTracingCircleRoute
   LetterTracingDownRoute: typeof LetterTracingDownRoute
+  LetterTracingLeftSlashRoute: typeof LetterTracingLeftSlashRoute
+  LetterTracingRightSlashRoute: typeof LetterTracingRightSlashRoute
   LetterTracingSquareRoute: typeof LetterTracingSquareRoute
   LetterTracingTriangleRoute: typeof LetterTracingTriangleRoute
   FreeDrawIndexRoute: typeof FreeDrawIndexRoute
@@ -482,6 +522,8 @@ const rootRouteChildren: RootRouteChildren = {
   LetterTracingBUpperRoute: LetterTracingBUpperRoute,
   LetterTracingCircleRoute: LetterTracingCircleRoute,
   LetterTracingDownRoute: LetterTracingDownRoute,
+  LetterTracingLeftSlashRoute: LetterTracingLeftSlashRoute,
+  LetterTracingRightSlashRoute: LetterTracingRightSlashRoute,
   LetterTracingSquareRoute: LetterTracingSquareRoute,
   LetterTracingTriangleRoute: LetterTracingTriangleRoute,
   FreeDrawIndexRoute: FreeDrawIndexRoute,
@@ -517,6 +559,8 @@ export const routeTree = rootRoute
         "/letter-tracing/b-upper",
         "/letter-tracing/circle",
         "/letter-tracing/down",
+        "/letter-tracing/left-slash",
+        "/letter-tracing/right-slash",
         "/letter-tracing/square",
         "/letter-tracing/triangle",
         "/free-draw/",
@@ -563,6 +607,12 @@ export const routeTree = rootRoute
     },
     "/letter-tracing/down": {
       "filePath": "letter-tracing/down.tsx"
+    },
+    "/letter-tracing/left-slash": {
+      "filePath": "letter-tracing/left-slash.tsx"
+    },
+    "/letter-tracing/right-slash": {
+      "filePath": "letter-tracing/right-slash.tsx"
     },
     "/letter-tracing/square": {
       "filePath": "letter-tracing/square.tsx"

@@ -129,6 +129,16 @@ const GAME_LISTING: GameListing = {
           path: "/letter-tracing/b-upper",
           icon: "./icons/trace/b-uppercase.svg",
         },
+        {
+          title: "Left Slash",
+          path: "/letter-tracing/left-slash",
+          icon: "./icons/trace/left-slash.svg",
+        },
+        {
+          title: "Right Slash",
+          path: "/letter-tracing/right-slash",
+          icon: "./icons/trace/right-slash.svg",
+        },
       ],
     },
     {
