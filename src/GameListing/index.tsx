@@ -12,6 +12,7 @@ import Header from "@/Header/Header";
 import { Tile } from "./Tile";
 import { speak } from "@/utils/speak";
 import FloatAround from "@/FloatAround";
+import { hasTouch } from "@/utils/touch";
 
 const GAME_LISTING: GameListing = {
   title: null!,
@@ -156,6 +157,12 @@ const GAME_LISTING: GameListing = {
       path: "/free-draw/",
       icon: "./icons/free-draw.svg",
     },
+    {
+      title: "Type Away",
+      path: "/type-away/",
+      icon: "./icons/ph_shuffle.svg",
+      isDisabled: () => hasTouch()
+    },
   ],
 };
 
@@ -163,6 +170,7 @@ type GameListing = {
   title: string;
   icon: string;
   back?: () => GameListing;
+  isDisabled?: () => boolean;
 } & (
     | {
       children: GameListing[];
@@ -201,6 +209,7 @@ export const Home = () => {
       }
       if ("children" in root) {
         for (const child of root.children) {
+          if (child.isDisabled?.()) continue;
           const found = findListing(child, searchTitle);
           if (found) return found;
         }

@@ -12,6 +12,7 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
+import { Route as TypeAwayIndexImport } from './routes/type-away/index'
 import { Route as TapToCountIndexImport } from './routes/tap-to-count/index'
 import { Route as ReadWordsIndexImport } from './routes/read-words/index'
 import { Route as PlaceTheLettersIndexImport } from './routes/place-the-letters/index'
@@ -41,6 +42,11 @@ import { Route as FindAndTapAnimalsImport } from './routes/find-and-tap/animals'
 
 const IndexRoute = IndexImport.update({
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const TypeAwayIndexRoute = TypeAwayIndexImport.update({
+  path: '/type-away/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -346,6 +352,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TapToCountIndexImport
       parentRoute: typeof rootRoute
     }
+    '/type-away/': {
+      id: '/type-away/'
+      path: '/type-away'
+      fullPath: '/type-away'
+      preLoaderRoute: typeof TypeAwayIndexImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -377,6 +390,7 @@ export interface FileRoutesByFullPath {
   '/place-the-letters': typeof PlaceTheLettersIndexRoute
   '/read-words': typeof ReadWordsIndexRoute
   '/tap-to-count': typeof TapToCountIndexRoute
+  '/type-away': typeof TypeAwayIndexRoute
 }
 
 export interface FileRoutesByTo {
@@ -405,6 +419,7 @@ export interface FileRoutesByTo {
   '/place-the-letters': typeof PlaceTheLettersIndexRoute
   '/read-words': typeof ReadWordsIndexRoute
   '/tap-to-count': typeof TapToCountIndexRoute
+  '/type-away': typeof TypeAwayIndexRoute
 }
 
 export interface FileRoutesById {
@@ -434,6 +449,7 @@ export interface FileRoutesById {
   '/place-the-letters/': typeof PlaceTheLettersIndexRoute
   '/read-words/': typeof ReadWordsIndexRoute
   '/tap-to-count/': typeof TapToCountIndexRoute
+  '/type-away/': typeof TypeAwayIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -464,6 +480,7 @@ export interface FileRouteTypes {
     | '/place-the-letters'
     | '/read-words'
     | '/tap-to-count'
+    | '/type-away'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -491,6 +508,7 @@ export interface FileRouteTypes {
     | '/place-the-letters'
     | '/read-words'
     | '/tap-to-count'
+    | '/type-away'
   id:
     | '__root__'
     | '/'
@@ -518,6 +536,7 @@ export interface FileRouteTypes {
     | '/place-the-letters/'
     | '/read-words/'
     | '/tap-to-count/'
+    | '/type-away/'
   fileRoutesById: FileRoutesById
 }
 
@@ -547,6 +566,7 @@ export interface RootRouteChildren {
   PlaceTheLettersIndexRoute: typeof PlaceTheLettersIndexRoute
   ReadWordsIndexRoute: typeof ReadWordsIndexRoute
   TapToCountIndexRoute: typeof TapToCountIndexRoute
+  TypeAwayIndexRoute: typeof TypeAwayIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -575,6 +595,7 @@ const rootRouteChildren: RootRouteChildren = {
   PlaceTheLettersIndexRoute: PlaceTheLettersIndexRoute,
   ReadWordsIndexRoute: ReadWordsIndexRoute,
   TapToCountIndexRoute: TapToCountIndexRoute,
+  TypeAwayIndexRoute: TypeAwayIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -613,7 +634,8 @@ export const routeTree = rootRoute
         "/number-keypad/",
         "/place-the-letters/",
         "/read-words/",
-        "/tap-to-count/"
+        "/tap-to-count/",
+        "/type-away/"
       ]
     },
     "/": {
@@ -690,6 +712,9 @@ export const routeTree = rootRoute
     },
     "/tap-to-count/": {
       "filePath": "tap-to-count/index.tsx"
+    },
+    "/type-away/": {
+      "filePath": "type-away/index.tsx"
     }
   }
 }
