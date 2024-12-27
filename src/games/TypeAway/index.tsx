@@ -61,7 +61,7 @@ function useTyped() {
     if (excludedKeys.includes(event.key)) return;
     setTyped(typed => [...typed, { id: nanoid(), key: event.key, createdAt: new Date() }]);
     vibrate();
-    fx.keys.play(event.key);
+    fx.keys.play(event.key, { rate: 1.2 });
     event.preventDefault();
     event.stopPropagation();
   }
