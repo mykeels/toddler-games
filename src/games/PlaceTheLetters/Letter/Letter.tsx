@@ -1,3 +1,4 @@
+import "../LetterSlot/LetterSlot.css";
 import clsx from "clsx";
 import Draggable, { DraggableEvent } from "react-draggable";
 import { DEFAULT_LETTER_COLOR, DEFAULT_LETTER_FONT_SIZE } from "../PlaceTheLetters.consts";
@@ -9,6 +10,7 @@ type LetterProps = {
     value: string;
     fontSize?: string;
     color?: string;
+    textShadowColor?: string;
     draggable?: {
         position: {
             x: number;
@@ -59,6 +61,7 @@ export const Letter = ({
     value,
     fontSize = DEFAULT_LETTER_FONT_SIZE,
     color = DEFAULT_LETTER_COLOR,
+    textShadowColor = "#fff",
     draggable
 }: LetterProps) => {
     const nodeRef = useRef<HTMLDivElement>(null);
@@ -131,13 +134,17 @@ export const Letter = ({
                 ref={nodeRef}
             >
                 <span
-                    className={clsx("stroke-white", {
+                    className={clsx("", {
                         "absolute": draggable,
                         [classId]: true
                     })}
                     ref={distortableRef}
                     style={{
-                        color
+                        color,
+                        textShadow: `-2px -2px 0 ${textShadowColor},
+                                    2px -2px 0 ${textShadowColor},
+                                    -2px 2px 0 ${textShadowColor},
+                                    2px 2px 0 ${textShadowColor}`
                     }}
                 >
                     {value}
