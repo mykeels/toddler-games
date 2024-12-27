@@ -57,9 +57,11 @@ function useTyped() {
   const [typed, setTyped] = useState<{ id: string, key: string, createdAt: Date }[]>([]);
 
   const handleKeyPress = (event: KeyboardEvent) => {
+    const excludedKeys = ['CapsLock', 'Shift'];
+    if (excludedKeys.includes(event.key)) return;
     setTyped(typed => [...typed, { id: nanoid(), key: event.key, createdAt: new Date() }]);
     vibrate();
-    // speak(event.key);
+    fx.keys.play(event.key);
     event.preventDefault();
     event.stopPropagation();
   }

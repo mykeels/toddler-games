@@ -1,4 +1,5 @@
 import { Howl } from "howler";
+import { speak } from "./speak";
 
 export const audio = (src: string, options: { rate?: number } = {}) =>
   new Howl({
@@ -73,6 +74,45 @@ export const fx = {
     y: audio("./soundfx/phonics/y.mp3"),
     z: audio("./soundfx/phonics/z.mp3"),
   },
+  alphabet: {
+    a: audio("./soundfx/alphabet/a.mp3"),
+    b: audio("./soundfx/alphabet/b.mp3"),
+    c: audio("./soundfx/alphabet/c.mp3"),
+    d: audio("./soundfx/alphabet/d.mp3"),
+    e: audio("./soundfx/alphabet/e.mp3"),
+    f: audio("./soundfx/alphabet/f.mp3"),
+    g: audio("./soundfx/alphabet/g.mp3"),
+    h: audio("./soundfx/alphabet/h.mp3"),
+    i: audio("./soundfx/alphabet/i.mp3"),
+    j: audio("./soundfx/alphabet/j.mp3"),
+    k: audio("./soundfx/alphabet/k.mp3"),
+    l: audio("./soundfx/alphabet/l.mp3"),
+    m: audio("./soundfx/alphabet/m.mp3"),
+    n: audio("./soundfx/alphabet/n.mp3"),
+    o: audio("./soundfx/alphabet/o.mp3"),
+    p: audio("./soundfx/alphabet/p.mp3"),
+    q: audio("./soundfx/alphabet/q.mp3"),
+    r: audio("./soundfx/alphabet/r.mp3"),
+    s: audio("./soundfx/alphabet/s.mp3"),
+    t: audio("./soundfx/alphabet/t.mp3"),
+    u: audio("./soundfx/alphabet/u.mp3"),
+    v: audio("./soundfx/alphabet/v.mp3"),
+    w: audio("./soundfx/alphabet/w.mp3"),
+    x: audio("./soundfx/alphabet/x.mp3"),
+    y: audio("./soundfx/alphabet/y.mp3"),
+    z: audio("./soundfx/alphabet/z.mp3"),
+  },
+  keys: {
+    play: (key: string, options: { rate?: number } = {}) => {
+      if (Object.keys(fx.alphabet).includes(key.toLowerCase()) && key === key.toUpperCase()) {
+        audio("./soundfx/alphabet/" + key.toLowerCase() + ".mp3", options).play();
+      } else if (Object.keys(fx.phonics).includes(key.toLowerCase())) {
+        audio("./soundfx/phonics/" + key.toLowerCase() + ".mp3", options).play();
+      } else {
+        speak(key);
+      }
+    },
+  }
 };
 
 export const isVowel = (character: string) =>
