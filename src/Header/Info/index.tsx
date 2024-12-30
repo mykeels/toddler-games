@@ -25,6 +25,11 @@ export const Info = ({
             <DialogHeader>
                 <DialogDescription className="text-brand-pink-500">
                     <Markdown>{description}</Markdown>
+                    <Markdown>{`
+## Feedback
+
+Do you have any feedback for this game? [Submit feedback](https://docs.google.com/forms/d/e/1FAIpQLSfDToCN7p-LG8R4QGmm8mWTmR9tRMdflYHlB72-48qxHbk9BA/viewform?usp=header).
+`}</Markdown>
                 </DialogDescription>
             </DialogHeader>
         </DialogContent>

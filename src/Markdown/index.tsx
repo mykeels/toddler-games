@@ -31,7 +31,7 @@ export const Markdown = ({ children }: { children: string }) => {
           a: ({ children, href }) => (
             <a
               href={href}
-              className="text-[#00629B] cursor-pointer underline"
+              className="text-[#f6eca3] cursor-pointer underline"
               target="_blank"
               rel="noopener noreferrer"
             >
