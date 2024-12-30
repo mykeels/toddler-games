@@ -19,6 +19,11 @@ const GAME_LISTING: GameListing = {
   icon: "./icons/toddler.svg",
   children: [
     {
+      title: "Flow",
+      path: "/flow/",
+      icon: "./icons/play.svg",
+    },
+    {
       title: "Letters, Numbers, and Symbols",
       icon: "./icons/tap-uppercase.svg",
       children: [

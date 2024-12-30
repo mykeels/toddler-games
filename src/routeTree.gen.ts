@@ -20,6 +20,7 @@ import { Route as NumberKeypadIndexImport } from './routes/number-keypad/index'
 import { Route as MenuIndexImport } from './routes/menu/index'
 import { Route as ImageToLetterMatchingIndexImport } from './routes/image-to-letter-matching/index'
 import { Route as FreeDrawIndexImport } from './routes/free-draw/index'
+import { Route as FlowIndexImport } from './routes/flow/index'
 import { Route as LetterTracingTriangleImport } from './routes/letter-tracing/triangle'
 import { Route as LetterTracingSquareImport } from './routes/letter-tracing/square'
 import { Route as LetterTracingRightSlashImport } from './routes/letter-tracing/right-slash'
@@ -84,6 +85,11 @@ const ImageToLetterMatchingIndexRoute = ImageToLetterMatchingIndexImport.update(
 
 const FreeDrawIndexRoute = FreeDrawIndexImport.update({
   path: '/free-draw/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const FlowIndexRoute = FlowIndexImport.update({
+  path: '/flow/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -303,6 +309,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LetterTracingTriangleImport
       parentRoute: typeof rootRoute
     }
+    '/flow/': {
+      id: '/flow/'
+      path: '/flow'
+      fullPath: '/flow'
+      preLoaderRoute: typeof FlowIndexImport
+      parentRoute: typeof rootRoute
+    }
     '/free-draw/': {
       id: '/free-draw/'
       path: '/free-draw'
@@ -383,6 +396,7 @@ export interface FileRoutesByFullPath {
   '/letter-tracing/right-slash': typeof LetterTracingRightSlashRoute
   '/letter-tracing/square': typeof LetterTracingSquareRoute
   '/letter-tracing/triangle': typeof LetterTracingTriangleRoute
+  '/flow': typeof FlowIndexRoute
   '/free-draw': typeof FreeDrawIndexRoute
   '/image-to-letter-matching': typeof ImageToLetterMatchingIndexRoute
   '/menu': typeof MenuIndexRoute
@@ -412,6 +426,7 @@ export interface FileRoutesByTo {
   '/letter-tracing/right-slash': typeof LetterTracingRightSlashRoute
   '/letter-tracing/square': typeof LetterTracingSquareRoute
   '/letter-tracing/triangle': typeof LetterTracingTriangleRoute
+  '/flow': typeof FlowIndexRoute
   '/free-draw': typeof FreeDrawIndexRoute
   '/image-to-letter-matching': typeof ImageToLetterMatchingIndexRoute
   '/menu': typeof MenuIndexRoute
@@ -442,6 +457,7 @@ export interface FileRoutesById {
   '/letter-tracing/right-slash': typeof LetterTracingRightSlashRoute
   '/letter-tracing/square': typeof LetterTracingSquareRoute
   '/letter-tracing/triangle': typeof LetterTracingTriangleRoute
+  '/flow/': typeof FlowIndexRoute
   '/free-draw/': typeof FreeDrawIndexRoute
   '/image-to-letter-matching/': typeof ImageToLetterMatchingIndexRoute
   '/menu/': typeof MenuIndexRoute
@@ -473,6 +489,7 @@ export interface FileRouteTypes {
     | '/letter-tracing/right-slash'
     | '/letter-tracing/square'
     | '/letter-tracing/triangle'
+    | '/flow'
     | '/free-draw'
     | '/image-to-letter-matching'
     | '/menu'
@@ -501,6 +518,7 @@ export interface FileRouteTypes {
     | '/letter-tracing/right-slash'
     | '/letter-tracing/square'
     | '/letter-tracing/triangle'
+    | '/flow'
     | '/free-draw'
     | '/image-to-letter-matching'
     | '/menu'
@@ -529,6 +547,7 @@ export interface FileRouteTypes {
     | '/letter-tracing/right-slash'
     | '/letter-tracing/square'
     | '/letter-tracing/triangle'
+    | '/flow/'
     | '/free-draw/'
     | '/image-to-letter-matching/'
     | '/menu/'
@@ -559,6 +578,7 @@ export interface RootRouteChildren {
   LetterTracingRightSlashRoute: typeof LetterTracingRightSlashRoute
   LetterTracingSquareRoute: typeof LetterTracingSquareRoute
   LetterTracingTriangleRoute: typeof LetterTracingTriangleRoute
+  FlowIndexRoute: typeof FlowIndexRoute
   FreeDrawIndexRoute: typeof FreeDrawIndexRoute
   ImageToLetterMatchingIndexRoute: typeof ImageToLetterMatchingIndexRoute
   MenuIndexRoute: typeof MenuIndexRoute
@@ -588,6 +608,7 @@ const rootRouteChildren: RootRouteChildren = {
   LetterTracingRightSlashRoute: LetterTracingRightSlashRoute,
   LetterTracingSquareRoute: LetterTracingSquareRoute,
   LetterTracingTriangleRoute: LetterTracingTriangleRoute,
+  FlowIndexRoute: FlowIndexRoute,
   FreeDrawIndexRoute: FreeDrawIndexRoute,
   ImageToLetterMatchingIndexRoute: ImageToLetterMatchingIndexRoute,
   MenuIndexRoute: MenuIndexRoute,
@@ -628,6 +649,7 @@ export const routeTree = rootRoute
         "/letter-tracing/right-slash",
         "/letter-tracing/square",
         "/letter-tracing/triangle",
+        "/flow/",
         "/free-draw/",
         "/image-to-letter-matching/",
         "/menu/",
@@ -691,6 +713,9 @@ export const routeTree = rootRoute
     },
     "/letter-tracing/triangle": {
       "filePath": "letter-tracing/triangle.tsx"
+    },
+    "/flow/": {
+      "filePath": "flow/index.tsx"
     },
     "/free-draw/": {
       "filePath": "free-draw/index.tsx"
