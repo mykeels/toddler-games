@@ -16,10 +16,12 @@ import README from "./README.md";
 export type FindAndTapProps = {
   getCharacterSet?: (set: typeof CHARACTERS) => Character[];
   level?: number;
+  onNext?: () => void;
 }
 
 export function FindAndTap({
   getCharacterSet = (set: typeof CHARACTERS) => set.uppercaseLetters,
+  onNext,
   ...props
 }: FindAndTapProps) {
   const characters = getCharacterSet(CHARACTERS);
@@ -61,6 +63,7 @@ export function FindAndTap({
     setState("playing");
     setGameIndex(gameIndex + 1);
     vibrate();
+    onNext?.();
   };
 
   useEffect(() => {

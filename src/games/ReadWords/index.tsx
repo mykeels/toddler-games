@@ -17,9 +17,10 @@ import README from "./README.md";
 type ReadWordsProps = {
   getWordSet?: (level?: Levels) => typeof WORDS[Levels];
   level?: Levels;
+  onNext?: () => void;
 }
 
-export const ReadWords = ({ getWordSet = (level) => level ? WORDS[level] : ALL_WORDS, ...props }: ReadWordsProps) => {
+export const ReadWords = ({ getWordSet = (level) => level ? WORDS[level] : ALL_WORDS, onNext, ...props }: ReadWordsProps) => {
   const { life, restart } = useRestart();
   const level = useLevel();
   const noOfWordCharacters = Math.min((Number(props.level) || level) + 1, 6) as Levels;
@@ -44,6 +45,13 @@ export const ReadWords = ({ getWordSet = (level) => level ? WORDS[level] : ALL_W
       showConfetti();
     }
   }, [letters.length, allLetters.length]);
+
+  const onNextClick = () => {
+    fx.click.play();
+    restart();
+    vibrate();
+    onNext?.();
+  };
 
   return (
     <Container key={life}>
@@ -86,7 +94,7 @@ export const ReadWords = ({ getWordSet = (level) => level ? WORDS[level] : ALL_W
           <img src={goal.image} alt={goal.value} className={classNames("w-56 h-56 hsx:w-32 hsx:h-32 hsm:w-32 hsm:h-32 border-2 border-white rounded-lg")} />
         </button>
         <Next
-          onNext={restart}
+          onNext={onNextClick}
           className={{
             invisible: letters.length !== allLetters.length
           }}

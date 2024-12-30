@@ -10,15 +10,18 @@ import { speak } from "@/utils/speak";
 import { useConfetti } from "@/Confetti";
 import { useLevel } from "@/Header/Levels";
 import README from "./README.md";
+import { vibrate } from "@/utils/vibrate";
 const IMAGES = [...ANIMALS, ...FRUITS];
 
 export type ImageToLetterMatchingProps = {
   transformLetter?: (letter: string) => string;
   level?: number;
+  onNext?: () => void;
 }
 
 export const ImageToLetterMatching = ({
   transformLetter = (letter) => letter,
+  onNext,
   ...props
 }: ImageToLetterMatchingProps) => {
   const [gameIndex, setGameIndex] = useState(0);
@@ -63,9 +66,8 @@ export const ImageToLetterMatching = ({
     setSelected(null);
     setGameIndex(gameIndex + 1);
     setState("playing");
-    if ("vibrate" in navigator) {
-      navigator.vibrate(200);
-    }
+    vibrate();
+    onNext?.();
   };
 
   useEffect(() => {

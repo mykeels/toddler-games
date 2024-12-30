@@ -11,7 +11,9 @@ import Letter from "./Letter/Letter";
 import { speak } from "@/utils/speak";
 import { getRainbowColor } from "@/utils/colors";
 import README from "./README.md";
-export const PlaceTheLetters = () => {
+import { vibrate } from "@/utils/vibrate";
+import { fx } from "@/utils/sound";
+export const PlaceTheLetters = ({ onNext }: { onNext?: () => void }) => {
   const { life, restart } = useRestart();
   const level = useLevel();
   const word = useMemo(() => {
@@ -34,8 +36,14 @@ export const PlaceTheLetters = () => {
   }, [isCompleted]);
   useEffect(() => {
     speak(`Let's spell, ${word}`);
-  }, [word]);
+  }, [word, onNext]);
   const fontSize = `${(90 / (characters.length + 2))}dvw`;
+  const onNextClick = () => {
+    fx.click.play();
+    restart();
+    vibrate();
+    onNext?.();
+  };
 
   return <Container key={life}>
     <Header
@@ -82,7 +90,7 @@ export const PlaceTheLetters = () => {
       <>
         {Confetti}
         <Next
-          onNext={restart}
+          onNext={onNextClick}
           className={{
             invisible: !isCompleted
           }}

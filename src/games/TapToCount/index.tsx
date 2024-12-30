@@ -11,10 +11,17 @@ import { speak } from "@/utils/speak";
 import { useConfetti } from "@/Confetti";
 import { useLevel } from "@/Header/Levels";
 import README from "./README.md";
+import { vibrate } from "@/utils/vibrate";
+import { useRestart } from "@/utils/restart";
 const COUNTABLES = [...FRUITS, ...ANIMALS];
 
-const TapToCount = ({ ...props }: { level?: number }) => {
-  const [gameId, setGameId] = useState(0);
+type TapToCountProps = {
+  onNext?: () => void;
+  level?: number;
+};
+
+export const TapToCount = ({ onNext, ...props }: TapToCountProps) => {
+  const { life, restart } = useRestart();
   const level = useLevel();
   const noOfItemsToCount = (props.level ?? level) + 1;
   const [items, setItems] = useState<
@@ -24,16 +31,13 @@ const TapToCount = ({ ...props }: { level?: number }) => {
     }[]
   >(getNextItems(noOfItemsToCount));
   const { ref } = useHorizontalSwipe({
-    onSwipe: () => reset()
+    onSwipe: () => onNextClick()
   });
   const targetCount = items.reduce((acc, item) => acc + item.target, 0);
   const [count, setCount] = useState(0);
   const getNextCount = (checked: boolean) => {
     setCount(count + (checked ? 1 : -1));
     fx.click.play();
-    if ("vibrate" in navigator) {
-      navigator.vibrate(200);
-    }
   };
   function getNextItems(level: number) {
     const items = [];
@@ -47,11 +51,13 @@ const TapToCount = ({ ...props }: { level?: number }) => {
     return items;
   }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  function reset() {
+  function onNextClick() {
     setItems(getNextItems(noOfItemsToCount));
     setCount(0);
-    setGameId(gameId + 1);
+    restart();
     fx.correct.play();
+    vibrate();
+    onNext?.();
   }
 
   useEffect(() => {
@@ -61,7 +67,7 @@ const TapToCount = ({ ...props }: { level?: number }) => {
     const controller = new AbortController();
     const handleKeyPress = (event: KeyboardEvent) => {
       if (event.key === "Enter" || event.key === " ") {
-        reset();
+        onNextClick();
       }
     };
 
@@ -69,7 +75,7 @@ const TapToCount = ({ ...props }: { level?: number }) => {
       signal: controller.signal,
     });
     return () => controller.abort();
-  }, [reset]);
+  }, [onNextClick]);
 
   const [showConfetti, Confetti] = useConfetti();
 
@@ -78,7 +84,7 @@ const TapToCount = ({ ...props }: { level?: number }) => {
   }, []);
   useEffect(() => {
     speak(`Can you count to ${targetCount}?`);
-  }, [gameId, targetCount]);
+  }, [life, targetCount]);
   useEffect(() => {
     if (count === targetCount) {
       showConfetti();
@@ -91,12 +97,12 @@ const TapToCount = ({ ...props }: { level?: number }) => {
 
   return (
     <Container
-      key={gameId}
+      key={life}
       ref={ref as React.LegacyRef<HTMLDivElement>}
     >
       <Header 
         title="Tap to Count" 
-        onRestart={reset}
+        onRestart={restart}
         Right={
           <Header.Info description={README} />
         }
@@ -119,7 +125,7 @@ const TapToCount = ({ ...props }: { level?: number }) => {
           )}
         </div>
         <div className="pt-4">
-          <Next onNext={reset} className={{
+          <Next onNext={onNextClick} className={{
             invisible: count !== targetCount
           }} />
         </div>
