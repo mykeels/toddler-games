@@ -36,6 +36,7 @@ export const PlaceTheLetters = ({ onNext }: { onNext?: () => void }) => {
   }, [isCompleted]);
   useEffect(() => {
     speak(`Let's spell, ${word}`);
+    fx.click.play();
   }, [word, onNext]);
   const fontSize = `${(90 / (characters.length + 2))}dvw`;
   const onNextClick = () => {
