@@ -15,19 +15,22 @@ import { useRestart } from "@/utils/restart";
 import Card from "@/Card";
 
 type WhatDoYouHearProps = {
-    getWordSet?: (level?: Levels) => typeof WORDS[Levels];
+    getWordSet?: (level?: number) => typeof WORDS[Levels];
     level?: Levels;
     onNext?: () => void;
 };
 
+const ONE_WORD_SET = Object.keys(fx.alphabet)
+    .map((letter) => ({ value: letter, pronunciation: letter, image: letter }));
+
 export const WhatDoYouHear = ({
-    getWordSet = (level) => level ? WORDS[level] : WORDS[2],
+    getWordSet = (level) => level === 1 ? ONE_WORD_SET : level ? WORDS[level as Levels] : WORDS[2],
     onNext,
     ...props
 }: WhatDoYouHearProps) => {
     const { life, restart } = useRestart();
     const level = useLevel();
-    const noOfWordCharacters = Math.min((Number(props.level) || level) + 1, 6) as Levels;
+    const noOfWordCharacters = Math.min((Number(props.level) || level), 6) as Levels;
     const wordSet = getWordSet(noOfWordCharacters);
     const getNextPair = () => getOptions(wordSet.map((word) => ({ value: word.value, name: word.value })), 2);
     const [pair, setPair] = useState(getNextPair());
@@ -81,7 +84,11 @@ export const WhatDoYouHear = ({
                 title="What Do You Hear?"
                 onRestart={onNextClick}
                 Right={<Header.Info description={README} />}
-            />
+            >
+                <button onClick={() => speak(goal.value)}>
+                    What Do You Hear?
+                </button>
+            </Header>
             <div className="flex flex-col items-center justify-center h-[90%] space-y-8">
                 <div className="flex justify-center gap-4">
                     {pair.map((option) => (
