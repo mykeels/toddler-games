@@ -42,18 +42,6 @@ export const WhatDoYouHear = ({
     const isCorrect = selected === goal.value;
     const [showConfetti, Confetti] = useConfetti();
 
-    useEffect(() => {
-        speak("What do you hear?");
-        let speakCount = 0;
-        const interval = setInterval(() => {
-            if (!isCorrect && speakCount < 3) {
-                speak(goal.value);
-                speakCount++;
-            }
-        }, 2000);
-        return () => clearInterval(interval);
-    }, [goal, isCorrect]);
-
     const onOptionClick = (option: string) => {
         setSelected(option);
         if (option === goal.value) {
@@ -74,9 +62,21 @@ export const WhatDoYouHear = ({
     };
 
     useEffect(() => {
+        speak("Listen! What do you hear?");
         setPair(getNextPair());
         setSelected(null);
-    }, [level]);
+    }, [life, level]);
+
+    useEffect(() => {
+        let speakCount = 0;
+        const interval = setInterval(() => {
+            if (!isCorrect && speakCount < 3) {
+                speak(goal.value);
+                speakCount++;
+            }
+        }, 2000);
+        return () => clearInterval(interval);
+    }, [goal.value]);
 
     return (
         <Container key={life}>
