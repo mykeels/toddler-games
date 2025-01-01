@@ -41,9 +41,11 @@ export const WhatDoYouHear = ({
 
     useEffect(() => {
         speak("What do you hear?");
+        let speakCount = 0;
         const interval = setInterval(() => {
-            if (!isCorrect) {
+            if (!isCorrect && speakCount < 3) {
                 speak(goal.value);
+                speakCount++;
             }
         }, 2000);
         return () => clearInterval(interval);
