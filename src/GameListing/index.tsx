@@ -68,6 +68,11 @@ const GAME_LISTING: GameListing = {
           path: "/number-keypad/",
           icon: "./icons/123.svg",
         },
+        {
+          title: "What do you hear?",
+          path: "/what-do-you-hear/",
+          icon: "./icons/loudspeaker.svg",
+        },
       ]
     },
     {

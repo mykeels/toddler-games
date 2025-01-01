@@ -27,20 +27,20 @@ export const WhatDoYouHear = ({
 }: WhatDoYouHearProps) => {
     const { life, restart } = useRestart();
     const level = useLevel();
-    const noOfWordCharacters = (props.level ?? level) + 1;
-    const wordSet = getWordSet(noOfWordCharacters as Levels);
+    const noOfWordCharacters = Math.min((Number(props.level) || level) + 1, 6) as Levels;
+    const wordSet = getWordSet(noOfWordCharacters);
     const getNextPair = () => getOptions(wordSet.map((word) => ({ value: word.value, name: word.value })), 2);
     const [pair, setPair] = useState(getNextPair());
     const goal = useMemo(
         () => pair[Math.floor(Math.random() * pair.length)],
-        [pair]
+        [life, pair, level, noOfWordCharacters]
     );
     const [selected, setSelected] = useState<string | null>(null);
     const isCorrect = selected === goal.value;
     const [showConfetti, Confetti] = useConfetti();
 
     useEffect(() => {
-        speak(goal.value);
+        speak("What do you hear?");
         const interval = setInterval(() => {
             if (!isCorrect) {
                 speak(goal.value);
@@ -67,6 +67,11 @@ export const WhatDoYouHear = ({
         restart();
         onNext?.();
     };
+
+    useEffect(() => {
+        setPair(getNextPair());
+        setSelected(null);
+    }, [level]);
 
     return (
         <Container key={life}>

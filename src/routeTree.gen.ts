@@ -12,6 +12,7 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
+import { Route as WhatDoYouHearIndexImport } from './routes/what-do-you-hear/index'
 import { Route as TypeAwayIndexImport } from './routes/type-away/index'
 import { Route as TapToCountIndexImport } from './routes/tap-to-count/index'
 import { Route as ReadWordsIndexImport } from './routes/read-words/index'
@@ -43,6 +44,11 @@ import { Route as FindAndTapAnimalsImport } from './routes/find-and-tap/animals'
 
 const IndexRoute = IndexImport.update({
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const WhatDoYouHearIndexRoute = WhatDoYouHearIndexImport.update({
+  path: '/what-do-you-hear/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -372,6 +378,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TypeAwayIndexImport
       parentRoute: typeof rootRoute
     }
+    '/what-do-you-hear/': {
+      id: '/what-do-you-hear/'
+      path: '/what-do-you-hear'
+      fullPath: '/what-do-you-hear'
+      preLoaderRoute: typeof WhatDoYouHearIndexImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -405,6 +418,7 @@ export interface FileRoutesByFullPath {
   '/read-words': typeof ReadWordsIndexRoute
   '/tap-to-count': typeof TapToCountIndexRoute
   '/type-away': typeof TypeAwayIndexRoute
+  '/what-do-you-hear': typeof WhatDoYouHearIndexRoute
 }
 
 export interface FileRoutesByTo {
@@ -435,6 +449,7 @@ export interface FileRoutesByTo {
   '/read-words': typeof ReadWordsIndexRoute
   '/tap-to-count': typeof TapToCountIndexRoute
   '/type-away': typeof TypeAwayIndexRoute
+  '/what-do-you-hear': typeof WhatDoYouHearIndexRoute
 }
 
 export interface FileRoutesById {
@@ -466,6 +481,7 @@ export interface FileRoutesById {
   '/read-words/': typeof ReadWordsIndexRoute
   '/tap-to-count/': typeof TapToCountIndexRoute
   '/type-away/': typeof TypeAwayIndexRoute
+  '/what-do-you-hear/': typeof WhatDoYouHearIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -498,6 +514,7 @@ export interface FileRouteTypes {
     | '/read-words'
     | '/tap-to-count'
     | '/type-away'
+    | '/what-do-you-hear'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -527,6 +544,7 @@ export interface FileRouteTypes {
     | '/read-words'
     | '/tap-to-count'
     | '/type-away'
+    | '/what-do-you-hear'
   id:
     | '__root__'
     | '/'
@@ -556,6 +574,7 @@ export interface FileRouteTypes {
     | '/read-words/'
     | '/tap-to-count/'
     | '/type-away/'
+    | '/what-do-you-hear/'
   fileRoutesById: FileRoutesById
 }
 
@@ -587,6 +606,7 @@ export interface RootRouteChildren {
   ReadWordsIndexRoute: typeof ReadWordsIndexRoute
   TapToCountIndexRoute: typeof TapToCountIndexRoute
   TypeAwayIndexRoute: typeof TypeAwayIndexRoute
+  WhatDoYouHearIndexRoute: typeof WhatDoYouHearIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -617,6 +637,7 @@ const rootRouteChildren: RootRouteChildren = {
   ReadWordsIndexRoute: ReadWordsIndexRoute,
   TapToCountIndexRoute: TapToCountIndexRoute,
   TypeAwayIndexRoute: TypeAwayIndexRoute,
+  WhatDoYouHearIndexRoute: WhatDoYouHearIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -657,7 +678,8 @@ export const routeTree = rootRoute
         "/place-the-letters/",
         "/read-words/",
         "/tap-to-count/",
-        "/type-away/"
+        "/type-away/",
+        "/what-do-you-hear/"
       ]
     },
     "/": {
@@ -740,6 +762,9 @@ export const routeTree = rootRoute
     },
     "/type-away/": {
       "filePath": "type-away/index.tsx"
+    },
+    "/what-do-you-hear/": {
+      "filePath": "what-do-you-hear/index.tsx"
     }
   }
 }
