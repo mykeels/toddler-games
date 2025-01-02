@@ -228,8 +228,8 @@ function Readable({
         {
           "bg-yellow-300": isChecked,
           "border-black": isChecked && !character.twin,
-          "border-green-700 text-green-700": isChecked && character.twin && character.twin % 2 === 1,
-          "border-purple-700 text-purple-700": isChecked && character.twin && character.twin % 2 === 0,
+          "border-green-700 text-green-700": character.twin && character.twin % 2 === 1,
+          "border-purple-700 text-purple-700": character.twin && character.twin % 2 === 0,
           "animate-breathe": !isComplete && isChecked,
           "bg-white hover:bg-blue-200": !isChecked,
         },
