@@ -12,6 +12,7 @@ import { speak } from "@/utils/speak";
 import { useConfetti } from "@/Confetti";
 import { useLevel } from "@/Header/Levels";
 import README from "./README.md";
+import { useMountTime } from "@/hooks/useMountTime";
 
 export type FindAndTapProps = {
   getCharacterSet?: (set: typeof CHARACTERS) => Character[];
@@ -31,7 +32,11 @@ export function FindAndTap({
   const noOfOptions = (props.level ?? level) + 1;
   const getNextPair = () => getOptions(characters, noOfOptions);
   const [pair, setPair] = useState<Character[]>(getNextPair());
+  const { elapsedTime } = useMountTime();
   useEffect(() => {
+    if (elapsedTime().seconds < 3) {
+      return;
+    }
     setPair(getNextPair());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [noOfOptions]);
