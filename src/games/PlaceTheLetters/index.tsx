@@ -43,7 +43,7 @@ export const PlaceTheLetters = ({ onNext }: { onNext?: () => void }) => {
     fx.click.play();
   };
   useEffect(speakGoal, [word, onNext]);
-  const fontSize = `${(90 / (characters.length + 2))}dvw`;
+  const fontSize = `${(85 / (characters.length + 2))}dvw`;
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const onNextClick = () => {
     fx.click.play();
