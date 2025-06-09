@@ -82,12 +82,15 @@ export function FindAndTap({
   useEffect(() => {
     const controller = new AbortController();
     const handleKeyPress = (event: KeyboardEvent) => {
-      if (event.key === "Enter" || event.key === " ") {
+      const options = pair.map((character) => character.value.toLowerCase());
+      if (options.includes(event.key.toLowerCase())) {
+        const button = document.querySelector(`[data-value="${event.key.toLowerCase()}"]`);
+        if (button) {
+          (button as HTMLButtonElement).click();
+        }
+      }
+      else if (event.key === "Enter" || event.key === " ") {
         onNextClick();
-      } else if (event.key === "ArrowLeft") {
-        onLetterOrNumberClick(pair[0]);
-      } else if (event.key === "ArrowRight") {
-        onLetterOrNumberClick(pair[1]);
       }
     };
 
