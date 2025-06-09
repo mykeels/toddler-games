@@ -34,10 +34,11 @@ export const PlaceTheLetters = ({ onNext }: { onNext?: () => void }) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isCompleted]);
-  useEffect(() => {
+  const speakGoal = () => {
     speak(`Let's spell, ${word}`);
     fx.click.play();
-  }, [word, onNext]);
+  };
+  useEffect(speakGoal, [word, onNext]);
   const fontSize = `${(90 / (characters.length + 2))}dvw`;
   const onNextClick = () => {
     fx.click.play();
@@ -53,7 +54,9 @@ export const PlaceTheLetters = ({ onNext }: { onNext?: () => void }) => {
         <Header.Info description={README} />
       }
     >
-      Place the letters in the word
+      <button className="focus:outline-none" onClick={() => speakGoal()}>
+        Place the letters in the word
+      </button>
     </Header>
     <div className="flex flex-col items-center justify-center h-[90%] space-y-8 hsx:space-y-2">
       <div className="flex flex-wrap justify-center content-center items-center portrait:gap-2 landscape:gap-4 landscape:px-[10%]">
