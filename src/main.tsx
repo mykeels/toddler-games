@@ -1,7 +1,6 @@
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import { createHashRouter, RouterProvider } from "react-router";
-
 import "./index.css";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { LevelContextProvider } from "./Header/Levels";
@@ -20,70 +19,77 @@ import TapToCount from "./games/TapToCount";
 import TypeAway from "./games/TypeAway";
 import WhatDoYouHear from "./games/WhatDoYouHear";
 import { WhatDoYouHearRoute } from "./games/WhatDoYouHear/route";
+import { Layout } from "./layout";
 
 // Create a new router instance
-const router = createHashRouter([
-  {
-    path: "/",
-    element: <Splash />,
-  },
-  {
-    path: "/menu",
-    element: <Home />,
-  },
-  {
-    path: "/find-and-tap/:characterSet",
-    element: <FindAndTapRoute />,
-  },
-  {
-    path: "/flow",
-    element: <Flow />,
-  },
-  {
-    path: "/free-draw",
-    element: <FreeDraw />,
-  },
-  {
-    path: "/image-to-letter-matching",
-    element: <ImageToLetterMatching />,
-  },
-  {
-    path: "/image-to-letter-matching/:characterSet",
-    element: <ImageToLetterMatchingRoute />,
-  },
-  {
-    path: "/letter-tracing/:characterSet",
-    element: <LetterTracingRoute />,
-  },
-  {
-    path: "/number-keypad",
-    element: <NumberKeypad />,
-  },
-  {
-    path: "/place-the-letters",
-    element: <PlaceTheLetters />,
-  },
-  {
-    path: "/read-words",
-    element: <ReadWords />,
-  },
-  {
-    path: "/tap-to-count",
-    element: <TapToCount />,
-  },
-  {
-    path: "/type-away",
-    element: <TypeAway />,
-  },
-  {
-    path: "/what-do-you-hear",
-    element: <WhatDoYouHear />,
-  },
-  {
-    path: "/what-do-you-hear/:uppercase",
-    element: <WhatDoYouHearRoute />,
-  },
-]);
+const router = createHashRouter(
+  [
+    {
+      path: "/",
+      element: <Splash />,
+    },
+    {
+      path: "/menu",
+      element: <Home />,
+    },
+    {
+      path: "/find-and-tap/:characterSet",
+      element: <FindAndTapRoute />,
+    },
+    {
+      path: "/flow",
+      element: <Flow />,
+    },
+    {
+      path: "/free-draw",
+      element: <FreeDraw />,
+    },
+    {
+      path: "/image-to-letter-matching",
+      element: <ImageToLetterMatching />,
+    },
+    {
+      path: "/image-to-letter-matching/:characterSet",
+      element: <ImageToLetterMatchingRoute />,
+    },
+    {
+      path: "/letter-tracing/:characterSet",
+      element: <LetterTracingRoute />,
+    },
+    {
+      path: "/number-keypad",
+      element: <NumberKeypad />,
+    },
+    {
+      path: "/place-the-letters",
+      element: <PlaceTheLetters />,
+    },
+    {
+      path: "/read-words",
+      element: <ReadWords />,
+    },
+    {
+      path: "/tap-to-count",
+      element: <TapToCount />,
+    },
+    {
+      path: "/type-away",
+      element: <TypeAway />,
+    },
+    {
+      path: "/what-do-you-hear",
+      element: <WhatDoYouHear />,
+    },
+    {
+      path: "/what-do-you-hear/:uppercase",
+      element: <WhatDoYouHearRoute />,
+    },
+  ].map((route) => ({
+    ...route,
+    element: <Layout>{route.element}</Layout>,
+  })),
+  {}
+);
 
 // eslint-disable-next-line react-refresh/only-export-components
 const RenderMode = ({ children }: { children: React.ReactNode }) => {
