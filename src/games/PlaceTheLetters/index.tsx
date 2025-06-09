@@ -13,17 +13,20 @@ import { getRainbowColor } from "@/utils/colors";
 import README from "./README.md";
 import { vibrate } from "@/utils/vibrate";
 import { fx } from "@/utils/sound";
+import clsx from "clsx";
+
 export const PlaceTheLetters = ({ onNext }: { onNext?: () => void }) => {
   const { life, restart } = useRestart();
   const level = useLevel();
-  const word = useMemo(() => {
+  const wordData = useMemo(() => {
     const words = WORDS[level + 1 as Levels] || [{
       value: "NONE"
     }];
     const randomIndex = Math.floor(Math.random() * words.length);
-    return words[randomIndex].value;
+    return words[randomIndex];
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [level, life]);
+  const word = wordData.value;
   const { characters, placeCharacter } = useWord(word);
   const isCompleted = characters.every(character => character.placed);
   const [showConfetti, Confetti] = useConfetti();
@@ -112,7 +115,18 @@ export const PlaceTheLetters = ({ onNext }: { onNext?: () => void }) => {
         }
       </div>
       <>
-        {Confetti}
+        <button className={clsx("flex flex-col items-center justify-center", {
+          'invisible': !isCompleted
+        })} onClick={() => {
+          speakGoal();
+        }}>
+          {Confetti}
+          {
+            !!wordData.image && (
+              <img src={wordData.image} alt={word} className={clsx("w-48 h-48 hsx:w-24 hsx:h-24 hsm:w-24 hsm:h-24 border-2 border-white rounded-lg")} />
+            )
+          }
+        </button>
         <Next
           onNext={onNextClick}
           className={{
