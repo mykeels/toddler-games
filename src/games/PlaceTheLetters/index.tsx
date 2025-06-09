@@ -34,18 +34,38 @@ export const PlaceTheLetters = ({ onNext }: { onNext?: () => void }) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isCompleted]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const speakGoal = () => {
     speak(`Let's spell, ${word}`);
     fx.click.play();
   };
   useEffect(speakGoal, [word, onNext]);
   const fontSize = `${(90 / (characters.length + 2))}dvw`;
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const onNextClick = () => {
     fx.click.play();
     restart();
     vibrate();
     onNext?.();
   };
+
+  useEffect(() => {
+    const controller = new AbortController();
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (event.key === " ") {
+        if (!isCompleted) {
+          speakGoal();
+        } else {
+          onNextClick();
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyPress, {
+      signal: controller.signal,
+    });
+    return () => controller.abort();
+  }, [onNextClick, isCompleted, speakGoal]);
 
   return <Container key={life}>
     <Header

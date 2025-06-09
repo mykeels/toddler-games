@@ -89,8 +89,14 @@ export function FindAndTap({
           button.tap();
         }
       }
-      else if (event.key === "Enter" || event.key === " ") {
+      else if (event.key === "Enter") {
         onNextClick();
+      } else if (event.key === " ") {
+        if (!isCorrect) {
+          speakGoal();
+        } else {
+          onNextClick();
+        }
       }
     };
 
