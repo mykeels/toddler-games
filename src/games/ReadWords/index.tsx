@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import classNames from "clsx";
+import classNames, { clsx } from "clsx";
 import { onTouch } from "@/utils/touch";
 import { fx, Phonics } from "@/utils/sound";
 import Header from "@/Header/Header";
@@ -95,7 +95,13 @@ export const ReadWords = ({ getWordSet = (level) => level ? WORDS[level] : ALL_W
         </button>
       </Header>
       <div className="flex flex-col items-center justify-center h-[90%] space-y-8 hsx:space-y-2">
-        <div className="flex flex-wrap justify-center content-center items-center portrait:gap-2 landscape:gap-4 landscape:px-[10%]">
+        <div className={clsx(
+          "flex flex-wrap justify-center content-center items-center",
+          {
+            "portrait:gap-2 landscape:gap-4 landscape:px-[10%]": allLetters.length < 5,
+            "gap-1": allLetters.length >= 5
+          }
+        )}>
           {allLetters.map((letter, index) => (
             <Readable
               key={index}
@@ -113,6 +119,7 @@ export const ReadWords = ({ getWordSet = (level) => level ? WORDS[level] : ALL_W
               }}
               isComplete={letters.length === allLetters.length}
               isChecked={letters.length >= index + 1}
+              noOfCharacters={allLetters.length}
             />
           ))}
         </div>
@@ -122,7 +129,11 @@ export const ReadWords = ({ getWordSet = (level) => level ? WORDS[level] : ALL_W
           speak(goal.value);
         }}>
           {Confetti}
-          <img src={goal.image} alt={goal.value} className={classNames("w-56 h-56 hsx:w-32 hsx:h-32 hsm:w-32 hsm:h-32 border-2 border-white rounded-lg")} />
+          {
+            !!goal.image && (
+              <img src={goal.image} alt={goal.value} className={classNames("w-56 h-56 hsx:w-32 hsx:h-32 hsm:w-32 hsm:h-32 border-2 border-white rounded-lg")} />
+            )
+          }
         </button>
         <Next
           onNext={onNextClick}
@@ -185,10 +196,15 @@ function useReadWord(word: {
   const [letters, setLetters] = useState<string[]>([]);
   const next = () => {
     const nextCharacter = characters[letters.length];
-    const twinCharacter = characters[letters.length + 1];
-    const isTwin = nextCharacter.twin;
+    let nextCharacterIndex = letters.length + 1;
+    const twinCharacters = [];
+    while (characters[nextCharacterIndex]?.value === nextCharacter.value && characters[nextCharacterIndex].twin) {
+      const nextCharacter = characters[nextCharacterIndex];
+      twinCharacters.push(nextCharacter);
+      nextCharacterIndex++;
+    }
     if (nextCharacter) {
-      const newLetters = [...letters, nextCharacter.value, ...((isTwin && twinCharacter) ? [twinCharacter.value] : [])];
+      const newLetters = [...letters, nextCharacter.value, ...twinCharacters.map(c => c.value)];
       setLetters(newLetters);
 
       if (newLetters.length >= allLetters.length) {
@@ -216,7 +232,8 @@ function Readable({
   onClick,
   isReady,
   isComplete,
-  isChecked
+  isChecked,
+  noOfCharacters
 }: {
   value: string;
   character: {
@@ -228,6 +245,7 @@ function Readable({
   isReady: boolean;
   isComplete: boolean;
   isChecked: boolean;
+  noOfCharacters: number;
 }) {
   const onTap = () => {
     onClick();
@@ -254,9 +272,14 @@ function Readable({
       data-value={value.toLowerCase()}
       data-readable={isReady && !isComplete && !isChecked}
       className={classNames(
-        "portrait:w-[16dvw] portrait:h-[16dvw] landscape:w-[18dvh] landscape:h-[18dvh]",
-        "landscape:text-5xl portrait:text-4xl portrait:lg:text-8xl landscape:hsx:text-3xl landscape:hsm:text-4xl",
-        "border-4 rounded text-black",
+        {
+          "portrait:w-[16dvw] portrait:h-[16dvw] landscape:w-[18dvh] landscape:h-[18dvh] landscape:text-5xl portrait:text-4xl portrait:lg:text-8xl landscape:hsx:text-3xl landscape:hsm:text-4xl border-4": noOfCharacters < 5,
+          "portrait:w-[14dvw] portrait:h-[14dvw] landscape:w-[16dvh] landscape:h-[16dvh] landscape:text-4xl portrait:text-3xl portrait:lg:text-7xl landscape:hsx:text-2xl landscape:hsm:text-3xl border-4": noOfCharacters >= 5 && noOfCharacters < 7,
+          "portrait:w-[12dvw] portrait:h-[12dvw] landscape:w-[14dvh] landscape:h-[14dvh] landscape:text-4xl portrait:text-3xl portrait:lg:text-7xl landscape:hsx:text-2xl landscape:hsm:text-3xl border-2": noOfCharacters >= 7 && noOfCharacters < 9,
+          "portrait:w-[10dvw] portrait:h-[10dvw] landscape:w-[12dvh] landscape:h-[12dvh] landscape:text-3xl portrait:text-2xl portrait:lg:text-6xl landscape:hsx:text-xl landscape:hsm:text-2xl border-2": noOfCharacters >= 9 && noOfCharacters < 11,
+          "portrait:w-[8dvw] portrait:h-[8dvw] landscape:w-[10dvh] landscape:h-[10dvh] landscape:text-2xl portrait:text-xl portrait:lg:text-5xl landscape:hsx:text-lg landscape:hsm:text-xl border-2": noOfCharacters >= 11,
+        },
+        "rounded text-black",
         "flex items-center justify-center font-bold",
         {
           "bg-yellow-300": isChecked,
