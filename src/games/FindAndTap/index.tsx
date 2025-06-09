@@ -48,11 +48,9 @@ export function FindAndTap({
   const onLetterOrNumberClick = (letterOrNumber: Character) => {
     setSelected(letterOrNumber);
     setState("interlude");
-    vibrate();
   };
   useEffect(() => {
-    if (!selected)
-    {
+    if (!selected) {
       return;
     }
     if (selected.value === goal.value) {
@@ -60,6 +58,7 @@ export function FindAndTap({
       showConfetti();
     } else if (selected.value !== goal.value) {
       fx.incorrect.play();
+      vibrate();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selected, goal]);

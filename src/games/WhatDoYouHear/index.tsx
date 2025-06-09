@@ -13,6 +13,7 @@ import README from "./README.md";
 import { getOptions } from "@/utils/characters";
 import { useRestart } from "@/utils/restart";
 import Card from "@/Card";
+import { sleep } from "@/utils/sleep";
 
 type WhatDoYouHearProps = {
     getWordSet?: (level?: number) => typeof WORDS[Levels];
@@ -44,14 +45,21 @@ export const WhatDoYouHear = ({
 
     const onOptionClick = (option: string) => {
         setSelected(option);
-        if (option === goal.value) {
-            fx.correct.play();
-            showConfetti();
-        } else {
-            fx.incorrect.play();
-            vibrate();
-        }
     };
+    
+    useEffect(() => {
+      if (!selected) {
+        return;
+      }
+      if (selected === goal.value) {
+        fx.correct.play();
+        showConfetti();
+      } else if (selected !== goal.value) {
+        fx.incorrect.play();
+        vibrate();
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [selected, goal]);
 
     const onNextClick = () => {
         fx.click.play();
@@ -63,19 +71,18 @@ export const WhatDoYouHear = ({
 
     useEffect(() => {
         speak("Listen! What do you hear?");
-        setPair(getNextPair());
-        setSelected(null);
     }, [life, level]);
 
     useEffect(() => {
-        let speakCount = 0;
-        const interval = setInterval(() => {
-            if (!isCorrect && speakCount < 3) {
-                speak(goal.value);
-                speakCount++;
+        async function run() {
+            await sleep(2000);
+            for (let speakCount = 0; speakCount < 3; speakCount++)
+            {
+                fx.keys.play(goal.value);
+                await sleep(1000);
             }
-        }, 2000);
-        return () => clearInterval(interval);
+        }
+        run();
     }, [goal.value]);
 
     return (
@@ -85,7 +92,7 @@ export const WhatDoYouHear = ({
                 onRestart={onNextClick}
                 Right={<Header.Info description={README} />}
             >
-                <button onClick={() => speak(goal.value)}>
+                <button onClick={() => fx.keys.play(goal.value)}>
                     What Do You Hear?
                 </button>
             </Header>
@@ -103,7 +110,7 @@ export const WhatDoYouHear = ({
                                 "px-8 py-4": true,
                             }}
                         >
-                            <span className={classNames("tracking-[0.25em] uppercase text-base sm:text-4xl")}>{option.value}</span>
+                            <span className={classNames("uppercase text-base sm:text-4xl text-center")}>{option.value}</span>
                             {option.value === goal.value ? Confetti : null}
                         </Card>
                     ))}
