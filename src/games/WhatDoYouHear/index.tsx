@@ -82,7 +82,7 @@ export const WhatDoYouHear = ({
 
     useEffect(() => {
         async function run() {
-            await sleep(2000);
+            await sleep(2300);
             for (let speakCount = 0; speakCount < 3; speakCount++)
             {
                 fx.keys.play(goal.value);

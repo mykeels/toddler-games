@@ -13,17 +13,17 @@ type GameComponent = (props: GameProps) => React.ReactNode;
 
 const games: GameComponent[] = [
     (props: GameProps) => <PlaceTheLetters {...props} />,
-    (props: GameProps) => <FindAndTap getCharacterSet={(set) => set.animals} {...props} />,
+    (props: GameProps) => <FindAndTap getCharacterSet={(set) => set.uppercaseLetters} {...props} />,
     (props: GameProps) => <ReadWords {...props} />,
     (props: GameProps) => <WhatDoYouHear {...props} />,
-    (props: GameProps) => <FindAndTap getCharacterSet={(set) => set.fruits} {...props} />,
-    (props: GameProps) => <TapToCount {...props} />,
     (props: GameProps) => <FindAndTap getCharacterSet={(set) => set.lowercaseLetters} {...props} />,
+    (props: GameProps) => <TapToCount {...props} />,
+    (props: GameProps) => <FindAndTap getCharacterSet={(set) => set.numbers} {...props} />,
     (props: GameProps) => <ImageToLetterMatching transformLetter={(letter) => letter.toUpperCase()} {...props} />,
     (props: GameProps) => <WhatDoYouHear {...props} uppercase />,
-    (props: GameProps) => <FindAndTap getCharacterSet={(set) => set.numbers} {...props} />,
+    (props: GameProps) => <FindAndTap getCharacterSet={(set) => set.fruits} {...props} />,
     (props: GameProps) => <ImageToLetterMatching transformLetter={(letter) => letter.toLowerCase()} {...props} />,
-    (props: GameProps) => <FindAndTap getCharacterSet={(set) => set.uppercaseLetters} {...props} />,
+    (props: GameProps) => <FindAndTap getCharacterSet={(set) => set.animals} {...props} />,
 ]
 
 export const Flow = () => {
