@@ -1,3 +1,4 @@
+import { onTouch } from "@/utils/touch";
 import { vibrate } from "@/utils/vibrate";
 import classNames from "clsx";
 import { useRef } from "react";
@@ -23,12 +24,12 @@ export function Card({
   return (
     <label className="flex flex-col items-center justify-center w-auto select-auto group">
       <div
-        onClick={() => {
+        {...onTouch(() => {
           onClick();
           if (value !== selectedValue) {
             vibrate();
           }
-        }}
+        })}
         data-value={value.toLowerCase()}
         className={classNames(
           "width" in classNameOptions

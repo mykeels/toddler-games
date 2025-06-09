@@ -86,7 +86,7 @@ export function FindAndTap({
       if (options.includes(event.key.toLowerCase())) {
         const button = document.querySelector(`[data-value="${event.key.toLowerCase()}"]`);
         if (button) {
-          (button as HTMLButtonElement).click();
+          button.tap();
         }
       }
       else if (event.key === "Enter" || event.key === " ") {

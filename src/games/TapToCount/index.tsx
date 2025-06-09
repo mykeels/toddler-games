@@ -13,6 +13,7 @@ import { useLevel } from "@/Header/Levels";
 import README from "./README.md";
 import { vibrate } from "@/utils/vibrate";
 import { useRestart } from "@/utils/restart";
+import { useMountTime } from "@/hooks/useMountTime";
 const COUNTABLES = [...FRUITS, ...ANIMALS];
 
 type TapToCountProps = {
@@ -60,14 +61,26 @@ export const TapToCount = ({ onNext, ...props }: TapToCountProps) => {
     onNext?.();
   }
 
+  const { elapsedTime } = useMountTime();
+
   useEffect(() => {
+    if (elapsedTime().seconds < 3) {
+      return;
+    }
     setItems(getNextItems(noOfItemsToCount));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [noOfItemsToCount]);
+
   useEffect(() => {
     const controller = new AbortController();
     const handleKeyPress = (event: KeyboardEvent) => {
-      if (event.key === "Enter" || event.key === " ") {
+      if (event.key === "Enter") {
         onNextClick();
+      } else if (event.key === " ") {
+        const button = document.querySelector(`[data-countable="true"]`);
+        if (button) {
+          button.tap();
+        }
       }
     };
 
@@ -157,6 +170,7 @@ function Countable({
   return (
     <button
       {...onTouch(onTap)}
+      data-countable={!checked}
       className={classNames(
         "portrait:w-[16dvw] portrait:h-[16dvw] landscape:w-[18dvh] landscape:h-[18dvh]",
         "border-2 border-black rounded",

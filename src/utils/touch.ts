@@ -9,3 +9,19 @@ export const onTouch = (
   };
 };
 
+export const tap = (element: HTMLElement) => {
+  element.dispatchEvent(new MouseEvent("mousedown", { bubbles: true, cancelable: true }));
+  element.dispatchEvent(new TouchEvent("touchstart", { bubbles: true, cancelable: true }));
+  element.click();
+}
+
+declare global {
+  interface Element {
+    tap: () => void;
+  }
+}
+
+Element.prototype.tap = function() {
+  tap(this as HTMLElement);
+};
+
