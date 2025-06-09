@@ -28,11 +28,6 @@ const GAME_LISTING: GameListing = {
       icon: "./icons/tap-uppercase.svg",
       children: [
         {
-          title: "Place the Letters",
-          path: "/place-the-letters/",
-          icon: "./icons/tap-uppercase.svg",
-        },
-        {
           title: "Find and Tap",
           icon: "./icons/tap.svg",
           children: [
@@ -68,17 +63,22 @@ const GAME_LISTING: GameListing = {
           path: "/number-keypad/",
           icon: "./icons/123.svg",
         },
-        {
-          title: "What do you hear?",
-          path: "/what-do-you-hear/",
-          icon: "./icons/loudspeaker.svg",
-        },
       ]
     },
     {
       title: "Tap to Count",
       path: "/tap-to-count/",
       icon: "./icons/1234.svg",
+    },
+    {
+      title: "Place the Letters",
+      path: "/place-the-letters/",
+      icon: "./icons/tap-uppercase.svg",
+    },
+    {
+      title: "What do you hear?",
+      path: "/what-do-you-hear/",
+      icon: "./icons/loudspeaker.svg",
     },
     {
       title: "Read Words",
