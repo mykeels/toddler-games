@@ -1,5 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
-import { getFirstCharOptions, LETTERS, getNextCharacter, ANIMALS, FRUITS } from "@/utils/characters";
+import {
+  getFirstCharOptions,
+  LETTERS,
+  getNextCharacter,
+  ANIMALS,
+  FRUITS,
+} from "@/utils/characters";
 import { useHorizontalSwipe } from "@/utils/swipe";
 import { fx } from "@/utils/sound";
 import Header from "@/Header/Header";
@@ -11,13 +17,15 @@ import { useConfetti } from "@/Confetti";
 import { useLevel } from "@/Header/Levels";
 import README from "./README.md";
 import { vibrate } from "@/utils/vibrate";
+import { sleep } from "@/utils/sleep";
+
 const IMAGES = [...ANIMALS, ...FRUITS];
 
 export type ImageToLetterMatchingProps = {
   transformLetter?: (letter: string) => string;
   level?: number;
   onNext?: () => void;
-}
+};
 
 export const ImageToLetterMatching = ({
   transformLetter = (letter) => letter,
@@ -35,7 +43,9 @@ export const ImageToLetterMatching = ({
   const noOfOptions = (props.level ?? level) + 1;
   const letters = useMemo(
     () =>
-      shuffleArray(getFirstCharOptions(LETTERS, image.name, noOfOptions)).map(transformLetter),
+      shuffleArray(getFirstCharOptions(LETTERS, image.name, noOfOptions)).map(
+        transformLetter
+      ),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [image.name, noOfOptions]
   );
@@ -71,24 +81,6 @@ export const ImageToLetterMatching = ({
   };
 
   useEffect(() => {
-    const controller = new AbortController();
-    const handleKeyPress = (event: KeyboardEvent) => {
-      if (event.key === "Enter" || event.key === " ") {
-        onNextClick();
-      } else if (event.key === "ArrowLeft") {
-        onLetterClick(letters[0]);
-      } else if (event.key === "ArrowRight") {
-        onLetterClick(letters[1]);
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyPress, {
-      signal: controller.signal,
-    });
-    return () => controller.abort();
-  }, [onNextClick, onLetterClick, letters]);
-
-  useEffect(() => {
     fx.game.play();
   }, []);
 
@@ -96,31 +88,70 @@ export const ImageToLetterMatching = ({
     onSwipe: () => onNextClick(),
   });
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const speakGoal = async () => {
+    const firstLetter = image.name[0]!;
+    for (let i = 0; i < 2; i++) {
+      fx.keys.play(firstLetter.toLowerCase());
+      await sleep(750);
+    }
+    speak(image.name);
+  };
+
   useEffect(() => {
-    speak(`Does ${image.name} start with ${listOptions(letters)}?`);
-  }, [gameIndex, image.name, letters]);
+    speakGoal();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [image.name]);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (letters.map(l => l.toLowerCase()).includes(event.key.toLowerCase())) {
+        const button = document.querySelector(`[data-value="${event.key.toLowerCase()}"]`);
+        if (button) {
+          button.tap();
+        }
+      }
+      else if (event.key === "Enter") {
+        onNextClick();
+      } else if (event.key === " ") {
+        if (!isCorrect) {
+          speakGoal();
+        } else {
+          onNextClick();
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyPress, {
+      signal: controller.signal,
+    });
+    return () => controller.abort();
+  }, [onNextClick, onLetterClick, letters, isCorrect, speakGoal]);
 
   return (
-    <Container
-      key={gameIndex}
-      ref={ref as React.LegacyRef<HTMLDivElement>}
-    >
+    <Container key={gameIndex} ref={ref as React.LegacyRef<HTMLDivElement>}>
       <Header
         title="Match Image to Letter"
         onRestart={onNextClick}
-        Right={
-          <Header.Info description={README} />
-        }
+        Right={<Header.Info description={README} />}
       >
-        {state === "interlude"
-          ? `${image.name} starts with ${goal}`
-          : `${image.name} starts with...`}
+        <button className="focus:outline-none" onClick={() => speakGoal()}>
+          {state === "interlude"
+            ? `${image.name} starts with ${goal}`
+            : `${image.name} starts with...`}
+        </button>
       </Header>
       <div className="flex flex-col items-center justify-center h-[90%] space-y-8">
-        <button className="text-center py-8 text-9xl font-bold" onClick={() => speak(image.name)}>{image.value}</button>
+        <button
+          className="text-center py-8 text-9xl font-bold"
+          onClick={() => speak(image.name)}
+        >
+          {image.value}
+        </button>
         <div data-name="pair" className="flex justify-center flex-wrap gap-4">
-          {
-            letters.map(letter => <Card
+          {letters.map((letter) => (
+            <Card
               key={letter}
               value={letter}
               selectedValue={goal}
@@ -129,22 +160,21 @@ export const ImageToLetterMatching = ({
             >
               {letter}
               {letter === goal ? Confetti : null}
-            </Card>)
-          }
+            </Card>
+          ))}
         </div>
-        <Next onNext={onNextClick} className={{
-          'invisible': !(state == "interlude" && selected && isCorrect)
-        }} />
+        <Next
+          onNext={onNextClick}
+          className={{
+            invisible: !(state == "interlude" && selected && isCorrect),
+          }}
+        />
       </div>
     </Container>
   );
 };
 
 export default ImageToLetterMatching;
-
-function listOptions(letters: string[]): string {
-  return letters.slice(0, -1).join(", ") + " or " + letters[letters.length - 1];
-}
 
 function shuffleArray<T>(array: T[]): T[] {
   const shuffled = [...array];
