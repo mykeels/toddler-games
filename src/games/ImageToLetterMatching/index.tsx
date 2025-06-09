@@ -90,9 +90,8 @@ export const ImageToLetterMatching = ({
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const speakGoal = async () => {
-    const firstLetter = image.name[0]!;
     for (let i = 0; i < 2; i++) {
-      fx.keys.play(firstLetter);
+      fx.keys.play(goal);
       await sleep(750);
     }
     speak(image.name);
