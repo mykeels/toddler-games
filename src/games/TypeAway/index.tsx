@@ -17,9 +17,10 @@ export const TypeAway = () => {
     fx.game.play();
   }, []);
 
-  useEffect(() => {
+  const speakGoal = () => {
     speak(`Type away!`);
-  }, []);
+  };
+  useEffect(speakGoal, []);
 
   const { typed } = useTyped();
 
@@ -32,7 +33,9 @@ export const TypeAway = () => {
         }
         noLevels
       >
-        Type Away!
+        <button className="focus:outline-none" onClick={() => speakGoal()}>
+          Type Away!
+        </button>
       </Header>
       <div className="flex flex-col items-center justify-center h-[90%] space-y-8 hsx:space-y-2">
         <div className="block relative w-full h-full">
@@ -83,8 +86,6 @@ function useTyped() {
       window.removeEventListener(KEY_PRESS_EVENT, handleKeyPress);
     }
   }, []);
-
-  console.log(typed);
 
   return { typed: typed.map(t => ({ id: t.id, key: t.key })) };
 }

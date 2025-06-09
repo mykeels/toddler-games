@@ -38,9 +38,10 @@ export const FreeDraw = () => {
   }, []);
 
   const { life, restart } = useRestart();
-  useEffect(() => {
+  const speakGoal = () => {
     speak("Draw something beautiful!");
-  }, []);
+  };
+  useEffect(speakGoal, []);
 
   return (
     <div className="flex flex-col h-full">
@@ -50,7 +51,11 @@ export const FreeDraw = () => {
           <Header.Info description={README} />
         }
         noLevels
-      >Free Draw</Header>
+      >
+        <button className="focus:outline-none" onClick={() => speakGoal()}>
+          Free Draw
+        </button>
+      </Header>
       <div
         className="flex flex-col space-y-4 items-center justify-center grow"
         ref={containerRef}

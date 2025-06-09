@@ -52,7 +52,11 @@ export const LetterTracing = ({ name, Letter = Across }: LetterTracingProps) => 
             </Menu.Item>
           </>
         }
-      />
+      >
+        <button className="focus:outline-none" onClick={() => speak(name)}>
+          {name}
+        </button>
+      </Header>
       <div
         className="flex flex-col space-y-4 items-center justify-center grow relative"
         ref={containerRef}
