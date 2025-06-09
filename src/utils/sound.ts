@@ -102,12 +102,26 @@ export const fx = {
     y: audio("./soundfx/alphabet/y.mp3"),
     z: audio("./soundfx/alphabet/z.mp3"),
   },
+  digits: {
+    0: audio("./soundfx/digits/0.mp3"),
+    1: audio("./soundfx/digits/1.mp3"),
+    2: audio("./soundfx/digits/2.mp3"),
+    3: audio("./soundfx/digits/3.mp3"),
+    4: audio("./soundfx/digits/4.mp3"),
+    5: audio("./soundfx/digits/5.mp3"),
+    6: audio("./soundfx/digits/6.mp3"),
+    7: audio("./soundfx/digits/7.mp3"),
+    8: audio("./soundfx/digits/8.mp3"),
+    9: audio("./soundfx/digits/9.mp3"),
+  },
   keys: {
     play: (key: string, options: { rate?: number } = {}) => {
       if (Object.keys(fx.alphabet).includes(key.toLowerCase()) && key === key.toUpperCase()) {
         audio("./soundfx/alphabet/" + key.toLowerCase() + ".mp3", options).play();
       } else if (Object.keys(fx.phonics).includes(key.toLowerCase())) {
         audio("./soundfx/phonics/" + key.toLowerCase() + ".mp3", options).play();
+      } else if (Object.keys(fx.digits).includes(key)) {
+        audio("./soundfx/digits/" + key + ".mp3", options).play();
       } else {
         speak(key);
       }
