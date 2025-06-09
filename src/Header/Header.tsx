@@ -1,5 +1,5 @@
 import { useNavigateToRoot } from "@/utils/useNavigateToRoot";
-import { Link } from "@tanstack/react-router";
+import { Link } from "react-router";
 import { Menu } from "./Menu";
 import { Levels } from "./Levels";
 import clsx from "clsx";
@@ -53,7 +53,10 @@ export const Header = ({ title, children, Left, ...props }: HeaderProps) => {
 export default Header;
 
 const BackToMenu = ({ title }: { title?: string }) => {
-  return <Link to="/menu" search={{ title }} className="flex p-2 self-stretch">
+  return <Link to={{
+    pathname: "/menu",
+    search: `title=${title}`
+  }} className="flex p-2 self-stretch">
     <img src="./icons/arrow-left.svg" alt="back" />
   </Link>
 }
