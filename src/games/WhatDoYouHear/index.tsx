@@ -19,12 +19,14 @@ type WhatDoYouHearProps = {
     getWordSet?: (level?: number) => typeof WORDS[Levels];
     level?: Levels;
     onNext?: () => void;
+    uppercase?: boolean;
 };
 
 const ONE_WORD_SET = Object.keys(fx.alphabet)
     .map((letter) => ({ value: letter, pronunciation: letter, image: letter }));
 
 export const WhatDoYouHear = ({
+    uppercase = false,
     getWordSet = (level) => level === 1 ? ONE_WORD_SET : level ? WORDS[level as Levels] : WORDS[2],
     onNext,
     ...props
@@ -33,7 +35,12 @@ export const WhatDoYouHear = ({
     const level = useLevel();
     const noOfWordCharacters = Math.min((Number(props.level) || level), 6) as Levels;
     const wordSet = getWordSet(noOfWordCharacters);
-    const getNextPair = () => getOptions(wordSet.map((word) => ({ value: word.value, name: word.value })), 2);
+    const getNextPair = () => getOptions(
+        wordSet
+            .map(word => uppercase ? word.value.toUpperCase() : word.value)
+            .map((word) => ({ value: word, name: word })),
+        2
+    );
     const [pair, setPair] = useState(getNextPair());
     const goal = useMemo(
         () => pair[Math.floor(Math.random() * pair.length)],
@@ -88,7 +95,7 @@ export const WhatDoYouHear = ({
     return (
         <Container key={life}>
             <Header
-                title="What Do You Hear?"
+                title="What do you hear?"
                 onRestart={onNextClick}
                 Right={<Header.Info description={README} />}
             >
@@ -110,7 +117,7 @@ export const WhatDoYouHear = ({
                                 "px-8 py-4": true,
                             }}
                         >
-                            <span className={classNames("uppercase text-base sm:text-4xl text-center")}>{option.value}</span>
+                            <span className={classNames("text-base sm:text-4xl text-center")}>{option.value}</span>
                             {option.value === goal.value ? Confetti : null}
                         </Card>
                     ))}

@@ -19,6 +19,7 @@ import ReadWords from "./games/ReadWords";
 import TapToCount from "./games/TapToCount";
 import TypeAway from "./games/TypeAway";
 import WhatDoYouHear from "./games/WhatDoYouHear";
+import { WhatDoYouHearRoute } from "./games/WhatDoYouHear/route";
 
 // Create a new router instance
 const router = createHashRouter([
@@ -77,6 +78,10 @@ const router = createHashRouter([
   {
     path: "/what-do-you-hear",
     element: <WhatDoYouHear />,
+  },
+  {
+    path: "/what-do-you-hear/:uppercase",
+    element: <WhatDoYouHearRoute />,
   },
 ]);
 

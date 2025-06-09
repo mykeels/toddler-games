@@ -78,8 +78,19 @@ const GAME_LISTING: GameListing = {
     },
     {
       title: "What do you hear?",
-      path: "/what-do-you-hear/",
       icon: "./icons/loudspeaker.svg",
+      children: [
+        {
+          title: "Lowercase Letters only",
+          path: "/what-do-you-hear",
+          icon: "./icons/tap-lowercase.svg",
+        },
+        {
+          title: "Uppercase Letters only",
+          path: "/what-do-you-hear/uppercase",
+          icon: "./icons/tap-uppercase.svg",
+        },
+      ],
     },
     {
       title: "Read Words",
