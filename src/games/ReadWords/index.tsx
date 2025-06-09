@@ -53,6 +53,33 @@ export const ReadWords = ({ getWordSet = (level) => level ? WORDS[level] : ALL_W
     onNext?.();
   };
 
+  const isCompleted = letters.length === allLetters.length;
+
+  useEffect(() => {
+    const controller = new AbortController();
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (event.key === "Enter") {
+        onNextClick();
+      } else if (event.key === " ") {
+        if (!isCompleted) {
+          speak(goal.value);
+        } else {
+          onNextClick();
+        }
+      } else if (allLetters.map(l => l.toLowerCase()).includes(event.key.toLowerCase())) {
+        const button = document.querySelector(`[data-value="${event.key.toLowerCase()}"][data-readable="true"]`);
+        if (button) {
+          button.tap();
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyPress, {
+      signal: controller.signal,
+    });
+    return () => controller.abort();
+  }, [onNextClick, isCompleted, goal.value]);
+
   return (
     <Container key={life}>
       <Header
@@ -61,7 +88,11 @@ export const ReadWords = ({ getWordSet = (level) => level ? WORDS[level] : ALL_W
           <Header.Info description={README} />
         }
       >
-        {goal.value}
+        <button className="focus:outline-none" onClick={() => {
+          speak(goal.value); 
+        }}>
+          {goal.value}
+        </button>
       </Header>
       <div className="flex flex-col items-center justify-center h-[90%] space-y-8 hsx:space-y-2">
         <div className="flex flex-wrap justify-center content-center items-center portrait:gap-2 landscape:gap-4 landscape:px-[10%]">
@@ -220,6 +251,8 @@ function Readable({
         }, 300);
       })}
       data-character-id={characterId}
+      data-value={value.toLowerCase()}
+      data-readable={isReady && !isComplete && !isChecked}
       className={classNames(
         "portrait:w-[16dvw] portrait:h-[16dvw] landscape:w-[18dvh] landscape:h-[18dvh]",
         "landscape:text-5xl portrait:text-4xl portrait:lg:text-8xl landscape:hsx:text-3xl landscape:hsm:text-4xl",
