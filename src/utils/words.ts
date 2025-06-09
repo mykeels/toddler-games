@@ -657,7 +657,7 @@ const EIGHT_LETTER_WORDS = [
   },
   {
     value: "demolish",
-    pronunciation: "demolišš",
+    pronunciation: "dimolišš",
     image: "",
   },
   {
