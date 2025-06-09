@@ -17,7 +17,7 @@ export type FindAndTapProps = {
   getCharacterSet?: (set: typeof CHARACTERS) => Character[];
   level?: number;
   onNext?: () => void;
-}
+};
 
 export function FindAndTap({
   getCharacterSet = (set: typeof CHARACTERS) => set.uppercaseLetters,
@@ -47,21 +47,30 @@ export function FindAndTap({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const onLetterOrNumberClick = (letterOrNumber: Character) => {
     setSelected(letterOrNumber);
-    if (letterOrNumber.value === goal.value) {
-      fx.correct.play();
-      showConfetti();
-    } else {
-      fx.incorrect.play();
-    }
     setState("interlude");
     vibrate();
   };
+  useEffect(() => {
+    if (!selected)
+    {
+      return;
+    }
+    if (selected.value === goal.value) {
+      fx.correct.play();
+      showConfetti();
+    } else if (selected.value !== goal.value) {
+      fx.incorrect.play();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selected, goal]);
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const onNextClick = () => {
     fx.click.play();
     setPair(getNextPair());
     setState("playing");
     setGameIndex(gameIndex + 1);
+    setSelected(null);
     vibrate();
     onNext?.();
   };
@@ -104,17 +113,14 @@ export function FindAndTap({
       <Header
         title="Find and Tap"
         onRestart={onNextClick}
-        Right={
-          <Header.Info description={README} />
-        }
+        Right={<Header.Info description={README} />}
       >
         Tap {goal.value}
       </Header>
       <div className="flex flex-col items-center justify-center h-[90%] space-y-16">
-        <div data-name="pair" className="flex justify-center flex-wrap gap-4"
-        >
-          {
-            pair.map(character => <Card
+        <div data-name="pair" className="flex justify-center flex-wrap gap-4">
+          {pair.map((character) => (
+            <Card
               key={character.value}
               value={character.value}
               selectedValue={goal.value}
@@ -123,18 +129,16 @@ export function FindAndTap({
             >
               {character.value}
               {character.value === goal.value ? Confetti : null}
-            </Card>)
-          }
+            </Card>
+          ))}
         </div>
         <Next
           onNext={onNextClick}
           className={{
-            invisible: !(state == "interlude" && isCorrect)
+            invisible: !(state == "interlude" && isCorrect),
           }}
         />
       </div>
-
-
     </Container>
   );
 }
