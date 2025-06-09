@@ -108,9 +108,11 @@ export function FindAndTap({
     onSwipe: () => onNextClick(),
   });
 
-  useEffect(() => {
-    speak(`Tap ${goal.name}`);
-  }, [goal, gameIndex]);
+  const speakGoal = () => {
+    speak(`Tap ${goal.value}`);
+  };
+
+  useEffect(speakGoal, [goal, gameIndex]);
 
   return (
     <Container
@@ -122,7 +124,9 @@ export function FindAndTap({
         onRestart={onNextClick}
         Right={<Header.Info description={README} />}
       >
-        Tap {goal.value}
+        <button className="focus:outline-none" onClick={() => speakGoal()}>
+          Tap {goal.value}
+        </button>
       </Header>
       <div className="flex flex-col items-center justify-center h-[90%] space-y-16">
         <div data-name="pair" className="flex justify-center flex-wrap gap-4">

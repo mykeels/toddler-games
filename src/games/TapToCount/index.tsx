@@ -95,14 +95,15 @@ export const TapToCount = ({ onNext, ...props }: TapToCountProps) => {
   useEffect(() => {
     fx.game.play();
   }, []);
-  useEffect(() => {
+  const speakGoal = () => {
     speak(`Can you count to ${targetCount}?`);
-  }, [life, targetCount]);
+  };
+  useEffect(speakGoal, [life, targetCount]);
   useEffect(() => {
     if (count === targetCount) {
       showConfetti();
       setTimeout(() => {
-        speak("Well done! Let's do it again.");
+        speak(`You counted to ${targetCount}! Let's do it again.`);
       }, 500);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -120,6 +121,9 @@ export const TapToCount = ({ onNext, ...props }: TapToCountProps) => {
           <Header.Info description={README} />
         }
       >
+        <button className="focus:outline-none" onClick={() => speakGoal()}>
+          Tap to Count
+        </button>
       </Header>
       <div className="flex flex-col portrait:gap-8 landscape:gap-4 landscape:hsx:gap-1 items-center justify-center h-[90%]">
         <h1

@@ -92,7 +92,7 @@ export const WhatDoYouHear = ({
                 onRestart={onNextClick}
                 Right={<Header.Info description={README} />}
             >
-                <button onClick={() => fx.keys.play(goal.value)}>
+                <button className="focus:outline-none" onClick={() => fx.keys.play(goal.value)}>
                     What Do You Hear?
                 </button>
             </Header>
