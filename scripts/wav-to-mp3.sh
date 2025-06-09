@@ -1,6 +1,6 @@
 #!/bin/bash
-letters=("a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z")
+letters=("0" "1" "2" "3" "4" "5" "6" "7" "8" "9")
 
-for letter in $letters; do
-    rm public/soundfx/alphabet/$letter.wav
+for letter in "${letters[@]}"; do
+    ffmpeg -i public/soundfx/digits/originals/$letter.wav -acodec libmp3lame -b:a 128k public/soundfx/digits/$letter.mp3;
 done
