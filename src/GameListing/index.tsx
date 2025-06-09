@@ -1,9 +1,9 @@
 import {
-  Link,
   useNavigate,
-  useSearch,
-  type FileRoutesByPath,
-} from "@tanstack/react-router";
+  Link,
+  useSearchParams,
+  URLSearchParamsInit,
+} from "react-router";
 import { fx } from "@/utils/sound";
 import { useEffect, useState } from "react";
 import { useHorizontalSwipe } from "@/utils/swipe";
@@ -13,6 +13,7 @@ import { Tile } from "./Tile";
 import { speak } from "@/utils/speak";
 import FloatAround from "@/FloatAround";
 import { hasTouch } from "@/utils/touch";
+import { z } from "zod";
 
 const GAME_LISTING: GameListing = {
   title: null!,
@@ -63,7 +64,7 @@ const GAME_LISTING: GameListing = {
           path: "/number-keypad/",
           icon: "./icons/123.svg",
         },
-      ]
+      ],
     },
     {
       title: "Tap to Count",
@@ -171,7 +172,7 @@ const GAME_LISTING: GameListing = {
       title: "Type Away",
       path: "/type-away/",
       icon: "./icons/ph_shuffle.svg",
-      isDisabled: () => hasTouch()
+      isDisabled: () => hasTouch(),
     },
   ],
 };
@@ -182,13 +183,13 @@ type GameListing = {
   back?: () => GameListing;
   isDisabled?: () => boolean;
 } & (
-    | {
+  | {
       children: GameListing[];
     }
-    | {
-      path: keyof FileRoutesByPath;
+  | {
+      path: string;
     }
-  );
+);
 
 const useHomeSound = () => {
   useEffect(() => {
@@ -200,6 +201,12 @@ const useHomeSound = () => {
     }
   }, []);
 };
+
+function useSearch(schema: z.AnyZodObject, defaultInit?: URLSearchParamsInit) {
+  const [searchParams] = useSearchParams(defaultInit);
+  const search = schema.parse(Object.fromEntries(searchParams));
+  return search;
+}
 
 export const Home = () => {
   useHomeSound();
@@ -232,11 +239,13 @@ export const Home = () => {
       return {
         ...found,
         back: () => GAME_LISTING,
-      }
+      };
     }
     return GAME_LISTING;
   };
-  const { title } = useSearch({ from: "/menu/" });
+  const { title } = useSearch(z.object({ title: z.string().optional() }), {
+    from: "/menu/",
+  });
   const [listing, setListing] = useState(searchListing(title));
   const enterListing = (item: GameListing) => {
     if ("children" in item) {
@@ -245,9 +254,7 @@ export const Home = () => {
         back: item.back ?? (() => listing),
       });
     } else {
-      navigate({
-        to: item.path,
-      });
+      navigate(item.path);
     }
   };
   const isListingAtRoot = listing.title === GAME_LISTING.title;
@@ -264,44 +271,61 @@ export const Home = () => {
   }, [listing.title]);
 
   return (
-    <Container
-      ref={ref as React.LegacyRef<HTMLDivElement>}>
+    <Container ref={ref as React.LegacyRef<HTMLDivElement>}>
       <Header
         title={listing.title}
         onRestart={undefined}
         Left={
-          isListingAtRoot ? <Header.BackToHome /> : <Header.Back onClick={() => enterListing(listing.back?.() ?? GAME_LISTING)} />
+          isListingAtRoot ? (
+            <Header.BackToHome />
+          ) : (
+            <Header.Back
+              onClick={() => enterListing(listing.back?.() ?? GAME_LISTING)}
+            />
+          )
         }
         noLevels
       >
-        {isListingAtRoot ? <h1 className="text-4xl font-bold font-lily">Let’s Play</h1> : null}
+        {isListingAtRoot ? (
+          <h1 className="text-4xl font-bold font-lily">Let’s Play</h1>
+        ) : null}
       </Header>
-      <div
-        className="flex flex-col p-2 md:p-4 relative h-[80dvh]"
-      >
-        {new Array(4).fill(null).map((_, index) => <Floaters key={index} />)}
+      <div className="flex flex-col p-2 md:p-4 relative h-[80dvh]">
+        {new Array(4).fill(null).map((_, index) => (
+          <Floaters key={index} />
+        ))}
         <ol className="list-none text-lg h-full overflow-y-auto snap-y flex portrait:max-md:flex-col md:flex-wrap items-center md:justify-center content-center gap-4 z-10">
-          {"children" in listing ? listing.children.map((child) =>
-            "path" in child ? (
-              <Link key={child.title} className="snap-center" to={child.path}>
-                <Tile title={child.title} imageSourcePath={child.icon} />
-              </Link>
-            ) : (
-              <li key={child.title} className="snap-center" onClick={() => enterListing(child)}>
-                <Link
-                  to="."
-                  search={{
-                    title: child.title,
-                  }}
-                >
-                  <Tile title={child.title} imageSourcePath={child.icon} />
-                </Link>
-              </li>
-            )
-          ) : null}
+          {"children" in listing
+            ? listing.children.map((child) =>
+                "path" in child ? (
+                  <Link
+                    key={child.title}
+                    className="snap-center"
+                    to={child.path}
+                  >
+                    <Tile title={child.title} imageSourcePath={child.icon} />
+                  </Link>
+                ) : (
+                  <li
+                    key={child.title}
+                    className="snap-center"
+                    onClick={() => enterListing(child)}
+                  >
+                    <Link
+                      to={{ pathname: ".", search: `?title=${child.title}` }}
+                    >
+                      <Tile title={child.title} imageSourcePath={child.icon} />
+                    </Link>
+                  </li>
+                )
+              )
+            : null}
           {!isListingAtRoot && (
             <button onClick={() => enterListing(listing.back!())}>
-              <Tile title="Back" imageSourcePath="./icons/arrow-left-black.svg" />
+              <Tile
+                title="Back"
+                imageSourcePath="./icons/arrow-left-black.svg"
+              />
             </button>
           )}
         </ol>
@@ -311,21 +335,33 @@ export const Home = () => {
 };
 
 const Floaters = () => {
-    return <>
-        <FloatAround>
-            <img src="./icons/123.svg" alt="123" className="opacity-20" />
-        </FloatAround>
-        <FloatAround>
-            <img src="./icons/1234.svg" alt="1234" className="opacity-20" />
-        </FloatAround>
-        <FloatAround>
-            <img src="./icons/free-draw.svg" alt="free-draw" className="opacity-20" />
-        </FloatAround>
-        <FloatAround>
-            <img src="./icons/match-image/to-lowercase.svg" className="opacity-20" />
-        </FloatAround>
-        <FloatAround>
-            <img src="./icons/match-image/to-uppercase.svg" className="opacity-20" />
-        </FloatAround>
+  return (
+    <>
+      <FloatAround>
+        <img src="./icons/123.svg" alt="123" className="opacity-20" />
+      </FloatAround>
+      <FloatAround>
+        <img src="./icons/1234.svg" alt="1234" className="opacity-20" />
+      </FloatAround>
+      <FloatAround>
+        <img
+          src="./icons/free-draw.svg"
+          alt="free-draw"
+          className="opacity-20"
+        />
+      </FloatAround>
+      <FloatAround>
+        <img
+          src="./icons/match-image/to-lowercase.svg"
+          className="opacity-20"
+        />
+      </FloatAround>
+      <FloatAround>
+        <img
+          src="./icons/match-image/to-uppercase.svg"
+          className="opacity-20"
+        />
+      </FloatAround>
     </>
+  );
 };

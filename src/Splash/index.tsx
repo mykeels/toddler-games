@@ -3,7 +3,7 @@ import Header from "@/Header/Header";
 import { fetchLatestVersion } from "@/utils/fetchLatestVersion";
 import { speak } from "@/utils/speak";
 import { useNavigateToRoot } from "@/utils/useNavigateToRoot";
-import { useNavigate } from "@tanstack/react-router";
+import { useNavigate } from "react-router";
 import { useEffect } from "react";
 import { useQuery } from "react-query";
 
@@ -31,7 +31,7 @@ export const Splash = () => {
                     style={{ textShadow: "2px 2px 4px rgba(0,0,0,0.5)", letterSpacing: "-4%" }}>
                     Let’s Play!
                 </h1>
-                <Button className="text-xl py-6 px-8" onClick={() => navigate({ to: "/menu" })}>
+                <Button className="text-xl py-6 px-8" onClick={() => navigate("/menu")}>
                     <>
                         <span>Play</span>
                         <img src="./icons/play-white.svg" alt="play" />
