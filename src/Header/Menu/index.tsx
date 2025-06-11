@@ -2,6 +2,8 @@ import React from "react";
 import { motion } from "framer-motion";
 import { useToggleMenu } from "../useToggleMenu";
 import { useClickOutside } from "../useClickOutside";
+import { getBaseUrl } from "@/utils/url";
+
 export type MenuProps = {
     open?: boolean;
     children?: React.ReactNode;
@@ -11,6 +13,7 @@ export const Menu = ({
     open,
     children
 }: MenuProps) => {
+    const baseUrl = getBaseUrl();
     const { isOpen, toggleMenu, closeMenu } = useToggleMenu({ open });
     const ref = useClickOutside(closeMenu);
     return <div className="flex flex-col items-center justify-center relative bg-brand-primary shadow print:hidden" ref={ref}>
@@ -25,7 +28,7 @@ export const Menu = ({
                 }}
             >
                 {
-                    isOpen ? <img src="./icons/close-white.svg" alt="close" /> : <img src="./icons/menu-white.svg" alt="menu" />
+                    isOpen ? <img src={`${baseUrl}/icons/close-white.svg`} alt="close" /> : <img src={`${baseUrl}/icons/menu-white.svg`} alt="menu" />
                 }
             </motion.div>
         </button>

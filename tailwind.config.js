@@ -1,3 +1,5 @@
+import { scopedPreflightStyles } from "tailwindcss-scoped-preflight";
+
 /** @type {import('tailwindcss').Config} */
 export default {
   darkMode: ["class"],
@@ -71,5 +73,11 @@ export default {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    require("tailwindcss-scoped-preflight").scopedPreflightStyles({
+      cssSelector: ".toddler-games",
+      mode: "matched only",
+    }),
+  ],
 };

@@ -39,13 +39,13 @@
   100% { transform: rotate(0deg); }
 }
 
-.prevent-select {
+.toddler-games .prevent-select {
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
 }
 
-* {
+.toddler-games * {
   font-family: 'Poppins', 'Segoe UI', 'San Francisco', 'Helvetica Neue', 'Arial', sans-serif;
 }
 

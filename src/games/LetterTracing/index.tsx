@@ -11,6 +11,7 @@ import Header from "@/Header/Header";
 import { speak } from "@/utils/speak";
 import { Menu } from "@/Header/Menu";
 import README from "./README.md";
+import { getBaseUrl } from "@/utils/url";
 
 type LetterTracingProps = {
   name: string;
@@ -18,6 +19,7 @@ type LetterTracingProps = {
 };
 
 export const LetterTracing = ({ name, Letter = Across }: LetterTracingProps) => {
+  const baseUrl = getBaseUrl();
   const { size, containerRef } = useFullScreenSize();
   useEffect(() => {
     fx.game.play();
@@ -44,7 +46,7 @@ export const LetterTracing = ({ name, Letter = Across }: LetterTracingProps) => 
                 }}
                 className="print:hidden"
               >
-                <img src="./icons/print-white.svg" alt="Print" />
+                <img src={`${baseUrl}/icons/print-white.svg`} alt="Print" />
               </button>
             </Menu.Item>
             <Menu.Item>

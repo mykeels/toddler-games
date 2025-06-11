@@ -20,6 +20,7 @@ type WhatDoYouHearProps = {
     level?: Levels;
     onNext?: () => void;
     uppercase?: boolean;
+    standalone?: boolean;
 };
 
 const ONE_WORD_SET = Object.keys(fx.alphabet)
@@ -29,6 +30,7 @@ export const WhatDoYouHear = ({
     uppercase = false,
     getWordSet = (level) => level === 1 ? ONE_WORD_SET : level ? WORDS[level as Levels] : WORDS[2],
     onNext,
+    standalone = false,
     ...props
 }: WhatDoYouHearProps) => {
     const { life, restart } = useRestart();
@@ -97,7 +99,8 @@ export const WhatDoYouHear = ({
             <Header
                 title="What do you hear?"
                 onRestart={onNextClick}
-                Right={<Header.Info description={README} />}
+                Right={standalone ? null : <Header.Info description={README} />}
+                {...(standalone ? { Left: <div></div> } : {})}
             >
                 <button className="focus:outline-none" onClick={() => fx.keys.play(goal.value)}>
                     What Do You Hear?

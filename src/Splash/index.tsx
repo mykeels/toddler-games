@@ -6,10 +6,12 @@ import { useNavigateToRoot } from "@/utils/useNavigateToRoot";
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
 import { useQuery } from "react-query";
+import { getBaseUrl } from "@/utils/url";
 
 export const Splash = () => {
     const navigate = useNavigate();
     const navigateToRoot = useNavigateToRoot();
+    const baseUrl = getBaseUrl();
     useEffect(() => {
         speak("Welcome! Let's Play!");
     }, []);
@@ -21,7 +23,7 @@ export const Splash = () => {
         <section
             className=" h-screen"
             style={{
-                backgroundImage: `url(./splash.webp)`,
+                backgroundImage: `url(${baseUrl}/splash.webp)`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
             }}
@@ -34,7 +36,7 @@ export const Splash = () => {
                 <Button className="text-xl py-6 px-8" onClick={() => navigate("/menu")}>
                     <>
                         <span>Play</span>
-                        <img src="./icons/play-white.svg" alt="play" />
+                        <img src={`${baseUrl}/icons/play-white.svg`} alt="play" />
                     </>
                 </Button>
                 <Header.Restart onRestart={navigateToRoot} isLoading={isFetching || isLoading} />
