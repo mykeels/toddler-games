@@ -61,6 +61,7 @@ export default defineConfig(({ mode }) => {
           "./index": "./src/main.mfe.tsx",
           "./what-do-you-hear": "./src/games/WhatDoYouHear/index.mfe.tsx",
           "./read-words": "./src/games/ReadWords/index.mfe.tsx",
+          "./alphabet": "./src/Alphabet/index.mfe.tsx",
         },
         shared: ["react", "react-dom", "react-router"],
       }),

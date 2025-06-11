@@ -10,6 +10,16 @@
  * Every other sound is represented as its short sound
  */
 
+export const SPECIAL_PHONICS = {
+  "ā": "a",
+  "ē": "e",
+  "ī": "i",
+  "ō": "o",
+  "ū": "u",
+  "č": "ch",
+  "š": "sh",
+}
+
 const TWO_LETTER_WORDS = [
   {
     value: "on",
