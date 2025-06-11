@@ -64,8 +64,8 @@ export const CreateReadWord = () => {
       {isReady && (
         <ReadWord
           goal={{
-            value: word,
-            pronunciation: pronunciation.slice(0, word.length),
+            value: word.toLowerCase(),
+            pronunciation: pronunciation.slice(0, word.length).toLowerCase(),
           }}
           standalone
           className={{
