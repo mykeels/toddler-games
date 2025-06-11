@@ -1,13 +1,19 @@
+import urlJoin from "url-join";
 import { Howl } from "howler";
 import { speak } from "./speak";
+import { getBaseUrl } from "./url";
 
 export const audio = (src: string, options: { rate?: number } = {}) =>
-  new Howl({
-    ...options,
-    src: [src],
-    preload: true,
-    volume: 0.8,
-  });
+  {
+    const baseUrl = getBaseUrl();
+    const audioUrl = urlJoin(baseUrl, src);
+    return new Howl({
+      ...options,
+      src: [audioUrl],
+      preload: true,
+      volume: 0.8,
+    });
+  };
 
 export const sequence = (
   fileNames: string[],

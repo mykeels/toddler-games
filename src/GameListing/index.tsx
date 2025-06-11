@@ -14,6 +14,7 @@ import { speak } from "@/utils/speak";
 import FloatAround from "@/FloatAround";
 import { hasTouch } from "@/utils/touch";
 import { z } from "zod";
+import { getBaseUrl } from "@/utils/url";
 
 const GAME_LISTING: GameListing = {
   title: null!,
@@ -346,30 +347,31 @@ export const Home = () => {
 };
 
 const Floaters = () => {
+  const baseUrl = getBaseUrl();
   return (
     <>
       <FloatAround>
-        <img src="./icons/123.svg" alt="123" className="opacity-20" />
+        <img src={`${baseUrl}/icons/123.svg`} alt="123" className="opacity-20" />
       </FloatAround>
       <FloatAround>
-        <img src="./icons/1234.svg" alt="1234" className="opacity-20" />
+        <img src={`${baseUrl}/icons/1234.svg`} alt="1234" className="opacity-20" />
       </FloatAround>
       <FloatAround>
         <img
-          src="./icons/free-draw.svg"
+          src={`${baseUrl}/icons/free-draw.svg`}
           alt="free-draw"
           className="opacity-20"
         />
       </FloatAround>
       <FloatAround>
         <img
-          src="./icons/match-image/to-lowercase.svg"
+          src={`${baseUrl}/icons/match-image/to-lowercase.svg`}
           className="opacity-20"
         />
       </FloatAround>
       <FloatAround>
         <img
-          src="./icons/match-image/to-uppercase.svg"
+          src={`${baseUrl}/icons/match-image/to-uppercase.svg`}
           className="opacity-20"
         />
       </FloatAround>

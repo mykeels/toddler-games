@@ -5,6 +5,7 @@ import { Levels } from "./Levels";
 import clsx from "clsx";
 import { Info } from "./Info";
 import React from "react";
+import { getBaseUrl } from "@/utils/url";
 
 type HeaderProps = {
   title?: string;
@@ -53,30 +54,34 @@ export const Header = ({ title, children, Left, ...props }: HeaderProps) => {
 export default Header;
 
 const BackToMenu = ({ title }: { title?: string }) => {
+  const baseUrl = getBaseUrl();
   return <Link to={{
     pathname: "/menu",
     search: `title=${title}`
   }} className="flex p-2 self-stretch">
-    <img src="./icons/arrow-left.svg" alt="back" />
+    <img src={`${baseUrl}/icons/arrow-left.svg`} alt="back" />
   </Link>
 }
 
 const Back = ({ onClick }: { onClick: () => void }) => {
+  const baseUrl = getBaseUrl();
   return <button onClick={onClick} className="flex p-2 self-stretch">
-    <img src="./icons/arrow-left.svg" alt="back" />
+    <img src={`${baseUrl}/icons/arrow-left.svg`} alt="back" />
   </button>
 }
 
 const BackToHome = () => {
+  const baseUrl = getBaseUrl();
   const navigateToRoot = useNavigateToRoot();
   return <Link to="/" onClick={async () => await navigateToRoot()} className="flex p-2 self-stretch">
-    <img src="./icons/home-white.svg" alt="home" />
+    <img src={`${baseUrl}/icons/home-white.svg`} alt="home" />
   </Link>
 }
 
 const Restart = ({ onRestart, isLoading }: { onRestart: () => void, isLoading?: boolean }) => {
+  const baseUrl = getBaseUrl();
   return <button onClick={onRestart} className="flex p-2 self-stretch justify-center">
-    <img src="./icons/restart-white.svg" alt="restart" className={clsx("w-10 h-10", {
+    <img src={`${baseUrl}/icons/restart-white.svg`} alt="restart" className={clsx("w-10 h-10", {
       "animate-spin": isLoading
     })} />
   </button>

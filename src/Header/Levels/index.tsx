@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { StoryFn } from "@storybook/react";
 import { useDebouncedCallback } from 'use-debounce';
 import { useClickOutside } from "../useClickOutside";
+import { getBaseUrl } from "@/utils/url";
 
 export const Levels = () => {
     const { isOpen, toggleMenu, closeMenu } = useToggleMenu({ open: false });
@@ -17,9 +18,10 @@ export const Levels = () => {
         }
     }
     const ref = useClickOutside(closeMenu);
+    const baseUrl = getBaseUrl();
     return <div className="flex flex-row gap-2 relative" ref={ref}>
         <button onClick={toggleMenu}>
-            <img src="./icons/ladder-white.svg" alt="ladder" className={
+            <img src={`${baseUrl}/icons/ladder-white.svg`} alt="ladder" className={
                 clsx("transform duration-300 w-10 h-10", {
                     "rotate-[30deg]": isOpen,
                     "rotate-0": !isOpen
