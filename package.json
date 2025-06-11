@@ -1,7 +1,7 @@
 {
   "name": "toddler-games",
   "private": true,
-  "version": "0.0.111",
+  "version": "0.0.112",
   "type": "module",
   "scripts": {
     "predeploy": "npm version patch && npm run build:github",
