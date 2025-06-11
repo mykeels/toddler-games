@@ -1,5 +1,5 @@
 import "./index.css";
-import { StrictMode } from "react";
+import React , { StrictMode } from "react";
 import { createHashRouter, RouterProvider } from "react-router";
 import { QueryClient, QueryClientProvider } from "react-query";
 
@@ -20,6 +20,7 @@ import TypeAway from "./games/TypeAway";
 import WhatDoYouHear from "./games/WhatDoYouHear";
 import { WhatDoYouHearRoute } from "./games/WhatDoYouHear/route";
 import { Layout } from "./layout";
+import { ErrorBoundary } from "./utils/error-boundary";
 
 // eslint-disable-next-line react-refresh/only-export-components
 const RenderMode = ({ children }: { children: React.ReactNode }) => {
@@ -32,11 +33,15 @@ const queryClient = new QueryClient();
 export const AppContexts = ({ children }: { children: React.ReactNode }) => {
   return (
     <RenderMode>
-      <QueryClientProvider client={queryClient}>
-        <LevelContextProvider>
-          <div className="mfe toddler-games">{children}</div>
-        </LevelContextProvider>
-      </QueryClientProvider>
+      <ErrorBoundary>
+        <QueryClientProvider client={queryClient}>
+          <LevelContextProvider>
+            <div className="mfe toddler-games">
+              {children}
+            </div>
+          </LevelContextProvider>
+        </QueryClientProvider>
+      </ErrorBoundary>
     </RenderMode>
   );
 };
