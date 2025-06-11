@@ -4,8 +4,8 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 
 export const CreateReadWord = () => {
-  const [word, setWord] = useState("");
-  const [pronunciation, setPronunciation] = useState("");
+  const [word, setWord] = useState("hello");
+  const [pronunciation, setPronunciation] = useState("hellō");
   const isReady =
     word.length > 0 &&
     pronunciation.length > 0 &&
