@@ -13,7 +13,7 @@ export default defineConfig(({ mode }) => {
     build: {
       target: "esnext",
       rollupOptions: {
-        input: {},
+        input: "index.html",
         output: {
           format: "esm",
         },
