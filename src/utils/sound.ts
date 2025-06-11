@@ -1,3 +1,4 @@
+import urlJoin from "url-join";
 import { Howl } from "howler";
 import { speak } from "./speak";
 import { getBaseUrl } from "./url";
@@ -5,7 +6,7 @@ import { getBaseUrl } from "./url";
 export const audio = (src: string, options: { rate?: number } = {}) =>
   {
     const baseUrl = getBaseUrl();
-    const audioUrl = new URL(src, baseUrl).toString();
+    const audioUrl = urlJoin(baseUrl, src);
     return new Howl({
       ...options,
       src: [audioUrl],
