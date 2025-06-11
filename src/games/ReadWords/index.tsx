@@ -148,10 +148,12 @@ export const ReadWord = ({
   goal,
   reader,
   standalone,
+  className,
 }: {
   goal: { value: string; pronunciation?: string };
   reader?: ReturnType<typeof useReadWord>;
   standalone?: boolean;
+  className?: string | Record<string, boolean>;
 }) => {
   const _reader = useReadWord(goal);
   const { next, letters, allLetters, characters } = reader || _reader;
@@ -165,7 +167,8 @@ export const ReadWord = ({
             allLetters.length < 5,
           "gap-1": allLetters.length >= 5,
           "flex-wrap": !standalone,
-        }
+        },
+        className
       )}
     >
       {allLetters.map((letter, index) => (
