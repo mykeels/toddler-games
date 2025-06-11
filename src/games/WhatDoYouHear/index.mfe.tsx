@@ -6,8 +6,11 @@ import {
 import { WhatDoYouHear } from "./index";
 import { AppContexts } from "@/main.app";
 import { useState } from "react";
+import { getBaseUrl } from "@/utils/url";
 
 const WhenUserIsReady = ({ children }: { children: React.ReactNode }) => {
+  const baseUrl = getBaseUrl();
+  console.log({ baseUrl });
   const [isReady, setIsReady] = useState(false);
   return (
     <div className="toddler-games">

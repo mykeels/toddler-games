@@ -4,13 +4,23 @@ export const getBaseUrl = () => {
       document.querySelector(
         "script[data-scope='toddler-games']"
       )) as HTMLScriptElement;
-    const baseUrl = currentScript?.getAttribute("src") || new URL(import.meta.url).origin;
-    return (
-      baseUrl
+
+    const entryUrl =
+      currentScript?.getAttribute("src") || new URL(import.meta.url).origin;
+    const baseUrl =
+      entryUrl
         .split("?")[0]
         ?.replace("/dist/assets/remoteEntry.js", "")
-        .replace("/assets/remoteEntry.js", "") || "/"
-    );
+        .replace("/assets/remoteEntry.js", "") || "/";
+
+    if (import.meta.env.ASSET_URL) {
+      return `${baseUrl}/${import.meta.env.ASSET_URL}`;
+    }
+    return baseUrl;
+  }
+  const entryUrl = new URL(import.meta.url).origin;
+  if (import.meta.env.ASSET_URL) {
+    return `${entryUrl}/${import.meta.env.ASSET_URL}`;
   }
   return "/";
 };
