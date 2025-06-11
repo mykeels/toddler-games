@@ -3,7 +3,7 @@ import {
   getModuleFederationEntry,
   ModuleFederationEntry,
 } from "@/utils/mfe.utils";
-import { WhatDoYouHear } from "./index";
+import { ReadWords } from "./index";
 import { AppContexts } from "@/main.app";
 import { WhenUserIsReady } from "@/WhenUserIsReady";
 
@@ -13,7 +13,7 @@ const Entry: ModuleFederationEntry<never> = getModuleFederationEntry(() => {
       path: "/",
       element: (
         <WhenUserIsReady>
-          <WhatDoYouHear standalone />
+          <ReadWords standalone />
         </WhenUserIsReady>
       ),
     },

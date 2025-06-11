@@ -18,9 +18,10 @@ type ReadWordsProps = {
   getWordSet?: (level?: Levels) => typeof WORDS[Levels];
   level?: Levels;
   onNext?: () => void;
+  standalone?: boolean;
 }
 
-export const ReadWords = ({ getWordSet = (level) => level ? WORDS[level] : ALL_WORDS, onNext, ...props }: ReadWordsProps) => {
+export const ReadWords = ({ getWordSet = (level) => level ? WORDS[level] : ALL_WORDS, onNext, standalone, ...props }: ReadWordsProps) => {
   const { life, restart } = useRestart();
   const level = useLevel();
   const noOfWordCharacters = Math.min((Number(props.level) || level) + 1, 6) as Levels;
@@ -84,9 +85,8 @@ export const ReadWords = ({ getWordSet = (level) => level ? WORDS[level] : ALL_W
     <Container key={life}>
       <Header
         onRestart={restart}
-        Right={
-          <Header.Info description={README} />
-        }
+        Right={standalone ? null : <Header.Info description={README} />}
+        {...(standalone ? { Left: <div></div> } : {})}
       >
         <button className="focus:outline-none" onClick={() => {
           speak(goal.value); 

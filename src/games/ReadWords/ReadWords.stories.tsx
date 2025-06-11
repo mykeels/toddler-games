@@ -40,3 +40,5 @@ export const TwinWords = () => (
     ]}
   />
 );
+
+export const Standalone = () => <ReadWords standalone />;
