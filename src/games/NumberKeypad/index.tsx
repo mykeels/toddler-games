@@ -15,7 +15,6 @@ export const NumberKeypad = () => {
     setRecipient((recipient + digit).slice(-10));
     vibrate();
   };
-  const reset = () => setRecipient("");
 
   useEffect(() => {
     fx.game.play();
