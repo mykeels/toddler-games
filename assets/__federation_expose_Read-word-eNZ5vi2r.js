@@ -1,0 +1,1 @@
+import{j as t,a as r,c as a}from"./main.app-Bi-gfH3g.js";import{g as e}from"./mfe.utils-BsyZ-VZ0.js";const d=e(({mountProps:o})=>t.jsx(r,{children:t.jsx(a,{goal:o.goal,standalone:!0})}));export{d as default};
