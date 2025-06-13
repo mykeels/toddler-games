@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useToggleMenu } from "../useToggleMenu";
 import { useClickOutside } from "../useClickOutside";
 import { getBaseUrl } from "@/utils/url";
+import { vibrate } from "@/utils/vibrate";
 
 export type MenuProps = {
     open?: boolean;
@@ -53,7 +54,12 @@ export const Menu = ({
                 >
                     {React.Children.map(children, (child) => {
                         if (React.isValidElement(child) && child.type === Menu.Item) {
-                            return <li className="flex hover:scale-110 transition-all duration-300 border border-white rounded-full p-1 hover:bg-brand-accent-pink">
+                            return <li 
+                                onClick={() => {
+                                    vibrate();
+                                }}
+                                className="flex hover:scale-110 transition-all duration-300 border border-white rounded-full p-1 hover:bg-brand-accent-pink"
+                            >
                                 <span className="w-10 h-10 flex items-center justify-center">
                                     {child}
                                 </span>
