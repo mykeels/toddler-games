@@ -5,6 +5,7 @@ import { DEFAULT_LETTER_COLOR, DEFAULT_LETTER_FONT_SIZE } from "../PlaceTheLette
 import { useRef } from "react";
 import { useFloatAround } from "@/FloatAround";
 import { fx } from "@/utils/sound";
+import { vibrate } from "@/utils/vibrate";
 
 type LetterProps = {
     value: string;
@@ -71,6 +72,7 @@ export const Letter = ({
     const speakLetter = throttle(() => {
         rateRef.current = 1 + Math.abs(Math.sin(Date.now() / 200) * 0.5);
         fx.phonics.play(value, { rate: rateRef.current });
+        vibrate();
     }, 300);
     const { classId, style } = useFloatAround(3);
 
