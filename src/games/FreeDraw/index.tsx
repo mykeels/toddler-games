@@ -43,10 +43,14 @@ export const FreeDraw = () => {
   };
   useEffect(speakGoal, []);
 
+  const onNextClick = () => {
+    restart();
+  };
+
   return (
     <div className="flex flex-col h-full">
       <Header
-        onRestart={restart}
+        onRestart={onNextClick}
         Right={
           <Header.Info description={README} />
         }

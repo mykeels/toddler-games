@@ -11,7 +11,6 @@ import Letter from "./Letter/Letter";
 import { speak } from "@/utils/speak";
 import { getRainbowColor } from "@/utils/colors";
 import README from "./README.md";
-import { vibrate } from "@/utils/vibrate";
 import { fx } from "@/utils/sound";
 import clsx from "clsx";
 
@@ -46,9 +45,7 @@ export const PlaceTheLetters = ({ onNext }: { onNext?: () => void }) => {
   const fontSize = `${(85 / (characters.length + 2))}dvw`;
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const onNextClick = () => {
-    fx.click.play();
     restart();
-    vibrate();
     onNext?.();
   };
 
@@ -72,7 +69,7 @@ export const PlaceTheLetters = ({ onNext }: { onNext?: () => void }) => {
 
   return <Container key={life}>
     <Header
-      onRestart={restart}
+      onRestart={onNextClick}
       Right={
         <Header.Info description={README} />
       }

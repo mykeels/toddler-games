@@ -57,9 +57,7 @@ export const ReadWords = ({
   }, [letters.length, allLetters.length]);
 
   const onNextClick = () => {
-    fx.click.play();
     restart();
-    vibrate();
     onNext?.();
   };
 

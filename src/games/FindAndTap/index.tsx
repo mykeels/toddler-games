@@ -70,12 +70,10 @@ export function FindAndTap({
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const onNextClick = () => {
-    fx.click.play();
     setPair(getNextPair());
     setState("playing");
     setGameIndex(gameIndex + 1);
     setSelected(null);
-    vibrate();
     onNext?.();
   };
 

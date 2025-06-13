@@ -46,7 +46,7 @@ export const NumberKeypad = () => {
   return (
     <Container>
       <Header 
-        onRestart={reset}
+        onRestart={undefined}
         noLevels
         Right={
           <Header.Info description={README} />

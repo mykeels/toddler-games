@@ -116,7 +116,7 @@ export const TapToCount = ({ onNext, ...props }: TapToCountProps) => {
     >
       <Header 
         title="Tap to Count" 
-        onRestart={restart}
+        onRestart={onNextClick}
         Right={
           <Header.Info description={README} />
         }

@@ -16,8 +16,8 @@ import { speak } from "@/utils/speak";
 import { useConfetti } from "@/Confetti";
 import { useLevel } from "@/Header/Levels";
 import README from "./README.md";
-import { vibrate } from "@/utils/vibrate";
 import { sleep } from "@/utils/sleep";
+import { useRestart } from "@/utils/restart";
 
 const IMAGES = [...ANIMALS, ...FRUITS];
 
@@ -32,12 +32,12 @@ export const ImageToLetterMatching = ({
   onNext,
   ...props
 }: ImageToLetterMatchingProps) => {
-  const [gameIndex, setGameIndex] = useState(0);
+  const { life, restart } = useRestart();
   const [state, setState] = useState<"playing" | "interlude">("playing");
   const image = useMemo(
     () => getNextCharacter(IMAGES),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [gameIndex]
+    [life]
   );
   const level = useLevel();
   const noOfOptions = (props.level ?? level) + 1;
@@ -72,11 +72,9 @@ export const ImageToLetterMatching = ({
   };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const onNextClick = () => {
-    fx.click.play();
     setSelected(null);
-    setGameIndex(gameIndex + 1);
     setState("playing");
-    vibrate();
+    restart();
     onNext?.();
   };
 
@@ -129,7 +127,7 @@ export const ImageToLetterMatching = ({
   }, [onNextClick, onLetterClick, letters, isCorrect, speakGoal]);
 
   return (
-    <Container key={gameIndex} ref={ref as React.LegacyRef<HTMLDivElement>}>
+    <Container key={life} ref={ref as React.LegacyRef<HTMLDivElement>}>
       <Header
         title="Match Image to Letter"
         onRestart={onNextClick}

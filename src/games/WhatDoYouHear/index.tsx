@@ -71,7 +71,6 @@ export const WhatDoYouHear = ({
     }, [selected, goal]);
 
     const onNextClick = () => {
-        fx.click.play();
         setPair(getNextPair());
         setSelected(null);
         restart();
