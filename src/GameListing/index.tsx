@@ -296,6 +296,7 @@ export const Home = () => {
             />
           )
         }
+        noRight
         noLevels
       >
         {isListingAtRoot ? (

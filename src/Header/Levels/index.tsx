@@ -19,8 +19,8 @@ export const Levels = () => {
     }
     const ref = useClickOutside(closeMenu);
     const baseUrl = getBaseUrl();
-    return <div className="flex flex-row gap-2 relative" ref={ref}>
-        <button onClick={toggleMenu}>
+    return <div className="flex flex-row gap-2 relative group" ref={ref}>
+        <button onClick={toggleMenu} className="flex p-2">
             <img src={`${baseUrl}/icons/ladder-white.svg`} alt="ladder" className={
                 clsx("transform duration-300 w-10 h-10", {
                     "rotate-[30deg]": isOpen,
@@ -40,7 +40,7 @@ export const Levels = () => {
                     duration: 0.2,
                     ease: "easeOut"
                 }}
-                className="absolute right-0 top-[-20%] w-48 bg-brand-accent-pink p-1 mr-12 flex flex-col gap-2 shadow border border-white rounded"
+                className="absolute right-0 top-0 w-48 p-2 mr-12 flex flex-col gap-2 shadow border border-white rounded group-hover:bg-brand-accent-pink"
             >
                 <h4 className="text-white text-sm text-center" ref={titleRef}>{`Level ${level}`}</h4>
                 <input

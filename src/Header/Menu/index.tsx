@@ -16,7 +16,7 @@ export const Menu = ({
     const baseUrl = getBaseUrl();
     const { isOpen, toggleMenu, closeMenu } = useToggleMenu({ open });
     const ref = useClickOutside(closeMenu);
-    return <div className="flex flex-col items-center justify-center relative bg-brand-primary shadow print:hidden" ref={ref}>
+    return <div className="flex flex-col items-center justify-center relative bg-brand-primary print:hidden mr-3" ref={ref}>
         <button onClick={toggleMenu}>
             <motion.div
                 animate={{
@@ -48,13 +48,15 @@ export const Menu = ({
                         duration: 0.2,
                         ease: "easeOut"
                     }}
-                    className="absolute top-full left-[-50%] w-[200%] bg-brand-accent-pink text-black shadow-lg mt-4 rounded 
-            flex flex-col items-center justify-center gap-4 border border-t-0 border-white rounded-t-none"
+                    className="absolute top-full  w-[250%] text-black shadow-lg mt-4 
+            flex flex-col items-center justify-center gap-4 rounded-t-none"
                 >
                     {React.Children.map(children, (child) => {
                         if (React.isValidElement(child) && child.type === Menu.Item) {
-                            return <li className="flex hover:scale-110 transition-all duration-300">
-                                {child}
+                            return <li className="flex hover:scale-110 transition-all duration-300 border border-white rounded-full p-1 hover:bg-brand-accent-pink">
+                                <span className="w-10 h-10 flex items-center justify-center">
+                                    {child}
+                                </span>
                             </li>
                         }
                     })}
