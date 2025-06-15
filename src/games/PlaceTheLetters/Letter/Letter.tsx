@@ -6,6 +6,7 @@ import { useRef } from "react";
 import { useFloatAround } from "@/FloatAround";
 import { fx } from "@/utils/sound";
 import { vibrate } from "@/utils/vibrate";
+import { isLightColor } from "@/utils/colors";
 
 type LetterProps = {
     value: string;
@@ -62,7 +63,6 @@ export const Letter = ({
     value,
     fontSize = DEFAULT_LETTER_FONT_SIZE,
     color = DEFAULT_LETTER_COLOR,
-    textShadowColor = "#fff",
     draggable
 }: LetterProps) => {
     const nodeRef = useRef<HTMLDivElement>(null);
@@ -75,6 +75,7 @@ export const Letter = ({
         vibrate();
     }, 300);
     const { classId, style } = useFloatAround(3);
+    const textShadowColor = isLightColor(color) ? "#000" : "#fff";
 
     return <>
         <style>{style}</style>
@@ -125,7 +126,7 @@ export const Letter = ({
                 className={clsx(
                     `py-2 px-1 font-bold`,
                     {
-                        "fixed cursor-move draggable-letter": draggable
+                        "absolute cursor-move draggable-letter": draggable
                     }
                 )}
                 style={{

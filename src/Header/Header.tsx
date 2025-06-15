@@ -41,7 +41,7 @@ export const Header = ({ title, children, Left, ...props }: HeaderProps) => {
               <Header.Levels />
             </Menu.Item>
           ) : null}
-          {"Right" in props ? (
+          {"Right" in props && props.Right ? (
             React.isValidElement(props.Right) &&
             props.Right.type === React.Fragment ? (
               React.Children.map(props.Right.props.children, (child) => child)

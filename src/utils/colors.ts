@@ -1,12 +1,12 @@
 export const RAINBOW_COLORS = [
-  '#FFF',
+  '#FFFFFF',
   '#FF5117',
   '#FF1093',
   '#17A6FF',
   '#FFC300',
   '#17FF70',
   '#803EC2',
-  '#333'
+  '#333333'
 ];
 
 export const getRainbowColor = (id: string) => {
@@ -19,4 +19,9 @@ export const getRainbowColor = (id: string) => {
   const colorIndex = hash % RAINBOW_COLORS.length;
   
   return RAINBOW_COLORS[colorIndex];
+}
+
+export const isLightColor = (color: string) => {
+  const [r, g, b] = color.match(/\w\w/g)?.map(hex => parseInt(hex, 16)) || [0, 0, 0];
+  return (r * 299 + g * 587 + b * 114) / 1000 > 128;
 }

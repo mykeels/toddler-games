@@ -13,7 +13,7 @@ const Entry: ModuleFederationEntry<never> = getModuleFederationEntry(() => {
       path: "/",
       element: (
         <WhenUserIsReady>
-          <PlaceTheLetters />
+          <PlaceTheLetters standalone />
         </WhenUserIsReady>
       ),
     },

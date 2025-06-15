@@ -14,7 +14,7 @@ import README from "./README.md";
 import { fx } from "@/utils/sound";
 import clsx from "clsx";
 
-export const PlaceTheLetters = ({ onNext }: { onNext?: () => void }) => {
+export const PlaceTheLetters = ({ onNext, standalone }: { onNext?: () => void, standalone?: boolean }) => {
   const { life, restart } = useRestart();
   const level = useLevel();
   const wordData = useMemo(() => {
@@ -44,7 +44,7 @@ export const PlaceTheLetters = ({ onNext }: { onNext?: () => void }) => {
   useEffect(speakGoal, [word, onNext]);
   const containerRef = useRef<HTMLDivElement>(null);
   const containerWidth = containerRef.current?.clientWidth || 500;
-  const fontSize = `${(containerWidth / (characters.length + Math.ceil(characters.length / 2)))}px`;
+  const fontSize = `${(containerWidth / (characters.length + Math.ceil(characters.length / 4)))}px`;
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const onNextClick = () => {
     restart();
@@ -73,11 +73,11 @@ export const PlaceTheLetters = ({ onNext }: { onNext?: () => void }) => {
     <Header
       onRestart={onNextClick}
       Right={
-        <Header.Info description={README} />
+        standalone ? null : <Header.Info description={README} />
       }
     >
       <button className="focus:outline-none" onClick={() => speakGoal()}>
-        Place the letters in the word
+        {standalone ? "Place Letters" : "Place the letters in the word"}
       </button>
     </Header>
     <div className="flex flex-col items-center justify-center h-[90%] space-y-8 hsx:space-y-2 relative" ref={containerRef}>
@@ -173,6 +173,7 @@ const useWord = (word: string) => {
       }
     })));
   }, [splitWord]);
+  console.log(characters);
   return {
     characters,
     placeCharacter
