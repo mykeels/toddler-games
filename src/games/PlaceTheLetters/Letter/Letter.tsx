@@ -71,7 +71,7 @@ export const Letter = ({
     const rateRef = useRef(1);
     const speakLetter = throttle(() => {
         rateRef.current = 1 + Math.abs(Math.sin(Date.now() / 200) * 0.5);
-        fx.phonics.play(value, { rate: rateRef.current });
+        fx.keys.play(value.toUpperCase(), { rate: rateRef.current });
         vibrate();
     }, 300);
     const { classId, style } = useFloatAround(3);

@@ -71,6 +71,8 @@ export const PlaceTheLetters = ({ onNext, standalone }: { onNext?: () => void, s
     return () => controller.abort();
   }, [onNextClick, isCompleted, speakGoal]);
 
+  const nextCharacterForPlacement = characters.find(character => !character.placed);
+
   return <Container key={life}>
     <Header
       onRestart={onNextClick}
@@ -98,6 +100,7 @@ export const PlaceTheLetters = ({ onNext, standalone }: { onNext?: () => void, s
                   value={character.character}
                   onDrop={() => placeCharacter(character.id)}
                   fontSize={fontSize}
+                  canReceive={nextCharacterForPlacement?.id === character.id}
                 />
           ))
         }
