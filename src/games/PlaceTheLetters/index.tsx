@@ -5,7 +5,7 @@ import Next from "@/Next";
 import { useRestart } from "@/utils/restart";
 import { Levels, WORDS } from "@/utils/words";
 import { useConfetti } from "@/Confetti";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import LetterSlot from "./LetterSlot/LetterSlot";
 import Letter from "./Letter/Letter";
 import { speak } from "@/utils/speak";
@@ -42,7 +42,9 @@ export const PlaceTheLetters = ({ onNext }: { onNext?: () => void }) => {
     fx.click.play();
   };
   useEffect(speakGoal, [word, onNext]);
-  const fontSize = `${(85 / (characters.length + 2))}dvw`;
+  const containerRef = useRef<HTMLDivElement>(null);
+  const containerWidth = containerRef.current?.clientWidth || 500;
+  const fontSize = `${(containerWidth / (characters.length + Math.ceil(characters.length / 2)))}px`;
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const onNextClick = () => {
     restart();
@@ -78,8 +80,8 @@ export const PlaceTheLetters = ({ onNext }: { onNext?: () => void }) => {
         Place the letters in the word
       </button>
     </Header>
-    <div className="flex flex-col items-center justify-center h-[90%] space-y-8 hsx:space-y-2">
-      <div className="flex flex-wrap justify-center content-center items-center portrait:gap-2 landscape:gap-4 landscape:px-[10%]">
+    <div className="flex flex-col items-center justify-center h-[90%] space-y-8 hsx:space-y-2 relative" ref={containerRef}>
+      <div className="flex flex-wrap justify-center content-center items-center gap-1 landscape:px-[1%]">
         {
           characters.map((character) => (
             character.placed

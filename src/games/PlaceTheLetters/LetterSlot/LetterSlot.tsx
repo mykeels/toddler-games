@@ -21,7 +21,7 @@ export const LetterSlot = ({
   return <span
     ref={spanRef}
     className={clsx(
-      `inline-block text-white px-2 lg:px-4 font-bold stroke-black letter-slot opacity-25`,
+      `inline-block text-white py-2 px-1 font-bold stroke-black letter-slot opacity-25`,
     )}
     style={{ fontSize }}
     onDrop={e => {

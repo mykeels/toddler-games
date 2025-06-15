@@ -123,7 +123,7 @@ export const Letter = ({
         >
             <span
                 className={clsx(
-                    `px-2 lg:px-4 font-bold`,
+                    `py-2 px-1 font-bold`,
                     {
                         "fixed cursor-move draggable-letter": draggable
                     }
