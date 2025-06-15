@@ -8,7 +8,7 @@
     "deploy": "gh-pages -d dist --dotfiles",
     "dev": "npx -y concurrently \"vite\" \"npm run build:federation\"",
     "start": "npm run dev",
-    "build:federation": "onchange -i ** --exclude dist --exclude node_modules -- vite build",
+    "build:federation": "onchange -i ** --exclude dist --exclude node_modules --exclude package.json -- vite build",
     "build:github": "tsc -b && npx cross-env ASSET_URL=/toddler-games/ vite build --base=/toddler-games/",
     "build": "tsc -b && vite build",
     "ts": "tsc -b",
