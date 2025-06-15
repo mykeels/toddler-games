@@ -17,6 +17,9 @@ import { sleep } from "@/utils/sleep";
 export const PlaceTheLetters = ({ onNext, standalone }: { onNext?: () => void, standalone?: boolean }) => {
   const { life, restart } = useRestart();
   const level = useLevel();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const containerWidth = containerRef.current?.clientWidth || 500;
+  const containerHeight = containerRef.current?.clientHeight || 500;
   const wordData = useMemo(() => {
     const words = WORDS[level + 1 as Levels] || [{
       value: "NONE"
@@ -26,7 +29,7 @@ export const PlaceTheLetters = ({ onNext, standalone }: { onNext?: () => void, s
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [level, life]);
   const word = wordData.value;
-  const { characters, placeCharacter } = useWord(word);
+  const { characters, placeCharacter } = useWord(word, { width: containerWidth, height: containerHeight });
   const isCompleted = characters.every(character => character.placed);
   const [showConfetti, Confetti] = useConfetti();
   useEffect(() => {
@@ -43,8 +46,6 @@ export const PlaceTheLetters = ({ onNext, standalone }: { onNext?: () => void, s
     speak(`Let's spell, ${word}`);
   };
   useEffect(speakGoal, [word, onNext]);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const containerWidth = containerRef.current?.clientWidth || 500;
   const fontSizeValue = (containerWidth / (characters.length + Math.ceil(characters.length / 4)));
   const fontSize = `min(${fontSizeValue}px, 30dvh)`;
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -100,7 +101,7 @@ export const PlaceTheLetters = ({ onNext, standalone }: { onNext?: () => void, s
                   value={character.character}
                   onDrop={() => placeCharacter(character.id)}
                   fontSize={fontSize}
-                  canReceive={nextCharacterForPlacement?.id === character.id}
+                  canReceive={nextCharacterForPlacement?.character === character.character}
                 />
           ))
         }
@@ -114,6 +115,7 @@ export const PlaceTheLetters = ({ onNext, standalone }: { onNext?: () => void, s
                   draggable={{ position: character.position }}
                   color={getRainbowColor(character.id)}
                   fontSize={fontSize}
+                  canBeDropped={nextCharacterForPlacement?.character === character.character}
                 />
           )
         }
@@ -143,7 +145,7 @@ export const PlaceTheLetters = ({ onNext, standalone }: { onNext?: () => void, s
   </Container>;
 };
 
-const useWord = (word: string) => {
+const useWord = (word: string, containerSize: { width: number, height: number }) => {
   const splitWord = useMemo(() => word.toUpperCase().split(""), [word]);
   const [characters, setCharacters] = useState(splitWord.map((character, index) => ({
     character,
@@ -173,8 +175,8 @@ const useWord = (word: string) => {
       id: `${character}-${index}`,
       placed: false,
       position: {
-        x: randomPosition(window.innerWidth), // Subtract letter width to keep within viewport
-        y: randomPosition(window.innerHeight * 0.5)
+        x: randomPosition(containerSize.width), // Subtract letter width to keep within viewport
+        y: randomPosition(containerSize.height * 0.5)
       }
     })));
   }, [splitWord]);

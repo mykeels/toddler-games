@@ -8,19 +8,6 @@ import { fx } from "@/utils/sound";
 import { vibrate } from "@/utils/vibrate";
 import { isLightColor } from "@/utils/colors";
 
-type LetterProps = {
-    value: string;
-    fontSize?: string;
-    color?: string;
-    textShadowColor?: string;
-    draggable?: {
-        position: {
-            x: number;
-            y: number;
-        }
-    };
-};
-
 
 const useDraggableWrapper = (draggable: LetterProps["draggable"], nodeRef: React.RefObject<HTMLDivElement>) =>
     (props: {
@@ -59,11 +46,26 @@ const throttle = (func: (...args: unknown[]) => void, limit: number) => {
     }
 }
 
+type LetterProps = {
+    value: string;
+    fontSize?: string;
+    color?: string;
+    textShadowColor?: string;
+    draggable?: {
+        position: {
+            x: number;
+            y: number;
+        }
+    };
+    canBeDropped?: boolean;
+};
+
 export const Letter = ({
     value,
     fontSize = DEFAULT_LETTER_FONT_SIZE,
     color = DEFAULT_LETTER_COLOR,
-    draggable
+    draggable,
+    canBeDropped = false
 }: LetterProps) => {
     const nodeRef = useRef<HTMLDivElement>(null);
     const DraggableWrapper = useDraggableWrapper(draggable, nodeRef);
@@ -83,9 +85,12 @@ export const Letter = ({
             onDragStart={() => {
             }}
             onDrag={(e, isDragging) => {
+                distortableRef.current?.classList.toggle("animate-breathe", canBeDropped && !isDragging);
                 distortableRef.current?.classList.toggle("animate-distort", isDragging);
                 distortableRef.current?.classList?.toggle(classId, !isDragging);
-                speakLetter();
+                if (canBeDropped) {
+                    speakLetter();
+                }
                 const mouseX = (e as MouseEvent).clientX || (e as TouchEvent).changedTouches?.[0]?.clientX;
                 const mouseY = (e as MouseEvent).clientY || (e as TouchEvent).changedTouches?.[0]?.clientY;
 
@@ -139,7 +144,8 @@ export const Letter = ({
                 <span
                     className={clsx("", {
                         "absolute": draggable,
-                        [classId]: true
+                        [classId]: true,
+                        "animate-breathe": canBeDropped
                     })}
                     ref={distortableRef}
                     style={{
