@@ -63,6 +63,7 @@ export default defineConfig(({ mode }) => {
           "./read-words": "./src/games/ReadWords/index.mfe.tsx",
           "./read-word": "./src/games/ReadWords/word.mfe.tsx",
           "./create-read-word": "./src/games/ReadWords/CreateReadWord.mfe.tsx",
+          "./place-the-letters": "./src/games/PlaceTheLetters/index.mfe.tsx",
           "./alphabet": "./src/Alphabet/index.mfe.tsx",
         },
         shared: ["react", "react-dom", "react-router"],
