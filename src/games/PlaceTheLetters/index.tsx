@@ -11,8 +11,8 @@ import Letter from "./Letter/Letter";
 import { speak } from "@/utils/speak";
 import { getRainbowColor } from "@/utils/colors";
 import README from "./README.md";
-import { fx } from "@/utils/sound";
 import clsx from "clsx";
+import { sleep } from "@/utils/sleep";
 
 export const PlaceTheLetters = ({ onNext, standalone }: { onNext?: () => void, standalone?: boolean }) => {
   const { life, restart } = useRestart();
@@ -32,14 +32,15 @@ export const PlaceTheLetters = ({ onNext, standalone }: { onNext?: () => void, s
   useEffect(() => {
     if (isCompleted) {
       showConfetti();
-      speak("Well done!");
+      sleep(300).then(() => {
+        speak(`${word}. Well done!`);
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isCompleted]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const speakGoal = () => {
     speak(`Let's spell, ${word}`);
-    fx.click.play();
   };
   useEffect(speakGoal, [word, onNext]);
   const containerRef = useRef<HTMLDivElement>(null);
