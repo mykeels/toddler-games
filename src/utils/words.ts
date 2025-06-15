@@ -497,52 +497,52 @@ const SIX_LETTER_WORDS = [
   {
     value: "bellow",
     pronunciation: "bellōw",
-    image: "",
+    image: "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3c2s3bTVpbmowdm9weWE1eWUzanZlNzg4aHRxcWpzaHdmNzd1N2lyayZlcD12MV9naWZzX3NlYXJjaCZjdD1n/2A5zHrIPvo8MNnkAXl/giphy.gif",
   },
   {
     value: "bounce",
     pronunciation: "baunss",
-    image: "",
+    image: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExaDg2N3J0MGh0ZWtnbnJwbXA5ajdyNXBlMWZqd3F4aXlmMDJ1YTYzOSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/l0HlMhcc67eLP7oeA/giphy.gif",
   },
   {
     value: "clumsy",
     pronunciation: "clomsy",
-    image: "",
+    image: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExemM2NTg5d3BwYzFlN3g3NWw4c3lxOHk0Z214cG5vbnYxYmpocjBxbyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/hh05KqdAkVTos/giphy.gif",
   },
   {
     value: "fluffy",
     pronunciation: "floffy",
-    image: "",
+    image: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYnExeTgyYmh6bXQ1cjhzeDN5a2M3Zzk4OTc2czdldnpkaHM2d2xwNSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/YkuzftfzdoPOE/giphy.gif",
   },
   {
     value: "gargle",
     pronunciation: "gargll",
-    image: "",
+    image: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcmY5ZzExNndyY2IzaThodXlucTZ2Z2xwcGVzYWt3MmJmdnY2ajF0MCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/xTk2YI4CHaFOLbNVMQ/giphy.gif",
   },
   {
     value: "juggle",
     pronunciation: "joggll",
-    image: "",
+    image: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHBpNW9mYzlwaWNsdHJ4OTBpbTY0d2xsanhibmlleXFydXN1NDEzOSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/RyXv8qbbBxyOIM1X5y/giphy.gif",
   },
   {
     value: "jumble",
     pronunciation: "jombll",
-    image: "",
+    image: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExd21tM3IyZDd5MG4yczI2MWF5ODllNXh0cm13aXlpYmN4bGZ4ZnI2NiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/7NMVxStmJJg40sOb4y/giphy.gif",
   },
   {
     value: "nibble",
     pronunciation: "nibbll",
-    image: "",
+    image: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOWI1Nm5jaTFsM3doMmg4endnYzlkYXBwOWRqdWpkejE0d240eWhiaCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/LS35Jo0kZzO2lU75rV/giphy.gif",
   },
   {
     value: "pester",
     pronunciation: "pestar",
-    image: "",
+    image: "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3cHJkb3k1Ymx5dXc5YXhqdXY5aW02ZzgzM3N1MWRzZGNzZnJoZTM4ciZlcD12MV9naWZzX3NlYXJjaCZjdD1n/dn65vbCqM8IZzCpBmV/giphy.gif",
   },
   {
     value: "rescue",
     pronunciation: "rescyu",
-    image: "",
+    image: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExY2ducjMzcmoxaHQ2ZWRtN2FkMW0zMjdvYW5rMWNtYnZobXB1OW1kdCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/5Fd9NV3yBn1RamHy9g/giphy.gif",
   },
   {
     value: "ruckus",
@@ -552,42 +552,42 @@ const SIX_LETTER_WORDS = [
   {
     value: "shadow",
     pronunciation: "shadōw",
-    image: "",
+    image: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZW1lMTRvem1odnBkcHo1Y2Y2eXlncHp3MTN4ODJvOXhkOXRpYmdtcyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/3o6Zt5HXxxx8rRIjM4/giphy.gif",
   },
   {
     value: "sticky",
     pronunciation: "stikky",
-    image: "",
+    image: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcXk0YzJ6MzJuc3VrdjNlZHQwdTc1aWEwN2NsdmY4OWR6MnlqODc3cyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/C6TUZ559o8hAA/giphy.gif",
   },
   {
     value: "tangle",
     pronunciation: "tangll",
-    image: "",
+    image: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZjVpeW93bXAwejYxNml2ZTA3OW1lOWJ0a2FlbWNtMDE3N201dGx0eCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/YFzFDNC7g03MB2N60i/giphy.gif",
   },
   {
     value: "tickle",
     pronunciation: "ticcll",
-    image: "",
+    image: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmMzMHJ6Z2dubzlvcnV4YzIzaTYwaHhldHMzYWRheWRvMnhreTRzZCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/H2GX5Ik1ILy5q/giphy.gif",
   },
   {
     value: "vacuum",
     pronunciation: "vacyum",
-    image: "",
+    image: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExY2k2dTVuYnJ3bmNjeXprZzFxZzJsNzE1c3JvbzJ2YXF6eTh6bGJpbyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/br9UMgxhBGufLsjKKN/giphy.gif",
   },
   {
     value: "wiggle",
     pronunciation: "wiggll",
-    image: "",
+    image: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZG1oNXI4cTFhcGk2dXV4MHI3OWs1MzRqYXBxamdjbjYzYXFnZjJsMCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/XCm6aoloWyUkwUuqkf/giphy.gif",
   },
   {
     value: "zigzag",
     pronunciation: "zigzag",
-    image: "",
+    image: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExeWlkZTF1MnprbjB3cnZoMWl3cTc4cmR6bnBuYWQzN2lkbnpvOGJwZyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/htXOrsFJihFmeoJik4/giphy.gif",
   },
   {
     value: "zipper",
     pronunciation: "zzppar",
-    image: "",
+    image: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNzN1azV1ODZyNzUzNDA1Zmx3Y3l1dGVkbWo0ODY2ZDF4d2l3MnM4biZlcD12MV9naWZzX3NlYXJjaCZjdD1n/2jMkaoEh70nHF1VrCq/giphy.gif",
   },
 ];
 
