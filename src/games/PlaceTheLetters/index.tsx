@@ -44,7 +44,8 @@ export const PlaceTheLetters = ({ onNext, standalone }: { onNext?: () => void, s
   useEffect(speakGoal, [word, onNext]);
   const containerRef = useRef<HTMLDivElement>(null);
   const containerWidth = containerRef.current?.clientWidth || 500;
-  const fontSize = `${(containerWidth / (characters.length + Math.ceil(characters.length / 4)))}px`;
+  const fontSizeValue = (containerWidth / (characters.length + Math.ceil(characters.length / 4)));
+  const fontSize = `min(${fontSizeValue}px, 30dvh)`;
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const onNextClick = () => {
     restart();
