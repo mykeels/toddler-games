@@ -1,6 +1,5 @@
 import urlJoin from "url-join";
 import { Howl } from "howler";
-import { speak } from "./speak";
 import { getBaseUrl } from "./url";
 import { SPECIAL_PHONICS } from "./words";
 
@@ -45,13 +44,16 @@ export const fx = {
   tapOn: audio("./soundfx/tap-on.mp3"),
   phonics: {
     play: (letter: string, options: { rate?: number } = {}) => {
+      let howl: Howl;
       if (["ā", "ē", "ī", "ō", "ū"].includes(letter)) {
-        audio("./soundfx/alphabet/" + SPECIAL_PHONICS[letter as keyof typeof SPECIAL_PHONICS] + ".mp3", options).play();
+        howl = audio("./soundfx/alphabet/" + SPECIAL_PHONICS[letter as keyof typeof SPECIAL_PHONICS] + ".mp3", options);
       } else if (["č", "š"].includes(letter)) {
-        audio("./soundfx/phonics/" + SPECIAL_PHONICS[letter as keyof typeof SPECIAL_PHONICS] + ".mp3", options).play();
+        howl = audio("./soundfx/phonics/" + SPECIAL_PHONICS[letter as keyof typeof SPECIAL_PHONICS] + ".mp3", options);
       } else {
-        audio("./soundfx/phonics/" + letter.toLowerCase() + ".mp3", options).play();
+        howl = audio("./soundfx/phonics/" + letter.toLowerCase() + ".mp3", options);
       }
+      howl?.play();
+      return howl;
     },
     a: audio("./soundfx/phonics/a.mp3"),
     "ā": audio("./soundfx/alphabet/a.mp3"),
@@ -88,6 +90,14 @@ export const fx = {
     z: audio("./soundfx/phonics/z.mp3"),
   },
   alphabet: {
+    play: (letter: string, options: { rate?: number } = {}) => {
+      const letters = Object.keys(fx.alphabet).filter(l => !['play'].includes(l));
+      if (letters.includes(letter)) {
+        const howl = audio("./soundfx/alphabet/" + letter + ".mp3", options);
+        howl.play();
+        return howl;
+      }
+    },
     a: audio("./soundfx/alphabet/a.mp3"),
     b: audio("./soundfx/alphabet/b.mp3"),
     c: audio("./soundfx/alphabet/c.mp3"),
@@ -129,20 +139,21 @@ export const fx = {
   },
   keys: {
     play: (key: string, options: { rate?: number } = {}) => {
+      let howl: Howl | undefined;
       if (Object.keys(fx.alphabet).includes(key.toLowerCase()) && key === key.toUpperCase()) {
-        audio("./soundfx/alphabet/" + key.toLowerCase() + ".mp3", options).play();
+        howl = audio("./soundfx/alphabet/" + key.toLowerCase() + ".mp3", options);
       } else if (Object.keys(fx.phonics).includes(key.toLowerCase()) || !!SPECIAL_PHONICS[key as keyof typeof SPECIAL_PHONICS]) {
         const isSpecialPhonics = !!SPECIAL_PHONICS[key as keyof typeof SPECIAL_PHONICS];
         if (isSpecialPhonics) {
-          fx.phonics.play(key, options);
+          howl = fx.phonics.play(key, options);
         } else {
-          audio("./soundfx/phonics/" + key.toLowerCase() + ".mp3", options).play();
+          howl = audio("./soundfx/phonics/" + key.toLowerCase() + ".mp3", options);
         }
       } else if (Object.keys(fx.digits).includes(key)) {
-        audio("./soundfx/digits/" + key + ".mp3", options).play();
-      } else {
-        speak(key);
+        howl = audio("./soundfx/digits/" + key + ".mp3", options);
       }
+      howl?.play();
+      return howl;
     },
   }
 };

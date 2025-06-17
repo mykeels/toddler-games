@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import classNames from "clsx";
 import { fx } from "@/utils/sound";
-import { speak } from "@/utils/speak";
+import { useSpeak } from "@/utils/speak";
 import { vibrate } from "@/utils/vibrate";
 import { useConfetti } from "@/Confetti";
 import { useLevel } from "@/Header/Levels";
@@ -33,6 +33,7 @@ export const WhatDoYouHear = ({
     standalone = false,
     ...props
 }: WhatDoYouHearProps) => {
+    const { speak } = useSpeak();
     const { life, restart } = useRestart();
     const level = useLevel();
     const noOfWordCharacters = Math.min((Number(props.level) || level), 6) as Levels;
@@ -86,7 +87,7 @@ export const WhatDoYouHear = ({
             await sleep(2300);
             for (let speakCount = 0; speakCount < 3; speakCount++)
             {
-                fx.keys.play(goal.value);
+                speak(goal.value);
                 await sleep(1000);
             }
         }
@@ -101,7 +102,7 @@ export const WhatDoYouHear = ({
                 Right={standalone ? null : <Header.Info description={README} />}
                 {...(standalone ? { Left: <div></div> } : {})}
             >
-                <button className="focus:outline-none" onClick={() => fx.keys.play(goal.value)}>
+                <button className="focus:outline-none" onClick={() => speak(goal.value)}>
                     What Do You Hear?
                 </button>
             </Header>

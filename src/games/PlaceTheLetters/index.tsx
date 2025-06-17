@@ -8,48 +8,77 @@ import { useConfetti } from "@/Confetti";
 import { useEffect, useMemo, useRef, useState } from "react";
 import LetterSlot from "./LetterSlot/LetterSlot";
 import Letter from "./Letter/Letter";
-import { speak } from "@/utils/speak";
+import { useSpeak } from "@/utils/speak";
 import { getRainbowColor } from "@/utils/colors";
 import README from "./README.md";
 import clsx from "clsx";
 import { sleep } from "@/utils/sleep";
 
-export const PlaceTheLetters = ({ onNext, standalone }: { onNext?: () => void, standalone?: boolean }) => {
+export const PlaceTheLetters = ({
+  onNext,
+  standalone,
+}: {
+  onNext?: () => void;
+  standalone?: boolean;
+}) => {
   const { life, restart } = useRestart();
   const level = useLevel();
   const containerRef = useRef<HTMLDivElement>(null);
   const containerWidth = containerRef.current?.clientWidth || 500;
   const containerHeight = containerRef.current?.clientHeight || 500;
   const wordData = useMemo(() => {
-    const words = WORDS[level + 1 as Levels] || [{
-      value: "NONE"
-    }];
+    const words = WORDS[(level + 1) as Levels] || [
+      {
+        value: "NONE",
+      },
+    ];
     const randomIndex = Math.floor(Math.random() * words.length);
     return words[randomIndex];
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [level, life]);
   const word = wordData.value;
-  const { characters, placeCharacter } = useWord(word, { width: containerWidth, height: containerHeight });
-  const isCompleted = characters.every(character => character.placed);
+  const { characters, placeCharacter } = useWord(word, {
+    width: containerWidth,
+    height: containerHeight,
+  });
+  const [spokenCharacter, setSpokenCharacter] = useState<Character | null>(
+    null
+  );
   const [showConfetti, Confetti] = useConfetti();
-  useEffect(() => {
-    if (isCompleted) {
-      showConfetti();
-      sleep(300).then(() => {
-        speak(`${word}. Well done!`);
-      });
+  const { speak } = useSpeak();
+  const isCompleted = characters.every((character) => character.placed);
+  const [isSpellingCompleted, setIsSpellingCompleted] = useState(false);
+  async function saySpelling() {
+    await sleep(400);
+    for (const character of characters) {
+      setSpokenCharacter(character);
+      await Promise.all([
+        (async () => {
+          await speak(character.character.toUpperCase(), { rate: 1.2 });
+          await sleep(50);
+        })(),
+        sleep(500),
+      ]);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isCompleted]);
+    setSpokenCharacter(null);
+    showConfetti();
+    setIsSpellingCompleted(true);
+    await speak(word, { rate: 1.2 });
+  }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const speakGoal = () => {
     speak(`Let's spell, ${word}`);
   };
-  useEffect(speakGoal, [word, onNext]);
-  const fontSizeValue = (containerWidth / (characters.length + Math.ceil(characters.length / 4)));
+  useEffect(() => {
+    speakGoal();
+  }, [word, onNext]);
+  const fontSizeValue =
+    containerWidth / (characters.length + Math.ceil(characters.length / 4));
   const fontSize = `min(${fontSizeValue}px, 30dvh)`;
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const onNextClick = () => {
+    setIsSpellingCompleted(false);
+    setSpokenCharacter(null);
     restart();
     onNext?.();
   };
@@ -72,119 +101,155 @@ export const PlaceTheLetters = ({ onNext, standalone }: { onNext?: () => void, s
     return () => controller.abort();
   }, [onNextClick, isCompleted, speakGoal]);
 
-  const nextCharacterForPlacement = characters.find(character => !character.placed);
+  const nextCharacterForPlacement = characters.find(
+    (character) => !character.placed
+  );
 
-  return <Container key={life}>
-    <Header
-      onRestart={onNextClick}
-      Right={
-        standalone ? null : <Header.Info description={README} />
-      }
-    >
-      <button className="focus:outline-none" onClick={() => speakGoal()}>
-        {standalone ? "Place Letters" : "Place the letters in the word"}
-      </button>
-    </Header>
-    <div className="flex flex-col items-center justify-center h-[90%] space-y-8 hsx:space-y-2 relative" ref={containerRef}>
-      <div className="flex flex-wrap justify-center content-center items-center gap-1 landscape:px-[1%]">
-        {
-          characters.map((character) => (
-            character.placed
-              ? <Letter
-                  key={character.id}
-                  value={character.character}
-                  color={getRainbowColor(character.id)}
-                  fontSize={fontSize}
-                />
-              : <LetterSlot
-                  key={character.id}
-                  value={character.character}
-                  onDrop={() => placeCharacter(character.id)}
-                  fontSize={fontSize}
-                  canReceive={nextCharacterForPlacement?.character === character.character}
-                />
-          ))
-        }
-        {
-          characters.map((character) =>
-            character.placed
-              ? null
-              : <Letter
-                  key={character.id}
-                  value={character.character}
-                  draggable={{ position: character.position }}
-                  color={getRainbowColor(character.id)}
-                  fontSize={fontSize}
-                  canBeDropped={nextCharacterForPlacement?.character === character.character}
-                />
-          )
-        }
-      </div>
-      <>
-        <button className={clsx("flex flex-col items-center justify-center", {
-          'invisible': !isCompleted
-        })} onClick={() => {
-          speakGoal();
-        }}>
-          {Confetti}
-          {
-            !!wordData.image && (
-              <img src={wordData.image} alt={word} className={clsx("w-48 h-48 hsx:w-24 hsx:h-24 hsm:w-24 hsm:h-24 border-2 border-white rounded-lg")} />
-            )
-          }
+  return (
+    <Container key={life}>
+      <Header
+        onRestart={onNextClick}
+        Right={standalone ? null : <Header.Info description={README} />}
+      >
+        <button className="focus:outline-none" onClick={() => speakGoal()}>
+          {standalone ? "Place Letters" : "Place the letters in the word"}
         </button>
-        <Next
-          onNext={onNextClick}
-          className={{
-            invisible: !isCompleted
-          }}
-        />
-      </>
-    </div>
-
-  </Container>;
+      </Header>
+      <div
+        className="flex flex-col items-center justify-center h-[90%] space-y-8 hsx:space-y-2 relative"
+        ref={containerRef}
+      >
+        <div className="flex flex-wrap justify-center content-center items-center gap-1 landscape:px-[1%]">
+          {characters.map((character) =>
+            character.placed ? (
+              <Letter
+                key={character.id}
+                value={character.character}
+                color={getRainbowColor(character.id)}
+                fontSize={fontSize}
+                spoken={spokenCharacter?.id === character.id}
+              />
+            ) : (
+              <LetterSlot
+                key={character.id}
+                value={character.character}
+                onDrop={() => {
+                  const newCharacters = placeCharacter(character.id);
+                  if (newCharacters.every((character) => character.placed)) {
+                    saySpelling();
+                  }
+                }}
+                fontSize={fontSize}
+                canReceive={
+                  nextCharacterForPlacement?.character === character.character
+                }
+              />
+            )
+          )}
+          {characters.map((character) =>
+            character.placed ? null : (
+              <Letter
+                key={character.id}
+                value={character.character}
+                draggable={{ position: character.position }}
+                color={getRainbowColor(character.id)}
+                fontSize={fontSize}
+                canBeDropped={
+                  nextCharacterForPlacement?.character === character.character
+                }
+              />
+            )
+          )}
+        </div>
+        <>
+          <button
+            className={clsx("flex flex-col items-center justify-center", {
+              invisible: !isCompleted || !isSpellingCompleted,
+            })}
+            onClick={() => {
+              speakGoal();
+            }}
+          >
+            {Confetti}
+            {!!wordData.image && (
+              <img
+                src={wordData.image}
+                alt={word}
+                className={clsx(
+                  "w-48 h-48 hsx:w-24 hsx:h-24 hsm:w-24 hsm:h-24 border-2 border-white rounded-lg"
+                )}
+              />
+            )}
+          </button>
+          <Next
+            onNext={onNextClick}
+            className={{
+              invisible: !isCompleted || !isSpellingCompleted,
+            }}
+          />
+        </>
+      </div>
+    </Container>
+  );
 };
 
-const useWord = (word: string, containerSize: { width: number, height: number }) => {
-  const splitWord = useMemo(() => word.toUpperCase().split(""), [word]);
-  const [characters, setCharacters] = useState(splitWord.map((character, index) => ({
-    character,
-    id: `${character}-${index}`,
-    placed: false,
-    position: {
-      x: 0,
-      y: 0
-    }
-  })));
-  const placeCharacter = (id: string) => {
-    setCharacters(characters.map(character => ({
-      ...character,
-      placed: character.placed || character.id === id
-    })));
+type Character = {
+  character: string;
+  id: string;
+  placed: boolean;
+  position: {
+    x: number;
+    y: number;
   };
-  useEffect(() => {
-    const randomPosition = (max: number) => Math.min(
-      Math.max(
-        Math.floor((Math.random() * max) - (max / 2)),
-        ((-max / 2) * 0.7)
-      ),
-      (max / 2) * 0.7
-    );
-    setCharacters(splitWord.map((character, index) => ({
+};
+
+const useWord = (
+  word: string,
+  containerSize: { width: number; height: number }
+) => {
+  const splitWord = useMemo(() => word.toUpperCase().split(""), [word]);
+  const [characters, setCharacters] = useState<Character[]>(
+    splitWord.map((character, index) => ({
       character,
       id: `${character}-${index}`,
       placed: false,
       position: {
-        x: randomPosition(containerSize.width), // Subtract letter width to keep within viewport
-        y: randomPosition(containerSize.height * 0.5)
-      }
-    })));
+        x: 0,
+        y: 0,
+      },
+    }))
+  );
+  const placeCharacter = (id: string) => {
+    const newCharacters = characters.map((character) => ({
+      ...character,
+      placed: character.placed || character.id === id,
+    }));
+    setCharacters(newCharacters);
+    return newCharacters;
+  };
+  useEffect(() => {
+    const randomPosition = (max: number) =>
+      Math.min(
+        Math.max(Math.floor(Math.random() * max - max / 2), (-max / 2) * 0.7),
+        (max / 2) * 0.7
+      );
+    setCharacters(
+      splitWord.map((character, index) => ({
+        character,
+        id: `${character}-${index}`,
+        placed: false,
+        position: {
+          x: randomPosition(containerSize.width), // Subtract letter width to keep within viewport
+          y: randomPosition(containerSize.height * 0.5),
+        },
+      }))
+    );
   }, [splitWord]);
-  console.log(characters);
+
   return {
     characters,
-    placeCharacter
+    placeCharacter,
   };
-}
+};
 
 export default PlaceTheLetters;

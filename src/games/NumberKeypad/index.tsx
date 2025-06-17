@@ -4,14 +4,15 @@ import { fx } from "@/utils/sound";
 import Header from "@/Header/Header";
 import Container from "@/Container";
 import { vibrate } from "@/utils/vibrate";
-import { speak } from "@/utils/speak";
+import { useSpeak } from "@/utils/speak";
 import README from "./README.md";
 
 export const NumberKeypad = () => {
+  const { speak } = useSpeak();
   const [recipient, setRecipient] = useState<string>("");
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const dial = (digit: string) => {
-    fx.keys.play(digit, { rate: 1.2 });
+    speak(digit, { rate: 1.2 });
     setRecipient((recipient + digit).slice(-10));
     vibrate();
   };
