@@ -4,7 +4,7 @@ import { fx } from "@/utils/sound";
 import Header from "@/Header/Header";
 import Container from "@/Container";
 import { vibrate } from "@/utils/vibrate";
-import { speak } from "@/utils/speak";
+import { speak, useSpeak } from "@/utils/speak";
 import { useRestart } from "@/utils/restart";
 import README from "./README.md";
 import Letter from "../PlaceTheLetters/Letter/Letter";
@@ -57,6 +57,7 @@ export const TypeAway = () => {
 export default TypeAway;
 
 function useTyped() {
+  const { speak } = useSpeak();
   const [typed, setTyped] = useState<{ id: string, key: string, createdAt: Date }[]>([]);
 
   const handleKeyPress = (event: KeyboardEvent) => {
@@ -64,7 +65,7 @@ function useTyped() {
     if (excludedKeys.includes(event.key)) return;
     setTyped(typed => [...typed, { id: nanoid(), key: event.key, createdAt: new Date() }]);
     vibrate();
-    fx.keys.play(event.key, { rate: 1.2 });
+    speak(event.key, { rate: 1.2 });
     event.preventDefault();
     event.stopPropagation();
   }

@@ -12,7 +12,7 @@ import Header from "@/Header/Header";
 import Container from "@/Container";
 import Card from "@/Card";
 import Next from "@/Next";
-import { speak } from "@/utils/speak";
+import { useSpeak } from "@/utils/speak";
 import { useConfetti } from "@/Confetti";
 import { useLevel } from "@/Header/Levels";
 import README from "./README.md";
@@ -32,6 +32,7 @@ export const ImageToLetterMatching = ({
   onNext,
   ...props
 }: ImageToLetterMatchingProps) => {
+  const { speak } = useSpeak();
   const { life, restart } = useRestart();
   const [state, setState] = useState<"playing" | "interlude">("playing");
   const image = useMemo(
@@ -56,10 +57,13 @@ export const ImageToLetterMatching = ({
   const [showConfetti, Confetti] = useConfetti();
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const onLetterClick = (letter: string) => {
+  const onLetterClick = async (letter: string) => {
     setSelected(letter);
     if (letter === goal) {
       fx.correct.play();
+      await sleep(300);
+      speak(`${letter} for ${image.name}`);
+
       showConfetti();
     } else {
       fx.incorrect.play();
@@ -89,7 +93,7 @@ export const ImageToLetterMatching = ({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const speakGoal = async () => {
     for (let i = 0; i < 2; i++) {
-      fx.keys.play(goal);
+      speak(goal);
       await sleep(750);
     }
     speak(image.name);

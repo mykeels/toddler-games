@@ -1,3 +1,4 @@
+import { useSpeak } from "@/utils/speak";
 import "../index.css";
 import { fx } from "@/utils/sound";
 import { getBaseUrl } from "@/utils/url";
@@ -5,7 +6,8 @@ import { vibrate } from "@/utils/vibrate";
 import { SPECIAL_PHONICS } from "@/utils/words";
 
 export const Alphabet = () => {
-  const letters = Object.keys(fx.alphabet);
+  const letters = Object.keys(fx.alphabet).filter((l) => !["play"].includes(l));
+  const { speak } = useSpeak();
   return (
     <table className="w-full table-fixed border-collapse border border-gray-300">
       <thead className="bg-brand-primary text-white">
@@ -22,7 +24,7 @@ export const Alphabet = () => {
                 <div className="flex w-10">{letter.toLowerCase()}</div>
                 <PlayButton
                   onClick={() => {
-                    fx.phonics[letter as keyof typeof fx.alphabet].play();
+                    speak(letter);
                   }}
                 />
               </div>
@@ -32,7 +34,7 @@ export const Alphabet = () => {
                 <div className="flex w-10">{letter.toUpperCase()}</div>
                 <PlayButton
                   onClick={() => {
-                    fx.alphabet[letter as keyof typeof fx.alphabet].play();
+                    speak(letter);
                   }}
                 />
               </div>
@@ -45,9 +47,9 @@ export const Alphabet = () => {
 };
 
 const ClassicPhonics = () => {
-  const phonics = Object.keys(fx.phonics).filter(
-    (l) => Object.keys(fx.alphabet).includes(l)
-  );
+  const phonics = Object.keys(fx.phonics)
+    .filter((l) => Object.keys(fx.alphabet).includes(l))
+    .filter((l) => !["play"].includes(l));
 
   return <Letters letters={phonics} />;
 };
@@ -71,6 +73,7 @@ const SpecialPhonicConsonants = () => {
 };
 
 const Letters = ({ letters }: { letters: string[] }) => {
+  const { speak } = useSpeak();
   return (
     <div className="grid grid-cols-4 gap-4 p-4 bg-white text-xl text-brand-accent-pink">
       {letters.map((letter) => (
@@ -78,7 +81,7 @@ const Letters = ({ letters }: { letters: string[] }) => {
           <div className="flex w-10">{letter.toLowerCase()}</div>
           <PlayButton
             onClick={() => {
-              fx.keys.play(letter);
+              speak(letter);
             }}
           />
         </div>

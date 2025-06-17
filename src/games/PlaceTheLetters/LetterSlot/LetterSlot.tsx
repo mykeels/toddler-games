@@ -4,6 +4,8 @@ import { DEFAULT_LETTER_FONT_SIZE } from "../PlaceTheLetters.consts";
 import { RefObject, useRef } from "react";
 import { vibrate } from "@/utils/vibrate";
 import { fx } from "@/utils/sound";
+import { useSpeak } from "@/utils/speak";
+import { sleep } from "@/utils/sleep";
 
 type LetterSlotProps = {
   value: string;
@@ -65,6 +67,7 @@ export const LetterSlot = ({
 };
 
 const useAnimateSlot = (ref: RefObject<HTMLElement>) => {
+  const { speak } = useSpeak();
   return {
     onDragLeave: () => {
       // ref.current?.classList.remove("animate-breathe", "text-white");
@@ -82,13 +85,14 @@ const useAnimateSlot = (ref: RefObject<HTMLElement>) => {
         ref.current?.classList.remove("animate-vibrate");
       }, 1000);
     },
-    onDragSuccess: () => {
+    onDragSuccess: async () => {
       const letterSlot = ref.current?.closest("[data-letter-slot]");
       const letterSlotValue = letterSlot?.getAttribute("data-letter-slot");
       if (letterSlotValue) {
-        fx.keys.play(letterSlotValue);
+        fx.correct.play();
+        await sleep(300);
+        speak(letterSlotValue);
       }
-      // fx.correct.play();
       ref.current?.classList.add("animate-success");
       setTimeout(() => {
         ref.current?.classList.remove("animate-success");
