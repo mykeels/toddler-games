@@ -294,3 +294,7 @@ export function getNextCharacter<T extends K[], K>(set: T): T[number] {
   lastCharacterIndex = index;
   return set[index];
 }
+
+export function shuffle<T>(array: T[]): T[] {
+  return array.sort(() => Math.random() - 0.5);
+}

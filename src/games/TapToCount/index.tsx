@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
 import classNames from "clsx";
-import { FRUITS, ANIMALS } from "@/utils/characters";
+import { FRUITS, ANIMALS, NUMBERS } from "@/utils/characters";
 import { onTouch } from "@/utils/touch";
 import { useHorizontalSwipe } from "@/utils/swipe";
 import { fx } from "@/utils/sound";
 import Container from "@/Container";
 import Header from "@/Header/Header";
-import Next from "@/Next";
-import { speak } from "@/utils/speak";
+import { useSpeak } from "@/utils/speak";
 import { useConfetti } from "@/Confetti";
 import { useLevel } from "@/Header/Levels";
 import README from "./README.md";
-import { vibrate } from "@/utils/vibrate";
 import { useRestart } from "@/utils/restart";
 import { useMountTime } from "@/hooks/useMountTime";
+import { useCardOptions } from "@/Card/CardOptions";
+import { sleep } from "@/utils/sleep";
 const COUNTABLES = [...FRUITS, ...ANIMALS];
 
 type TapToCountProps = {
@@ -22,6 +22,7 @@ type TapToCountProps = {
 };
 
 export const TapToCount = ({ onNext, ...props }: TapToCountProps) => {
+  const { speak } = useSpeak();
   const { life, restart } = useRestart();
   const level = useLevel();
   const noOfItemsToCount = (props.level ?? level) + 1;
@@ -32,21 +33,27 @@ export const TapToCount = ({ onNext, ...props }: TapToCountProps) => {
     }[]
   >(getNextItems(noOfItemsToCount));
   const { ref } = useHorizontalSwipe({
-    onSwipe: () => onNextClick()
+    onSwipe: () => onNextClick(),
   });
   const targetCount = items.reduce((acc, item) => acc + item.target, 0);
   const [count, setCount] = useState(0);
   const getNextCount = (checked: boolean) => {
-    setCount(count + (checked ? 1 : -1));
-    fx.click.play();
+    const nextCount = count + (checked ? 1 : -1);
+    setCount(nextCount);
+    speak(nextCount.toString(), { rate: 1.2 });
   };
+  const isComplete = count === targetCount;
   function getNextItems(level: number) {
     const items = [];
-    const noOfItems = Math.max(Math.floor(Math.random() * (level * 2)) + 2, level);
+    const noOfItems = Math.max(
+      Math.floor(Math.random() * (level * 2)) + 2,
+      level
+    );
+    const countable = COUNTABLES[Math.floor(Math.random() * COUNTABLES.length)].value;
     for (let i = 0; i < noOfItems; i++) {
       items.push({
         target: 1,
-        text: COUNTABLES[Math.floor(Math.random() * COUNTABLES.length)].value,
+        text: countable,
       });
     }
     return items;
@@ -56,8 +63,6 @@ export const TapToCount = ({ onNext, ...props }: TapToCountProps) => {
     setItems(getNextItems(noOfItemsToCount));
     setCount(0);
     restart();
-    fx.correct.play();
-    vibrate();
     onNext?.();
   }
 
@@ -74,10 +79,16 @@ export const TapToCount = ({ onNext, ...props }: TapToCountProps) => {
   useEffect(() => {
     const controller = new AbortController();
     const handleKeyPress = (event: KeyboardEvent) => {
+      const digits = NUMBERS.map((number) => number.value.toString());
       if (event.key === "Enter") {
         onNextClick();
       } else if (event.key === " ") {
         const button = document.querySelector(`[data-countable="true"]`);
+        if (button) {
+          button.tap();
+        }
+      } else if (digits.includes(event.key)) {
+        const button = document.querySelector(`[data-value="${event.key}"]`);
         if (button) {
           button.tap();
         }
@@ -100,51 +111,63 @@ export const TapToCount = ({ onNext, ...props }: TapToCountProps) => {
   };
   useEffect(speakGoal, [life, targetCount]);
   useEffect(() => {
-    if (count === targetCount) {
+    if (isComplete) {
       showConfetti();
       setTimeout(() => {
-        speak(`You counted to ${targetCount}! Let's do it again.`);
+        speak(`How many cards?`);
       }, 500);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [count, targetCount]);
 
+  const { CardOptions } = useCardOptions({
+    characters: NUMBERS,
+    noOfOptions: 2,
+    goal: {
+      name: targetCount.toString(),
+      value: targetCount.toString(),
+    },
+  });
+
   return (
-    <Container
-      key={life}
-      ref={ref as React.LegacyRef<HTMLDivElement>}
-    >
-      <Header 
-        title="Tap to Count" 
+    <Container key={life} ref={ref as React.LegacyRef<HTMLDivElement>}>
+      <Header
+        title="Tap to Count"
         onRestart={onNextClick}
-        Right={
-          <Header.Info description={README} />
-        }
+        Right={<Header.Info description={README} />}
       >
         <button className="focus:outline-none" onClick={() => speakGoal()}>
           Tap to Count
         </button>
       </Header>
       <div className="flex flex-col portrait:gap-8 landscape:gap-4 landscape:hsx:gap-1 items-center justify-center h-[90%]">
-        <h1
-          className={classNames("font-bold text-6xl landscape:hsx:text-4xl")}
-        >
-          {count ? count : ""}
-          {Confetti}
+        <h1 className={classNames("font-bold text-6xl landscape:hsx:text-4xl")}>
+          {isComplete ? Confetti : count ? count : ""}
         </h1>
         <div className="flex flex-wrap items-center justify-center gap-4">
           {items.map((item) =>
             Array(item.target)
               .fill("")
               .map((_, index) => (
-                <Countable key={index} value={item.text} onClick={getNextCount} isComplete={count === targetCount} />
+                <Countable
+                  key={index}
+                  value={item.text}
+                  onClick={getNextCount}
+                  isComplete={isComplete}
+                />
               ))
           )}
         </div>
         <div className="pt-4">
-          <Next onNext={onNextClick} className={{
-            invisible: count !== targetCount
-          }} />
+          {isComplete && (
+            <CardOptions
+              onSelect={() => {}}
+              onSuccess={async () => {
+                await sleep(1000);
+                onNextClick();
+              }}
+            />
+          )}
         </div>
       </div>
     </Container>
@@ -157,7 +180,7 @@ function Countable({
   value,
   className,
   onClick,
-  isComplete
+  isComplete,
 }: {
   value: string;
   className?: string;
