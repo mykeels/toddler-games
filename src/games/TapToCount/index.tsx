@@ -163,7 +163,9 @@ export const TapToCount = ({ onNext, ...props }: TapToCountProps) => {
             <CardOptions
               onSelect={() => {}}
               onSuccess={async () => {
-                await sleep(1000);
+                await sleep(500);
+                speak(`${targetCount} cards!`);
+                await sleep(1750);
                 onNextClick();
               }}
             />
