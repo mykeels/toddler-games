@@ -5,6 +5,8 @@ import { ReadWords } from "@/games/ReadWords";
 import { TapToCount } from "@/games/TapToCount";
 import { useRestart } from "@/utils/restart";
 import WhatDoYouHear from "../WhatDoYouHear";
+import { useMemo } from "react";
+import { getNextCharacter } from "@/utils/characters";
 
 type GameProps = {
     onNext?: () => void;
@@ -28,7 +30,7 @@ const games: GameComponent[] = [
 
 export const Flow = () => {
     const { life, restart } = useRestart();
-    const Game = games[life % games.length];
+    const Game = useMemo(() => getNextCharacter(games), [life]);
     return <Game onNext={restart} />;
 };
 
