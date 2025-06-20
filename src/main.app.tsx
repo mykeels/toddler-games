@@ -21,6 +21,7 @@ import WhatDoYouHear from "./games/WhatDoYouHear";
 import { WhatDoYouHearRoute } from "./games/WhatDoYouHear/route";
 import { Layout } from "./layout";
 import { ErrorBoundary } from "./utils/error-boundary";
+import { ThemeMusic } from "@/utils/theme-music";
 
 // eslint-disable-next-line react-refresh/only-export-components
 const RenderMode = ({ children }: { children: React.ReactNode }) => {
@@ -38,6 +39,7 @@ export const AppContexts = ({ children }: { children: React.ReactNode }) => {
           <LevelContextProvider>
             <div className="mfe toddler-games">
               {children}
+              <ThemeMusic />
             </div>
           </LevelContextProvider>
         </QueryClientProvider>

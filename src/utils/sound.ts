@@ -36,6 +36,7 @@ export const sequence = (
 };
 
 export const fx = {
+  theme: audio("./soundfx/theme.mp3"),
   click: audio("./soundfx/click.mp3"),
   correct: audio("./soundfx/correct.mp3"),
   incorrect: audio("./soundfx/incorrect.mp3"),
