@@ -82,10 +82,6 @@ export const ImageToLetterMatching = ({
     onNext?.();
   };
 
-  useEffect(() => {
-    fx.game.play();
-  }, []);
-
   const { ref } = useHorizontalSwipe({
     onSwipe: () => onNextClick(),
   });
