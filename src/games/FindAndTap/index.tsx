@@ -104,16 +104,12 @@ export function FindAndTap({
     return () => controller.abort();
   }, [onNextClick, onLetterOrNumberClick, pair]);
 
-  useEffect(() => {
-    fx.game.play();
-  }, []);
-
   const { ref } = useHorizontalSwipe({
     onSwipe: () => onNextClick(),
   });
 
   const speakGoal = () => {
-    speak(`Tap ${goal.value}`);
+    speak(`Tap ${goal.name}`);
   };
 
   useEffect(speakGoal, [goal, gameIndex]);
