@@ -93,7 +93,7 @@ export const ImageToLetterMatching = ({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const speakGoal = async () => {
     for (let i = 0; i < 2; i++) {
-      speak(goal);
+      speak(goal.toUpperCase(), { rate: 1.2 });
       await sleep(750);
     }
     speak(image.name);
