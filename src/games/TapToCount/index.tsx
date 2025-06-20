@@ -3,7 +3,6 @@ import classNames from "clsx";
 import { FRUITS, ANIMALS, NUMBERS } from "@/utils/characters";
 import { onTouch } from "@/utils/touch";
 import { useHorizontalSwipe } from "@/utils/swipe";
-import { fx } from "@/utils/sound";
 import Container from "@/Container";
 import Header from "@/Header/Header";
 import { useSpeak } from "@/utils/speak";
@@ -103,9 +102,6 @@ export const TapToCount = ({ onNext, ...props }: TapToCountProps) => {
 
   const [showConfetti, Confetti] = useConfetti();
 
-  useEffect(() => {
-    fx.game.play();
-  }, []);
   const speakGoal = () => {
     speak(`Can you count to ${targetCount}?`);
   };
