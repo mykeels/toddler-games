@@ -208,7 +208,6 @@ const useHomeSound = () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const $window = window as any;
     if (!$window.__hasPlayedHome) {
-      fx.home.play();
       $window.__hasPlayedHome = true;
     }
   }, []);
