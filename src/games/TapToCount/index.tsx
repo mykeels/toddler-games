@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import classNames from "clsx";
-import { FRUITS, ANIMALS, NUMBERS } from "@/utils/characters";
+import { FRUITS, ANIMALS, DIGITS } from "@/utils/characters";
 import { onTouch } from "@/utils/touch";
 import { useHorizontalSwipe } from "@/utils/swipe";
 import Container from "@/Container";
@@ -78,7 +78,7 @@ export const TapToCount = ({ onNext, ...props }: TapToCountProps) => {
   useEffect(() => {
     const controller = new AbortController();
     const handleKeyPress = (event: KeyboardEvent) => {
-      const digits = NUMBERS.map((number) => number.value.toString());
+      const digits = DIGITS.map((number) => number.value.toString());
       if (event.key === "Enter") {
         onNextClick();
       } else if (event.key === " ") {
@@ -117,7 +117,7 @@ export const TapToCount = ({ onNext, ...props }: TapToCountProps) => {
   }, [count, targetCount]);
 
   const { CardOptions } = useCardOptions({
-    characters: NUMBERS,
+    characters: DIGITS,
     noOfOptions: 2,
     goal: {
       name: targetCount.toString(),

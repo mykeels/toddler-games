@@ -110,7 +110,7 @@ export const LETTERS: Character[] = [
   },
 ];
 
-export const NUMBERS: Character[] = [
+export const DIGITS: Character[] = [
   {
     value: "1",
     name: "one",
@@ -253,7 +253,7 @@ export const CHARACTERS = {
     value: letter.value.toLowerCase(),
     name: letter.name,
   }) as Character),
-  numbers: NUMBERS,
+  numbers: DIGITS,
   animals: ANIMALS,
   fruits: FRUITS,
 };
