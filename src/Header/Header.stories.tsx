@@ -1,12 +1,19 @@
+import { expect, within } from '@storybook/test';
 import { Header } from './Header';
 import { Menu } from './Menu';
+import { story } from '@/utils/story';
 
 export default {
   title: 'components/Header',
   component: Header,
 };
 
-export const Default = () => <Header title="Header" onRestart={() => {}} />;
+export const Default = story(() => <Header title="Header" onRestart={() => {}} />, {
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByTestId('header')).toBeInTheDocument();
+  },
+});
 
 export const WithBackToHome = () => <Header title="Header" onRestart={() => {}} Left={<Header.BackToHome />} />;
 

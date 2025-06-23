@@ -24,7 +24,10 @@ type HeaderProps = {
 
 export const Header = ({ title, children, Left, ...props }: HeaderProps) => {
   return (
-    <h1 className="text-4xl flex flex-row items-center justify-between bg-brand-primary px-2 text-white select-none z-10">
+    <h1
+      data-testid="header"
+      className="text-4xl flex flex-row items-center justify-between bg-brand-primary px-2 text-white select-none z-10"
+    >
       {Left ? Left : <Header.BackToMenu />}
       <span className="text-center text-2xl md:text-4xl">{children ?? title}</span>
       {!props.noRight ? (

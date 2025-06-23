@@ -22,35 +22,39 @@ export default defineConfig(({ mode }) => {
     },
     plugins: [
       react(),
-      VitePWA({
-        registerType: 'autoUpdate',
-        manifest: {
-          name: 'Toddler Games',
-          short_name: 'Toddler Games',
-          description: 'Toddler Games',
-          theme_color: '#BB017A',
-          background_color: '#000000',
-          display: 'fullscreen',
-          categories: ['education', 'game'],
-          icons: [
-            {
-              src: './logo.svg',
-              sizes: '192x192',
-              type: 'image/svg',
-            },
-            {
-              src: './logo.svg',
-              sizes: '512x512',
-              type: 'image/svg',
-            },
-            {
-              src: './logo.svg',
-              sizes: '1024x1024',
-              type: 'image/svg',
-            },
-          ],
-        },
-      }),
+      ...(process.env.STORYBOOK
+        ? []
+        : [
+            VitePWA({
+              registerType: 'autoUpdate',
+              manifest: {
+                name: 'Toddler Games',
+                short_name: 'Toddler Games',
+                description: 'Toddler Games',
+                theme_color: '#BB017A',
+                background_color: '#000000',
+                display: 'fullscreen',
+                categories: ['education', 'game'],
+                icons: [
+                  {
+                    src: './logo.svg',
+                    sizes: '192x192',
+                    type: 'image/svg',
+                  },
+                  {
+                    src: './logo.svg',
+                    sizes: '512x512',
+                    type: 'image/svg',
+                  },
+                  {
+                    src: './logo.svg',
+                    sizes: '1024x1024',
+                    type: 'image/svg',
+                  },
+                ],
+              },
+            }),
+          ]),
       rawPlugin({
         fileRegex: /\.md$/,
       }),

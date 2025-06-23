@@ -26,3 +26,7 @@ dist-ssr
 
 *storybook.log
 .qodo
+
+storybook-static
+coverage
+.nyc_output
