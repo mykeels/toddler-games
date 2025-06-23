@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import Draggable, { DraggableEvent } from 'react-draggable';
 import { DEFAULT_LETTER_COLOR, DEFAULT_LETTER_FONT_SIZE } from '../PlaceTheLetters.consts';
 import { useRef } from 'react';
-import { useFloatAround } from '@/FloatAround';
+import { useFloatAround } from '@/FloatAround/useFloatAround.hook';
 import { vibrate } from '@/utils/vibrate';
 import { isLightColor } from '@/utils/colors';
 import { useSpeak } from '@/utils/speak';
