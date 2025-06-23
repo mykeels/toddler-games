@@ -13,7 +13,7 @@ export const ThemeMusic = () => {
   const stop = () => {
     graduallyReduceVolumeThenStop(fx.theme);
   };
-  useWindowFocus({
+  const { isFocused } = useWindowFocus({
     onFocus: () => {
       play();
     },
@@ -22,7 +22,9 @@ export const ThemeMusic = () => {
     },
   });
   useEffect(() => {
-    play();
+    if (isFocused) {
+      play();
+    }
     return () => {
       stop();
     };
