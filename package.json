@@ -17,6 +17,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "npx cross-env BASE_URL=/ STORYBOOK=true storybook build",
