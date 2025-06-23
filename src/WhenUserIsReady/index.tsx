@@ -1,10 +1,6 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-export const WhenUserIsReady = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+export const WhenUserIsReady = ({ children }: { children: React.ReactNode }) => {
   const [isReady, setIsReady] = useState(false);
   return (
     <div className="toddler-games">

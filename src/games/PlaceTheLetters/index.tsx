@@ -1,26 +1,20 @@
-import Container from "@/Container";
-import Header from "@/Header/Header";
-import { useLevel } from "@/Header/Levels";
-import Next from "@/Next";
-import { useRestart } from "@/utils/restart";
-import { Levels, WORDS } from "@/utils/words";
-import { useConfetti } from "@/Confetti";
-import { useEffect, useMemo, useRef, useState } from "react";
-import LetterSlot from "./LetterSlot/LetterSlot";
-import Letter from "./Letter/Letter";
-import { useSpeak } from "@/utils/speak";
-import { getRainbowColor } from "@/utils/colors";
-import README from "./README.md";
-import clsx from "clsx";
-import { sleep } from "@/utils/sleep";
+import Container from '@/Container';
+import Header from '@/Header/Header';
+import { useLevel } from '@/Header/Levels';
+import Next from '@/Next';
+import { useRestart } from '@/utils/restart';
+import { Levels, WORDS } from '@/utils/words';
+import { useConfetti } from '@/Confetti';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import LetterSlot from './LetterSlot/LetterSlot';
+import Letter from './Letter/Letter';
+import { useSpeak } from '@/utils/speak';
+import { getRainbowColor } from '@/utils/colors';
+import README from './README.md';
+import clsx from 'clsx';
+import { sleep } from '@/utils/sleep';
 
-export const PlaceTheLetters = ({
-  onNext,
-  standalone,
-}: {
-  onNext?: () => void;
-  standalone?: boolean;
-}) => {
+export const PlaceTheLetters = ({ onNext, standalone }: { onNext?: () => void; standalone?: boolean }) => {
   const { life, restart } = useRestart();
   const level = useLevel();
   const containerRef = useRef<HTMLDivElement>(null);
@@ -29,7 +23,7 @@ export const PlaceTheLetters = ({
   const wordData = useMemo(() => {
     const words = WORDS[(level + 1) as Levels] || [
       {
-        value: "NONE",
+        value: 'NONE',
       },
     ];
     const randomIndex = Math.floor(Math.random() * words.length);
@@ -41,9 +35,7 @@ export const PlaceTheLetters = ({
     width: containerWidth,
     height: containerHeight,
   });
-  const [spokenCharacter, setSpokenCharacter] = useState<Character | null>(
-    null
-  );
+  const [spokenCharacter, setSpokenCharacter] = useState<Character | null>(null);
   const [showConfetti, Confetti] = useConfetti();
   const { speak } = useSpeak();
   const isCompleted = characters.every((character) => character.placed);
@@ -72,8 +64,7 @@ export const PlaceTheLetters = ({
   useEffect(() => {
     speakGoal();
   }, [word, onNext]);
-  const fontSizeValue =
-    containerWidth / (characters.length + Math.ceil(characters.length / 4));
+  const fontSizeValue = containerWidth / (characters.length + Math.ceil(characters.length / 4));
   const fontSize = `min(${fontSizeValue}px, 30dvh)`;
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const onNextClick = () => {
@@ -86,7 +77,7 @@ export const PlaceTheLetters = ({
   useEffect(() => {
     const controller = new AbortController();
     const handleKeyPress = (event: KeyboardEvent) => {
-      if (event.key === " ") {
+      if (event.key === ' ') {
         if (!isCompleted) {
           speakGoal();
         } else {
@@ -95,24 +86,19 @@ export const PlaceTheLetters = ({
       }
     };
 
-    window.addEventListener("keydown", handleKeyPress, {
+    window.addEventListener('keydown', handleKeyPress, {
       signal: controller.signal,
     });
     return () => controller.abort();
   }, [onNextClick, isCompleted, speakGoal]);
 
-  const nextCharacterForPlacement = characters.find(
-    (character) => !character.placed
-  );
+  const nextCharacterForPlacement = characters.find((character) => !character.placed);
 
   return (
     <Container key={life}>
-      <Header
-        onRestart={onNextClick}
-        Right={standalone ? null : <Header.Info description={README} />}
-      >
+      <Header onRestart={onNextClick} Right={standalone ? null : <Header.Info description={README} />}>
         <button className="focus:outline-none" onClick={() => speakGoal()}>
-          {standalone ? "Place Letters" : "Place the letters in the word"}
+          {standalone ? 'Place Letters' : 'Place the letters in the word'}
         </button>
       </Header>
       <div
@@ -140,9 +126,7 @@ export const PlaceTheLetters = ({
                   }
                 }}
                 fontSize={fontSize}
-                canReceive={
-                  nextCharacterForPlacement?.character === character.character
-                }
+                canReceive={nextCharacterForPlacement?.character === character.character}
               />
             )
           )}
@@ -154,16 +138,14 @@ export const PlaceTheLetters = ({
                 draggable={{ position: character.position }}
                 color={getRainbowColor(character.id)}
                 fontSize={fontSize}
-                canBeDropped={
-                  nextCharacterForPlacement?.character === character.character
-                }
+                canBeDropped={nextCharacterForPlacement?.character === character.character}
               />
             )
           )}
         </div>
         <>
           <button
-            className={clsx("flex flex-col items-center justify-center", {
+            className={clsx('flex flex-col items-center justify-center', {
               invisible: !isCompleted || !isSpellingCompleted,
             })}
             onClick={() => {
@@ -175,9 +157,7 @@ export const PlaceTheLetters = ({
               <img
                 src={wordData.image}
                 alt={word}
-                className={clsx(
-                  "w-48 h-48 hsx:w-24 hsx:h-24 hsm:w-24 hsm:h-24 border-2 border-white rounded-lg"
-                )}
+                className={clsx('w-48 h-48 hsx:w-24 hsx:h-24 hsm:w-24 hsm:h-24 border-2 border-white rounded-lg')}
               />
             )}
           </button>
@@ -203,11 +183,8 @@ type Character = {
   };
 };
 
-const useWord = (
-  word: string,
-  containerSize: { width: number; height: number }
-) => {
-  const splitWord = useMemo(() => word.toUpperCase().split(""), [word]);
+const useWord = (word: string, containerSize: { width: number; height: number }) => {
+  const splitWord = useMemo(() => word.toUpperCase().split(''), [word]);
   const [characters, setCharacters] = useState<Character[]>(
     splitWord.map((character, index) => ({
       character,
@@ -229,10 +206,7 @@ const useWord = (
   };
   useEffect(() => {
     const randomPosition = (max: number) =>
-      Math.min(
-        Math.max(Math.floor(Math.random() * max - max / 2), (-max / 2) * 0.7),
-        (max / 2) * 0.7
-      );
+      Math.min(Math.max(Math.floor(Math.random() * max - max / 2), (-max / 2) * 0.7), (max / 2) * 0.7);
     setCharacters(
       splitWord.map((character, index) => ({
         character,

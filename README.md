@@ -1,6 +1,6 @@
 # Toddler Games
 
-This codebase represents a collection of educational games for toddlers called "Toddler Games". It's a React-based web application that includes several interactive games designed to help toddlers learn various concepts. 
+This codebase represents a collection of educational games for toddlers called "Toddler Games". It's a React-based web application that includes several interactive games designed to help toddlers learn various concepts.
 
 Demo: [https://mykeels.github.io/toddler-games/](https://mykeels.github.io/toddler-games/)
 
@@ -32,7 +32,6 @@ Here's some games included:
 
 - [Story Time](./src/games/StoryTime/README.md): A simple, interactive storybook app that highlights words as they are read aloud, encouraging toddlers to follow along and associate written words with their spoken counterparts. -->
 
-
 ## Using the template
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
@@ -57,7 +56,7 @@ export default tseslint.config({
       tsconfigRootDir: import.meta.dirname,
     },
   },
-})
+});
 ```
 
 - Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
@@ -66,7 +65,7 @@ export default tseslint.config({
 
 ```js
 // eslint.config.js
-import react from 'eslint-plugin-react'
+import react from 'eslint-plugin-react';
 
 export default tseslint.config({
   // Set the react version
@@ -81,5 +80,5 @@ export default tseslint.config({
     ...react.configs.recommended.rules,
     ...react.configs['jsx-runtime'].rules,
   },
-})
+});
 ```

@@ -1,6 +1,6 @@
-import { useEffect, useRef } from "react";
-import SwipeListener from "swipe-listener";
-import { hasTouch } from "./touch";
+import { useEffect, useRef } from 'react';
+import SwipeListener from 'swipe-listener';
+import { hasTouch } from './touch';
 
 type SwipeEventData = {
   directions: {
@@ -18,11 +18,7 @@ type SwipeEvent = {
   detail: SwipeEventData;
 };
 
-export const useSwipe = ({
-  onSwipe,
-}: {
-  onSwipe: (data: SwipeEventData) => void;
-}) => {
+export const useSwipe = ({ onSwipe }: { onSwipe: (data: SwipeEventData) => void }) => {
   const ref = useRef<HTMLElement>();
 
   useEffect(() => {
@@ -33,16 +29,13 @@ export const useSwipe = ({
     const element = ref.current as HTMLElement;
     const controller = new AbortController();
     element.addEventListener(
-      "swipe",
+      'swipe',
       (e) => {
         const event = e as unknown as SwipeEvent;
         const directions = event.detail.directions;
         const x: [number, number] = event.detail.x;
         const y: [number, number] = event.detail.y;
-        const distance: [number, number] = [
-          Math.abs(x[0] - x[1]),
-          Math.abs(y[0] - y[1]),
-        ];
+        const distance: [number, number] = [Math.abs(x[0] - x[1]), Math.abs(y[0] - y[1])];
         console.log(directions, x, y, distance);
         const maxDistance = Math.max(...distance);
         if (maxDistance > 120) {
@@ -69,11 +62,7 @@ export const useSwipe = ({
   };
 };
 
-export const useHorizontalSwipe = ({
-  onSwipe,
-}: {
-  onSwipe: (data: SwipeEventData) => void;
-}) => {
+export const useHorizontalSwipe = ({ onSwipe }: { onSwipe: (data: SwipeEventData) => void }) => {
   return useSwipe({
     onSwipe: (data) => {
       if (data.directions.left || data.directions.right) {
@@ -83,11 +72,7 @@ export const useHorizontalSwipe = ({
   });
 };
 
-export const useVerticalSwipe = ({
-  onSwipe,
-}: {
-  onSwipe: (data: SwipeEventData) => void;
-}) => {
+export const useVerticalSwipe = ({ onSwipe }: { onSwipe: (data: SwipeEventData) => void }) => {
   return useSwipe({
     onSwipe: (data) => {
       if (data.directions.up || data.directions.down) {

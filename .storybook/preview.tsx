@@ -1,9 +1,9 @@
-import "../src/index.css";
+import '../src/index.css';
 
-import React from "react";
-import type { Preview } from "@storybook/react";
-import { withRouter } from "../src/utils/withRouter";
-import { withLevels } from "../src/Header/Levels";
+import React from 'react';
+import type { Preview } from '@storybook/react';
+import { withRouter } from '../src/utils/withRouter';
+import { withLevels } from '../src/Header/Levels';
 
 const preview: Preview = {
   parameters: {

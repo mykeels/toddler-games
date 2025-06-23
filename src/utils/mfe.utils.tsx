@@ -17,9 +17,7 @@ const setMountProps = (mountProps: MfeMountProps) => {
   _mountProps = mountProps;
 };
 
-export function getModuleFederationEntry<
-  TMountProps extends ExtendedMountProps,
->(
+export function getModuleFederationEntry<TMountProps extends ExtendedMountProps>(
   Component: (props: { mountProps: TMountProps }) => React.ReactElement
 ): ModuleFederationEntry<TMountProps> {
   return {
@@ -84,10 +82,7 @@ function defaultUnmount(containerRef: HTMLElement) {
 }
 
 export type ModuleFederationEntry<TMountProps extends ExtendedMountProps> = {
-  mount: (
-    containerRef: string | HTMLElement,
-    mountProps: TMountProps
-  ) => () => void;
+  mount: (containerRef: string | HTMLElement, mountProps: TMountProps) => () => void;
   unmount: (containerRef: HTMLElement) => void;
 };
 

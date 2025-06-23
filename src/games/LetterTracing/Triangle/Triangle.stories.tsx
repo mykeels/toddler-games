@@ -1,7 +1,7 @@
-import Triangle from ".";
+import Triangle from '.';
 
 export default {
-  title: "Games/LetterTracing/Triangle",
+  title: 'Games/LetterTracing/Triangle',
   component: Triangle,
 };
 

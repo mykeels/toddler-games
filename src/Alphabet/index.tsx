@@ -1,12 +1,12 @@
-import { useSpeak } from "@/utils/speak";
-import "../index.css";
-import { fx } from "@/utils/sound";
-import { getBaseUrl } from "@/utils/url";
-import { vibrate } from "@/utils/vibrate";
-import { SPECIAL_PHONICS } from "@/utils/words";
+import { useSpeak } from '@/utils/speak';
+import '../index.css';
+import { fx } from '@/utils/sound';
+import { getBaseUrl } from '@/utils/url';
+import { vibrate } from '@/utils/vibrate';
+import { SPECIAL_PHONICS } from '@/utils/words';
 
 export const Alphabet = () => {
-  const letters = Object.keys(fx.alphabet).filter((l) => !["play"].includes(l));
+  const letters = Object.keys(fx.alphabet).filter((l) => !['play'].includes(l));
   const { speak } = useSpeak();
   return (
     <table className="w-full table-fixed border-collapse border border-gray-300">
@@ -49,7 +49,7 @@ export const Alphabet = () => {
 const ClassicPhonics = () => {
   const phonics = Object.keys(fx.phonics)
     .filter((l) => Object.keys(fx.alphabet).includes(l))
-    .filter((l) => !["play"].includes(l));
+    .filter((l) => !['play'].includes(l));
 
   return <Letters letters={phonics} />;
 };
@@ -61,13 +61,13 @@ const SpecialPhonics = () => {
 };
 
 const SpecialPhonicVowels = () => {
-  const phonics = ["ā", "ē", "ī", "ō", "ū"];
+  const phonics = ['ā', 'ē', 'ī', 'ō', 'ū'];
 
   return <Letters letters={phonics} />;
 };
 
 const SpecialPhonicConsonants = () => {
-  const phonics = ["č", "š"];
+  const phonics = ['č', 'š'];
 
   return <Letters letters={phonics} />;
 };
@@ -103,11 +103,11 @@ const PlayButton = ({ onClick }: { onClick: () => void }) => {
       onClick={(e) => {
         onClick();
         vibrate();
-        e.currentTarget?.classList?.remove("hover:animate-breathe");
-        e.currentTarget?.classList?.add("animate-vibrate");
+        e.currentTarget?.classList?.remove('hover:animate-breathe');
+        e.currentTarget?.classList?.add('animate-vibrate');
         setTimeout(() => {
-          e.currentTarget?.classList?.remove("animate-vibrate");
-          e.currentTarget?.classList?.add("hover:animate-breathe");
+          e.currentTarget?.classList?.remove('animate-vibrate');
+          e.currentTarget?.classList?.add('hover:animate-breathe');
         }, 1000);
       }}
     >

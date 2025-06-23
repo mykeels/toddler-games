@@ -6,7 +6,7 @@ export const Screens = {
   SM: `(max-width: 768px)`,
   MD: `(max-width: 1024px)`,
   LG: `(max-width: 1280px)`,
-  XL: `(max-width: 1536px)`
+  XL: `(max-width: 1536px)`,
 } as const;
 
 /**
@@ -27,11 +27,7 @@ export const Screens = {
     'text-white'
   );
  */
-export function useMedia<TQuery extends Query, TValue>(
-  queries: TQuery[],
-  values: TValue[],
-  defaultValue: TValue
-) {
+export function useMedia<TQuery extends Query, TValue>(queries: TQuery[], values: TValue[], defaultValue: TValue) {
   // Array containing a media query list for each query
   const mediaQueryLists = queries.map((q) => window.matchMedia(q));
 
@@ -55,8 +51,7 @@ export function useMedia<TQuery extends Query, TValue>(
       // Set a listener for each media query with above handler as callback.
       mediaQueryLists.forEach((mql) => mql.addListener(handler));
       // Remove listeners on cleanup
-      return () =>
-        mediaQueryLists.forEach((mql) => mql.removeListener(handler));
+      return () => mediaQueryLists.forEach((mql) => mql.removeListener(handler));
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [] // Empty array ensures effect is only run on mount and unmount

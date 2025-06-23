@@ -1,9 +1,5 @@
-import { SvgProps } from "../LetterTracing.types";
-import {
-  DEFAULT_LETTER_SIZE,
-  DEFAULT_COLOR,
-  DEFAULT_DOT_SIZE,
-} from "../LetterTracing.consts";
+import { SvgProps } from '../LetterTracing.types';
+import { DEFAULT_LETTER_SIZE, DEFAULT_COLOR, DEFAULT_DOT_SIZE } from '../LetterTracing.consts';
 
 export default function Down({
   size = DEFAULT_LETTER_SIZE,
@@ -11,12 +7,7 @@ export default function Down({
   color = DEFAULT_COLOR,
 }: SvgProps) {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width={size}
-      height={size}
-      viewBox="0 0 100 100"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 100 100">
       {/*<!-- Vertical line -->*/}
       <circle cx="50" cy="10" r={dotSize} fill={color} />
       <circle cx="50" cy="20" r={dotSize} fill={color} />

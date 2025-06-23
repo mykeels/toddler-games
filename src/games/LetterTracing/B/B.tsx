@@ -1,37 +1,12 @@
-import { SvgProps } from "../LetterTracing.types";
-import {
-  DEFAULT_LETTER_SIZE,
-  DEFAULT_COLOR,
-  DEFAULT_DOT_SIZE,
-} from "../LetterTracing.consts";
+import { SvgProps } from '../LetterTracing.types';
+import { DEFAULT_LETTER_SIZE, DEFAULT_COLOR, DEFAULT_DOT_SIZE } from '../LetterTracing.consts';
 
-export default function B({
-  size = DEFAULT_LETTER_SIZE,
-  dotSize = DEFAULT_DOT_SIZE,
-  color = DEFAULT_COLOR,
-}: SvgProps) {
-  const upperCurvePoints = generateCubicCurvePoints(
-    [60, 10],
-    [75, 15],
-    [75, 45],
-    [60, 50],
-    5
-  );
-  const lowerCurvePoints = generateCubicCurvePoints(
-    [60, 50],
-    [75, 55],
-    [75, 85],
-    [60, 90],
-    5
-  );
+export default function B({ size = DEFAULT_LETTER_SIZE, dotSize = DEFAULT_DOT_SIZE, color = DEFAULT_COLOR }: SvgProps) {
+  const upperCurvePoints = generateCubicCurvePoints([60, 10], [75, 15], [75, 45], [60, 50], 5);
+  const lowerCurvePoints = generateCubicCurvePoints([60, 50], [75, 55], [75, 85], [60, 90], 5);
 
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width={size}
-      height={size}
-      viewBox="0 0 100 100"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 100 100">
       {/*<!-- Vertical line -->*/}
       <circle cx="30" cy="10" r={dotSize} fill={color} />
       <circle cx="30" cy="20" r={dotSize} fill={color} />
@@ -53,24 +28,12 @@ export default function B({
 
       {/*<!-- Upper curve -->*/}
       {upperCurvePoints.map((point) => (
-        <circle
-          key={`${point.x}-${point.y}`}
-          cx={point.x}
-          cy={point.y}
-          r={dotSize}
-          fill={color}
-        />
+        <circle key={`${point.x}-${point.y}`} cx={point.x} cy={point.y} r={dotSize} fill={color} />
       ))}
 
       {/*<!-- Lower curve -->*/}
       {lowerCurvePoints.map((point) => (
-        <circle
-          key={`${point.x}-${point.y}`}
-          cx={point.x}
-          cy={point.y}
-          r={dotSize}
-          fill={color}
-        />
+        <circle key={`${point.x}-${point.y}`} cx={point.x} cy={point.y} r={dotSize} fill={color} />
       ))}
     </svg>
   );
@@ -78,13 +41,7 @@ export default function B({
 
 type Point = [number, number];
 
-function generateCubicCurvePoints(
-  start: Point,
-  control1: Point,
-  control2: Point,
-  end: Point,
-  count: number
-) {
+function generateCubicCurvePoints(start: Point, control1: Point, control2: Point, end: Point, count: number) {
   const points = [];
   const [startX, startY] = start;
   const [control1X, control1Y] = control1;

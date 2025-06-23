@@ -1,9 +1,6 @@
-import {
-  getModuleFederationEntry,
-  ModuleFederationEntry,
-} from "@/utils/mfe.utils";
-import { AppContexts } from "@/main.app";
-import { CreateReadWord } from "./CreateReadWord";
+import { getModuleFederationEntry, ModuleFederationEntry } from '@/utils/mfe.utils';
+import { AppContexts } from '@/main.app';
+import { CreateReadWord } from './CreateReadWord';
 
 const Entry: ModuleFederationEntry<never> = getModuleFederationEntry(() => {
   return (

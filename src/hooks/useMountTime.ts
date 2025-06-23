@@ -1,9 +1,5 @@
-import { useEffect, useState } from "react";
-import {
-  differenceInSeconds,
-  differenceInMinutes,
-  differenceInHours,
-} from "date-fns";
+import { useEffect, useState } from 'react';
+import { differenceInSeconds, differenceInMinutes, differenceInHours } from 'date-fns';
 
 /**
  * Use this hook to get the time elapsed since the component mounted.

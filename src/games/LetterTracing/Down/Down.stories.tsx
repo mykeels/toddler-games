@@ -1,7 +1,7 @@
-import Down from "./Down";
+import Down from './Down';
 
 export default {
-  title: "Games/LetterTracing/Down",
+  title: 'Games/LetterTracing/Down',
   component: Down,
 };
 

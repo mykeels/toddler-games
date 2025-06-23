@@ -1,7 +1,7 @@
-import Across from "./Across";
+import Across from './Across';
 
 export default {
-  title: "Games/LetterTracing/Across",
+  title: 'Games/LetterTracing/Across',
   component: Across,
 };
 

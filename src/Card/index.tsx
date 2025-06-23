@@ -1,7 +1,7 @@
-import { onTouch } from "@/utils/touch";
-import { vibrate } from "@/utils/vibrate";
-import classNames from "clsx";
-import { useRef } from "react";
+import { onTouch } from '@/utils/touch';
+import { vibrate } from '@/utils/vibrate';
+import classNames from 'clsx';
+import { useRef } from 'react';
 
 export function Card({
   children,
@@ -20,7 +20,7 @@ export function Card({
 }) {
   const radioRef = useRef<HTMLInputElement>(null);
   const isCorrect = value === selectedValue;
-  const classNameOptions = typeof className === "object" ? className || {} : {};
+  const classNameOptions = typeof className === 'object' ? className || {} : {};
   return (
     <label className="flex flex-col items-center justify-center w-auto select-auto group">
       <div
@@ -32,15 +32,14 @@ export function Card({
         })}
         data-value={value.toLowerCase()}
         className={classNames(
-          "width" in classNameOptions
+          'width' in classNameOptions
             ? classNameOptions.width
-            : "portrait:min-w-[16dvw] portrait:h-[16dvw] landscape:min-w-[18dvh] landscape:h-[18dvh]",
-          "cursor-pointer border-2 border-black flex items-center justify-center text-4xl rounded text-black",
+            : 'portrait:min-w-[16dvw] portrait:h-[16dvw] landscape:min-w-[18dvh] landscape:h-[18dvh]',
+          'cursor-pointer border-2 border-black flex items-center justify-center text-4xl rounded text-black',
           {
-            "group-has-[input:checked]:bg-brand-accent-green": isCorrect,
-            "group-has-[input:checked]:bg-brand-accent-orange group-has-[input:checked]:animate-vibrate":
-              !isCorrect,
-            "group-has-[input:not(:checked)]:bg-white": true,
+            'group-has-[input:checked]:bg-brand-accent-green': isCorrect,
+            'group-has-[input:checked]:bg-brand-accent-orange group-has-[input:checked]:animate-vibrate': !isCorrect,
+            'group-has-[input:not(:checked)]:bg-white': true,
           },
           className
         )}

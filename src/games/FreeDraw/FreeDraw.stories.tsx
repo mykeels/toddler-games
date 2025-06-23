@@ -1,7 +1,7 @@
-import FreeDraw from ".";
+import FreeDraw from '.';
 
 export default {
-  title: "Games/FreeDraw",
+  title: 'Games/FreeDraw',
   component: FreeDraw,
 };
 

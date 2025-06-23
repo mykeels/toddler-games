@@ -1,31 +1,31 @@
-import "./index.css";
-import React , { StrictMode } from "react";
-import { createHashRouter, RouterProvider } from "react-router";
-import { QueryClient, QueryClientProvider } from "react-query";
+import './index.css';
+import React, { StrictMode } from 'react';
+import { createHashRouter, RouterProvider } from 'react-router';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
-import { LevelContextProvider } from "./Header/Levels";
-import { Splash } from "./Splash";
-import { Home } from "./GameListing";
-import { FindAndTapRoute } from "./games/FindAndTap/route";
-import NumberKeypad from "./games/NumberKeypad";
-import Flow from "./games/Flow";
-import FreeDraw from "./games/FreeDraw";
-import { ImageToLetterMatchingRoute } from "./games/ImageToLetterMatching/route";
-import ImageToLetterMatching from "./games/ImageToLetterMatching";
-import PlaceTheLetters from "./games/PlaceTheLetters";
-import { LetterTracingRoute } from "./games/LetterTracing/route";
-import ReadWords from "./games/ReadWords";
-import TapToCount from "./games/TapToCount";
-import TypeAway from "./games/TypeAway";
-import WhatDoYouHear from "./games/WhatDoYouHear";
-import { WhatDoYouHearRoute } from "./games/WhatDoYouHear/route";
-import { Layout } from "./layout";
-import { ErrorBoundary } from "./utils/error-boundary";
-import { ThemeMusic } from "@/utils/theme-music";
+import { LevelContextProvider } from './Header/Levels';
+import { Splash } from './Splash';
+import { Home } from './GameListing';
+import { FindAndTapRoute } from './games/FindAndTap/route';
+import NumberKeypad from './games/NumberKeypad';
+import Flow from './games/Flow';
+import FreeDraw from './games/FreeDraw';
+import { ImageToLetterMatchingRoute } from './games/ImageToLetterMatching/route';
+import ImageToLetterMatching from './games/ImageToLetterMatching';
+import PlaceTheLetters from './games/PlaceTheLetters';
+import { LetterTracingRoute } from './games/LetterTracing/route';
+import ReadWords from './games/ReadWords';
+import TapToCount from './games/TapToCount';
+import TypeAway from './games/TypeAway';
+import WhatDoYouHear from './games/WhatDoYouHear';
+import { WhatDoYouHearRoute } from './games/WhatDoYouHear/route';
+import { Layout } from './layout';
+import { ErrorBoundary } from './utils/error-boundary';
+import { ThemeMusic } from '@/utils/theme-music';
 
 // eslint-disable-next-line react-refresh/only-export-components
 const RenderMode = ({ children }: { children: React.ReactNode }) => {
-  const isProduction = process.env.NODE_ENV === "production";
+  const isProduction = process.env.NODE_ENV === 'production';
   return isProduction ? <StrictMode>{children}</StrictMode> : children;
 };
 
@@ -53,67 +53,67 @@ export const App = () => {
   const router = createHashRouter(
     [
       {
-        path: "/",
+        path: '/',
         element: <Splash />,
       },
       {
-        path: "/menu",
+        path: '/menu',
         element: <Home />,
       },
       {
-        path: "/find-and-tap/:characterSet",
+        path: '/find-and-tap/:characterSet',
         element: <FindAndTapRoute />,
       },
       {
-        path: "/find-and-tap/:characterSet/:subCharacterSet",
+        path: '/find-and-tap/:characterSet/:subCharacterSet',
         element: <FindAndTapRoute />,
       },
       {
-        path: "/flow",
+        path: '/flow',
         element: <Flow />,
       },
       {
-        path: "/free-draw",
+        path: '/free-draw',
         element: <FreeDraw />,
       },
       {
-        path: "/image-to-letter-matching",
+        path: '/image-to-letter-matching',
         element: <ImageToLetterMatching />,
       },
       {
-        path: "/image-to-letter-matching/:characterSet",
+        path: '/image-to-letter-matching/:characterSet',
         element: <ImageToLetterMatchingRoute />,
       },
       {
-        path: "/letter-tracing/:characterSet",
+        path: '/letter-tracing/:characterSet',
         element: <LetterTracingRoute />,
       },
       {
-        path: "/number-keypad",
+        path: '/number-keypad',
         element: <NumberKeypad />,
       },
       {
-        path: "/place-the-letters",
+        path: '/place-the-letters',
         element: <PlaceTheLetters />,
       },
       {
-        path: "/read-words",
+        path: '/read-words',
         element: <ReadWords />,
       },
       {
-        path: "/tap-to-count",
+        path: '/tap-to-count',
         element: <TapToCount />,
       },
       {
-        path: "/type-away",
+        path: '/type-away',
         element: <TypeAway />,
       },
       {
-        path: "/what-do-you-hear",
+        path: '/what-do-you-hear',
         element: <WhatDoYouHear />,
       },
       {
-        path: "/what-do-you-hear/:uppercase",
+        path: '/what-do-you-hear/:uppercase',
         element: <WhatDoYouHearRoute />,
       },
     ].map((route) => ({

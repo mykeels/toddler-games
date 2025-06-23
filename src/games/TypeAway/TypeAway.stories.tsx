@@ -1,7 +1,7 @@
-import TypeRatATat from "./index";
+import TypeRatATat from './index';
 
 export default {
-  title: "Games/TypeRatATat",
+  title: 'Games/TypeRatATat',
   component: TypeRatATat,
 };
 

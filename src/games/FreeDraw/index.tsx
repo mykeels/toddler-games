@@ -1,21 +1,21 @@
-import { useEffect, useRef, useState } from "react";
-import CanvasDraw from "react-canvas-draw";
-import { fx } from "@/utils/sound";
-import Header from "@/Header/Header";
-import { useRestart } from "@/utils/restart";
-import { speak } from "@/utils/speak";
-import README from "./README.md";
+import { useEffect, useRef, useState } from 'react';
+import CanvasDraw from 'react-canvas-draw';
+import { fx } from '@/utils/sound';
+import Header from '@/Header/Header';
+import { useRestart } from '@/utils/restart';
+import { speak } from '@/utils/speak';
+import README from './README.md';
 export const FreeDraw = () => {
   const [size, setSize] = useState({ width: 500, height: 500 });
   const containerRef = useRef<HTMLDivElement>(null);
   const colors = [
-    "#FF0000", // Red
-    "#FF7F00", // Orange
-    "#008000", // Deep Green
-    "#0000FF", // Blue
-    "#4B0082", // Indigo
-    "#9400D3", // Violet
-    "#000000", // Black
+    '#FF0000', // Red
+    '#FF7F00', // Orange
+    '#008000', // Deep Green
+    '#0000FF', // Blue
+    '#4B0082', // Indigo
+    '#9400D3', // Violet
+    '#000000', // Black
   ];
   const [colorIndex, setColorIndex] = useState(0);
   const color = colors[colorIndex % colors.length];
@@ -39,7 +39,7 @@ export const FreeDraw = () => {
 
   const { life, restart } = useRestart();
   const speakGoal = () => {
-    speak("Draw something beautiful!");
+    speak('Draw something beautiful!');
   };
   useEffect(speakGoal, []);
 
@@ -49,28 +49,13 @@ export const FreeDraw = () => {
 
   return (
     <div className="flex flex-col h-full">
-      <Header
-        onRestart={onNextClick}
-        Right={
-          <Header.Info description={README} />
-        }
-        noLevels
-      >
+      <Header onRestart={onNextClick} Right={<Header.Info description={README} />} noLevels>
         <button className="focus:outline-none" onClick={() => speakGoal()}>
           Free Draw
         </button>
       </Header>
-      <div
-        className="flex flex-col space-y-4 items-center justify-center grow"
-        ref={containerRef}
-      >
-        <CanvasDraw
-          key={life}
-          canvasWidth={size.width}
-          canvasHeight={size.height}
-          brushColor={color}
-          lazyRadius={0}
-        />
+      <div className="flex flex-col space-y-4 items-center justify-center grow" ref={containerRef}>
+        <CanvasDraw key={life} canvasWidth={size.width} canvasHeight={size.height} brushColor={color} lazyRadius={0} />
       </div>
     </div>
   );

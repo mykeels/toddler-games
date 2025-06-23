@@ -1,7 +1,7 @@
-import { PlaceTheLetters } from "./index";
+import { PlaceTheLetters } from './index';
 
 export default {
-  title: "Games/PlaceTheLetters",
+  title: 'Games/PlaceTheLetters',
   component: PlaceTheLetters,
 };
 

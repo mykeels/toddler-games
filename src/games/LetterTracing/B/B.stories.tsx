@@ -1,7 +1,7 @@
-import B from "./B";
+import B from './B';
 
 export default {
-  title: "Games/LetterTracing/B",
+  title: 'Games/LetterTracing/B',
   component: B,
 };
 

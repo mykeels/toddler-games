@@ -1,7 +1,7 @@
-import { CreateReadWord } from "./CreateReadWord";
+import { CreateReadWord } from './CreateReadWord';
 
 export default {
-  title: "Games/ReadWords/CreateReadWord",
+  title: 'Games/ReadWords/CreateReadWord',
   component: CreateReadWord,
 };
 

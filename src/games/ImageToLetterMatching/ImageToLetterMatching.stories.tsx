@@ -1,7 +1,7 @@
-import ImageToLetterMatching from ".";
+import ImageToLetterMatching from '.';
 
 export default {
-  title: "Games/ImageToLetterMatching",
+  title: 'Games/ImageToLetterMatching',
   component: ImageToLetterMatching,
 };
 

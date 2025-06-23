@@ -1,7 +1,7 @@
-import A from "./A";
+import A from './A';
 
 export default {
-  title: "Games/LetterTracing/A",
+  title: 'Games/LetterTracing/A',
   component: A,
 };
 

@@ -1,6 +1,6 @@
-import { getBaseUrl } from "@/utils/url";
-import { clsx } from "clsx";
-import { motion } from "framer-motion";
+import { getBaseUrl } from '@/utils/url';
+import { clsx } from 'clsx';
+import { motion } from 'framer-motion';
 
 export const Tile = ({
   title,
@@ -23,17 +23,12 @@ export const Tile = ({
             group hover:shadow"
     >
       {title ? (
-        <h1 className="text-sm font-normal group-hover:animate-breathe transition-all duration-300">
-          {title}
-        </h1>
+        <h1 className="text-sm font-normal group-hover:animate-breathe transition-all duration-300">{title}</h1>
       ) : null}
       <img
         src={`${baseUrl}/${imageSourcePath}`}
         alt={title}
-        className={clsx(
-          "w-16 h-16 group-hover:animate-breathe transition-all duration-300",
-          imageClassName
-        )}
+        className={clsx('w-16 h-16 group-hover:animate-breathe transition-all duration-300', imageClassName)}
       />
     </motion.div>
   );

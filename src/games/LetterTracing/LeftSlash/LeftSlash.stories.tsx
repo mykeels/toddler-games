@@ -1,7 +1,7 @@
-import LeftSlash from "../LeftSlash";
+import LeftSlash from '../LeftSlash';
 
 export default {
-  title: "Games/LetterTracing/LeftSlash",
+  title: 'Games/LetterTracing/LeftSlash',
   component: LeftSlash,
 };
 

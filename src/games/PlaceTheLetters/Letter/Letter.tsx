@@ -1,21 +1,15 @@
-import "../LetterSlot/LetterSlot.css";
-import clsx from "clsx";
-import Draggable, { DraggableEvent } from "react-draggable";
-import {
-  DEFAULT_LETTER_COLOR,
-  DEFAULT_LETTER_FONT_SIZE,
-} from "../PlaceTheLetters.consts";
-import { useRef } from "react";
-import { useFloatAround } from "@/FloatAround";
-import { vibrate } from "@/utils/vibrate";
-import { isLightColor } from "@/utils/colors";
-import { useSpeak } from "@/utils/speak";
+import '../LetterSlot/LetterSlot.css';
+import clsx from 'clsx';
+import Draggable, { DraggableEvent } from 'react-draggable';
+import { DEFAULT_LETTER_COLOR, DEFAULT_LETTER_FONT_SIZE } from '../PlaceTheLetters.consts';
+import { useRef } from 'react';
+import { useFloatAround } from '@/FloatAround';
+import { vibrate } from '@/utils/vibrate';
+import { isLightColor } from '@/utils/colors';
+import { useSpeak } from '@/utils/speak';
 
 const useDraggableWrapper =
-  (
-    draggable: LetterProps["draggable"],
-    nodeRef: React.RefObject<HTMLDivElement>
-  ) =>
+  (draggable: LetterProps['draggable'], nodeRef: React.RefObject<HTMLDivElement>) =>
   (props: {
     children: React.ReactNode;
     onDrag: (e: DraggableEvent, isDragging: boolean) => void;
@@ -30,8 +24,7 @@ const useDraggableWrapper =
         onStart={(e) => {
           props.onDrag(e, true);
           // props.onDragStart?.(e);
-          (e.target as HTMLElement).dataset.value =
-            (e.target as HTMLElement).textContent || "";
+          (e.target as HTMLElement).dataset.value = (e.target as HTMLElement).textContent || '';
         }}
         onStop={(e) => props.onDrag(e, false)}
         onDrag={(e) => props.onDrag(e, true)}
@@ -89,7 +82,7 @@ export const Letter = ({
     vibrate();
   }, 300);
   const { classId, style } = useFloatAround(3);
-  const textShadowColor = isLightColor(color) ? "#000" : "#fff";
+  const textShadowColor = isLightColor(color) ? '#000' : '#fff';
 
   const Wrapper = ({ children }: { children: React.ReactNode }) => {
     return draggable ? (
@@ -98,40 +91,23 @@ export const Letter = ({
         <DraggableWrapper
           onDragStart={() => {}}
           onDrag={(e, isDragging) => {
-            distortableRef.current?.classList.toggle(
-              "animate-breathe",
-              canBeDropped && !isDragging
-            );
-            distortableRef.current?.classList.toggle(
-              "animate-distort",
-              isDragging
-            );
+            distortableRef.current?.classList.toggle('animate-breathe', canBeDropped && !isDragging);
+            distortableRef.current?.classList.toggle('animate-distort', isDragging);
             distortableRef.current?.classList?.toggle(classId, !isDragging);
             if (canBeDropped) {
               speakLetter();
             }
-            const mouseX =
-              (e as MouseEvent).clientX ||
-              (e as TouchEvent).changedTouches?.[0]?.clientX;
-            const mouseY =
-              (e as MouseEvent).clientY ||
-              (e as TouchEvent).changedTouches?.[0]?.clientY;
+            const mouseX = (e as MouseEvent).clientX || (e as TouchEvent).changedTouches?.[0]?.clientX;
+            const mouseY = (e as MouseEvent).clientY || (e as TouchEvent).changedTouches?.[0]?.clientY;
 
             if (!mouseX || !mouseY) {
               return;
             }
 
-            const elementsUnderCursor = document.elementsFromPoint(
-              mouseX,
-              mouseY
-            );
-            const elementsBehind = elementsUnderCursor.filter(
-              (el) => el !== distortableRef.current
-            );
-            const dragOverSlots = elementsBehind.filter((el) =>
-              el.classList.contains("letter-slot")
-            );
-            const allSlots = document.querySelectorAll(".letter-slot");
+            const elementsUnderCursor = document.elementsFromPoint(mouseX, mouseY);
+            const elementsBehind = elementsUnderCursor.filter((el) => el !== distortableRef.current);
+            const dragOverSlots = elementsBehind.filter((el) => el.classList.contains('letter-slot'));
+            const allSlots = document.querySelectorAll('.letter-slot');
             const dispatchEvent = (el: Element, name: string) => {
               const event = new DragEvent(name, {
                 bubbles: true,
@@ -141,18 +117,18 @@ export const Letter = ({
                 dataTransfer: new DataTransfer(),
                 relatedTarget: distortableRef.current,
               });
-              event.dataTransfer?.setData("text/plain", value);
+              event.dataTransfer?.setData('text/plain', value);
               el.dispatchEvent(event);
             };
             allSlots.forEach((slot) => {
               if (dragOverSlots.includes(slot)) {
                 if (isDragging) {
-                  dispatchEvent(slot, "dragover");
+                  dispatchEvent(slot, 'dragover');
                 } else {
-                  dispatchEvent(slot, "drop");
+                  dispatchEvent(slot, 'drop');
                 }
               } else {
-                dispatchEvent(slot, "dragleave");
+                dispatchEvent(slot, 'dragleave');
               }
             });
           }}
@@ -169,21 +145,21 @@ export const Letter = ({
     <Wrapper>
       <span
         className={clsx(`py-2 px-1 font-bold`, {
-          "absolute cursor-move draggable-letter": draggable,
-          "scale-150": spoken,
+          'absolute cursor-move draggable-letter': draggable,
+          'scale-150': spoken,
         })}
         style={{
-          userSelect: "none",
+          userSelect: 'none',
           fontSize,
           color,
         }}
         ref={nodeRef}
       >
         <span
-          className={clsx("", {
+          className={clsx('', {
             absolute: draggable,
             [classId]: !canBeDropped && !spoken,
-            "animate-breathe": canBeDropped,
+            'animate-breathe': canBeDropped,
           })}
           ref={distortableRef}
           style={{

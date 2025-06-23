@@ -1,7 +1,7 @@
-import { useEffect } from "react";
-import { fx } from "./sound";
-import { useWindowFocus } from "@/hooks/useWindowFocus";
-import { sleep } from "./sleep";
+import { useEffect } from 'react';
+import { fx } from './sound';
+import { useWindowFocus } from '@/hooks/useWindowFocus';
+import { sleep } from './sleep';
 
 const DEFAULT_MUSIC_VOLUME = 0.3;
 

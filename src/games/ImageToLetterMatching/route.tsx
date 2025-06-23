@@ -1,5 +1,5 @@
-import { useParams } from "react-router";
-import { ImageToLetterMatching } from ".";
+import { useParams } from 'react-router';
+import { ImageToLetterMatching } from '.';
 
 export const ImageToLetterMatchingRoute = () => {
   const { characterSet } = useParams();
@@ -7,8 +7,7 @@ export const ImageToLetterMatchingRoute = () => {
     {
       uppercase: (letter: string) => letter.toUpperCase(),
       lowercase: (letter: string) => letter.toLowerCase(),
-    }[characterSet as never] ||
-    ((letter: string) => letter);
+    }[characterSet as never] || ((letter: string) => letter);
 
   return <ImageToLetterMatching transformLetter={transformLetter} />;
 };

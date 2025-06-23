@@ -1,8 +1,6 @@
-export const hasTouch = () => "ontouchstart" in window;
+export const hasTouch = () => 'ontouchstart' in window;
 
-export const onTouch = (
-  handler: (e: React.TouchEvent | React.MouseEvent) => void
-) => {
+export const onTouch = (handler: (e: React.TouchEvent | React.MouseEvent) => void) => {
   return {
     onTouchStart: hasTouch() ? handler : undefined,
     onMouseDown: hasTouch() ? undefined : handler,
@@ -10,10 +8,10 @@ export const onTouch = (
 };
 
 export const tap = (element: HTMLElement) => {
-  element.dispatchEvent(new MouseEvent("mousedown", { bubbles: true, cancelable: true }));
-  element.dispatchEvent(new TouchEvent("touchstart", { bubbles: true, cancelable: true }));
+  element.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true }));
+  element.dispatchEvent(new TouchEvent('touchstart', { bubbles: true, cancelable: true }));
   element.click();
-}
+};
 
 declare global {
   interface Element {
@@ -21,7 +19,6 @@ declare global {
   }
 }
 
-Element.prototype.tap = function() {
+Element.prototype.tap = function () {
   tap(this as HTMLElement);
 };
-

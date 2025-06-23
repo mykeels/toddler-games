@@ -1,12 +1,8 @@
-import type { StoryFn, StoryContext } from "@storybook/react";
-import { createMemoryRouter, RouterProvider } from "react-router";
+import type { StoryFn, StoryContext } from '@storybook/react';
+import { createMemoryRouter, RouterProvider } from 'react-router';
 
 export function withRouter(Story: StoryFn, { parameters }: StoryContext) {
-  const {
-    initialEntries = ["/"],
-    initialIndex = 0,
-    path = "/",
-  } = parameters?.router || {};
+  const { initialEntries = ['/'], initialIndex = 0, path = '/' } = parameters?.router || {};
 
   // Define a single route that renders the story at the given path
   const routes = [
@@ -25,7 +21,7 @@ export function withRouter(Story: StoryFn, { parameters }: StoryContext) {
 }
 
 // Optionally extend Storybook's Parameters type for type safety
-declare module "@storybook/react" {
+declare module '@storybook/react' {
   interface Parameters {
     router?: {
       initialEntries?: string[];

@@ -1,12 +1,14 @@
-import Container from "./index";
+import Container from './index';
 
 export default {
-  title: "components/Container",
+  title: 'components/Container',
   component: Container,
 };
 
 export const Default = () => {
-  return <Container>
-    <div>Hello</div>
-  </Container>;
+  return (
+    <Container>
+      <div>Hello</div>
+    </Container>
+  );
 };

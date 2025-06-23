@@ -1,17 +1,17 @@
-import { useEffect } from "react";
-import CanvasDraw from "react-canvas-draw";
-import classNames from "clsx";
-import { fx } from "@/utils/sound";
-import Across from "./Across/Across";
-import { useFullScreenSize } from "@/utils/screen";
-import { SvgProps } from "./LetterTracing.types";
-import { Screens, useMedia } from "@/utils/useMedia";
-import { useRestart } from "@/utils/restart";
-import Header from "@/Header/Header";
-import { speak } from "@/utils/speak";
-import { Menu } from "@/Header/Menu";
-import README from "./README.md";
-import { getBaseUrl } from "@/utils/url";
+import { useEffect } from 'react';
+import CanvasDraw from 'react-canvas-draw';
+import classNames from 'clsx';
+import { fx } from '@/utils/sound';
+import Across from './Across/Across';
+import { useFullScreenSize } from '@/utils/screen';
+import { SvgProps } from './LetterTracing.types';
+import { Screens, useMedia } from '@/utils/useMedia';
+import { useRestart } from '@/utils/restart';
+import Header from '@/Header/Header';
+import { speak } from '@/utils/speak';
+import { Menu } from '@/Header/Menu';
+import README from './README.md';
+import { getBaseUrl } from '@/utils/url';
 
 type LetterTracingProps = {
   name: string;
@@ -41,8 +41,9 @@ export const LetterTracing = ({ name, Letter = Across }: LetterTracingProps) => 
         Right={
           <>
             <Menu.Item>
-              <button onClick={() => {
-                window.print();
+              <button
+                onClick={() => {
+                  window.print();
                 }}
                 className="print:hidden"
               >
@@ -59,29 +60,25 @@ export const LetterTracing = ({ name, Letter = Across }: LetterTracingProps) => 
           {name}
         </button>
       </Header>
-      <div
-        className="flex flex-col space-y-4 items-center justify-center grow relative"
-        ref={containerRef}
-      >
-        <div className={classNames(
-          "w-full h-full absolute top-0 left-0 content-center place-items-center gap-8 p-4 sm:p-16 print:hidden",
-          {
-            "grid grid-cols-1 grid-rows-1 md:grid-cols-2 md:grid-rows-2": letters.length > 1
-          }
-        )}>
+      <div className="flex flex-col space-y-4 items-center justify-center grow relative" ref={containerRef}>
+        <div
+          className={classNames(
+            'w-full h-full absolute top-0 left-0 content-center place-items-center gap-8 p-4 sm:p-16 print:hidden',
+            {
+              'grid grid-cols-1 grid-rows-1 md:grid-cols-2 md:grid-rows-2': letters.length > 1,
+            }
+          )}
+        >
           {letters.map((item) => (
             <Letter size="100%" key={item} />
           ))}
         </div>
-        <div className={classNames(
-          "w-full h-full hidden flex-wrap print:flex gap-8 items-center justify-center pb-8"
-        )}>
+        <div className={classNames('w-full h-full hidden flex-wrap print:flex gap-8 items-center justify-center pb-8')}>
           {printableLetters.map((item) => (
             <Letter size="20dvw" key={item} />
           ))}
         </div>
-        <div
-          className="print:hidden">
+        <div className="print:hidden">
           <CanvasDraw
             key={life}
             canvasWidth={size.width}

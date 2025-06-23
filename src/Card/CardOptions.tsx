@@ -1,9 +1,9 @@
-import { Character, getOptions, shuffle } from "@/utils/characters";
-import { useEffect, useState } from "react";
-import Card from ".";
-import { useConfetti } from "@/Confetti";
-import { vibrate } from "@/utils/vibrate";
-import { fx } from "@/utils/sound";
+import { Character, getOptions, shuffle } from '@/utils/characters';
+import { useEffect, useState } from 'react';
+import Card from '.';
+import { useConfetti } from '@/Confetti';
+import { vibrate } from '@/utils/vibrate';
+import { fx } from '@/utils/sound';
 
 export const useCardOptions = ({
   characters,
@@ -16,17 +16,10 @@ export const useCardOptions = ({
 }) => {
   const getNextPair = () => {
     const options = getOptions(characters, noOfOptions);
-    const filteredOptions = options.filter(
-      (option) => option.value !== goal.value
-    );
+    const filteredOptions = options.filter((option) => option.value !== goal.value);
     return shuffle([
       goal,
-      ...filteredOptions.slice(
-        0,
-        filteredOptions.length === options.length
-          ? options.length - 1
-          : options.length
-      ),
+      ...filteredOptions.slice(0, filteredOptions.length === options.length ? options.length - 1 : options.length),
     ]);
   };
   const [pair, setPair] = useState<Character[]>(getNextPair());
@@ -66,12 +59,7 @@ type PairOptionCardsProps = {
   onSuccess: () => void;
 };
 
-export const CardOptions = ({
-  pair,
-  goal,
-  onSelect,
-  onSuccess,
-}: PairOptionCardsProps) => {
+export const CardOptions = ({ pair, goal, onSelect, onSuccess }: PairOptionCardsProps) => {
   const [showConfetti, Confetti] = useConfetti();
   return (
     <div data-name="pair" className="flex justify-center flex-wrap gap-4">

@@ -1,7 +1,7 @@
-import Circle from ".";
+import Circle from '.';
 
 export default {
-  title: "Games/LetterTracing/Circle",
+  title: 'Games/LetterTracing/Circle',
   component: Circle,
 };
 

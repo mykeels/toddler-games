@@ -1,7 +1,7 @@
-import Square from ".";
+import Square from '.';
 
 export default {
-  title: "Games/LetterTracing/Square",
+  title: 'Games/LetterTracing/Square',
   component: Square,
 };
 

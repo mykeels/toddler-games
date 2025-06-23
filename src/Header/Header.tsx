@@ -1,11 +1,11 @@
-import { useNavigateToRoot } from "@/utils/useNavigateToRoot";
-import { Link, useNavigate } from "react-router";
-import { Menu } from "./Menu";
-import { Levels } from "./Levels";
-import clsx from "clsx";
-import { Info } from "./Info";
-import React from "react";
-import { getBaseUrl } from "@/utils/url";
+import { useNavigateToRoot } from '@/utils/useNavigateToRoot';
+import { Link, useNavigate } from 'react-router';
+import { Menu } from './Menu';
+import { Levels } from './Levels';
+import clsx from 'clsx';
+import { Info } from './Info';
+import React from 'react';
+import { getBaseUrl } from '@/utils/url';
 
 type HeaderProps = {
   title?: string;
@@ -26,12 +26,10 @@ export const Header = ({ title, children, Left, ...props }: HeaderProps) => {
   return (
     <h1 className="text-4xl flex flex-row items-center justify-between bg-brand-primary px-2 text-white select-none z-10">
       {Left ? Left : <Header.BackToMenu />}
-      <span className="text-center text-2xl md:text-4xl">
-        {children ?? title}
-      </span>
+      <span className="text-center text-2xl md:text-4xl">{children ?? title}</span>
       {!props.noRight ? (
         <Header.Menu>
-          {"onRestart" in props && props.onRestart ? (
+          {'onRestart' in props && props.onRestart ? (
             <Menu.Item>
               <Header.Restart onRestart={props.onRestart} />
             </Menu.Item>
@@ -41,9 +39,8 @@ export const Header = ({ title, children, Left, ...props }: HeaderProps) => {
               <Header.Levels />
             </Menu.Item>
           ) : null}
-          {"Right" in props && props.Right ? (
-            React.isValidElement(props.Right) &&
-            props.Right.type === React.Fragment ? (
+          {'Right' in props && props.Right ? (
+            React.isValidElement(props.Right) && props.Right.type === React.Fragment ? (
               React.Children.map(props.Right.props.children, (child) => child)
             ) : (
               <Menu.Item>{props.Right}</Menu.Item>
@@ -90,31 +87,21 @@ const BackToHome = () => {
   const baseUrl = getBaseUrl();
   const navigateToRoot = useNavigateToRoot();
   return (
-    <Link
-      to="/"
-      onClick={async () => await navigateToRoot()}
-      className="flex p-2 self-stretch"
-    >
+    <Link to="/" onClick={async () => await navigateToRoot()} className="flex p-2 self-stretch">
       <img src={`${baseUrl}/icons/home-white.svg`} alt="home" />
     </Link>
   );
 };
 
-const Restart = ({
-  onRestart,
-  isLoading,
-}: {
-  onRestart: () => void;
-  isLoading?: boolean;
-}) => {
+const Restart = ({ onRestart, isLoading }: { onRestart: () => void; isLoading?: boolean }) => {
   const baseUrl = getBaseUrl();
   return (
     <button onClick={onRestart} className="flex p-2">
       <img
         src={`${baseUrl}/icons/restart-white.svg`}
         alt="restart"
-        className={clsx("w-10 h-10", {
-          "animate-spin": isLoading,
+        className={clsx('w-10 h-10', {
+          'animate-spin': isLoading,
         })}
       />
     </button>

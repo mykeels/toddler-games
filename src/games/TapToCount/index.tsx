@@ -1,18 +1,18 @@
-import { useEffect, useState } from "react";
-import classNames from "clsx";
-import { FRUITS, ANIMALS, DIGITS } from "@/utils/characters";
-import { onTouch } from "@/utils/touch";
-import { useHorizontalSwipe } from "@/utils/swipe";
-import Container from "@/Container";
-import Header from "@/Header/Header";
-import { useSpeak } from "@/utils/speak";
-import { useConfetti } from "@/Confetti";
-import { useLevel } from "@/Header/Levels";
-import README from "./README.md";
-import { useRestart } from "@/utils/restart";
-import { useMountTime } from "@/hooks/useMountTime";
-import { useCardOptions } from "@/Card/CardOptions";
-import { sleep } from "@/utils/sleep";
+import { useEffect, useState } from 'react';
+import classNames from 'clsx';
+import { FRUITS, ANIMALS, DIGITS } from '@/utils/characters';
+import { onTouch } from '@/utils/touch';
+import { useHorizontalSwipe } from '@/utils/swipe';
+import Container from '@/Container';
+import Header from '@/Header/Header';
+import { useSpeak } from '@/utils/speak';
+import { useConfetti } from '@/Confetti';
+import { useLevel } from '@/Header/Levels';
+import README from './README.md';
+import { useRestart } from '@/utils/restart';
+import { useMountTime } from '@/hooks/useMountTime';
+import { useCardOptions } from '@/Card/CardOptions';
+import { sleep } from '@/utils/sleep';
 const COUNTABLES = [...FRUITS, ...ANIMALS];
 
 type TapToCountProps = {
@@ -44,10 +44,7 @@ export const TapToCount = ({ onNext, ...props }: TapToCountProps) => {
   const isComplete = count === targetCount;
   function getNextItems(level: number) {
     const items = [];
-    const noOfItems = Math.max(
-      Math.floor(Math.random() * (level * 2)) + 2,
-      level
-    );
+    const noOfItems = Math.max(Math.floor(Math.random() * (level * 2)) + 2, level);
     const countable = COUNTABLES[Math.floor(Math.random() * COUNTABLES.length)].value;
     for (let i = 0; i < noOfItems; i++) {
       items.push({
@@ -79,9 +76,9 @@ export const TapToCount = ({ onNext, ...props }: TapToCountProps) => {
     const controller = new AbortController();
     const handleKeyPress = (event: KeyboardEvent) => {
       const digits = DIGITS.map((number) => number.value.toString());
-      if (event.key === "Enter") {
+      if (event.key === 'Enter') {
         onNextClick();
-      } else if (event.key === " ") {
+      } else if (event.key === ' ') {
         const button = document.querySelector(`[data-countable="true"]`);
         if (button) {
           button.tap();
@@ -94,7 +91,7 @@ export const TapToCount = ({ onNext, ...props }: TapToCountProps) => {
       }
     };
 
-    window.addEventListener("keydown", handleKeyPress, {
+    window.addEventListener('keydown', handleKeyPress, {
       signal: controller.signal,
     });
     return () => controller.abort();
@@ -127,30 +124,21 @@ export const TapToCount = ({ onNext, ...props }: TapToCountProps) => {
 
   return (
     <Container key={life} ref={ref as React.LegacyRef<HTMLDivElement>}>
-      <Header
-        title="Tap to Count"
-        onRestart={onNextClick}
-        Right={<Header.Info description={README} />}
-      >
+      <Header title="Tap to Count" onRestart={onNextClick} Right={<Header.Info description={README} />}>
         <button className="focus:outline-none" onClick={() => speakGoal()}>
           Tap to Count
         </button>
       </Header>
       <div className="flex flex-col portrait:gap-8 landscape:gap-4 landscape:hsx:gap-1 items-center justify-center h-[90%]">
-        <h1 className={classNames("font-bold text-6xl landscape:hsx:text-4xl")}>
-          {isComplete ? Confetti : count ? count : ""}
+        <h1 className={classNames('font-bold text-6xl landscape:hsx:text-4xl')}>
+          {isComplete ? Confetti : count ? count : ''}
         </h1>
         <div className="flex flex-wrap items-center justify-center gap-4">
           {items.map((item) =>
             Array(item.target)
-              .fill("")
+              .fill('')
               .map((_, index) => (
-                <Countable
-                  key={index}
-                  value={item.text}
-                  onClick={getNextCount}
-                  isComplete={isComplete}
-                />
+                <Countable key={index} value={item.text} onClick={getNextCount} isComplete={isComplete} />
               ))
           )}
         </div>
@@ -197,13 +185,13 @@ function Countable({
       {...onTouch(onTap)}
       data-countable={!checked}
       className={classNames(
-        "portrait:w-[16dvw] portrait:h-[16dvw] landscape:w-[18dvh] landscape:h-[18dvh]",
-        "border-2 border-black rounded",
-        "flex items-center justify-center text-5xl lg:text-9xl font-bold",
+        'portrait:w-[16dvw] portrait:h-[16dvw] landscape:w-[18dvh] landscape:h-[18dvh]',
+        'border-2 border-black rounded',
+        'flex items-center justify-center text-5xl lg:text-9xl font-bold',
         {
-          "bg-yellow-300": checked,
-          "animate-breathe": !isComplete && checked,
-          "bg-white hover:bg-blue-200": !checked,
+          'bg-yellow-300': checked,
+          'animate-breathe': !isComplete && checked,
+          'bg-white hover:bg-blue-200': !checked,
         },
         className
       )}

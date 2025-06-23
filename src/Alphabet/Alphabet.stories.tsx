@@ -1,7 +1,7 @@
-import { Alphabet } from "./index";
+import { Alphabet } from './index';
 
 export default {
-  title: "components/Alphabet",
+  title: 'components/Alphabet',
   component: Alphabet,
 };
 

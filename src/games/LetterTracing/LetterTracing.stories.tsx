@@ -1,15 +1,15 @@
-import LetterTracing from ".";
-import A from "./A/A";
-import Across from "./Across/Across";
-import B from "./B/B";
-import Down from "./Down/Down";
-import LeftCurve from "./LeftCurve";
-import LeftSlash from "./LeftSlash";
-import RightCurve from "./RightCurve";
-import RightSlash from "./RightSlash";
+import LetterTracing from '.';
+import A from './A/A';
+import Across from './Across/Across';
+import B from './B/B';
+import Down from './Down/Down';
+import LeftCurve from './LeftCurve';
+import LeftSlash from './LeftSlash';
+import RightCurve from './RightCurve';
+import RightSlash from './RightSlash';
 
 export default {
-  title: "Games/LetterTracing",
+  title: 'Games/LetterTracing',
   component: LetterTracing,
 };
 

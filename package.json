@@ -13,6 +13,7 @@
     "build": "tsc -b && vite build",
     "ts": "tsc -b",
     "lint": "eslint .",
+    "format": "prettier --write .",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"

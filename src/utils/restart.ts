@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { fx } from "./sound";
+import { useState } from 'react';
+import { fx } from './sound';
 
 export const useRestart = () => {
   const [life, setLife] = useState(0);

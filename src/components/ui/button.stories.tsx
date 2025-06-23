@@ -1,8 +1,8 @@
-import { Button } from "@/components/ui/button";
-import { getBaseUrl } from "@/utils/url";
+import { Button } from '@/components/ui/button';
+import { getBaseUrl } from '@/utils/url';
 
 export default {
-  title: "components/Button",
+  title: 'components/Button',
   component: Button,
 };
 

@@ -1,7 +1,7 @@
-import NumberKeypad from ".";
+import NumberKeypad from '.';
 
 export default {
-  title: "Games/NumberKeypad",
+  title: 'Games/NumberKeypad',
   component: NumberKeypad,
 };
 

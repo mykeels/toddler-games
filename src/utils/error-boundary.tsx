@@ -1,10 +1,7 @@
-import React from "react";
+import React from 'react';
 
 // Simple ErrorBoundary implementation
-export class ErrorBoundary extends React.Component<
-  { children: React.ReactNode },
-  { hasError: boolean }
-> {
+export class ErrorBoundary extends React.Component<{ children: React.ReactNode }, { hasError: boolean }> {
   constructor(props: { children: React.ReactNode }) {
     super(props);
     this.state = { hasError: false };
@@ -22,11 +19,7 @@ export class ErrorBoundary extends React.Component<
 
   render() {
     if (this.state.hasError) {
-      return (
-        <div className="text-center text-red-600 p-8">
-          Something went wrong.
-        </div>
-      );
+      return <div className="text-center text-red-600 p-8">Something went wrong.</div>;
     }
     return this.props.children;
   }

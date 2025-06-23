@@ -1,7 +1,7 @@
-import { Flow } from ".";
+import { Flow } from '.';
 
 export default {
-  title: "Games/Flow",
+  title: 'Games/Flow',
   component: Flow,
 };
 

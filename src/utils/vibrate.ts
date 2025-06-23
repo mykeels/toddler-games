@@ -1,5 +1,5 @@
 export const vibrate = () => {
-    if ("vibrate" in navigator) {
-        navigator.vibrate(200);
-    }
+  if ('vibrate' in navigator) {
+    navigator.vibrate(200);
+  }
 };

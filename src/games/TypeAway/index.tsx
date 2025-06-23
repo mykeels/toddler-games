@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react";
-import { nanoid } from 'nanoid'
-import { fx } from "@/utils/sound";
-import Header from "@/Header/Header";
-import Container from "@/Container";
-import { vibrate } from "@/utils/vibrate";
-import { speak, useSpeak } from "@/utils/speak";
-import { useRestart } from "@/utils/restart";
-import README from "./README.md";
-import Letter from "../PlaceTheLetters/Letter/Letter";
-import FloatAround from "@/FloatAround";
+import { useEffect, useState } from 'react';
+import { nanoid } from 'nanoid';
+import { fx } from '@/utils/sound';
+import Header from '@/Header/Header';
+import Container from '@/Container';
+import { vibrate } from '@/utils/vibrate';
+import { speak, useSpeak } from '@/utils/speak';
+import { useRestart } from '@/utils/restart';
+import README from './README.md';
+import Letter from '../PlaceTheLetters/Letter/Letter';
+import FloatAround from '@/FloatAround';
 
 export const TypeAway = () => {
   const { life, restart } = useRestart();
@@ -26,13 +26,7 @@ export const TypeAway = () => {
 
   return (
     <Container key={life}>
-      <Header
-        onRestart={restart}
-        Right={
-          <Header.Info description={README} />
-        }
-        noLevels
-      >
+      <Header onRestart={restart} Right={<Header.Info description={README} />} noLevels>
         <button className="focus:outline-none" onClick={() => speakGoal()}>
           Type Away!
         </button>
@@ -43,13 +37,16 @@ export const TypeAway = () => {
             const isLast = index === typed.length - 1;
             return (
               <FloatAround key={t.id} distance={70}>
-                <Letter value={t.key} color={isLast ? "#17A6FF" : "black"} textShadowColor={isLast ? "#ccc" : "white"} />
+                <Letter
+                  value={t.key}
+                  color={isLast ? '#17A6FF' : 'black'}
+                  textShadowColor={isLast ? '#ccc' : 'white'}
+                />
               </FloatAround>
-            )
+            );
           })}
         </div>
       </div>
-
     </Container>
   );
 };
@@ -58,18 +55,18 @@ export default TypeAway;
 
 function useTyped() {
   const { speak } = useSpeak();
-  const [typed, setTyped] = useState<{ id: string, key: string, createdAt: Date }[]>([]);
+  const [typed, setTyped] = useState<{ id: string; key: string; createdAt: Date }[]>([]);
 
   const handleKeyPress = (event: KeyboardEvent) => {
     const excludedKeys = ['CapsLock', 'Shift'];
     if (excludedKeys.includes(event.key)) return;
-    setTyped(typed => [...typed, { id: nanoid(), key: event.key, createdAt: new Date() }]);
+    setTyped((typed) => [...typed, { id: nanoid(), key: event.key, createdAt: new Date() }]);
     vibrate();
     speak(event.key, { rate: 1.2 });
     event.preventDefault();
     event.stopPropagation();
-  }
-  const KEY_PRESS_EVENT = "keyup";
+  };
+  const KEY_PRESS_EVENT = 'keyup';
 
   useEffect(() => {
     window.addEventListener(KEY_PRESS_EVENT, handleKeyPress);
@@ -77,16 +74,18 @@ function useTyped() {
     const MAX_TIME = 3000;
 
     const interval = setInterval(() => {
-      setTyped(typed => [...typed.filter(t => {
-        return (new Date().getTime() - new Date(t.createdAt).getTime()) <= MAX_TIME
-      })]);
+      setTyped((typed) => [
+        ...typed.filter((t) => {
+          return new Date().getTime() - new Date(t.createdAt).getTime() <= MAX_TIME;
+        }),
+      ]);
     }, 1000);
 
     return () => {
       clearInterval(interval);
       window.removeEventListener(KEY_PRESS_EVENT, handleKeyPress);
-    }
+    };
   }, []);
 
-  return { typed: typed.map(t => ({ id: t.id, key: t.key })) };
+  return { typed: typed.map((t) => ({ id: t.id, key: t.key })) };
 }

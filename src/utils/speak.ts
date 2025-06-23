@@ -1,11 +1,8 @@
-import { useRef } from "react";
-import { fx } from "./sound";
-import { sleep } from "./sleep";
+import { useRef } from 'react';
+import { fx } from './sound';
+import { sleep } from './sleep';
 
-export const speak = (
-  text: string,
-  options: { rate?: number } = { rate: 0.85 }
-) => {
+export const speak = (text: string, options: { rate?: number } = { rate: 0.85 }) => {
   const utterance = new SpeechSynthesisUtterance(text);
   utterance.rate = options?.rate ?? 0.85;
   speechSynthesis.speak(utterance);
@@ -25,7 +22,7 @@ export const speak = (
  */
 export const useSpeak = () => {
   type Speakable = {
-    type: "speech" | "sound";
+    type: 'speech' | 'sound';
     value: SpeechSynthesisUtterance | Howl;
   };
   const speakable = useRef<Speakable | null>(null);
@@ -42,11 +39,11 @@ export const useSpeak = () => {
         value.play();
       }
     } else {
-      throw new Error("Invalid speakable type");
+      throw new Error('Invalid speakable type');
     }
     isPlaying.current = true;
     setSpeakable({
-      type: value instanceof SpeechSynthesisUtterance ? "speech" : "sound",
+      type: value instanceof SpeechSynthesisUtterance ? 'speech' : 'sound',
       value,
     });
   };
@@ -65,10 +62,7 @@ export const useSpeak = () => {
     stop: () => {},
     type: speakable.current?.type,
     isPlaying: () => isPlaying.current,
-    speak: async (
-      text: string,
-      options: { rate?: number } = { rate: 0.85 }
-    ) => {
+    speak: async (text: string, options: { rate?: number } = { rate: 0.85 }) => {
       const howl = fx.keys.play(text, options);
       const value = howl ?? new SpeechSynthesisUtterance(text);
       if (value instanceof SpeechSynthesisUtterance) {
@@ -93,14 +87,14 @@ export const useSpeak = () => {
             });
           };
         } else if (value instanceof Howl) {
-          value.once("end", () => {
+          value.once('end', () => {
             isPlaying.current = false;
             resolve({
               speakable,
               completed: true,
             });
           });
-          value.once("playerror", () => {
+          value.once('playerror', () => {
             isPlaying.current = false;
             resolve({
               speakable,

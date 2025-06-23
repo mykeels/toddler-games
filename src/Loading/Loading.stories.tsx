@@ -1,8 +1,8 @@
-import { Button } from "@/components/ui/button";
-import { Loading } from "./index";
+import { Button } from '@/components/ui/button';
+import { Loading } from './index';
 
 export default {
-  title: "components/Loading",
+  title: 'components/Loading',
   component: Loading,
 };
 

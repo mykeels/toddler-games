@@ -1,7 +1,7 @@
-import FindAndTap from ".";
+import FindAndTap from '.';
 
 export default {
-  title: "Games/FindAndTap",
+  title: 'Games/FindAndTap',
   component: FindAndTap,
 };
 

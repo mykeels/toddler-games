@@ -1,7 +1,7 @@
-import { Splash } from "./index";
+import { Splash } from './index';
 
 export default {
-  title: "components/Splash",
+  title: 'components/Splash',
   component: Splash,
 };
 

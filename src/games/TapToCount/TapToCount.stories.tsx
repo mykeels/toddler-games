@@ -1,7 +1,7 @@
-import TapToCount from ".";
+import TapToCount from '.';
 
 export default {
-  title: "Games/TapToCount",
+  title: 'Games/TapToCount',
   component: TapToCount,
 };
 

@@ -1,7 +1,7 @@
-import { LetterSlot } from "./LetterSlot";
+import { LetterSlot } from './LetterSlot';
 
 export default {
-  title: "Games/PlaceTheLetters/LetterSlot",
+  title: 'Games/PlaceTheLetters/LetterSlot',
   component: LetterSlot,
 };
 

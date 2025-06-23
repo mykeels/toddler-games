@@ -1,15 +1,12 @@
-import { ReadWord } from "./index";
-import { Input } from "@/components/ui/input";
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
+import { ReadWord } from './index';
+import { Input } from '@/components/ui/input';
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
 
 export const CreateReadWord = () => {
-  const [word, setWord] = useState("hello");
-  const [pronunciation, setPronunciation] = useState("hellō");
-  const isReady =
-    word.length > 0 &&
-    pronunciation.length > 0 &&
-    word.length === pronunciation.length;
+  const [word, setWord] = useState('hello');
+  const [pronunciation, setPronunciation] = useState('hellō');
+  const isReady = word.length > 0 && pronunciation.length > 0 && word.length === pronunciation.length;
 
   const PronunciationButton = ({ character }: { character: string }) => {
     return (
@@ -31,8 +28,8 @@ export const CreateReadWord = () => {
               type="button"
               className="bg-white text-brand-primary border-2 border-blue-200 text-2xl p-4"
               onClick={() => {
-                setWord("");
-                setPronunciation("");
+                setWord('');
+                setPronunciation('');
               }}
             >
               Clear
@@ -69,8 +66,8 @@ export const CreateReadWord = () => {
           }}
           standalone
           className={{
-            "bg-brand-primary": false,
-            "bg-transparent": true,
+            'bg-brand-primary': false,
+            'bg-transparent': true,
           }}
         />
       )}
