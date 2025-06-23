@@ -65,6 +65,10 @@ export const App = () => {
         element: <FindAndTapRoute />,
       },
       {
+        path: "/find-and-tap/:characterSet/:subCharacterSet",
+        element: <FindAndTapRoute />,
+      },
+      {
         path: "/flow",
         element: <Flow />,
       },

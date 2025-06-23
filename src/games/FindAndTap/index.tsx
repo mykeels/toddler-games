@@ -137,6 +137,7 @@ export function FindAndTap({
               selectedValue={goal.value}
               onClick={() => onLetterOrNumberClick(character)}
               name="pair"
+              className="px-2"
             >
               {character.value}
               {character.value === goal.value ? Confetti : null}

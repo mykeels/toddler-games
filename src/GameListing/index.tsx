@@ -45,8 +45,39 @@ const GAME_LISTING: GameListing = {
             },
             {
               title: "Numbers only",
-              path: "/find-and-tap/numbers",
               icon: "./icons/tap-numbers.svg",
+              children: [
+                {
+                  title: "Digits",
+                  path: "/find-and-tap/numbers/digits",
+                  icon: "./icons/tap-numbers-digits.svg",
+                  iconClassName: {
+                    'w-16': false,
+                    'h-16': false,
+                    'w-32 h-20': true,
+                  },
+                },
+                {
+                  title: "Tens",
+                  path: "/find-and-tap/numbers/tens",
+                  icon: "./icons/tap-numbers-tens.svg",
+                  iconClassName: {
+                    'w-16': false,
+                    'h-16': false,
+                    'w-32 h-20': true,
+                  },
+                },
+                {
+                  title: "Hundreds",
+                  path: "/find-and-tap/numbers/hundreds",
+                  icon: "./icons/tap-numbers-hundreds.svg",
+                  iconClassName: {
+                    'w-16': false,
+                    'h-16': false,
+                    'w-32 h-20': true,
+                  },
+                },
+              ],
             },
             {
               title: "Fruits only",
@@ -192,6 +223,7 @@ const GAME_LISTING: GameListing = {
 type GameListing = {
   title: string;
   icon: string;
+  iconClassName?: string | Record<string, boolean>;
   back?: () => GameListing;
   isDisabled?: () => boolean;
 } & (
@@ -264,6 +296,10 @@ export const Home = () => {
         ...item,
         back: item.back ?? (() => listing),
       });
+      navigate({
+        pathname: ".",
+        search: item.title ? `?title=${item.title}` : undefined,
+      });
     } else {
       navigate(item.path);
     }
@@ -315,7 +351,7 @@ export const Home = () => {
                     className="snap-center"
                     to={child.path}
                   >
-                    <Tile title={child.title} imageSourcePath={child.icon} />
+                    <Tile title={child.title} imageSourcePath={child.icon} imageClassName={child.iconClassName} />
                   </Link>
                 ) : (
                   <li
@@ -326,7 +362,7 @@ export const Home = () => {
                     <Link
                       to={{ pathname: ".", search: `?title=${child.title}` }}
                     >
-                      <Tile title={child.title} imageSourcePath={child.icon} />
+                      <Tile title={child.title} imageSourcePath={child.icon} imageClassName={child.iconClassName} />
                     </Link>
                   </li>
                 )

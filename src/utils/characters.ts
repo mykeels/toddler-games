@@ -153,6 +153,16 @@ export const DIGITS: Character[] = [
   },
 ];
 
+export const NUMBERS_TENS: Character[] = [...Array.from({ length: 90 }, (_, i) => ({
+  value: (i + 1).toString(),
+  name: (i + 1).toString(),
+}))]
+
+export const NUMBERS_HUNDREDS: Character[] = [...Array.from({ length: 900 }, (_, i) => ({
+  value: (i + 1).toString(),
+  name: (i + 1).toString(),
+}))]
+
 export const ANIMALS: Character[] = [
   {
     value: "🐶",
@@ -253,7 +263,9 @@ export const CHARACTERS = {
     value: letter.value.toLowerCase(),
     name: letter.name,
   }) as Character),
-  numbers: DIGITS,
+  digits: DIGITS,
+  numbersTens: NUMBERS_TENS,
+  numbersHundreds: NUMBERS_HUNDREDS,
   animals: ANIMALS,
   fruits: FRUITS,
 };

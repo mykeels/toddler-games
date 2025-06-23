@@ -1,5 +1,5 @@
 import { useNavigateToRoot } from "@/utils/useNavigateToRoot";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { Menu } from "./Menu";
 import { Levels } from "./Levels";
 import clsx from "clsx";
@@ -25,7 +25,7 @@ type HeaderProps = {
 export const Header = ({ title, children, Left, ...props }: HeaderProps) => {
   return (
     <h1 className="text-4xl flex flex-row items-center justify-between bg-brand-primary px-2 text-white select-none z-10">
-      {Left ? Left : <Header.BackToMenu title={title} />}
+      {Left ? Left : <Header.BackToMenu />}
       <span className="text-center text-2xl md:text-4xl">
         {children ?? title}
       </span>
@@ -62,18 +62,18 @@ export const Header = ({ title, children, Left, ...props }: HeaderProps) => {
 
 export default Header;
 
-const BackToMenu = ({ title }: { title?: string }) => {
+const BackToMenu = () => {
+  const navigate = useNavigate();
   const baseUrl = getBaseUrl();
   return (
-    <Link
-      to={{
-        pathname: "/menu",
-        search: `title=${title}`,
-      }}
+    <button
       className="flex p-2 self-stretch"
+      onClick={() => {
+        navigate(-1);
+      }}
     >
       <img src={`${baseUrl}/icons/arrow-left.svg`} alt="back" />
-    </Link>
+    </button>
   );
 };
 

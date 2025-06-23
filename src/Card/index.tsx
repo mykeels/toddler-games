@@ -34,7 +34,7 @@ export function Card({
         className={classNames(
           "width" in classNameOptions
             ? classNameOptions.width
-            : "portrait:w-[16dvw] portrait:h-[16dvw] landscape:w-[18dvh] landscape:h-[18dvh]",
+            : "portrait:min-w-[16dvw] portrait:h-[16dvw] landscape:min-w-[18dvh] landscape:h-[18dvh]",
           "cursor-pointer border-2 border-black flex items-center justify-center text-4xl rounded text-black",
           {
             "group-has-[input:checked]:bg-brand-accent-green": isCorrect,
