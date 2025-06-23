@@ -3,8 +3,6 @@ name: CI Alpha
 on:
   push:
     branches-ignore: [ master ]
-  pull_request:
-    branches-ignore: [ master ]
 
 jobs:
   call-common:
