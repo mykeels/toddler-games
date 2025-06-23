@@ -3,6 +3,10 @@
   "private": true,
   "version": "0.0.135",
   "type": "module",
+  "engines": {
+    "node": ">=18",
+    "pnpm": ">=8"
+  },
   "scripts": {
     "pre-commit": "lint-staged",
     "predeploy": "npm version patch && npm run build:github",
