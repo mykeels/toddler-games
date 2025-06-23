@@ -23,6 +23,7 @@ export const NumberKeypad = () => {
 
   useEffect(() => {
     speak(`Dial a number.`);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- ignore speak dependency
   }, []);
 
   useEffect(() => {

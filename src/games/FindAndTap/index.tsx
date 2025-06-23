@@ -46,7 +46,6 @@ export function FindAndTap({
 
   const [showConfetti, Confetti] = useConfetti();
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const onLetterOrNumberClick = (letterOrNumber: Character) => {
     setSelected(letterOrNumber);
     setState('interlude');
@@ -65,7 +64,6 @@ export function FindAndTap({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selected, goal]);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const onNextClick = () => {
     setPair(getNextPair());
     setState('playing');

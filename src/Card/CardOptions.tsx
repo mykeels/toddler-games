@@ -26,6 +26,7 @@ export const useCardOptions = ({
 
   useEffect(() => {
     setPair(getNextPair());
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- ignore getNextPair dependency
   }, [goal.value, noOfOptions]);
 
   const _CardOptions = ({

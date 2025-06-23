@@ -4,7 +4,9 @@
   "version": "0.0.135",
   "type": "module",
   "scripts": {
+    "pre-commit": "lint-staged",
     "predeploy": "npm version patch && npm run build:github",
+    "prepare": "husky install",
     "deploy": "gh-pages -d dist --dotfiles",
     "dev": "npx -y concurrently \"vite\" \"npm run build:federation\"",
     "start": "npm run dev",
@@ -13,10 +15,17 @@
     "build": "tsc -b && vite build",
     "ts": "tsc -b",
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
   },
   "dependencies": {
     "@originjs/vite-plugin-federation": "^1.3.6",
@@ -75,6 +84,8 @@
     "eslint-plugin-storybook": "^0.9.0",
     "gh-pages-deploy": "^0.5.1",
     "globals": "^15.9.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.2",
     "onchange": "^7.1.0",
     "postcss": "^8.4.47",
     "postcss-prefixer": "^3.0.0",

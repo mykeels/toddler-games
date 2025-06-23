@@ -11,7 +11,6 @@ export class ErrorBoundary extends React.Component<{ children: React.ReactNode }
     return { hasError: true };
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   componentDidCatch(error: unknown, errorInfo: unknown) {
     // You can log the error to an error reporting service here
     console.error(error, errorInfo);

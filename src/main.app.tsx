@@ -23,7 +23,6 @@ import { Layout } from './layout';
 import { ErrorBoundary } from './utils/error-boundary';
 import { ThemeMusic } from '@/utils/theme-music';
 
-// eslint-disable-next-line react-refresh/only-export-components
 const RenderMode = ({ children }: { children: React.ReactNode }) => {
   const isProduction = process.env.NODE_ENV === 'production';
   return isProduction ? <StrictMode>{children}</StrictMode> : children;

@@ -20,7 +20,7 @@ const games: GameComponent[] = [
   (props: GameProps) => <WhatDoYouHear {...props} />,
   (props: GameProps) => <FindAndTap getCharacterSet={(set) => set.lowercaseLetters} {...props} />,
   (props: GameProps) => <TapToCount {...props} />,
-  (props: GameProps) => <FindAndTap getCharacterSet={(set) => set.numbers} {...props} />,
+  (props: GameProps) => <FindAndTap getCharacterSet={(set) => set.digits} {...props} />,
   (props: GameProps) => <ImageToLetterMatching transformLetter={(letter) => letter.toUpperCase()} {...props} />,
   (props: GameProps) => <WhatDoYouHear {...props} uppercase />,
   (props: GameProps) => <FindAndTap getCharacterSet={(set) => set.fruits} {...props} />,
