@@ -31,7 +31,13 @@ export const ReadWords = ({
   const level = useLevel();
   const noOfWordCharacters = Math.min((Number(props.level) || level) + 1, 6) as Levels;
   const goal = useMemo(
-    () => getNextCharacter(getWordSet(noOfWordCharacters)),
+    () => {
+      const character = getNextCharacter(getWordSet(noOfWordCharacters));
+      const $window = window as unknown as { readWordsCharacters: string[] };
+      $window.readWordsCharacters = $window.readWordsCharacters || [];
+      $window.readWordsCharacters.push(character.value);
+      return character;
+    },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [life, noOfWordCharacters]
   );

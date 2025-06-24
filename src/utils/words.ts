@@ -331,7 +331,7 @@ const FIVE_LETTER_WORDS = [
   },
   {
     value: 'light',
-    pronunciation: 'lìììt',
+    pronunciation: 'līīīt',
     image:
       'https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdmk0N2h6MGd4emNjdWc1aHNhdXB0NXh1dm4xc2poOGozaDVoNzRzbiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l2JebisijdzVL2Cqs/giphy.webp',
   },
@@ -391,7 +391,7 @@ const FIVE_LETTER_WORDS = [
   },
   {
     value: 'float',
-    pronunciation: 'float',
+    pronunciation: 'flōōt',
     image:
       'https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbGZia2lnMDVidm12anpja2QyMzJqcm9iaHVhbTc2M3d5Y2RlY2VuciZlcD12MV9naWZzX3NlYXJjaCZjdD1n/l41lFiBrHIPUuxscg/giphy.gif',
   },
@@ -447,7 +447,7 @@ const FIVE_LETTER_WORDS = [
     value: 'yucky',
     pronunciation: 'yokky',
     image:
-      'https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcWMxYWRsdDdqd2pmejhudmUyejZpY3kxN25jZXZ0ajgxYXNyYnM0diZlcD12MV9naWZzX3NlYXJjaCZjdD1n/VdAvVcQLJDwKKDUDJR/giphy.gif',
+      'https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExc2o0bDk0bnc1NzN1YWRoNThxcmRrMG1ncjg3Nmw2dTJ2b3Vqc3NsbSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/khicG8Q0DywSc/giphy.gif',
   },
 ];
 
@@ -720,7 +720,7 @@ const EIGHT_LETTER_WORDS = [
   },
   {
     value: 'magician',
-    pronunciation: 'magišian',
+    pronunciation: 'majišian',
     image: '',
   },
   {
@@ -916,14 +916,14 @@ export const WORDS = {
 export type Levels = keyof typeof WORDS;
 
 export const ALL_WORDS = [
-  ...TWO_LETTER_WORDS,
-  ...THREE_LETTER_WORDS,
-  ...FOUR_LETTER_WORDS,
+  // ...TWO_LETTER_WORDS,
+  // ...THREE_LETTER_WORDS,
+  // ...FOUR_LETTER_WORDS,
   ...FIVE_LETTER_WORDS,
   ...SIX_LETTER_WORDS,
-  ...SEVEN_LETTER_WORDS,
-  ...EIGHT_LETTER_WORDS,
-  ...NINE_LETTER_WORDS,
-  ...TEN_LETTER_WORDS,
-  ...ELEVEN_LETTER_WORDS,
+  // ...SEVEN_LETTER_WORDS,
+  // ...EIGHT_LETTER_WORDS,
+  // ...NINE_LETTER_WORDS,
+  // ...TEN_LETTER_WORDS,
+  // ...ELEVEN_LETTER_WORDS,
 ];

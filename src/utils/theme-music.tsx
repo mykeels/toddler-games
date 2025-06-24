@@ -6,7 +6,13 @@ import { sleep } from './sleep';
 const DEFAULT_MUSIC_VOLUME = 0.3;
 
 export const ThemeMusic = () => {
+  const disabledPaths = ['/videos/'];
+  const shouldDisableMusic = disabledPaths.some((path) => location.hash.includes(path));
+
   const play = () => {
+    if (shouldDisableMusic) {
+      return;
+    }
     fx.theme.volume(DEFAULT_MUSIC_VOLUME);
     fx.theme.loop(true).play();
   };
