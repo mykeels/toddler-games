@@ -103,12 +103,6 @@ const THREE_LETTER_WORDS = [
       'https://plus.unsplash.com/premium_photo-1672243483821-5d3855a21809?q=80&w=2788&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
   },
   {
-    value: 'dye',
-    pronunciation: 'dīī',
-    image:
-      'https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExdDFyMWs1Zzg5dGU2eDVpZWdqc3doa29pcWl1dG1raG0zenFvZXE0NyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/jUJVyEkGvCuIgsmAxf/giphy.gif',
-  },
-  {
     value: 'zap',
     pronunciation: 'zap',
     image:
@@ -550,7 +544,7 @@ const SIX_LETTER_WORDS = [
   },
   {
     value: 'rescue',
-    pronunciation: 'rescyu',
+    pronunciation: 'rescūū',
     image:
       'https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExY2ducjMzcmoxaHQ2ZWRtN2FkMW0zMjdvYW5rMWNtYnZobXB1OW1kdCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/5Fd9NV3yBn1RamHy9g/giphy.gif',
   },
@@ -916,9 +910,9 @@ export const WORDS = {
 export type Levels = keyof typeof WORDS;
 
 export const ALL_WORDS = [
-  // ...TWO_LETTER_WORDS,
-  // ...THREE_LETTER_WORDS,
-  // ...FOUR_LETTER_WORDS,
+  ...TWO_LETTER_WORDS,
+  ...THREE_LETTER_WORDS,
+  ...FOUR_LETTER_WORDS,
   ...FIVE_LETTER_WORDS,
   ...SIX_LETTER_WORDS,
   // ...SEVEN_LETTER_WORDS,

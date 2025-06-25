@@ -217,10 +217,6 @@ export const ANIMALS: Character[] = [
     name: 'Pig',
   },
   {
-    value: '🐽',
-    name: 'Pig',
-  },
-  {
     value: '🐸',
     name: 'Frog',
   },
