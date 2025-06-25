@@ -213,6 +213,11 @@ export const GAME_LISTING: GameListing = {
       icon: './icons/ph_shuffle.svg',
       isDisabled: () => hasTouch(),
     },
+    {
+      title: 'Memory Cards',
+      path: '/memory-cards/',
+      icon: './icons/memory-cards.svg',
+    },
   ],
 };
 
