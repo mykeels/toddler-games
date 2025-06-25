@@ -24,6 +24,7 @@ import { ErrorBoundary } from './utils/error-boundary';
 import { ThemeMusic } from '@/utils/theme-music';
 import { ALL_WORDS } from './utils/words';
 import { AppVideo } from './Video';
+import { MemoryCards } from './games/MemoryCards';
 
 const RenderMode = ({ children }: { children: React.ReactNode }) => {
   const isProduction = process.env.NODE_ENV === 'production';
@@ -116,6 +117,10 @@ export const App = () => {
       {
         path: '/what-do-you-hear/:uppercase',
         element: <WhatDoYouHearRoute />,
+      },
+      {
+        path: '/memory-cards',
+        element: <MemoryCards />,
       },
       {
         path: '/videos/:title',
