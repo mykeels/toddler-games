@@ -8,6 +8,8 @@ import Card from './Card';
 import { ObjectivesBar } from './ObjectivesBar';
 import Next from '@/Next';
 import { useLevel } from '@/Header/Levels';
+import { vibrate } from '@/utils/vibrate';
+import { fx } from '@/utils/sound';
 
 export type MemoryCardsProps = {
   level?: number;
@@ -67,19 +69,24 @@ export const MemoryCards = ({ level, onNext }: MemoryCardsProps) => {
 
   // Handle flipping a card
   const onCardClick = (card: { value: string; _id: string }) => {
+    vibrate();
     if (flipped.length === 2 || flipped.includes(card._id) || matched.includes(card._id)) return;
     const newFlipped = [...flipped, card._id];
     setFlipped(newFlipped);
     if (newFlipped.length === 2) {
       const [first, second] = newFlipped.map((id) => shuffled.find((c) => c._id === id));
       if (first && second && first.value === second.value) {
+        fx.correct.play();
         setTimeout(() => {
           setMatched((m) => [...m, first._id, second._id]);
           setFlipped([]);
         }, 700);
       } else {
+        fx.incorrect.play();
         setTimeout(() => setFlipped([]), 900);
       }
+    } else {
+      fx.flip.play();
     }
   };
 

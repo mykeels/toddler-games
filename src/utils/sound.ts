@@ -39,6 +39,7 @@ export const fx = {
   home: audio('./soundfx/home.mp3'),
   game: audio('./soundfx/game.mp3'),
   tapOn: audio('./soundfx/tap-on.mp3'),
+  flip: audio('./soundfx/flip.mp3'),
   phonics: {
     play: (letter: string, options: { rate?: number } = {}) => {
       let howl: Howl;
