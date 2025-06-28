@@ -14,7 +14,6 @@ import { useNavigate } from 'react-router';
 
 export const DetectNewVersion = ({
   hasNewVersion = async () => {
-    await fetchLatestVersion();
     return isNewVersionAvailable();
   },
   getLatestVersion = async () => {
