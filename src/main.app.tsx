@@ -25,6 +25,7 @@ import { ThemeMusic } from '@/utils/theme-music';
 import { ALL_WORDS } from './utils/words';
 import { AppVideo } from './Video';
 import { MemoryCards } from './games/MemoryCards';
+import { DetectNewVersion } from './DetectNewVersion';
 
 const RenderMode = ({ children }: { children: React.ReactNode }) => {
   const isProduction = process.env.NODE_ENV === 'production';
@@ -42,6 +43,7 @@ export const AppContexts = ({ children }: { children: React.ReactNode }) => {
             <div className="mfe toddler-games">
               {children}
               <ThemeMusic />
+              <DetectNewVersion />
             </div>
           </LevelContextProvider>
         </QueryClientProvider>

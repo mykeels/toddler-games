@@ -12,7 +12,7 @@ export const fetchLatestVersion = async () => {
 export const isNewVersionAvailable = async () => {
   if ('serviceWorker' in navigator) {
     const registration = await navigator.serviceWorker.getRegistration();
-    return registration?.waiting;
+    return !!registration?.waiting;
   }
   return false;
 };

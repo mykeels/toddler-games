@@ -68,6 +68,7 @@
     "url-join": "^5.0.0",
     "use-debounce": "^10.0.4",
     "use-sound": "^4.0.3",
+    "vaul": "^1.1.2",
     "vite-raw-plugin": "^1.0.2",
     "zod": "^3.23.8"
   },
