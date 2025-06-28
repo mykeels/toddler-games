@@ -59,6 +59,7 @@ export const DetectNewVersion = ({
 
   // Clean up interval on unmount
   useEffect(() => {
+    checkForUpdate();
     return () => {
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
