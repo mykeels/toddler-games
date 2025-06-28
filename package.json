@@ -1,7 +1,7 @@
 {
   "name": "toddler-games",
   "private": true,
-  "version": "0.0.153",
+  "version": "0.0.154",
   "type": "module",
   "engines": {
     "node": ">=18",
