@@ -26,7 +26,7 @@ export default defineConfig(({ mode }) => {
         ? []
         : [
             VitePWA({
-              registerType: 'autoUpdate',
+              registerType: 'prompt',
               manifest: {
                 name: 'Toddler Games',
                 short_name: 'Toddler Games',
