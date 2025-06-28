@@ -2,7 +2,9 @@ export const fetchLatestVersion = async () => {
   if ('serviceWorker' in navigator) {
     const registrations = await navigator.serviceWorker.getRegistrations();
     for (const registration of registrations) {
-      await registration.update();
+      await registration.update().catch((e) => {
+        console.warn(e);
+      });
     }
   }
   await new Promise((resolve) => setTimeout(resolve, 1000));
