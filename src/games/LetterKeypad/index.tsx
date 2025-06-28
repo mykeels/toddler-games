@@ -9,6 +9,7 @@ import README from './README.md';
 import { LETTERS } from '@/utils/characters';
 import { sleep } from '@/utils/sleep';
 import { useQuery } from 'react-query';
+import { getBaseUrl } from '@/utils/url';
 
 const LETTER_VALUES = LETTERS.map((letter) => letter.value);
 
@@ -112,6 +113,7 @@ function LetterButton({ value, onClick }: { value: string; onClick: (value: stri
 }
 
 function PlayAllButton({ onClick, isPlaying }: { onClick: () => void; isPlaying: boolean }) {
+  const baseUrl = getBaseUrl();
   const [clicked, setClicked] = useState(false);
   return (
     <button
@@ -131,7 +133,7 @@ function PlayAllButton({ onClick, isPlaying }: { onClick: () => void; isPlaying:
       )}
       disabled={isPlaying}
     >
-      <img src="/icons/play-fill.svg" className="w-6 h-6" />
+      <img src={`${baseUrl}/icons/play-fill.svg`} className="w-6 h-6" />
     </button>
   );
 }
