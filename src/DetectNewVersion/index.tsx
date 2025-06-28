@@ -13,12 +13,16 @@ import { useWindowFocus } from '@/hooks/useWindowFocus';
 import { useNavigate } from 'react-router';
 
 export const DetectNewVersion = ({
-  getLatestVersion = async () => {
+  hasNewVersion = async () => {
     await fetchLatestVersion();
     return isNewVersionAvailable();
   },
+  getLatestVersion = async () => {
+    await fetchLatestVersion();
+  },
 }: {
-  getLatestVersion?: () => Promise<boolean>;
+  hasNewVersion?: () => Promise<boolean>;
+  getLatestVersion?: () => Promise<void>;
 }) => {
   const [showDrawer, setShowDrawer] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -27,12 +31,12 @@ export const DetectNewVersion = ({
   const checkForUpdate = useCallback(async () => {
     if (isCheckingRef.current) return;
     isCheckingRef.current = true;
-    const hasNew = await getLatestVersion();
+    const hasNew = await hasNewVersion();
     if (hasNew) {
       setShowDrawer(true);
     }
     isCheckingRef.current = false;
-  }, [getLatestVersion]);
+  }, [hasNewVersion]);
 
   // Handle window focus
   useWindowFocus({
@@ -67,6 +71,7 @@ export const DetectNewVersion = ({
 
   const handleUpdate = async () => {
     await navigate('/');
+    await getLatestVersion();
     window.location.reload();
   };
 

@@ -5,4 +5,4 @@ export default {
   component: DetectNewVersion,
 };
 
-export const Index = () => <DetectNewVersion getLatestVersion={async () => true} />;
+export const Index = () => <DetectNewVersion getLatestVersion={async () => {}} hasNewVersion={async () => true} />;
