@@ -81,6 +81,11 @@ export const GAME_LISTING: GameListing = {
           path: '/number-keypad/',
           icon: './icons/123.svg',
         },
+        {
+          title: 'Sound Out Letters',
+          path: '/sound-out-letters/',
+          icon: './icons/tap-uppercase.svg',
+        },
       ],
     },
     {
