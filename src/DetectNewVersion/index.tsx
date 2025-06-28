@@ -10,6 +10,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { fetchLatestVersion, isNewVersionAvailable } from '@/utils/fetchLatestVersion';
 import { useWindowFocus } from '@/hooks/useWindowFocus';
+import { useNavigate } from 'react-router';
 
 export const DetectNewVersion = ({
   getLatestVersion = async () => {
@@ -62,7 +63,10 @@ export const DetectNewVersion = ({
     };
   }, []);
 
-  const handleUpdate = () => {
+  const navigate = useNavigate();
+
+  const handleUpdate = async () => {
+    await navigate('/');
     window.location.reload();
   };
 
