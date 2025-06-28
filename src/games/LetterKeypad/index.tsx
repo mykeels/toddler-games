@@ -54,7 +54,6 @@ export const LetterKeypad = ({ shouldPlayPhonics = false }: { shouldPlayPhonics?
       (button as HTMLButtonElement)?.click();
       await sleep(700);
     }
-    console.log('done');
   };
   const {
     refetch: playAllLetters,
@@ -68,8 +67,6 @@ export const LetterKeypad = ({ shouldPlayPhonics = false }: { shouldPlayPhonics?
   });
 
   const isPlaying = isRefetching || isFetching || isLoading;
-
-  console.log({ isPlaying });
 
   return (
     <Container>
