@@ -26,6 +26,7 @@ import { ALL_WORDS } from './utils/words';
 import { AppVideo } from './Video';
 import { MemoryCards } from './games/MemoryCards';
 import SoundOutLetters from './games/SoundOutLetters';
+import LetterKeypad from './games/LetterKeypad';
 
 const RenderMode = ({ children }: { children: React.ReactNode }) => {
   const isProduction = process.env.NODE_ENV === 'production';
@@ -94,6 +95,14 @@ export const App = () => {
       {
         path: '/number-keypad',
         element: <NumberKeypad />,
+      },
+      {
+        path: '/letter-keypad',
+        element: <LetterKeypad />,
+      },
+      {
+        path: '/phonics-keypad',
+        element: <LetterKeypad shouldPlayPhonics />,
       },
       {
         path: '/place-the-letters',
