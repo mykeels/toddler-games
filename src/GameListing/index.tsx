@@ -111,28 +111,30 @@ export const Home = () => {
         {new Array(4).fill(null).map((_, index) => (
           <Floaters key={index} />
         ))}
-        <ol className="list-none text-lg h-full overflow-y-auto snap-y flex portrait:max-md:flex-col md:flex-wrap items-center md:justify-center content-center gap-4 z-10">
-          {'children' in listing
-            ? listing.children.map((child) =>
-                'path' in child ? (
-                  <Link key={child.title} className="snap-center" to={child.path}>
-                    <Tile title={child.title} imageSourcePath={child.icon} imageClassName={child.iconClassName} />
-                  </Link>
-                ) : (
-                  <li key={child.title} className="snap-center" onClick={() => enterListing(child)}>
-                    <Link to={{ pathname: '.', search: `?title=${child.title}` }}>
+        <div className="overflow-y-auto h-full z-10">
+          <ol className="list-none text-lg grow snap-y flex portrait:max-md:flex-col md:flex-wrap items-center md:justify-center content-center gap-4">
+            {'children' in listing
+              ? listing.children.map((child) =>
+                  'path' in child ? (
+                    <Link key={child.title} className="snap-center" to={child.path}>
                       <Tile title={child.title} imageSourcePath={child.icon} imageClassName={child.iconClassName} />
                     </Link>
-                  </li>
+                  ) : (
+                    <li key={child.title} className="snap-center" onClick={() => enterListing(child)}>
+                      <Link to={{ pathname: '.', search: `?title=${child.title}` }}>
+                        <Tile title={child.title} imageSourcePath={child.icon} imageClassName={child.iconClassName} />
+                      </Link>
+                    </li>
+                  )
                 )
-              )
-            : null}
-          {!isListingAtRoot && (
-            <button onClick={() => enterListing(listing.back!())}>
-              <Tile title="Back" imageSourcePath="./icons/arrow-left-black.svg" />
-            </button>
-          )}
-        </ol>
+              : null}
+            {!isListingAtRoot && (
+              <button onClick={() => enterListing(listing.back!())}>
+                <Tile title="Back" imageSourcePath="./icons/arrow-left-black.svg" />
+              </button>
+            )}
+          </ol>
+        </div>
       </div>
     </Container>
   );
