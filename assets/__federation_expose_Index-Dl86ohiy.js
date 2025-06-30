@@ -1,0 +1,1 @@
+import{j as t,A as r}from"./main.app-B6bDPNyC.js";import{g as o}from"./mfe.utils-DaK77wFs.js";const a=o(()=>t.jsx(r,{}));export{a as default};
