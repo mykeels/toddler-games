@@ -51,7 +51,7 @@ export const LetterToImageMatching = ({
         ),
       ]),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [goal.letter, noOfOptions]
+    [goal.letter, noOfOptions, life]
   );
   const [selected, setSelected] = useState<string | null>(null);
   const isCorrect = selected === goal.letter;
