@@ -10,6 +10,11 @@
  * Every other sound is represented as its short sound
  */
 
+import { getBaseUrl } from './url';
+
+const baseUrl = getBaseUrl();
+const imagesBaseUrl = `${baseUrl}/images`;
+
 export const SPECIAL_PHONICS = {
   ā: 'a',
   ē: 'e',
@@ -56,8 +61,7 @@ const THREE_LETTER_WORDS = [
   {
     value: 'you',
     pronunciation: 'yuu',
-    image:
-      'https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExMnJwNmFjMXRwc2h1dmdyNG92MW1uamlrZzNtZWZmcGxzOWxrZGV0MCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/5BUKkB7Ve74nYaF5tL/giphy.webp',
+    image: `${imagesBaseUrl}/dazzle-points-at-you.png`,
   },
   {
     value: 'yes',
@@ -71,24 +75,20 @@ const THREE_LETTER_WORDS = [
   },
   {
     value: 'bed',
-    image:
-      'https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExNzU4cHh6cmhwMzIyMHNjYmJ3dnY4MHU2ejBxbXZubm01M2xiMTg1bCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/wsUuw16j6oyxLLRnnK/giphy.webp',
+    image: `${imagesBaseUrl}/dazzle-in-bed.png`,
   },
   {
     value: 'dog',
-    image:
-      'https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExNnd0MmVjajg3emY5NWNpYzYwMjNsOG5uNDdhdXlvczRyYWs4cjA1ayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xT8qAYyGomTMWkqyME/giphy.webp',
+    image: `${imagesBaseUrl}/dazzle-walks-a-dog.png`,
   },
   {
     value: 'cat',
-    image:
-      'https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmI2cTdoY2o0czVpejkxNTc1cnM5dmhycHJ6eDMxYmY1ZGdrcjJtNCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/nR4L10XlJcSeQ/200.webp',
+    image: `${imagesBaseUrl}/dazzle-pets-a-cat.png`,
   },
   {
     value: 'sun',
     pronunciation: 'son',
-    image:
-      'https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcXhtaHJzNnVvMmllZ29ldTE0ZGMxdmFlNG9xYnkybGJ5cmNrcGdoNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/1Fm7jEapE18HwS6fkT/giphy.webp',
+    image: `${imagesBaseUrl}/dazzle-in-sun.png`,
   },
   {
     value: 'big',
@@ -114,8 +114,7 @@ const FOUR_LETTER_WORDS = [
   {
     value: 'book',
     pronunciation: 'buuk',
-    image:
-      'https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExdWNldjJ3djI1bHNraXNtbHFiZXJheTNjNmNodnllZ2puNzc1Mjl6NiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xT77Y1T0zY1gR5qe5O/giphy.webp',
+    image: `${imagesBaseUrl}/dazzle-reads-a-book.png`,
   },
   {
     value: 'look',
@@ -144,14 +143,12 @@ const FOUR_LETTER_WORDS = [
   {
     value: 'four',
     pronunciation: 'foor',
-    image:
-      'https://images.unsplash.com/photo-1580892934698-cd589f9538a4?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    image: `${imagesBaseUrl}/dazzle-juggles-four-balls.png`,
   },
   {
     value: 'five',
     pronunciation: 'fīvv',
-    image:
-      'https://plus.unsplash.com/premium_photo-1669349127530-23d9e3dab307?q=80&w=2960&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    image: `${imagesBaseUrl}/dazzle-juggles-five-stars.png`,
   },
   {
     value: 'bark',
@@ -174,8 +171,7 @@ const FOUR_LETTER_WORDS = [
   {
     value: 'bird',
     pronunciation: 'brrd',
-    image:
-      'https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExd3o4cWU2b21jeG91dDdiYmd3aXFheTc4ZWhkY2ZjaXh5a29ic2w3NSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WXgQucWm9SUHm/giphy.webp',
+    image: `${imagesBaseUrl}/dazzle-pets-a-bird.png`,
   },
   {
     value: 'snow',

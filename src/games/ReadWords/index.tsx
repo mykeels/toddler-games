@@ -13,6 +13,7 @@ import Next from '@/Next';
 import { useConfetti } from '@/Confetti';
 import { useLevel } from '@/Header/Levels';
 import README from './README.md';
+import { GameImage } from '@/GameImage';
 
 type ReadWordsProps = {
   getWordSet?: (level?: Levels) => (typeof WORDS)[Levels];
@@ -32,7 +33,11 @@ export const ReadWords = ({
   const noOfWordCharacters = Math.min((Number(props.level) || level) + 1, 6) as Levels;
   const goal = useMemo(
     () => {
-      const character = getNextCharacter(getWordSet(noOfWordCharacters));
+      const wordSet = getWordSet(noOfWordCharacters);
+      if (wordSet.length === 1) {
+        return wordSet[0];
+      }
+      const character = getNextCharacter(wordSet);
       const $window = window as unknown as { readWordsCharacters: string[] };
       $window.readWordsCharacters = $window.readWordsCharacters || [];
       $window.readWordsCharacters.push(character.value);
@@ -118,13 +123,7 @@ export const ReadWords = ({
           }}
         >
           {Confetti}
-          {!!goal.image && (
-            <img
-              src={goal.image}
-              alt={goal.value}
-              className={classNames('w-56 h-56 hsx:w-32 hsx:h-32 hsm:w-32 hsm:h-32 border-2 border-white rounded-lg')}
-            />
-          )}
+          {!!goal.image && <GameImage src={goal.image} alt={goal.value} />}
         </button>
         <Next
           onNext={onNextClick}

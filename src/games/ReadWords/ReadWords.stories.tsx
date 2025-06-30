@@ -1,4 +1,6 @@
+import { ALL_WORDS } from '@/utils/words';
 import ReadWords from './index';
+import { useState } from 'react';
 
 export default {
   title: 'Games/ReadWords',
@@ -40,5 +42,25 @@ export const TwinWords = () => (
     ]}
   />
 );
+
+export const SelectWord = () => {
+  const [selectedWord, setSelectedWord] = useState<string>('you');
+  return (
+    <div className="flex flex-col gap-1 bg-brand-primary p-1">
+      <select
+        className="bg-brand-secondary text-brand-primary p-1 rounded-md"
+        value={selectedWord}
+        onChange={(e) => setSelectedWord(e.target.value)}
+      >
+        {Object.values(ALL_WORDS).map((word) => (
+          <option key={word.value} value={word.value}>
+            {word.value}
+          </option>
+        ))}
+      </select>
+      <ReadWords key={selectedWord} getWordSet={() => [...ALL_WORDS.filter((word) => word.value === selectedWord)]} />
+    </div>
+  );
+};
 
 export const Standalone = () => <ReadWords standalone />;

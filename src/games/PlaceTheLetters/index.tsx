@@ -13,6 +13,7 @@ import { getRainbowColor } from '@/utils/colors';
 import README from './README.md';
 import clsx from 'clsx';
 import { sleep } from '@/utils/sleep';
+import { GameImage } from '@/GameImage';
 
 export const PlaceTheLetters = ({ onNext, standalone }: { onNext?: () => void; standalone?: boolean }) => {
   const { life, restart } = useRestart();
@@ -154,10 +155,10 @@ export const PlaceTheLetters = ({ onNext, standalone }: { onNext?: () => void; s
           >
             {Confetti}
             {!!wordData.image && (
-              <img
+              <GameImage
                 src={wordData.image}
                 alt={word}
-                className={clsx('w-48 h-48 hsx:w-24 hsx:h-24 hsm:w-24 hsm:h-24 border-2 border-white rounded-lg')}
+                className={{ size: 'w-48 h-48 hsx:w-24 hsx:h-24 hsm:w-24 hsm:h-24' }}
               />
             )}
           </button>
