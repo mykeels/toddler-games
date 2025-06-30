@@ -1,4 +1,6 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
+import { useQuery } from 'react-query';
+import { clsx } from 'clsx';
 import { getNextCharacter, ANIMALS, FRUITS, shuffle, getOptions } from '@/utils/characters';
 import { fx } from '@/utils/sound';
 import Header from '@/Header/Header';
@@ -56,7 +58,6 @@ export const LetterToImageMatching = ({
 
   const [showConfetti, Confetti] = useConfetti();
 
-   
   const onLetterClick = async (character: { letter: string; name: string }) => {
     setSelected(character.letter);
     if (character.letter === goal.letter) {
@@ -75,7 +76,6 @@ export const LetterToImageMatching = ({
     vibrate();
   };
 
-   
   const onNextClick = () => {
     setSelected(null);
     setState('playing');
@@ -83,24 +83,21 @@ export const LetterToImageMatching = ({
     onNext?.();
   };
 
-   
-  const speakGoal = async () => {
-    for (let i = 0; i < 2; i++) {
-      speak(goal.letter.toUpperCase(), { rate: 1.2 });
-      await sleep(750);
-    }
-    speak(`${goal.letter} for`);
-  };
-
-  useEffect(() => {
-    speakGoal();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [goal.name]);
+  const { refetch: speakGoal, isFetching } = useQuery({
+    queryKey: ['letter-to-image-matching', goal.letter, life],
+    queryFn: async () => {
+      await speak(goal.letter.toUpperCase(), { rate: 1.2 });
+      await sleep(250);
+      await speak(goal.letter.toUpperCase(), { rate: 1.2 });
+      await sleep(250);
+      await speak(goal.letter.toUpperCase(), { rate: 1.2 });
+    },
+  });
 
   const transformedGoalLetter = useMemo(() => transformLetter(goal.letter), [goal.letter, transformLetter]);
 
   return (
-    <Container key={life}>
+    <Container key={`${life}-${goal.letter}`}>
       <Header title="Match Letter to Image" onRestart={onNextClick} Right={<Header.Info description={README} />}>
         <button className="focus:outline-none" onClick={() => speakGoal()}>
           {state === 'interlude' ? `${transformedGoalLetter} for ${goal.name}` : `${transformedGoalLetter} for ...`}
@@ -110,10 +107,15 @@ export const LetterToImageMatching = ({
         <button className="text-center py-8 text-9xl font-bold" onClick={() => speak(goal.name)}>
           {transformedGoalLetter}
         </button>
-        <div data-name="pair" className="flex justify-center flex-wrap gap-4">
+        <div
+          data-name="pair"
+          className={clsx('flex justify-center flex-wrap gap-4', {
+            'opacity-50 pointer-events-none': isFetching,
+          })}
+        >
           {options.map((option) => (
             <Card
-              key={option.letter}
+              key={`${option.letter}-${option.name}`}
               value={option.letter}
               selectedValue={goal.letter}
               onClick={() => onLetterClick(option)}

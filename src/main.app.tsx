@@ -27,6 +27,8 @@ import { AppVideo } from './Video';
 import { MemoryCards } from './games/MemoryCards';
 import SoundOutLetters from './games/SoundOutLetters';
 import LetterKeypad from './games/LetterKeypad';
+import { LetterToImageMatching } from './games/LetterToImageMatching';
+import { LetterToImageMatchingRoute } from './games/LetterToImageMatching/route';
 
 const RenderMode = ({ children }: { children: React.ReactNode }) => {
   const isProduction = process.env.NODE_ENV === 'production';
@@ -87,6 +89,14 @@ export const App = () => {
       {
         path: '/image-to-letter-matching/:characterSet',
         element: <ImageToLetterMatchingRoute />,
+      },
+      {
+        path: '/letter-to-image-matching',
+        element: <LetterToImageMatching />,
+      },
+      {
+        path: '/letter-to-image-matching/:characterSet',
+        element: <LetterToImageMatchingRoute />,
       },
       {
         path: '/letter-tracing/:characterSet',

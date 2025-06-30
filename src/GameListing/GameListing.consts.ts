@@ -96,6 +96,38 @@ export const GAME_LISTING: GameListing = {
           path: '/sound-out-letters/',
           icon: './icons/tap-uppercase.svg',
         },
+        {
+          title: 'Image to Letter',
+          icon: './icons/match-image/index.svg',
+          children: [
+            {
+              title: 'Uppercase Letters',
+              path: '/image-to-letter-matching/uppercase',
+              icon: './icons/match-image/to-uppercase.svg',
+            },
+            {
+              title: 'Lowercase Letters',
+              path: '/image-to-letter-matching/lowercase',
+              icon: './icons/match-image/to-lowercase.svg',
+            },
+          ],
+        },
+        {
+          title: 'Letter to Image',
+          icon: './icons/match-letter/index.svg',
+          children: [
+            {
+              title: 'Uppercase Letters',
+              path: '/letter-to-image-matching/uppercase',
+              icon: './icons/match-letter/to-uppercase.svg',
+            },
+            {
+              title: 'Lowercase Letters',
+              path: '/letter-to-image-matching/lowercase',
+              icon: './icons/match-letter/to-lowercase.svg',
+            },
+          ],
+        },
       ],
     },
     {
@@ -138,22 +170,6 @@ export const GAME_LISTING: GameListing = {
           path: `/videos/${slugify(video.title)}`,
           icon: './icons/video.svg',
         })),
-      ],
-    },
-    {
-      title: 'Match Image to Letter',
-      icon: './icons/match-image/index.svg',
-      children: [
-        {
-          title: 'Uppercase Letters',
-          path: '/image-to-letter-matching/',
-          icon: './icons/match-image/to-uppercase.svg',
-        },
-        {
-          title: 'Lowercase Letters',
-          path: '/image-to-letter-matching/lowercase',
-          icon: './icons/match-image/to-lowercase.svg',
-        },
       ],
     },
     {
