@@ -8,7 +8,7 @@
  * The player can click a Next button to get a new random letter
  */
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Card from '@/Card';
 import { LETTERS } from '@/utils/characters';
 import { fx } from '@/utils/sound';
@@ -20,11 +20,10 @@ import Next from '@/Next';
 
 function getRandomLetter() {
   const letter = LETTERS[Math.floor(Math.random() * LETTERS.length)];
-  speak(`What sound does ${letter.value} make?`);
   return letter;
 }
 
-export default function SoundOutLetters() {
+export default function SoundOutLetters({ onNext }: { onNext?: () => void }) {
   const { life, restart } = useRestart();
   const [current, setCurrent] = useState(() => getRandomLetter());
   const [correct, setCorrect] = useState<boolean | null>(null);
@@ -35,10 +34,15 @@ export default function SoundOutLetters() {
   };
 
   const handleNext = () => {
+    onNext?.();
     restart();
     setCurrent(getRandomLetter());
     setCorrect(null);
   };
+
+  useEffect(() => {
+    speak(`What sound does ${current.value} make?`);
+  }, [current.value]);
 
   return (
     <Container key={`${life}-${current.value}`}>

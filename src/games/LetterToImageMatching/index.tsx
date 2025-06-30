@@ -120,6 +120,7 @@ export const LetterToImageMatching = ({
               selectedValue={goal.letter}
               onClick={() => onLetterClick(option)}
               name="pair"
+              className="text-5xl lg:text-9xl"
             >
               {option.value}
               {option.letter === goal.letter ? Confetti : null}

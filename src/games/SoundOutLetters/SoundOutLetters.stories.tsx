@@ -5,4 +5,4 @@ export default {
   component: SoundOutLetters,
 };
 
-export const Index = () => <SoundOutLetters />;
+export const Index = () => <SoundOutLetters onNext={() => {}} />;

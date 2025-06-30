@@ -10,10 +10,11 @@ import Container from '@/Container';
 import Header from '@/Header/Header';
 import Next from '@/Next';
 import README from './README.md';
-import { getOptions } from '@/utils/characters';
+import { getOptions, LETTERS } from '@/utils/characters';
 import { useRestart } from '@/utils/restart';
 import Card from '@/Card';
 import { sleep } from '@/utils/sleep';
+import { useQuery } from 'react-query';
 
 type WhatDoYouHearProps = {
   getWordSet?: (level?: number) => (typeof WORDS)[Levels];
@@ -23,10 +24,10 @@ type WhatDoYouHearProps = {
   standalone?: boolean;
 };
 
-const ONE_WORD_SET = Object.keys(fx.alphabet).map((letter) => ({
-  value: letter,
-  pronunciation: letter,
-  image: letter,
+const ONE_WORD_SET = LETTERS.map((letter) => ({
+  value: letter.value,
+  pronunciation: letter.value,
+  image: letter.value,
 }));
 
 export const WhatDoYouHear = ({
@@ -79,20 +80,16 @@ export const WhatDoYouHear = ({
     onNext?.();
   };
 
-  useEffect(() => {
-    speak('Listen! What do you hear?');
-  }, [life, level]);
-
-  useEffect(() => {
-    async function run() {
-      await sleep(2300);
+  const { isFetching } = useQuery({
+    queryKey: ['what-do-you-hear', goal.value, life],
+    queryFn: async () => {
+      await speak('Listen! What do you hear?');
       for (let speakCount = 0; speakCount < 3; speakCount++) {
-        speak(goal.value);
-        await sleep(1000);
+        speak(goal.value, { rate: 1.2 });
+        await sleep(500);
       }
-    }
-    run();
-  }, [goal.value]);
+    },
+  });
 
   return (
     <Container key={life}>
@@ -107,7 +104,11 @@ export const WhatDoYouHear = ({
         </button>
       </Header>
       <div className="flex flex-col items-center justify-center h-[90%] space-y-8">
-        <div className="flex justify-center gap-4">
+        <div
+          className={classNames('flex justify-center gap-4', {
+            'opacity-50 pointer-events-none': isFetching,
+          })}
+        >
           {pair.map((option) => (
             <Card
               key={option.value}

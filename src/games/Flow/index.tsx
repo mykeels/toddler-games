@@ -7,6 +7,8 @@ import { useRestart } from '@/utils/restart';
 import WhatDoYouHear from '../WhatDoYouHear';
 import { useMemo } from 'react';
 import { getNextCharacter } from '@/utils/characters';
+import { LetterToImageMatching } from '../LetterToImageMatching';
+import SoundOutLetters from '../SoundOutLetters';
 
 type GameProps = {
   onNext?: () => void;
@@ -22,10 +24,13 @@ const games: GameComponent[] = [
   (props: GameProps) => <TapToCount {...props} />,
   (props: GameProps) => <FindAndTap getCharacterSet={(set) => set.digits} {...props} />,
   (props: GameProps) => <ImageToLetterMatching transformLetter={(letter) => letter.toUpperCase()} {...props} />,
+  (props: GameProps) => <LetterToImageMatching transformLetter={(letter) => letter.toUpperCase()} {...props} />,
   (props: GameProps) => <WhatDoYouHear {...props} uppercase />,
   (props: GameProps) => <FindAndTap getCharacterSet={(set) => set.fruits} {...props} />,
   (props: GameProps) => <ImageToLetterMatching transformLetter={(letter) => letter.toLowerCase()} {...props} />,
+  (props: GameProps) => <LetterToImageMatching transformLetter={(letter) => letter.toLowerCase()} {...props} />,
   (props: GameProps) => <FindAndTap getCharacterSet={(set) => set.animals} {...props} />,
+  (props: GameProps) => <SoundOutLetters {...props} />,
 ];
 
 export const Flow = () => {
@@ -33,7 +38,7 @@ export const Flow = () => {
   const Game = useMemo(() => getNextCharacter(games), [life]);
   return (
     <>
-      <Game onNext={restart} />
+      <Game key={life} onNext={restart} />
     </>
   );
 };
