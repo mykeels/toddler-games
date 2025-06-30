@@ -4,6 +4,9 @@ import React from 'react';
 import type { Preview } from '@storybook/react';
 import { withRouter } from '../src/utils/withRouter';
 import { withLevels } from '../src/Header/Levels';
+import { QueryClient, QueryClientProvider } from 'react-query';
+
+const queryClient = new QueryClient();
 
 const preview: Preview = {
   parameters: {
@@ -18,9 +21,11 @@ const preview: Preview = {
     withRouter,
     withLevels,
     (Story) => (
-      <div className="mfe toddler-games">
-        <Story />
-      </div>
+      <QueryClientProvider client={queryClient}>
+        <div className="mfe toddler-games">
+          <Story />
+        </div>
+      </QueryClientProvider>
     ),
   ],
 };

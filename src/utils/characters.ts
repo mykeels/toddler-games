@@ -169,91 +169,159 @@ export const NUMBERS_HUNDREDS: Character[] = [
 
 export const ANIMALS: Character[] = [
   {
-    value: '🐶',
-    name: 'Dog',
-  },
-  {
-    value: '🐱',
-    name: 'Cat',
-  },
-  {
-    value: '🐭',
-    name: 'Mouse',
-  },
-  {
-    value: '🐹',
-    name: 'Hamster',
-  },
-  {
-    value: '🐰',
-    name: 'Rabbit',
-  },
-  {
-    value: '🦊',
-    name: 'Fox',
+    value: '🐜',
+    name: 'Ant',
   },
   {
     value: '🐻',
     name: 'Bear',
   },
   {
-    value: '🐼',
-    name: 'Panda',
+    value: '🐝',
+    name: 'Bee',
   },
   {
-    value: '🐯',
-    name: 'Tiger',
-  },
-  {
-    value: '🦁',
-    name: 'Lion',
+    value: '🐱',
+    name: 'Cat',
   },
   {
     value: '🐮',
     name: 'Cow',
   },
   {
-    value: '🐷',
-    name: 'Pig',
+    value: '🐶',
+    name: 'Dog',
+  },
+  {
+    value: '🐘',
+    name: 'Elephant',
+  },
+  {
+    value: '🐠',
+    name: 'Fish',
+  },
+  {
+    value: '🦊',
+    name: 'Fox',
   },
   {
     value: '🐸',
     name: 'Frog',
   },
+  {
+    value: '🐐',
+    name: 'Goat',
+  },
+  {
+    value: '🐹',
+    name: 'Hamster',
+  },
+  {
+    value: '🦎',
+    name: 'Iguana',
+  },
+  {
+    value: '🐆',
+    name: 'Jaguar',
+  },
+  {
+    value: '🐨',
+    name: 'Koala',
+  },
+  {
+    value: '🦁',
+    name: 'Lion',
+  },
+  {
+    value: '🐭',
+    name: 'Mouse',
+  },
+  {
+    value: '🐙',
+    name: 'Octopus',
+  },
+  {
+    value: '🐼',
+    name: 'Panda',
+  },
+  {
+    value: '🐷',
+    name: 'Pig',
+  },
+  {
+    value: '🐰',
+    name: 'Rabbit',
+  },
+  {
+    value: '🐍',
+    name: 'Snake',
+  },
+  {
+    value: '🐯',
+    name: 'Tiger',
+  },
+  {
+    value: '🐳',
+    name: 'Whale',
+  },
+  {
+    value: '🦓',
+    name: 'Zebra',
+  },
 ];
 
 export const FRUITS: Character[] = [
-  {
-    value: '🍌',
-    name: 'Banana',
-  },
   {
     value: '🍎',
     name: 'Apple',
   },
   {
-    value: '🍓',
-    name: 'Strawberry',
+    value: '🍌',
+    name: 'Banana',
   },
   {
-    value: '🍉',
-    name: 'Watermelon',
-  },
-  {
-    value: '🍇',
-    name: 'Grapes',
+    value: '🥥',
+    name: 'Coconut',
   },
   {
     value: '🍒',
     name: 'Cherry',
   },
   {
+    value: '🍇',
+    name: 'Grapes',
+  },
+  {
+    value: '🥝',
+    name: 'Kiwi',
+  },
+  {
+    value: '🍋',
+    name: 'Lemon',
+  },
+  {
+    value: '🥭',
+    name: 'Mango',
+  },
+  {
+    value: '🍊',
+    name: 'Orange',
+  },
+  {
     value: '🍍',
     name: 'Pineapple',
   },
   {
-    value: '🥥',
-    name: 'Coconut',
+    value: '🍓',
+    name: 'Strawberry',
+  },
+  {
+    value: '🍅',
+    name: 'Tomato',
+  },
+  {
+    value: '🍉',
+    name: 'Watermelon',
   },
 ];
 
@@ -273,8 +341,8 @@ export const CHARACTERS = {
   fruits: FRUITS,
 };
 
-export function getOptions(set: { value: string; name: string }[], length = 2): { value: string; name: string }[] {
-  const options: { value: string; name: string }[] = [];
+export function getOptions<T extends { value: string; name: string }>(set: T[], length = 2): T[] {
+  const options: T[] = [];
   for (let i = 0; i < length; i++) {
     let letter = set[Math.floor(Math.random() * set.length)];
     while (options.find((option) => option.value === letter.value)) {

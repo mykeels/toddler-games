@@ -16,11 +16,38 @@ Here's some games included:
 
 - [Number Keypad](./src/games/NumberKeypad/README.md): A game where toddlers can tap on the numbers 0-10 to hear the corresponding number.
 
+- [Letter Keypad](./src/games/LetterKeypad/README.md): A game where toddlers can tap on the letters A-Z to hear the corresponding letter.
+
 - [Match Image to Letter](./src/games/ImageToLetterMatching/README.md): An interactive game that helps toddlers identify letters by matching them with the corresponding image.
 
 - [Letter Tracing](./src/games/LetterTracing/README.md): An interactive game that helps toddlers practice writing letters by tracing them on the screen with their finger or a stylus.
 
 - [Read Words](./src/games/ReadWords/README.md): A game where toddlers read words by tapping on the corresponding letter, helping them learn to associate letters with sounds.
+
+- A for apple
+
+Pick a letter at random. 
+Sound out "[letter] for ..."
+Show two cards with objects. One with an object that starts with the letter, and another with an object that does not.
+Tap on the correct card.
+
+- Number Sort
+
+Show n numbers. Allow the toddler to drag them to the correct order.
+
+- Letter Sort
+
+Show n letters. Allow the toddler to drag them to the correct order.
+
+- Add Digits
+
+Show two digits. Each digit has a number of circles below it representing its cardinality.
+
+Tap on the first digit, highlighting the circles with each tap.
+
+Tap on the second digit, highlighting the circles with each tap.
+
+Tap on the result card, highlighting the circles with each tap.
 
 <!-- - [Number Matching](./src/games/NumberMatching/README.md): A game where toddlers match numbers with the corresponding quantity of objects, reinforcing number recognition and counting skills. -->
 
