@@ -40,8 +40,7 @@ const TWO_LETTER_WORDS = [
   {
     value: 'go',
     pronunciation: 'gō',
-    image:
-      'https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHpuaWNsNjJpa2w2bHp4czJlMGExZGtjY21oYWoxc281bjBraXZrcSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7ZetIsjtbkgNE1I4/200.webp',
+    image: `${imagesBaseUrl}/dazzle-holds-up-a-go-sign.png`,
   },
   {
     value: 'no',
@@ -137,8 +136,7 @@ const FOUR_LETTER_WORDS = [
   {
     value: 'tree',
     pronunciation: 'trii',
-    image:
-      'https://images.unsplash.com/reserve/bOvf94dPRxWu0u3QsPjF_tree.jpg?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dHJlZXxlbnwwfHwwfHx8MA%3D%3D',
+    image: `${imagesBaseUrl}/dazzle-and-a-tree.png`,
   },
   {
     value: 'four',
@@ -159,14 +157,12 @@ const FOUR_LETTER_WORDS = [
   {
     value: 'ball',
     pronunciation: 'boll',
-    image:
-      'https://plus.unsplash.com/premium_photo-1709589145461-4797b4e80e9c?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    image: `${imagesBaseUrl}/dazzle-plays-with-a-ball.png`,
   },
   {
     value: 'bear',
     pronunciation: 'beer',
-    image:
-      'https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExa280MXNheDNoenBudWtiZnkxNXEyZnl0dDJpb2NsaWFhYXBmOTc4dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/QEIC6GZIEGStO/giphy.webp',
+    image: `${imagesBaseUrl}/dazzle-sees-a-bear.png`,
   },
   {
     value: 'bird',
@@ -176,14 +172,12 @@ const FOUR_LETTER_WORDS = [
   {
     value: 'snow',
     pronunciation: 'snōw',
-    image:
-      'https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExN2Nwb2VqZnA1dHQ1am5kM2t3bHNiMmptMjA3M3p2N20yem03b2o5eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/14uJKhQMZ1wLfO/giphy.webp',
+    image: `${imagesBaseUrl}/dazzle-in-snow.png`,
   },
   {
     value: 'rain',
     pronunciation: 'rāān',
-    image:
-      'https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExanZ2MTAwamVuNDE1amgyMTMzYjhicXpsa3d6czdlemtyZjJiaDh1ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o85xsNYU6Rlnw9cly/giphy.webp',
+    image: `${imagesBaseUrl}/dazzle-in-the-rain.png`,
   },
   {
     value: 'boat',
@@ -224,8 +218,7 @@ const FOUR_LETTER_WORDS = [
   {
     value: 'lick',
     pronunciation: 'licc',
-    image:
-      'https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3dmgyM3Uza3JmbHpjM3Q0OGoxZzhlNnc1cGYyeXI2OHBwMW9jMW9tZiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/89AAoZicNaRsA/giphy.gif',
+    image: `${imagesBaseUrl}/dazzle-licks-ice-cream.png`,
   },
   {
     value: 'melt',
@@ -242,14 +235,12 @@ const FOUR_LETTER_WORDS = [
   {
     value: 'wave',
     pronunciation: 'wāvv',
-    image:
-      'https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTJya2lld3VxamJrbWtvajJncGhhNjUxcTNxNWxpbDBwZ2J2dXljbCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/LPgFwCQg4HQBvPihcn/giphy.gif',
+    image: `${imagesBaseUrl}/dazzle-waves.png`,
   },
   {
     value: 'yawn',
     pronunciation: 'yoon',
-    image:
-      'https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNG5jbjkzeXV1enpxczd6eGYxN2gyOTV3MXFyN3hnbTVzcm80OWlwYSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/TfWhFbURIirNegNN4t/giphy.gif',
+    image: `${imagesBaseUrl}/dazzle-yawns.png`,
   },
 ];
 
@@ -263,8 +254,7 @@ const FIVE_LETTER_WORDS = [
   {
     value: 'house',
     pronunciation: 'hauss',
-    image:
-      'https://plus.unsplash.com/premium_photo-1689609950112-d66095626efb?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    image: `${imagesBaseUrl}/dazzle-by-a-house.png`,
   },
   {
     value: 'happy',
