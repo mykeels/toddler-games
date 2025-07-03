@@ -69,7 +69,11 @@ const BackToMenu = () => {
     <button
       className="flex p-2 self-stretch"
       onClick={() => {
-        navigate(-1);
+        if (window.history.state?.idx === 0) {
+          navigate('/');
+        } else {
+          navigate(-1);
+        }
       }}
     >
       <img src={`${baseUrl}/icons/arrow-left.svg`} alt="back" />
