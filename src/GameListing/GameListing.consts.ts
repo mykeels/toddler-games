@@ -1,3 +1,4 @@
+import { LetterTracingExercises } from '@/games/LetterTracing/LetterTracing.consts';
 import { hasTouch } from '@/utils/touch';
 import { slugify, VIDEOS } from '@/utils/videos';
 
@@ -175,63 +176,10 @@ export const GAME_LISTING: GameListing = {
     {
       title: 'Can you trace this?',
       icon: './icons/trace.svg',
-      children: [
-        {
-          title: 'Down',
-          path: '/letter-tracing/down',
-          icon: './icons/trace/arrows-vertical.svg',
-        },
-        {
-          title: 'Across',
-          path: '/letter-tracing/across',
-          icon: './icons/trace/arrows-horizontal.svg',
-        },
-        {
-          title: 'Circle',
-          path: '/letter-tracing/circle',
-          icon: './icons/trace/circle.svg',
-        },
-        {
-          title: 'Square',
-          path: '/letter-tracing/square',
-          icon: './icons/trace/square.svg',
-        },
-        {
-          title: 'Triangle',
-          path: '/letter-tracing/triangle',
-          icon: './icons/trace/triangle.svg',
-        },
-        {
-          title: 'Uppercase A',
-          path: '/letter-tracing/a-upper',
-          icon: './icons/trace/a-uppercase.svg',
-        },
-        {
-          title: 'Uppercase B',
-          path: '/letter-tracing/b-upper',
-          icon: './icons/trace/b-uppercase.svg',
-        },
-        {
-          title: 'Left Slash',
-          path: '/letter-tracing/left-slash',
-          icon: './icons/trace/left-slash.svg',
-        },
-        {
-          title: 'Right Slash',
-          path: '/letter-tracing/right-slash',
-          icon: './icons/trace/right-slash.svg',
-        },
-        {
-          title: 'Left Curve',
-          path: '/letter-tracing/left-curve',
-          icon: './icons/trace/left-curve.svg',
-        },
-        {
-          title: 'Right Curve',
-          path: '/letter-tracing/right-curve',
-          icon: './icons/trace/right-curve.svg',
-        },
-      ],
+      children: LetterTracingExercises.map((e) => ({
+        ...e,
+        path: `/letter-tracing/${slugify(e.title)}`,
+      })),
     },
     {
       title: 'Free Draw',
