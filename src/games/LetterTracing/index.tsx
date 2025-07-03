@@ -50,7 +50,8 @@ export const LetterTracing = ({ name }: LetterTracingProps) => {
     appState: {
       ...(exerciseData?.appState || {}),
       activeTool: { type: 'freedraw' },
-      currentItemStrokeWidth: 2,
+      currentItemStrokeWidth: 3.5,
+      currentItemStrokeColor: '#f00',
     },
   };
 
