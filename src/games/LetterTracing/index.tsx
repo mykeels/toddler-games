@@ -31,7 +31,6 @@ export const LetterTracing = ({ name }: LetterTracingProps) => {
   }, [life, name]);
 
   const exercise = LetterTracingExercises.find((exercise) => slugify(exercise.title) === slugify(name));
-  console.log({ exercise });
   const { data: exerciseData, isLoading } = useQuery({
     queryKey: ['letter-tracing', name],
     queryFn: async () => {
