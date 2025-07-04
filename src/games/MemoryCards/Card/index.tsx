@@ -30,7 +30,7 @@ export function Card({
         })}
         data-value={value.toLowerCase()}
         className={classNames(
-          'w-14 h-14 sm:w-20 sm:h-20',
+          'w-14 h-14 sm:w-16 sm:h-16',
           'cursor-pointer border-2 border-black flex items-center justify-center text-4xl rounded text-black',
           {
             'bg-white': !isFlipped && !isMatched,
