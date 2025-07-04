@@ -127,7 +127,7 @@ export const MemoryCards = ({ level, onNext }: MemoryCardsProps) => {
       <Header title="Memory Cards" onRestart={restartGame} Right={<Header.Info description={README} />}>
         Memory Cards
       </Header>
-      <div className="flex flex-col items-center justify-start h-[90%] gap-4 pt-4">
+      <div className="flex flex-col items-center justify-start h-[90%] gap-4 pt-4 overflow-auto">
         <ObjectivesBar objectives={objectives} />
         {won ? (
           <div className="flex flex-col items-center gap-8 pt-8">
