@@ -2,7 +2,7 @@ name: CI Alpha
 
 on:
   push:
-    branches-ignore: [ master ]
+    branches-ignore: [ master,gh-pages ]
 
 jobs:
   call-common:
