@@ -33,7 +33,7 @@
     "test-storybook:coverage": "npx -y nyc report --reporter=lcov --temp-dir coverage"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
+    "*.{js,jsx,ts,tsx,md,json}": [
       "prettier --write",
       "eslint --fix"
     ]
