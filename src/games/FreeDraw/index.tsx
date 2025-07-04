@@ -1,37 +1,15 @@
-import { useEffect, useRef, useState } from 'react';
-import CanvasDraw from 'react-canvas-draw';
+import '@excalidraw/excalidraw/index.css';
+import '@/excalidraw.css';
+import { useEffect, useRef } from 'react';
+import { Excalidraw } from '@excalidraw/excalidraw';
 import { fx } from '@/utils/sound';
 import Header from '@/Header/Header';
 import { useRestart } from '@/utils/restart';
 import { speak } from '@/utils/speak';
 import README from './README.md';
-export const FreeDraw = () => {
-  const [size, setSize] = useState({ width: 500, height: 500 });
-  const containerRef = useRef<HTMLDivElement>(null);
-  const colors = [
-    '#FF0000', // Red
-    '#FF7F00', // Orange
-    '#008000', // Deep Green
-    '#0000FF', // Blue
-    '#4B0082', // Indigo
-    '#9400D3', // Violet
-    '#000000', // Black
-  ];
-  const [colorIndex, setColorIndex] = useState(0);
-  const color = colors[colorIndex % colors.length];
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setColorIndex((index) => index + 1);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
 
-  useEffect(() => {
-    setSize({
-      width: containerRef.current?.clientWidth ?? 0,
-      height: containerRef.current?.clientHeight ?? 0,
-    });
-  }, []);
+export const FreeDraw = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     fx.game.play();
@@ -54,8 +32,26 @@ export const FreeDraw = () => {
           Free Draw
         </button>
       </Header>
-      <div className="flex flex-col space-y-4 items-center justify-center grow" ref={containerRef}>
-        <CanvasDraw key={life} canvasWidth={size.width} canvasHeight={size.height} brushColor={color} lazyRadius={0} />
+      <div className="flex flex-col space-y-4 items-center justify-center grow relative" ref={containerRef}>
+        <Excalidraw
+          key={life}
+          UIOptions={{
+            canvasActions: {
+              loadScene: false,
+            },
+            tools: {
+              image: false,
+            },
+          }}
+          initialData={{
+            appState: {
+              activeTool: { type: 'freedraw', customType: null, lastActiveTool: null, locked: false },
+              currentItemStrokeWidth: 3.5,
+              currentItemStrokeColor: '#f00',
+            },
+          }}
+          // The Excalidraw canvas will automatically fill its container
+        />
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import '@excalidraw/excalidraw/index.css';
+import '@/excalidraw.css';
 
 import { useEffect } from 'react';
 import { Excalidraw } from '@excalidraw/excalidraw';
@@ -56,19 +57,6 @@ export const LetterTracing = ({ name }: LetterTracingProps) => {
 
   return (
     <div className="flex flex-col h-full">
-      <style>{`
-      .excalidraw .panelColumn > div:nth-child(2),.excalidraw .panelColumn fieldset,.excalidraw .panelColumn > label,.excalidraw .panelColumn h3 {
-        display: none !important;
-      }
-
-      .excalidraw .dropdown-menu-button, .excalidraw .shapes-section, .excalidraw .sidebar-trigger, .excalidraw .FixedSideContainer {
-        display: none !important;
-      }
-
-      .excalidraw .selected-shape-actions {
-        position: absolute;
-      }
-      `}</style>
       <Header
         title="Can you trace this?"
         onRestart={restart}

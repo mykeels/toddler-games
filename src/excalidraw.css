@@ -1,0 +1,17 @@
+.excalidraw .panelColumn > div:nth-child(2),
+.excalidraw .panelColumn fieldset,
+.excalidraw .panelColumn > label,
+.excalidraw .panelColumn h3 {
+  display: none !important;
+}
+
+.excalidraw .dropdown-menu-button,
+.excalidraw .shapes-section,
+.excalidraw .sidebar-trigger,
+.excalidraw .App-toolbar-container {
+  display: none !important;
+}
+
+.excalidraw .selected-shape-actions {
+  position: absolute;
+}
