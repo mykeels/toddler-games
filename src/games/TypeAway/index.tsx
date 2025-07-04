@@ -24,6 +24,13 @@ export const TypeAway = () => {
 
   const { typed } = useTyped();
 
+  useEffect(() => {
+    const textarea = document.getElementById('type-away');
+    if (textarea) {
+      textarea.focus();
+    }
+  }, []);
+
   return (
     <Container key={life}>
       <Header onRestart={restart} Right={<Header.Info description={README} />} noLevels>
@@ -31,7 +38,7 @@ export const TypeAway = () => {
           Type Away!
         </button>
       </Header>
-      <div className="flex flex-col items-center justify-center h-[90%] space-y-8 hsx:space-y-2">
+      <div className="relative flex flex-col items-center justify-center h-[90%] space-y-8 hsx:space-y-2">
         <div className="block relative w-full h-full">
           {typed.map((t, index) => {
             const isLast = index === typed.length - 1;
@@ -46,6 +53,10 @@ export const TypeAway = () => {
             );
           })}
         </div>
+        <textarea
+          id="type-away"
+          className="absolute bottom-0 left-0 right-0 w-full grow p-2 border-none outline-none resize-none focus:outline-none bg-transparent text-white text-4xl"
+        />
       </div>
     </Container>
   );
