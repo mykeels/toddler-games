@@ -26,7 +26,7 @@ Here's some games included:
 
 - A for apple
 
-Pick a letter at random. 
+Pick a letter at random.
 Sound out "[letter] for ..."
 Show two cards with objects. One with an object that starts with the letter, and another with an object that does not.
 Tap on the correct card.

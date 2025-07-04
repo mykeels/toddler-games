@@ -1,39 +1,74 @@
+import '@excalidraw/excalidraw/index.css';
+
 import { useEffect } from 'react';
-import CanvasDraw from 'react-canvas-draw';
-import classNames from 'clsx';
+import { Excalidraw } from '@excalidraw/excalidraw';
 import { fx } from '@/utils/sound';
-import Across from './Across/Across';
-import { useFullScreenSize } from '@/utils/screen';
 import { SvgProps } from './LetterTracing.types';
-import { Screens, useMedia } from '@/utils/useMedia';
 import { useRestart } from '@/utils/restart';
 import Header from '@/Header/Header';
 import { speak } from '@/utils/speak';
 import { Menu } from '@/Header/Menu';
 import README from './README.md';
 import { getBaseUrl } from '@/utils/url';
+import { LetterTracingExercises } from './LetterTracing.consts';
+import { slugify } from '@/utils/videos';
+import { useQuery } from 'react-query';
 
 type LetterTracingProps = {
   name: string;
   Letter?: (props: SvgProps) => React.ReactNode;
 };
 
-export const LetterTracing = ({ name, Letter = Across }: LetterTracingProps) => {
+export const LetterTracing = ({ name }: LetterTracingProps) => {
   const baseUrl = getBaseUrl();
-  const { size, containerRef } = useFullScreenSize();
   useEffect(() => {
     fx.game.play();
   }, []);
-  const letters = useMedia([Screens.SM], [[0]], [0, 1, 2, 3]);
-  const printableLetters = new Array(20).fill(null).map((_, index) => index + 1);
   const { life, restart } = useRestart();
 
   useEffect(() => {
     speak(`Let's trace ${name}.`);
   }, [life, name]);
 
+  const exercise = LetterTracingExercises.find((exercise) => slugify(exercise.title) === slugify(name));
+  const { data: exerciseData, isLoading } = useQuery({
+    queryKey: ['letter-tracing', name],
+    queryFn: async () => {
+      const data = await fetch(`${baseUrl}/${exercise?.file}`).then((res) => res.json());
+
+      return data;
+    },
+    enabled: !!exercise,
+    cacheTime: 10 * 60 * 1000,
+    staleTime: 10 * 60 * 1000,
+  });
+
+  const initialData = {
+    ...exerciseData,
+    source: location.origin,
+    appState: {
+      ...(exerciseData?.appState || {}),
+      activeTool: { type: 'freedraw' },
+      currentItemStrokeWidth: 3.5,
+      currentItemStrokeColor: '#f00',
+    },
+  };
+
   return (
     <div className="flex flex-col h-full">
+      <style>{`
+      .excalidraw .panelColumn > div:nth-child(2),.excalidraw .panelColumn fieldset,.excalidraw .panelColumn > label,.excalidraw .panelColumn h3 {
+        display: none !important;
+      }
+
+      .excalidraw .dropdown-menu-button, .excalidraw .shapes-section, .excalidraw .sidebar-trigger, .excalidraw .FixedSideContainer {
+        display: none !important;
+      }
+
+      .excalidraw .selected-shape-actions {
+        position: absolute;
+      }
+      `}</style>
       <Header
         title="Can you trace this?"
         onRestart={restart}
@@ -60,34 +95,24 @@ export const LetterTracing = ({ name, Letter = Across }: LetterTracingProps) => 
           {name}
         </button>
       </Header>
-      <div className="flex flex-col space-y-4 items-center justify-center grow relative" ref={containerRef}>
-        <div
-          className={classNames(
-            'w-full h-full absolute top-0 left-0 content-center place-items-center gap-8 p-4 sm:p-16 print:hidden',
-            {
-              'grid grid-cols-1 grid-rows-1 md:grid-cols-2 md:grid-rows-2': letters.length > 1,
-            }
-          )}
-        >
-          {letters.map((item) => (
-            <Letter size="100%" key={item} />
-          ))}
-        </div>
-        <div className={classNames('w-full h-full hidden flex-wrap print:flex gap-8 items-center justify-center pb-8')}>
-          {printableLetters.map((item) => (
-            <Letter size="20dvw" key={item} />
-          ))}
-        </div>
-        <div className="print:hidden">
-          <CanvasDraw
-            key={life}
-            canvasWidth={size.width}
-            canvasHeight={size.height}
-            brushRadius={10}
-            brushColor="red"
-            lazyRadius={0}
+      <div
+        className="flex flex-col space-y-4 items-center justify-center grow relative"
+        key={`${name}-${life}-${initialData?.source}`}
+      >
+        {!isLoading && (
+          <Excalidraw
+            // theme="dark"
+            UIOptions={{
+              canvasActions: {
+                loadScene: true,
+              },
+              tools: {
+                image: false,
+              },
+            }}
+            initialData={initialData}
           />
-        </div>
+        )}
       </div>
     </div>
   );
