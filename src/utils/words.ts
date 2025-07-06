@@ -28,14 +28,12 @@ export const SPECIAL_PHONICS = {
 const TWO_LETTER_WORDS = [
   {
     value: 'on',
-    image:
-      'https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExbnFhenVwOHZpeW51Y2ozYzBqM2VnZDFhcmptdXhndGx5Mm9kczhtcCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/piO8R2DMyCXdalfXWQ/giphy.webp',
+    image: `${imagesBaseUrl}/dazzelle-turns-on-the-light.png`,
   },
   {
     value: 'up',
     pronunciation: 'op',
-    image:
-      'https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExMGpxZjFrZTg4aGF6dGhmM3RsbDBjOGFnMnJ6M3E3ejdybHI3cmNhbyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/iZGpuaRKdEZoI/giphy.webp',
+    image: `${imagesBaseUrl}/dazzelle-points-up.png`,
   },
   {
     value: 'go',
@@ -45,14 +43,12 @@ const TWO_LETTER_WORDS = [
   {
     value: 'no',
     pronunciation: 'nō',
-    image:
-      'https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExbzB2eHRyYW12dmU2M2lvNnRvczlkZjRzOGNkNHB3dXc4NGtqYjd3MiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/izHlHlaz9n99skGyUt/giphy.webp',
+    image: `${imagesBaseUrl}/dazzelle-says-no.png`,
   },
   {
     value: 'me',
     pronunciation: 'mi',
-    image:
-      'https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExbXJqOTUwaXo0ZHl5cXQ2a3dqcWc4cTc0a2RkYWtjbTExZjdmN2hoYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/i3L6JoWcVZj1HuURSE/giphy.webp',
+    image: `${imagesBaseUrl}/dazzelle-says-me.png`,
   },
 ];
 
@@ -64,13 +60,11 @@ const THREE_LETTER_WORDS = [
   },
   {
     value: 'yes',
-    image:
-      'https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExMDc5eWowaTMzeGo1ZHhocTh1N25qZWNpbXI2NWdkZ3VwYTUyM2ZmbSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/kwCLw42hH2cxvIywIi/giphy.webp',
+    image: `${imagesBaseUrl}/dazzelle-says-yes.png`,
   },
   {
     value: 'off',
-    image:
-      'https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExbnFhenVwOHZpeW51Y2ozYzBqM2VnZDFhcmptdXhndGx5Mm9kczhtcCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/piO8R2DMyCXdalfXWQ/giphy.webp',
+    image: `${imagesBaseUrl}/dazzelle-turns-off-the-light.png`,
   },
   {
     value: 'bed',
@@ -92,8 +86,7 @@ const THREE_LETTER_WORDS = [
   {
     value: 'big',
     pronunciation: 'big',
-    image:
-      'https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNmE1ajZ4MHNld3hmcDNlbGVvbnNzM3FwcmZhZzV3MXd0dG1sYTF4cyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/85AU17hrcbCCMko/giphy.webp',
+    image: `${imagesBaseUrl}/dazzelle-is-big.png`,
   },
   {
     value: 'boy',
@@ -118,8 +111,7 @@ const FOUR_LETTER_WORDS = [
   {
     value: 'look',
     pronunciation: 'luuk',
-    image:
-      'https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExbHdtaWRhbXQ1aWl0YzR2aWhjanJmdmNybGo0YmZmbXV2YXE1cm9hNCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/UymgKJ3zWAgCZTVN16/giphy.webp',
+    image: `${imagesBaseUrl}/dazzelle-looks.png`,
   },
   {
     value: 'good',
@@ -151,8 +143,7 @@ const FOUR_LETTER_WORDS = [
   {
     value: 'bark',
     pronunciation: 'bark',
-    image:
-      'https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZnljaWN3N2s3cTllM2ZvODRzdHd1MmwzZzBjd3V2c2d6ZjV3MXdmdSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3oGRFIjETeuYgyLyo0/giphy.webp',
+    image: `${imagesBaseUrl}/dazzelle-with-a-barking-dog.png`,
   },
   {
     value: 'ball',
@@ -223,8 +214,7 @@ const FOUR_LETTER_WORDS = [
   {
     value: 'melt',
     pronunciation: 'melt',
-    image:
-      'https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmpubmgzbXRtdDV4c3M1NHFheWFsNzRhN3RsdG0zOXpicmwwM2I2aSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/4vGqobN49fU81m9lSu/giphy.gif',
+    image: `${imagesBaseUrl}/dazzelle-with-melting-ice-cream.png`,
   },
   {
     value: 'odor',
