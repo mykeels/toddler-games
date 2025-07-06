@@ -22,7 +22,6 @@ import { WhatDoYouHearRoute } from './games/WhatDoYouHear/route';
 import { Layout } from './layout';
 import { ErrorBoundary } from './utils/error-boundary';
 import { ThemeMusic } from '@/utils/theme-music';
-import { ALL_WORDS } from './utils/words';
 import { AppVideo } from './Video';
 import { MemoryCards } from './games/MemoryCards';
 import SoundOutLetters from './games/SoundOutLetters';
@@ -120,7 +119,7 @@ export const App = () => {
       },
       {
         path: '/read-words',
-        element: <ReadWords getWordSet={() => ALL_WORDS} />,
+        element: <ReadWords />,
       },
       {
         path: '/sound-out-letters',
