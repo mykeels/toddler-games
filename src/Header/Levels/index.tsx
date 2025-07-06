@@ -21,7 +21,12 @@ export const Levels = () => {
   const baseUrl = getBaseUrl();
   return (
     <div className="flex flex-row gap-2 relative group" ref={ref}>
-      <button onClick={toggleMenu} className="flex p-2">
+      <button
+        onClick={() => {
+          toggleMenu();
+        }}
+        className="flex p-2"
+      >
         <img
           src={`${baseUrl}/icons/ladder-white.svg`}
           alt="ladder"
@@ -43,7 +48,12 @@ export const Levels = () => {
             duration: 0.2,
             ease: 'easeOut',
           }}
-          className="absolute right-0 top-0 w-48 p-2 mr-12 flex flex-col gap-2 shadow border border-white rounded group-hover:bg-brand-accent-pink"
+          className={clsx(
+            'absolute right-[1rem] top-0 w-48 p-2 mr-12 flex flex-col gap-2 shadow border border-white rounded group-hover:bg-brand-accent-pink',
+            {
+              'bg-brand-accent-pink': isOpen,
+            }
+          )}
         >
           <h4 className="text-white text-sm text-center" ref={titleRef}>{`Level ${level}`}</h4>
           <input

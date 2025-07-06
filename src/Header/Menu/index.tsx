@@ -4,6 +4,7 @@ import { useToggleMenu } from '../useToggleMenu';
 import { useClickOutside } from '../useClickOutside';
 import { getBaseUrl } from '@/utils/url';
 import { vibrate } from '@/utils/vibrate';
+import { fx } from '@/utils/sound';
 
 export type MenuProps = {
   open?: boolean;
@@ -16,7 +17,7 @@ export const Menu = ({ open, children }: MenuProps) => {
   const ref = useClickOutside(closeMenu);
   return (
     <div className="flex flex-col items-center justify-center relative bg-brand-primary print:hidden mr-3" ref={ref}>
-      <button onClick={toggleMenu}>
+      <button className="p-2" onClick={toggleMenu}>
         <motion.div
           animate={{
             rotate: isOpen ? 180 : 0,
@@ -58,10 +59,11 @@ export const Menu = ({ open, children }: MenuProps) => {
                   <li
                     onClick={() => {
                       vibrate();
+                      fx.click.play();
                     }}
-                    className="flex hover:scale-110 transition-all duration-300 border border-white rounded-full p-1 hover:bg-brand-accent-pink"
+                    className="flex hover:scale-110 transition-all duration-300 border border-white rounded-full p-1 hover:bg-brand-accent-pink items-center justify-center"
                   >
-                    <span className="w-10 h-10 flex items-center justify-center">{child}</span>
+                    {child}
                   </li>
                 );
               }
