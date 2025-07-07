@@ -87,10 +87,8 @@ export const LetterToImageMatching = ({
     queryKey: ['letter-to-image-matching', goal.letter, life],
     queryFn: async () => {
       await speak(goal.letter.toUpperCase(), { rate: 1.2 });
-      await sleep(250);
-      await speak(goal.letter.toUpperCase(), { rate: 1.2 });
-      await sleep(250);
-      await speak(goal.letter.toUpperCase(), { rate: 1.2 });
+      await sleep(300);
+      await speak(`for ${goal.name}`);
     },
   });
 
