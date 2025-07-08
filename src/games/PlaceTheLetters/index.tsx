@@ -103,7 +103,7 @@ export const PlaceTheLetters = ({ onNext, standalone }: { onNext?: () => void; s
         </button>
       </Header>
       <div
-        className="flex flex-col items-center justify-center h-[90%] space-y-8 hsx:space-y-2 relative"
+        className="flex flex-col items-center justify-center h-[90%] gap-y-4 hsx:space-y-2 relative"
         ref={containerRef}
       >
         <div className="flex flex-wrap justify-center content-center items-center gap-1 landscape:px-[1%]">
