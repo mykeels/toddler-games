@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
+import Container from '@/Container';
+import Header from '@/Header/Header';
+import { useLevel } from '@/Header/Levels';
+import { useRestart } from '@/utils/restart';
+import { useSpeak } from '@/utils/speak';
+import README from './README.md';
+import Next from '@/Next';
+import { GameImage } from '@/GameImage';
+import { getBaseUrl } from '@/utils/url';
 
-const NUM_CARDS = 5;
 const generateShuffled = (n: number) => {
   const arr = Array.from({ length: n }, (_, i) => i + 1);
   for (let i = arr.length - 1; i > 0; i--) {
@@ -10,8 +18,17 @@ const generateShuffled = (n: number) => {
   return arr;
 };
 
-export const OrderObjects = () => {
-  const [cards, setCards] = useState<number[]>(() => generateShuffled(NUM_CARDS));
+type OrderObjectsProps = {
+  level?: number;
+  onNext?: () => void;
+};
+
+export const OrderObjects = ({ onNext, ...props }: OrderObjectsProps) => {
+  const { speak } = useSpeak();
+  const { life, restart } = useRestart();
+  const level = useLevel();
+  const noOfCards = (props.level ?? level) + 5;
+  const [cards, setCards] = useState<number[]>(() => generateShuffled(noOfCards));
   const [draggedIdx, setDraggedIdx] = useState<number | null>(null);
 
   const isOrdered = cards.every((val, idx) => val === idx + 1);
@@ -32,44 +49,73 @@ export const OrderObjects = () => {
     setDraggedIdx(null);
   };
 
+  const speakGoal = async () => {
+    await speak(`Can you order the objects?`);
+  };
+
+  const onNextClick = () => {
+    restart();
+    setCards(generateShuffled(noOfCards));
+    setDraggedIdx(null);
+    onNext?.();
+  };
+
   return (
-    <div style={{ maxWidth: 400, margin: '2rem auto', textAlign: 'center' }}>
-      <h2>Order the Objects</h2>
-      <div style={{ display: 'flex', gap: 12, justifyContent: 'center', margin: '2rem 0' }}>
-        {cards.map((val, idx) => {
-          const inOrder = val === idx + 1;
-          return (
-            <div
-              key={val}
-              draggable
-              onDragStart={() => handleDragStart(idx)}
-              onDragOver={handleDragOver}
-              onDrop={() => handleDrop(idx)}
-              style={{
-                width: 60,
-                height: 80,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: 32,
-                borderRadius: 8,
-                border: `2px solid ${inOrder ? 'green' : 'red'}`,
-                background: inOrder ? '#e6ffe6' : '#ffe6e6',
-                cursor: 'grab',
-                boxShadow: '0 2px 8px #0001',
-                userSelect: 'none',
-                transition: 'border 0.2s, background 0.2s',
-              }}
-            >
-              {val}
-            </div>
-          );
-        })}
+    <Container key={`${life}-${level}-${noOfCards}`}>
+      <Header title="Order Objects" onRestart={onNextClick} Right={<Header.Info description={README} />}>
+        <button className="focus:outline-none" onClick={() => speakGoal()}>
+          Can you order the objects?
+        </button>
+      </Header>
+      <div className="flex flex-col items-center justify-center h-[90%] space-y-8">
+        <div className="flex flex-wrap gap-4 justify-center">
+          {cards.map((val, idx) => {
+            const inOrder = val === idx + 1;
+            return (
+              <div
+                key={val}
+                draggable
+                onDragStart={() => handleDragStart(idx)}
+                onDragOver={handleDragOver}
+                onDrop={() => handleDrop(idx)}
+                style={{
+                  width: 60,
+                  height: 80,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: 32,
+                  borderRadius: 8,
+                  border: `4px solid ${inOrder ? 'green' : 'red'}`,
+                  background: inOrder ? '#e6ffe6' : '#ffe6e6',
+                  color: inOrder ? 'green' : 'red',
+                  cursor: 'grab',
+                  boxShadow: '0 2px 8px #0001',
+                  userSelect: 'none',
+                  transition: 'border 0.2s, background 0.2s',
+                }}
+              >
+                {val}
+              </div>
+            );
+          })}
+        </div>
+
+        {isOrdered && (
+          <GameImage
+            src={`${getBaseUrl()}/images/dazzle-thumbs-up.png`}
+            alt="Dazzle thumbs up"
+            className={{ size: 'w-48 h-48 hsx:w-24 hsx:h-24 hsm:w-24 hsm:h-24' }}
+          />
+        )}
+
+        <Next
+          onNext={onNextClick}
+          className={{
+            invisible: !isOrdered,
+          }}
+        />
       </div>
-      {isOrdered && <div style={{ color: 'green', fontWeight: 'bold', fontSize: 24 }}>You win!</div>}
-      <button onClick={() => setCards(generateShuffled(NUM_CARDS))} style={{ marginTop: 24 }}>
-        Restart
-      </button>
-    </div>
+    </Container>
   );
 };
