@@ -8,6 +8,7 @@ import README from './README.md';
 import Next from '@/Next';
 import { GameImage } from '@/GameImage';
 import { getBaseUrl } from '@/utils/url';
+import { fx } from '@/utils/sound';
 
 const generateShuffled = (n: number) => {
   const arr = Array.from({ length: n }, (_, i) => i + 1);
@@ -35,6 +36,7 @@ export const OrderObjects = ({ onNext, ...props }: OrderObjectsProps) => {
 
   const handleDragStart = (idx: number) => {
     setDraggedIdx(idx);
+    fx.click.play();
   };
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
@@ -47,6 +49,12 @@ export const OrderObjects = ({ onNext, ...props }: OrderObjectsProps) => {
     [newCards[draggedIdx], newCards[idx]] = [newCards[idx], newCards[draggedIdx]];
     setCards(newCards);
     setDraggedIdx(null);
+    // if new position is correct in the ordering, play a sound
+    if (newCards[idx] === idx + 1) {
+      fx.correct.play();
+    } else {
+      fx.incorrect.play();
+    }
   };
 
   const speakGoal = async () => {
