@@ -81,6 +81,10 @@ export const OrderObjects = ({ onNext, ...props }: OrderObjectsProps) => {
   };
 
   useEffect(() => {
+    speakGoal();
+  }, []);
+
+  useEffect(() => {
     onNextClick();
   }, [level]);
 

@@ -197,6 +197,11 @@ export const GAME_LISTING: GameListing = {
       path: '/memory-cards/',
       icon: './icons/memory-cards.svg',
     },
+    {
+      title: 'Order Objects',
+      path: '/order-objects/',
+      icon: './icons/order-objects.svg',
+    },
   ],
 };
 
