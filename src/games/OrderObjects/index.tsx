@@ -34,6 +34,7 @@ export const OrderObjects = ({ onNext, ...props }: OrderObjectsProps) => {
   const noOfCards = (props.level ?? level) + 5;
   const [cards, setCards] = useState<number[]>(() => generateShuffled(noOfCards));
   const [draggedIdx, setDraggedIdx] = useState<number | null>(null);
+  const [dragOverIdx, setDragOverIdx] = useState<number | null>(null);
 
   const isOrdered = cards.every((val, idx) => val === idx + 1);
 
@@ -94,6 +95,7 @@ export const OrderObjects = ({ onNext, ...props }: OrderObjectsProps) => {
         <div className="flex flex-wrap gap-4 justify-center">
           {cards.map((val, idx) => {
             const inOrder = val === idx + 1;
+            const isDraggedOver = dragOverIdx === idx;
             return (
               <div
                 key={val}
@@ -102,8 +104,15 @@ export const OrderObjects = ({ onNext, ...props }: OrderObjectsProps) => {
                 })}
                 draggable
                 onDragStart={() => handleDragStart(idx)}
-                onDragOver={handleDragOver}
-                onDrop={() => handleDrop(idx)}
+                onDragOver={(e) => {
+                  handleDragOver(e);
+                  setDragOverIdx(idx);
+                }}
+                onDragLeave={() => setDragOverIdx(null)}
+                onDrop={() => {
+                  handleDrop(idx);
+                  setDragOverIdx(null);
+                }}
                 style={{
                   width: 60,
                   height: 80,
@@ -112,7 +121,7 @@ export const OrderObjects = ({ onNext, ...props }: OrderObjectsProps) => {
                   justifyContent: 'center',
                   fontSize: 32,
                   borderRadius: 8,
-                  border: `4px solid ${inOrder ? 'green' : 'red'}`,
+                  border: `4px solid ${isDraggedOver ? '#17FF70' : inOrder ? 'green' : 'red'}`,
                   background: inOrder ? '#e6ffe6' : '#ffe6e6',
                   color: inOrder ? 'green' : 'red',
                   cursor: 'grab',
