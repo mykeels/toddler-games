@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Container from '@/Container';
 import Header from '@/Header/Header';
 import { useLevel } from '@/Header/Levels';
@@ -9,6 +9,9 @@ import Next from '@/Next';
 import { GameImage } from '@/GameImage';
 import { getBaseUrl } from '@/utils/url';
 import { fx } from '@/utils/sound';
+import { useConfetti } from '@/Confetti';
+import { sleep } from '@/utils/sleep';
+import clsx from 'clsx';
 
 const generateShuffled = (n: number) => {
   const arr = Array.from({ length: n }, (_, i) => i + 1);
@@ -34,9 +37,11 @@ export const OrderObjects = ({ onNext, ...props }: OrderObjectsProps) => {
 
   const isOrdered = cards.every((val, idx) => val === idx + 1);
 
-  const handleDragStart = (idx: number) => {
+  const handleDragStart = async (idx: number) => {
     setDraggedIdx(idx);
     fx.click.play();
+    await sleep(250);
+    await speak(`${cards[idx]}`.toUpperCase(), { rate: 1.2 });
   };
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
@@ -55,18 +60,28 @@ export const OrderObjects = ({ onNext, ...props }: OrderObjectsProps) => {
     } else {
       fx.incorrect.play();
     }
+    const isOrdered = newCards.every((val, idx) => val === idx + 1);
+    if (isOrdered) {
+      showConfetti();
+    }
   };
 
+  const [showConfetti, Confetti] = useConfetti();
   const speakGoal = async () => {
     await speak(`Can you order the objects?`);
   };
 
   const onNextClick = () => {
     restart();
+    speakGoal();
     setCards(generateShuffled(noOfCards));
     setDraggedIdx(null);
     onNext?.();
   };
+
+  useEffect(() => {
+    onNextClick();
+  }, [level]);
 
   return (
     <Container key={`${life}-${level}-${noOfCards}`}>
@@ -82,6 +97,9 @@ export const OrderObjects = ({ onNext, ...props }: OrderObjectsProps) => {
             return (
               <div
                 key={val}
+                className={clsx({
+                  'pointer-events-none opacity-50': isOrdered,
+                })}
                 draggable
                 onDragStart={() => handleDragStart(idx)}
                 onDragOver={handleDragOver}
@@ -110,11 +128,14 @@ export const OrderObjects = ({ onNext, ...props }: OrderObjectsProps) => {
         </div>
 
         {isOrdered && (
-          <GameImage
-            src={`${getBaseUrl()}/images/dazzle-thumbs-up.png`}
-            alt="Dazzle thumbs up"
-            className={{ size: 'w-48 h-48 hsx:w-24 hsx:h-24 hsm:w-24 hsm:h-24' }}
-          />
+          <>
+            {Confetti}
+            <GameImage
+              src={`${getBaseUrl()}/images/dazzle-thumbs-up.png`}
+              alt="Dazzle thumbs up"
+              className={{ size: 'w-48 h-48 hsx:w-24 hsx:h-24 hsm:w-24 hsm:h-24' }}
+            />
+          </>
         )}
 
         <Next
