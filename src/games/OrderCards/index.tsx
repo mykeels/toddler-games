@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Container from '@/Container';
 import Header from '@/Header/Header';
 import { useLevel } from '@/Header/Levels';
@@ -22,12 +22,12 @@ const generateShuffled = (n: number) => {
   return arr;
 };
 
-type OrderObjectsProps = {
+type OrderCardsProps = {
   level?: number;
   onNext?: () => void;
 };
 
-export const OrderObjects = ({ onNext, ...props }: OrderObjectsProps) => {
+export const OrderCards = ({ onNext, ...props }: OrderCardsProps) => {
   const { speak } = useSpeak();
   const { life, restart } = useRestart();
   const level = useLevel();
@@ -39,7 +39,7 @@ export const OrderObjects = ({ onNext, ...props }: OrderObjectsProps) => {
 
   const [showConfetti, Confetti] = useConfetti();
   const speakGoal = async () => {
-    await speak(`Can you order the objects?`);
+    await speak(`Can you order the cards?`);
   };
 
   const onNextClick = () => {
@@ -56,9 +56,9 @@ export const OrderObjects = ({ onNext, ...props }: OrderObjectsProps) => {
 
   return (
     <Container key={`${life}-${level}-${noOfCards}`}>
-      <Header title="Order Objects" onRestart={onNextClick} Right={<Header.Info description={README} />}>
+      <Header title="Order Cards" onRestart={onNextClick} Right={<Header.Info description={README} />}>
         <button className="focus:outline-none" onClick={() => speakGoal()}>
-          Can you order the objects?
+          Can you order the cards?
         </button>
       </Header>
       <div className="flex flex-col items-center justify-center h-[90%] space-y-8">
@@ -107,9 +107,9 @@ export const OrderObjects = ({ onNext, ...props }: OrderObjectsProps) => {
                   justifyContent: 'center',
                   fontSize: 32,
                   borderRadius: 8,
-                  border: `4px solid ${isSelected ? '#17FF70' : inOrder ? 'green' : 'red'}`,
-                  background: inOrder ? '#e6ffe6' : '#ffe6e6',
-                  color: inOrder ? 'green' : 'red',
+                  border: `4px solid ${isSelected ? 'white' : inOrder ? 'green' : 'red'}`,
+                  background: isSelected ? '#222' : inOrder ? '#e6ffe6' : '#ffe6e6',
+                  color: isSelected ? 'white' : inOrder ? 'green' : 'red',
                   cursor: isOrdered ? 'default' : 'pointer',
                   boxShadow: '0 2px 8px #0001',
                   userSelect: 'none',

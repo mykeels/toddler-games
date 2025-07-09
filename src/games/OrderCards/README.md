@@ -1,4 +1,4 @@
-# Order Objects
+# Order Cards
 
 Show n cards, each with an orderable object e.g. a number, a letter, a shape, etc.
 
