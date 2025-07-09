@@ -51,10 +51,6 @@ export const OrderObjects = ({ onNext, ...props }: OrderObjectsProps) => {
   };
 
   useEffect(() => {
-    speakGoal();
-  }, []);
-
-  useEffect(() => {
     onNextClick();
   }, [level]);
 
@@ -99,6 +95,7 @@ export const OrderObjects = ({ onNext, ...props }: OrderObjectsProps) => {
                     const isNowOrdered = newCards.every((val, idx) => val === idx + 1);
                     if (isNowOrdered) {
                       showConfetti();
+                      speak('Well done!');
                     }
                   }
                 }}
