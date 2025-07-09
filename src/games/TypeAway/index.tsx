@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { nanoid } from 'nanoid';
 import { fx } from '@/utils/sound';
 import Header from '@/Header/Header';
@@ -22,7 +22,9 @@ export const TypeAway = () => {
   };
   useEffect(speakGoal, []);
 
-  const { typed } = useTyped();
+  const ref = useRef<HTMLTextAreaElement>(null);
+
+  const { typed } = useTyped(ref);
 
   useEffect(() => {
     const textarea = document.getElementById('type-away');
@@ -54,8 +56,9 @@ export const TypeAway = () => {
           })}
         </div>
         <textarea
+          ref={ref}
           id="type-away"
-          className="absolute bottom-0 left-0 right-0 w-full grow p-2 border-none outline-none resize-none focus:outline-none bg-transparent text-white text-4xl"
+          className="absolute top-0 bottom-0 left-0 right-0 w-full grow p-2 border-none outline-none resize-none focus:outline-none bg-transparent text-white text-4xl"
         />
       </div>
     </Container>
@@ -64,7 +67,7 @@ export const TypeAway = () => {
 
 export default TypeAway;
 
-function useTyped() {
+function useTyped(ref: React.RefObject<HTMLTextAreaElement>) {
   const { speak } = useSpeak();
   const [typed, setTyped] = useState<{ id: string; key: string; createdAt: Date }[]>([]);
 
@@ -80,7 +83,7 @@ function useTyped() {
   const KEY_PRESS_EVENT = 'keyup';
 
   useEffect(() => {
-    window.addEventListener(KEY_PRESS_EVENT, handleKeyPress);
+    ref.current?.addEventListener(KEY_PRESS_EVENT, handleKeyPress);
 
     const MAX_TIME = 3000;
 
@@ -94,7 +97,7 @@ function useTyped() {
 
     return () => {
       clearInterval(interval);
-      window.removeEventListener(KEY_PRESS_EVENT, handleKeyPress);
+      ref.current?.removeEventListener(KEY_PRESS_EVENT, handleKeyPress);
     };
   }, []);
 
