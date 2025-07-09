@@ -77,8 +77,10 @@ export const OrderCards = ({ onNext, ...props }: OrderCardsProps) => {
                 onClick={() => {
                   if (isOrdered) return;
                   if (selectedIdx === null) {
+                    fx.click.play();
                     setSelectedIdx(idx);
                   } else if (selectedIdx === idx) {
+                    fx.click.play();
                     setSelectedIdx(null);
                   } else {
                     // Swap
