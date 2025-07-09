@@ -1,15 +1,16 @@
 import { useNavigate, Link, useSearchParams, URLSearchParamsInit } from 'react-router';
 import { fx } from '@/utils/sound';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useHorizontalSwipe } from '@/utils/swipe';
 import Container from '@/Container';
-import Header from '@/Header/Header';
 import { Tile } from './Tile';
 import { speak } from '@/utils/speak';
 import FloatAround from '@/FloatAround';
 import { z } from 'zod';
 import { getBaseUrl } from '@/utils/url';
 import { GAME_LISTING, type GameListing } from './GameListing.consts';
+import { Breadcrumb, Breadcrumbs } from './Breadcrumbs';
+import { useMedia } from '@/utils/useMedia';
 
 const useHomeSound = () => {
   useEffect(() => {
@@ -29,21 +30,32 @@ function useSearch(schema: z.AnyZodObject, defaultInit?: URLSearchParamsInit) {
 
 export const Home = () => {
   useHomeSound();
+
   const navigate = useNavigate();
 
+  const { title } = useSearch(z.object({ title: z.string().optional() }), {
+    from: '/menu/',
+  });
+
   const searchListing = (title?: string): GameListing => {
-    const findListing = (root: GameListing, searchTitle: string): GameListing | undefined => {
-      if (root.title === searchTitle) {
-        if ('children' in root) {
-          return root;
+    const findListing = (listing: GameListing, searchTitle: string): GameListing | undefined => {
+      if (listing.title === searchTitle) {
+        if ('children' in listing) {
+          return listing;
         } else {
           return GAME_LISTING;
         }
       }
-      if ('children' in root) {
-        for (const child of root.children) {
+      if ('children' in listing) {
+        for (const child of listing.children) {
           if (child.isDisabled?.()) continue;
-          const found = findListing(child, searchTitle);
+          const found = findListing(
+            {
+              ...child,
+              back: () => listing,
+            },
+            searchTitle
+          );
           if (found) return found;
         }
       }
@@ -54,34 +66,17 @@ export const Home = () => {
     if (found) {
       return {
         ...found,
-        back: () => GAME_LISTING,
+        back: found.back ?? (() => GAME_LISTING),
       };
     }
     return GAME_LISTING;
   };
-  const { title } = useSearch(z.object({ title: z.string().optional() }), {
-    from: '/menu/',
-  });
-  const [listing, setListing] = useState(searchListing(title));
-  const enterListing = (item: GameListing) => {
-    if ('children' in item) {
-      setListing({
-        ...item,
-        back: item.back ?? (() => listing),
-      });
-      navigate({
-        pathname: '.',
-        search: item.title ? `?title=${item.title}` : undefined,
-      });
-    } else {
-      navigate(item.path);
-    }
-  };
+  const listing = searchListing(title);
   const isListingAtRoot = listing.title === GAME_LISTING.title;
   const { ref } = useHorizontalSwipe({
     onSwipe: ({ directions }) => {
       if (directions.right && !isListingAtRoot) {
-        enterListing(GAME_LISTING);
+        navigate('/menu/');
       }
     },
   });
@@ -90,23 +85,34 @@ export const Home = () => {
     fx.click.play();
   }, [listing.title]);
 
+  function getBreadcrumbs(): Breadcrumb[] {
+    const breadcrumbs: Breadcrumb[] = [];
+    let current: GameListing | undefined = listing;
+    while (current) {
+      const isMenu = !current.title;
+      breadcrumbs.push({
+        title: isMenu ? 'Menu' : current.title,
+        path: isMenu ? '/menu' : 'path' in current ? current.path : `?title=${current.title}`,
+      });
+      current = current.back?.();
+      if (isMenu) {
+        break;
+      }
+    }
+    breadcrumbs.push({
+      title: 'Home',
+      path: '/',
+    });
+    return breadcrumbs.reverse();
+  }
+
+  const isMobile = useMedia(['(max-width: 768px)'], [true], false);
+
+  const breadcrumbs = getBreadcrumbs().slice(isMobile ? -2 : undefined);
+
   return (
     <Container ref={ref as React.LegacyRef<HTMLDivElement>}>
-      <Header
-        title={listing.title}
-        onRestart={undefined}
-        Left={
-          isListingAtRoot ? (
-            <Header.BackToHome />
-          ) : (
-            <Header.Back onClick={() => enterListing(listing.back?.() ?? GAME_LISTING)} />
-          )
-        }
-        noRight
-        noLevels
-      >
-        {isListingAtRoot ? <h1 className="text-4xl font-bold font-lily">Let’s Play</h1> : null}
-      </Header>
+      <Breadcrumbs breadcrumbs={breadcrumbs} />
       <div className="flex flex-col p-2 md:p-4 relative h-[80dvh]">
         {new Array(4).fill(null).map((_, index) => (
           <Floaters key={index} />
@@ -120,7 +126,13 @@ export const Home = () => {
                       <Tile title={child.title} imageSourcePath={child.icon} imageClassName={child.iconClassName} />
                     </Link>
                   ) : (
-                    <li key={child.title} className="snap-center" onClick={() => enterListing(child)}>
+                    <li
+                      key={child.title}
+                      className="snap-center"
+                      onClick={() => {
+                        navigate('path' in child ? String(child.path) : `?title=${child.title}`);
+                      }}
+                    >
                       <Link to={{ pathname: '.', search: `?title=${child.title}` }}>
                         <Tile title={child.title} imageSourcePath={child.icon} imageClassName={child.iconClassName} />
                       </Link>
@@ -129,7 +141,13 @@ export const Home = () => {
                 )
               : null}
             {!isListingAtRoot && (
-              <button onClick={() => enterListing(listing.back!())}>
+              <button
+                onClick={() => {
+                  const newListing = listing.back?.();
+                  const isMenu = !newListing?.title;
+                  navigate(isMenu ? '/menu' : `?title=${newListing?.title}`);
+                }}
+              >
                 <Tile title="Back" imageSourcePath="./icons/arrow-left-black.svg" />
               </button>
             )}
