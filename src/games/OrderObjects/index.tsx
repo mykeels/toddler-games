@@ -10,8 +10,8 @@ import { GameImage } from '@/GameImage';
 import { getBaseUrl } from '@/utils/url';
 import { fx } from '@/utils/sound';
 import { useConfetti } from '@/Confetti';
-import { sleep } from '@/utils/sleep';
 import clsx from 'clsx';
+import { motion } from 'framer-motion';
 
 const generateShuffled = (n: number) => {
   const arr = Array.from({ length: n }, (_, i) => i + 1);
@@ -33,39 +33,9 @@ export const OrderObjects = ({ onNext, ...props }: OrderObjectsProps) => {
   const level = useLevel();
   const noOfCards = (props.level ?? level) + 5;
   const [cards, setCards] = useState<number[]>(() => generateShuffled(noOfCards));
-  const [draggedIdx, setDraggedIdx] = useState<number | null>(null);
-  const [dragOverIdx, setDragOverIdx] = useState<number | null>(null);
+  const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
 
   const isOrdered = cards.every((val, idx) => val === idx + 1);
-
-  const handleDragStart = async (idx: number) => {
-    setDraggedIdx(idx);
-    fx.click.play();
-    await sleep(250);
-    await speak(`${cards[idx]}`.toUpperCase(), { rate: 1.2 });
-  };
-
-  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-  };
-
-  const handleDrop = (idx: number) => {
-    if (draggedIdx === null || draggedIdx === idx) return;
-    const newCards = [...cards];
-    [newCards[draggedIdx], newCards[idx]] = [newCards[idx], newCards[draggedIdx]];
-    setCards(newCards);
-    setDraggedIdx(null);
-    // if new position is correct in the ordering, play a sound
-    if (newCards[idx] === idx + 1) {
-      fx.correct.play();
-    } else {
-      fx.incorrect.play();
-    }
-    const isOrdered = newCards.every((val, idx) => val === idx + 1);
-    if (isOrdered) {
-      showConfetti();
-    }
-  };
 
   const [showConfetti, Confetti] = useConfetti();
   const speakGoal = async () => {
@@ -76,7 +46,7 @@ export const OrderObjects = ({ onNext, ...props }: OrderObjectsProps) => {
     restart();
     speakGoal();
     setCards(generateShuffled(noOfCards));
-    setDraggedIdx(null);
+    setSelectedIdx(null);
     onNext?.();
   };
 
@@ -99,23 +69,38 @@ export const OrderObjects = ({ onNext, ...props }: OrderObjectsProps) => {
         <div className="flex flex-wrap gap-4 justify-center">
           {cards.map((val, idx) => {
             const inOrder = val === idx + 1;
-            const isDraggedOver = dragOverIdx === idx;
+            const isSelected = selectedIdx === idx;
             return (
-              <div
+              <motion.div
                 key={val}
+                layout
+                transition={{ type: 'spring', stiffness: 500, damping: 30 }}
                 className={clsx({
                   'pointer-events-none opacity-50': isOrdered,
                 })}
-                draggable
-                onDragStart={() => handleDragStart(idx)}
-                onDragOver={(e) => {
-                  handleDragOver(e);
-                  setDragOverIdx(idx);
-                }}
-                onDragLeave={() => setDragOverIdx(null)}
-                onDrop={() => {
-                  handleDrop(idx);
-                  setDragOverIdx(null);
+                onClick={() => {
+                  if (isOrdered) return;
+                  if (selectedIdx === null) {
+                    setSelectedIdx(idx);
+                  } else if (selectedIdx === idx) {
+                    setSelectedIdx(null);
+                  } else {
+                    // Swap
+                    const newCards = [...cards];
+                    [newCards[selectedIdx], newCards[idx]] = [newCards[idx], newCards[selectedIdx]];
+                    setCards(newCards);
+                    setSelectedIdx(null);
+                    // Play sound
+                    if (newCards[idx] === idx + 1) {
+                      fx.correct.play();
+                    } else {
+                      fx.incorrect.play();
+                    }
+                    const isNowOrdered = newCards.every((val, idx) => val === idx + 1);
+                    if (isNowOrdered) {
+                      showConfetti();
+                    }
+                  }
                 }}
                 style={{
                   width: 60,
@@ -125,17 +110,17 @@ export const OrderObjects = ({ onNext, ...props }: OrderObjectsProps) => {
                   justifyContent: 'center',
                   fontSize: 32,
                   borderRadius: 8,
-                  border: `4px solid ${isDraggedOver ? '#17FF70' : inOrder ? 'green' : 'red'}`,
+                  border: `4px solid ${isSelected ? '#17FF70' : inOrder ? 'green' : 'red'}`,
                   background: inOrder ? '#e6ffe6' : '#ffe6e6',
                   color: inOrder ? 'green' : 'red',
-                  cursor: 'grab',
+                  cursor: isOrdered ? 'default' : 'pointer',
                   boxShadow: '0 2px 8px #0001',
                   userSelect: 'none',
                   transition: 'border 0.2s, background 0.2s',
                 }}
               >
                 {val}
-              </div>
+              </motion.div>
             );
           })}
         </div>
