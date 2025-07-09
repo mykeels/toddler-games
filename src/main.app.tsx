@@ -28,6 +28,7 @@ import SoundOutLetters from './games/SoundOutLetters';
 import LetterKeypad from './games/LetterKeypad';
 import { LetterToImageMatching } from './games/LetterToImageMatching';
 import { LetterToImageMatchingRoute } from './games/LetterToImageMatching/route';
+import { OrderCards } from './games/OrderCards';
 
 const RenderMode = ({ children }: { children: React.ReactNode }) => {
   const isProduction = process.env.NODE_ENV === 'production';
@@ -144,6 +145,10 @@ export const App = () => {
       {
         path: '/memory-cards',
         element: <MemoryCards />,
+      },
+      {
+        path: '/order-cards',
+        element: <OrderCards />,
       },
       {
         path: '/videos/:title',
