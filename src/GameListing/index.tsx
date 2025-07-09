@@ -117,8 +117,8 @@ export const Home = () => {
         {new Array(4).fill(null).map((_, index) => (
           <Floaters key={index} />
         ))}
-        <div className="overflow-y-auto h-full z-10">
-          <ol className="list-none text-lg grow snap-y flex portrait:max-md:flex-col md:flex-wrap items-center md:justify-center content-center gap-4">
+        <div className="lg:flex overflow-y-auto h-full z-10 justify-center">
+          <ol className="list-none text-lg grow snap-y flex portrait:max-md:flex-col flex-wrap items-center justify-center content-center gap-4">
             {'children' in listing
               ? listing.children.map((child) =>
                   'path' in child ? (
