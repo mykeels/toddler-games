@@ -29,6 +29,7 @@ import LetterKeypad from './games/LetterKeypad';
 import { LetterToImageMatching } from './games/LetterToImageMatching';
 import { LetterToImageMatchingRoute } from './games/LetterToImageMatching/route';
 import { OrderCards } from './games/OrderCards';
+import { Page } from './page';
 
 const RenderMode = ({ children }: { children: React.ReactNode }) => {
   const isProduction = process.env.NODE_ENV === 'production';
@@ -60,104 +61,110 @@ export const App = () => {
     [
       {
         path: '/',
-        element: <Splash />,
+        element: <Layout />,
+        children: [
+          {
+            path: '/',
+            element: <Splash />,
+          },
+          {
+            path: '/menu',
+            element: <Home />,
+          },
+          {
+            path: '/find-and-tap/:characterSet',
+            element: <FindAndTapRoute />,
+          },
+          {
+            path: '/find-and-tap/:characterSet/:subCharacterSet',
+            element: <FindAndTapRoute />,
+          },
+          {
+            path: '/flow',
+            element: <Flow />,
+          },
+          {
+            path: '/free-draw',
+            element: <FreeDraw />,
+          },
+          {
+            path: '/image-to-letter-matching',
+            element: <ImageToLetterMatching />,
+          },
+          {
+            path: '/image-to-letter-matching/:characterSet',
+            element: <ImageToLetterMatchingRoute />,
+          },
+          {
+            path: '/letter-to-image-matching',
+            element: <LetterToImageMatching />,
+          },
+          {
+            path: '/letter-to-image-matching/:characterSet',
+            element: <LetterToImageMatchingRoute />,
+          },
+          {
+            path: '/letter-tracing/:characterSet',
+            element: <LetterTracingRoute />,
+          },
+          {
+            path: '/number-keypad',
+            element: <NumberKeypad />,
+          },
+          {
+            path: '/letter-keypad',
+            element: <LetterKeypad />,
+          },
+          {
+            path: '/phonics-keypad',
+            element: <LetterKeypad shouldPlayPhonics />,
+          },
+          {
+            path: '/place-the-letters',
+            element: <PlaceTheLetters />,
+          },
+          {
+            path: '/read-words',
+            element: <ReadWords />,
+          },
+          {
+            path: '/sound-out-letters',
+            element: <SoundOutLetters />,
+          },
+          {
+            path: '/tap-to-count',
+            element: <TapToCount />,
+          },
+          {
+            path: '/type-away',
+            element: <TypeAway />,
+          },
+          {
+            path: '/what-do-you-hear',
+            element: <WhatDoYouHear />,
+          },
+          {
+            path: '/what-do-you-hear/:uppercase',
+            element: <WhatDoYouHearRoute />,
+          },
+          {
+            path: '/memory-cards',
+            element: <MemoryCards />,
+          },
+          {
+            path: '/order-cards',
+            element: <OrderCards />,
+          },
+          {
+            path: '/videos/:title',
+            element: <AppVideo />,
+          },
+        ].map((route) => ({
+          ...route,
+          element: <Page>{route.element}</Page>,
+        })),
       },
-      {
-        path: '/menu',
-        element: <Home />,
-      },
-      {
-        path: '/find-and-tap/:characterSet',
-        element: <FindAndTapRoute />,
-      },
-      {
-        path: '/find-and-tap/:characterSet/:subCharacterSet',
-        element: <FindAndTapRoute />,
-      },
-      {
-        path: '/flow',
-        element: <Flow />,
-      },
-      {
-        path: '/free-draw',
-        element: <FreeDraw />,
-      },
-      {
-        path: '/image-to-letter-matching',
-        element: <ImageToLetterMatching />,
-      },
-      {
-        path: '/image-to-letter-matching/:characterSet',
-        element: <ImageToLetterMatchingRoute />,
-      },
-      {
-        path: '/letter-to-image-matching',
-        element: <LetterToImageMatching />,
-      },
-      {
-        path: '/letter-to-image-matching/:characterSet',
-        element: <LetterToImageMatchingRoute />,
-      },
-      {
-        path: '/letter-tracing/:characterSet',
-        element: <LetterTracingRoute />,
-      },
-      {
-        path: '/number-keypad',
-        element: <NumberKeypad />,
-      },
-      {
-        path: '/letter-keypad',
-        element: <LetterKeypad />,
-      },
-      {
-        path: '/phonics-keypad',
-        element: <LetterKeypad shouldPlayPhonics />,
-      },
-      {
-        path: '/place-the-letters',
-        element: <PlaceTheLetters />,
-      },
-      {
-        path: '/read-words',
-        element: <ReadWords />,
-      },
-      {
-        path: '/sound-out-letters',
-        element: <SoundOutLetters />,
-      },
-      {
-        path: '/tap-to-count',
-        element: <TapToCount />,
-      },
-      {
-        path: '/type-away',
-        element: <TypeAway />,
-      },
-      {
-        path: '/what-do-you-hear',
-        element: <WhatDoYouHear />,
-      },
-      {
-        path: '/what-do-you-hear/:uppercase',
-        element: <WhatDoYouHearRoute />,
-      },
-      {
-        path: '/memory-cards',
-        element: <MemoryCards />,
-      },
-      {
-        path: '/order-cards',
-        element: <OrderCards />,
-      },
-      {
-        path: '/videos/:title',
-        element: <AppVideo />,
-      },
-    ].map((route) => ({
-      ...route,
-      element: <Layout>{route.element}</Layout>,
-    })),
+    ],
     {}
   );
 
