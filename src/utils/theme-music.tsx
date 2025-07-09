@@ -13,6 +13,7 @@ export const ThemeMusic = () => {
     if (shouldDisableMusic) {
       return;
     }
+    fx.theme.stop();
     fx.theme.volume(DEFAULT_MUSIC_VOLUME);
     fx.theme.loop(true).play();
   };
