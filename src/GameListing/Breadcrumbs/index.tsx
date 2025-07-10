@@ -1,5 +1,5 @@
 import { Link } from 'react-router';
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import clsx from 'clsx';
 
 export type Breadcrumb = {
