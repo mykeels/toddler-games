@@ -193,14 +193,20 @@ export const GAME_LISTING: GameListing = {
       isDisabled: () => hasTouch(),
     },
     {
-      title: 'Memory Cards',
-      path: '/memory-cards/',
-      icon: './icons/memory-cards.svg',
-    },
-    {
-      title: 'Order Cards',
-      path: '/order-cards/',
-      icon: './icons/order-cards.svg',
+      title: 'Puzzles',
+      icon: './icons/puzzle.svg',
+      children: [
+        {
+          title: 'Memory Cards',
+          path: '/memory-cards/',
+          icon: './icons/memory-cards.svg',
+        },
+        {
+          title: 'Order Cards',
+          path: '/order-cards/',
+          icon: './icons/order-cards.svg',
+        },
+      ],
     },
   ],
 };
