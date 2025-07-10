@@ -1,0 +1,1 @@
+import{j as t,a as r,b as a}from"./percentages-BXMCSKIN-C79K_SFV.js";import{g as e}from"./mfe.utils-CZSTIhF2.js";const d=e(({mountProps:o})=>t.jsx(r,{children:t.jsx(a,{goal:o.goal,standalone:!0})}));export{d as default};
